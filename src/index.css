@@ -2,6 +2,42 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ========================================================
+   Universal High-Contrast Text Selection (Light & Dark)
+   ======================================================== */
+::selection, *::selection {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+::-moz-selection, *::-moz-selection {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+html.light ::selection, html.light *::selection {
+  background-color: #0f172a !important; /* Rich deep navy */
+  color: #ffffff !important;             /* Pure white text */
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+html.light ::-moz-selection, html.light *::-moz-selection {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+html.dark ::selection, html.dark *::selection {
+  background-color: #f59e0b !important; /* Vibrant golden amber */
+  color: #020617 !important;             /* Crisp rich black text */
+  -webkit-text-fill-color: #020617 !important;
+}
+
+html.dark ::-moz-selection, html.dark *::-moz-selection {
+  background-color: #f59e0b !important;
+  color: #020617 !important;
+}
+
 @layer base {
   :root {
     --font-heading: 'Alexandria', 'Cairo', system-ui, sans-serif;

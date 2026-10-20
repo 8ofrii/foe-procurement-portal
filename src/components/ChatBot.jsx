@@ -388,13 +388,11 @@ Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszł
 📍 Location: Tucano Mall — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
 🗺️ Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
 ⏰ Working Hours: Sunday to Thursday (09:00 AM – 05:00 PM).
-Executive Bureau: Government District - New Administrative Capital.
 Direct Hotline: 19842 | Email: procurement@foe.gov.eg`;
       } else if (lang === 'pl') {
         return `Oficjalna Główna Siedziba Dyrekcji ds. Zakupów:
 📍 Adres: Tucano Mall — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
 ⏰ Godziny pracy: Niedziela – Czwartek (09:00 – 17:00).
-Biuro Wykonawcze: Nowa Stolica Administracyjna.
 Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
       } else if (lang === 'uk') {
         return `Офіційний головний офіс Директорату закупівель:
@@ -406,7 +404,6 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
 📍 العنوان: توكانو مول — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
 🗺️ رابط خرائط Google: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
 ⏰ مواعيد العمل: من الأحد إلى الخميس (من 09:00 صباحاً حتى 05:00 مساءً).
-المكتب التنفيذي: الحي الحكومي - العاصمة الإدارية الجديدة.
 الخط الساخن: 19842 | البريد الرسمي: procurement@foe.gov.eg`;
       }
     }

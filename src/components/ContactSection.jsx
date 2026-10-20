@@ -44,8 +44,8 @@ export default function ContactSection({ lang, theme }) {
           </p>
         </div>
 
-        {/* Official Locations & Working Hours Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+        {/* Official Locations & Working Hours Cards (3 Columns) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {/* Main HQ: Tucano Mall */}
           <div className="glass-card p-6 rounded-2xl flex items-start gap-4 border-amber-500/30">
             <div className={`p-3 rounded-xl border flex-shrink-0 ${
@@ -95,28 +95,8 @@ export default function ContactSection({ lang, theme }) {
             </div>
           </div>
 
-          {/* Executive Bureau */}
-          <div className="glass-card p-6 rounded-2xl flex items-start gap-4">
-            <div className={`p-3 rounded-xl border flex-shrink-0 ${
-              theme === 'dark' ? 'bg-sky-500/15 border-sky-500/40 text-sky-400' : 'bg-sky-100 border-sky-300 text-sky-800'
-            }`}>
-              <Building className="w-6 h-6 text-sky-500" />
-            </div>
-            <div>
-              <div className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">
-                {isAr ? 'المكتب التنفيذي والتعاقدات' : 'Executive Contracts Bureau'}
-              </div>
-              <div className="text-sm font-black text-slate-900 dark:text-white mt-1 leading-snug">
-                {info.cairoOffice}
-              </div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">
-                {isAr ? 'لجان البت والتنسيق الحكومي' : 'Tender Evaluation Bureau'}
-              </div>
-            </div>
-          </div>
-
           {/* Hotline & Email */}
-          <div className="glass-card p-6 rounded-2xl flex items-start gap-4">
+          <div className="glass-card p-6 rounded-2xl flex items-start gap-4 border-amber-500/30">
             <div className={`p-3 rounded-xl border flex-shrink-0 ${
               theme === 'dark' ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-400' : 'bg-emerald-100 border-emerald-300 text-emerald-800'
             }`}>
