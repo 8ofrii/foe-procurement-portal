@@ -26,8 +26,8 @@ export default function ChatBot({ lang, theme }) {
   // Initial welcome message per language
   useEffect(() => {
     const welcomeMessages = {
-      ar: 'مرحباً بك! أنا المساعد الذكي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. كيف يمكنني إفادتك اليوم بخصوص مواعيد لجان التوريد (الأرز والجمبري)، السلع والمخزون، أو القنوات الرسمية؟',
-      en: 'Welcome! I am the AI Assistant of Mostaqbal Misr Unified Procurement Directorate. How can I assist you regarding committees schedule (Rice & Shrimp), strategic reserves, or official channels?',
+      ar: 'مرحباً بك! أنا المساعد الذكي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. كيف يمكنني إفادتك اليوم بخصوص مواعيد اللجان (لجنة الأرز، لجنة الرؤوس الحية، لجنة الجمبري)، السلع والمخزون، أو القنوات الرسمية؟',
+      en: 'Welcome! I am the AI Assistant of Mostaqbal Misr Unified Procurement Directorate. How can I assist you regarding committees schedule (Rice, Live Cattle, Shrimp), strategic reserves, or official channels?',
       pl: 'Witamy! Jestem Asystentem AI ds. Zakupów Strategicznych Agencji Przyszłość Egiptu. W czym mogę pomóc w kwestii harmonogramu komisji, surowców lub oficjalnych kanałów?',
       uk: 'Вітаємо! Я інтелектуальний помічник Директорату єдиних закупівель Агентства Майбутнє Єгипту. Чим можу допомогти щодо графіка комісій, стратегічних запасів чи контактів?'
     };
@@ -45,7 +45,7 @@ export default function ChatBot({ lang, theme }) {
   const quickPrompts = {
     ar: [
       'ما هي مواعيد وساعات العمل الرسمية؟',
-      'ما هي مواعيد لجان البت والتوريد (الأرز والجمبري)؟',
+      'ما هي مواعيد اللجان (لجنة الأرز، لجنة الرؤوس الحية، ولجنة الجمبري)؟',
       'ما هي القنوات والروابط الرسمية للجهاز؟',
       'ما هي رؤية وأهداف منظومة الشراء الموحد؟',
       'ما هي الإدارات التخصصية الثمانية؟',
@@ -482,7 +482,7 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
     } else if (lang === 'uk') {
       return `Ласкаво просимо до Директорату єдиних закупівель Агентства Майбутнє Єгипту. Проводимо щотижневі комісії (Рис щонеділі, Худоба щовівторка, Креветки щопонеділка). Головний офіс: Tucano Mall - 3-й поверх - Наср-Сіті - Каїр.`;
     } else {
-      return `أهلاً بكم في إدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. تتولى الإدارة إدارة التعاقدات واللجان الأسبوعية لتوريد السلع الأساسية (الأرز كل أحد، والرؤوس الحية كل ثلاثاء، والجمبري كل اثنين). مقرنا: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر.`;
+      return `أهلاً بكم في إدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. تتولى الإدارة إدارة التعاقدات وجلسات اللجان الأسبوعية (لجنة الأرز كل أحد، ولجنة الرؤوس الحية كل ثلاثاء، ولجنة الجمبري كل اثنين). مقرنا: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر.`;
     }
   };
 

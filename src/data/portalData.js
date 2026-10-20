@@ -950,10 +950,10 @@ export const COMMITTEES_DATA = {
       exactDate: "25/10/2026",
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
-        ar: "توريد الأرز", 
-        en: "Rice Procurement", 
-        pl: "Dostawy Ryżu", 
-        uk: "Закупівля рису" 
+        ar: "لجنة الأرز", 
+        en: "Rice Committee", 
+        pl: "Komisja ds. Ryżu", 
+        uk: "Комісія щодо рису" 
       },
       commoditySpecs: {
         ar: "مختلف الرتب والمواصفات القياسية المعتمدة",
@@ -986,10 +986,10 @@ export const COMMITTEES_DATA = {
       exactDate: "27/10/2026",
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
-        ar: "توريد الرؤوس الحية", 
-        en: "Live Cattle & Livestock", 
-        pl: "Żywe bydło i trzoda", 
-        uk: "Жива худоба та телята" 
+        ar: "لجنة الرؤوس الحية", 
+        en: "Live Cattle Committee", 
+        pl: "Komisja ds. Żywego Bydła", 
+        uk: "Комісія щодо живої худоби" 
       },
       commoditySpecs: {
         ar: "مواشي وعجول حية مخصصة للذبيح الفوري أو مشروعات التسمين",
@@ -1023,10 +1023,10 @@ export const COMMITTEES_DATA = {
       lastHeldDate: "19/10/2026",
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
-        ar: "توريد الجمبري", 
-        en: "Shrimp Supplies", 
-        pl: "Dostawy Krewetek", 
-        uk: "Закупівля креветок" 
+        ar: "لجنة الجمبري", 
+        en: "Shrimp Committee", 
+        pl: "Komisja ds. Krewetek", 
+        uk: "Комісія щодо креветок" 
       },
       commoditySpecs: {
         ar: "مختلف الأحجام والتوريدات البحرية والمجمدة المعتمدة",
