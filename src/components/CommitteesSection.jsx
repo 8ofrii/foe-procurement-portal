@@ -84,6 +84,15 @@ export default function CommitteesSection({ lang, theme }) {
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 border border-amber-500/30 text-amber-600 dark:text-amber-400">
               <span>{isAr ? 'انعقاد اللجان: 02:00 PM' : 'Committees Kickoff: 02:00 PM'}</span>
             </span>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shadow-sm"
+            >
+              <MapPin className="w-3.5 h-3.5" />
+              <span>{isAr ? 'الموقع على خرائط Google ↗' : 'Google Maps ↗'}</span>
+            </a>
           </div>
         </div>
 

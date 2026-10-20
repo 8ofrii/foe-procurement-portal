@@ -5,7 +5,8 @@ import {
   PhoneCall,
   ShieldCheck,
   Clock,
-  Share2
+  Share2,
+  MapPin
 } from 'lucide-react';
 import { PORTAL_INFO, NAV_LINKS } from '../data/portalData';
 
@@ -174,6 +175,15 @@ export default function Footer({ lang, theme, onScrollTo }) {
                 <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
                 <span>{info.workingHours}</span>
               </div>
+              <a 
+                href={info.mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[11px] text-amber-600 dark:text-amber-400 pt-1 flex items-center gap-1.5 font-bold hover:underline"
+              >
+                <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                <span>{isAr ? 'توكانو مول - الدور الثالث (خرائط Google) ↗' : 'Tucano Mall - Floor 3 (Google Maps) ↗'}</span>
+              </a>
             </div>
 
             <button
