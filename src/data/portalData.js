@@ -942,7 +942,7 @@ export const COMMITTEES_DATA = {
       dayName: { ar: "يوم الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
       dayCode: "SUNDAY",
       dayNumber: "25",
-      monthName: { ar: "أكتوبر 2026", en: "Oct 2026", pl: "Paź 2026", uk: "Жов 2026" },
+      monthName: { ar: "أكتوبر 2026", en: "October 2026", pl: "Październik 2026", uk: "Жовтень 2026" },
       exactDate: "25/10/2026",
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
@@ -958,29 +958,19 @@ export const COMMITTEES_DATA = {
         uk: "Різні ґатунки та стандарти якості"
       },
       category: { ar: "حبوب وسلع تموينية", en: "Grains & Staple Crops", pl: "Zboża", uk: "Зернові" },
-      badge: { ar: "جلسة أسبوعية ثابتة", en: "Fixed Weekly Session", pl: "Sesja cotygodniowa", uk: "Щотижнева сесія" },
+      badge: { ar: "جلسة أسبوعية ثابتة", en: "Weekly Fixed", pl: "Cotygodniowa", uk: "Щотижнева" },
       priorityRule: {
         ar: "الأولوية بأسبقية التواجد",
-        en: "Priority: First-Come Attendance",
+        en: "Priority: Physical Attendance Order",
         pl: "Pierwszeństwo według kolejności przybycia",
-        uk: "Пріоритет за черговістю присутності"
+        uk: "Пріоритет за черговістю прибуття"
       },
       priorityDetails: {
-        ar: "تنعقد الجلسة أسبوعياً كل أحد في تمام الساعة 2:00 ظهراً. تُمنح أولوية مراجعة العروض والبت بأسبقية الحضور والتسجيل الفعلي للموردين بقاعة اللجنة.",
-        en: "Convenes weekly every Sunday at 02:00 PM. Review priority and bid adjudication are strictly determined by physical attendance and sign-in order.",
-        pl: "Posiedzenie odbywa się w każdą niedzielę o 14:00. O kolejności rozpatrywania decyduje fizyczna obecność i rejestracja.",
-        uk: "Засідання щонеділі рівно о 14:00. Пріоритет розгляду визначається виключно черговістю фізичного прибуття та реєстрації."
+        ar: "تُمنح أسبقية فحص العروض والبت المالي والفني بأسبقية الحضور الفعلي والتسجيل بكشوف القاعة.",
+        en: "Review priority and bid adjudication are determined by physical sign-in order in the session hall.",
+        pl: "O kolejności rozpatrywania decyduje rejestracja na liście obecności.",
+        uk: "Пріоритет розгляду визначається черговістю підпису в списку присутності."
       },
-      docsRule: {
-        ar: "المستندات الرسمية للشركة + سابقة أعمال التوريد إن وُجدت.",
-        en: "Official corporate documents + previous supply track record if available.",
-        pl: "Oficjalne dokumenty firmy + doświadczenie w dostawach.",
-        uk: "Офіційні документи компанії + досвід поставок за наявності."
-      },
-      docsList: [
-        { ar: "الأوراق والمستندات الرسمية للشركة (سجل تجاري، بطاقة ضريبية، تفويض رسمي)", en: "Official corporate documents (Commercial Register, Tax Card, Authorization)" },
-        { ar: "سابقة أعمال التوريد المعتمدة (إن وُجدت)", en: "Previous certified supply track record (if available)" }
-      ],
       tagColor: "amber"
     },
     {
@@ -988,7 +978,7 @@ export const COMMITTEES_DATA = {
       dayName: { ar: "يوم الثلاثاء", en: "Tuesday", pl: "Wtorek", uk: "Вівторок" },
       dayCode: "TUESDAY",
       dayNumber: "27",
-      monthName: { ar: "أكتوبر 2026", en: "Oct 2026", pl: "Paź 2026", uk: "Жов 2026" },
+      monthName: { ar: "أكتوبر 2026", en: "October 2026", pl: "Październik 2026", uk: "Жовтень 2026" },
       exactDate: "27/10/2026",
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
@@ -1004,29 +994,19 @@ export const COMMITTEES_DATA = {
         uk: "Жива худоба та телята для забою або відгодівлі"
       },
       category: { ar: "ثروة حيوانية ولحوم", en: "Livestock & Meat", pl: "Żywy Inwentarz", uk: "Тваринництво" },
-      badge: { ar: "نظام دوري أسبوع وأسبوع", en: "Bi-weekly Schedule", pl: "Cykl co dwa tygodnie", uk: "Почерговий графік" },
+      badge: { ar: "نظام دوري أسبوع وأسبوع", en: "Bi-weekly Schedule", pl: "Co dwa tygodnie", uk: "Почерговий графік" },
       priorityRule: {
-        ar: "الجلسة القادمة: الثلاثاء 27/10/2026 🐂",
-        en: "Next Session: Tuesday 27/10/2026 🐂",
-        pl: "Następna sesja: Wtorek 27/10/2026 🐂",
-        uk: "Наступна сесія: Вівторок 27/10/2026 🐂"
+        ar: "دورة الانعقاد التبادلية 🐂",
+        en: "Bi-weekly Alternating Cycle 🐂",
+        pl: "Cykl naprzemienny 🐂",
+        uk: "Почерговий цикл 🐂"
       },
       priorityDetails: {
-        ar: "تنعقد لجنة الرؤوس الحية بنظام أسبوع وأسبوع؛ موعد الجلسة القادمة هو الثلاثاء 27/10/2026 في تمام الساعة 2:00 ظهراً.",
-        en: "Live Cattle committee convenes on a bi-weekly cycle; next session is scheduled for Tuesday 27/10/2026 at 02:00 PM.",
-        pl: "Posiedzenie komisji ds. żywego bydła odbywa się we wtorki co dwa tygodnie o 14:00. Najbliższa sesja: 27/10/2026.",
-        uk: "Комісія із закупівлі живої худоби збирається раз на два тижні; наступна сесія: вівторок 27/10/2026 о 14:00."
+        ar: "تنعقد الجلسة بالتبادل الأسبوعي مع لجنة الجمبري (أسبوع مخصص للرؤوس الحية وأسبوع للجمبري).",
+        en: "Convenes on an alternating weekly basis with the Shrimp committee.",
+        pl: "Obrady naprzemienne co tydzień z komisją ds. krewetek.",
+        uk: "Засідання чергуються щотижня з комісією щодо креветок."
       },
-      docsRule: {
-        ar: "المستندات الرسمية للشركة + سابقة أعمال التوريد إن وُجدت.",
-        en: "Official corporate documents + previous supply track record if available.",
-        pl: "Oficjalne dokumenty firmy + doświadczenie w dostawach.",
-        uk: "Офіційні документи компанії + досвід поставок за наявності."
-      },
-      docsList: [
-        { ar: "الأوراق والمستندات الرسمية للشركة (سجل تجاري، بطاقة ضريبية، تفويض رسمي)", en: "Official corporate documents (Commercial Register, Tax Card, Authorization)" },
-        { ar: "سابقة أعمال التوريد المعتمدة (إن وُجدت)", en: "Previous certified supply track record (if available)" }
-      ],
       tagColor: "rose"
     },
     {
@@ -1034,7 +1014,7 @@ export const COMMITTEES_DATA = {
       dayName: { ar: "يوم الاثنين", en: "Monday", pl: "Poniedziałek", uk: "Понеділок" },
       dayCode: "MONDAY",
       dayNumber: "02",
-      monthName: { ar: "نوفمبر 2026", en: "Nov 2026", pl: "Lis 2026", uk: "Лис 2026" },
+      monthName: { ar: "نوفمبر 2026", en: "November 2026", pl: "Listopad 2026", uk: "Листопад 2026" },
       exactDate: "02/11/2026",
       lastHeldDate: "19/10/2026",
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
@@ -1051,29 +1031,19 @@ export const COMMITTEES_DATA = {
         uk: "Креветки морські та заморожені різних калібрів"
       },
       category: { ar: "ثروة سمكية وبحرية", en: "Fisheries & Seafood", pl: "Rybołówstwo", uk: "Рибне господарство" },
-      badge: { ar: "نظام دوري أسبوع وأسبوع", en: "Bi-weekly Schedule", pl: "Cykl co dwa tygodnie", uk: "Почерговий графік" },
+      badge: { ar: "نظام دوري أسبوع وأسبوع", en: "Bi-weekly Schedule", pl: "Co dwa tygodnie", uk: "Почерговий графік" },
       priorityRule: {
-        ar: "انعقدت 19/10 • القادمة: الاثنين 02/11/2026 🦐",
-        en: "Held on 19/10 • Next on 02/11/2026 🦐",
-        pl: "Ostatnia 19/10 • Następna 02/11/2026 🦐",
-        uk: "Відбулася 19/10 • Наступна 02/11/2026 🦐"
+        ar: "دورة الانعقاد التبادلية 🦐",
+        en: "Bi-weekly Alternating Cycle 🦐",
+        pl: "Cykl naprzemienny 🦐",
+        uk: "Почерговий цикл 🦐"
       },
       priorityDetails: {
-        ar: "انعقدت الجلسة السابقة بنجاح يوم 19/10/2026؛ وموعد الجلسة القادمة هو يوم الاثنين 02/11/2026 في تمام الساعة 2:00 ظهراً.",
-        en: "Previous session was successfully held on 19/10/2026; the upcoming session convenes on Monday 02/11/2026 at 02:00 PM.",
-        pl: "Poprzednia sesja odbyła się 19/10/2026; kolejna odbędzie się w poniedziałek 02/11/2026 o 14:00.",
-        uk: "Попередня сесія успішно відбулася 19/10/2026; наступна відбудеться у понеділок 02/11/2026 о 14:00."
+        ar: "انعقدت الجلسة السابقة بنجاح بتاريخ 19/10/2026، وتنعقد الجلسة التالية وفق الموعد المبين أعلاه.",
+        en: "Previous session was held on 19/10/2026; next session convenes per the schedule above.",
+        pl: "Poprzednia sesja odbyła się 19/10/2026; kolejna zgodnie z powyższym terminem.",
+        uk: "Попередня відбулася 19/10/2026; наступна згідно з розкладом вище."
       },
-      docsRule: {
-        ar: "المستندات الرسمية للشركة + سابقة أعمال التوريد إن وُجدت.",
-        en: "Official corporate documents + previous supply track record if available.",
-        pl: "Oficjalne dokumenty firmy + doświadczenie w dostawach.",
-        uk: "Офіційні документи компанії + досвід поставок за наявності."
-      },
-      docsList: [
-        { ar: "الأوراق والمستندات الرسمية للشركة (سجل تجاري، بطاقة ضريبية، تفويض رسمي)", en: "Official corporate documents (Commercial Register, Tax Card, Authorization)" },
-        { ar: "سابقة أعمال التوريد المعتمدة (إن وُجدت)", en: "Previous certified supply track record (if available)" }
-      ],
       tagColor: "emerald"
     }
   ],
@@ -1081,17 +1051,17 @@ export const COMMITTEES_DATA = {
     {
       icon: "FileCheck",
       title: { ar: "الأوراق والمستندات الرسمية للشركة", en: "Official Company Documents", pl: "Oficjalne Dokumenty Firmy", uk: "Офіційні документи компанії" },
-      desc: { ar: "السجل التجاري الساري، البطاقة الضريبية، شهادة القيد بضريبة القيمة المضافة، وأصل التفويض الرسمي المعتمد.", en: "Valid commercial registry, tax card, VAT registration certificate, and accredited authorization letter." }
+      desc: { ar: "السجل التجاري الساري، البطاقة الضريبية، شهادة القيد بضريبة القيمة المضافة، وأصل التفويض الرسمي المعتمد للشخص الحاضر.", en: "Valid commercial registry, tax card, VAT registration certificate, and accredited authorization letter." }
     },
     {
       icon: "Award",
-      title: { ar: "سابقة الأعمال والخبرة في التوريد (إن وُجدت)", en: "Previous Track Record (If Available)", pl: "Doświadczenie w Dostawach (opcjonalnie)", uk: "Досвід поставок (за наявності)" },
-      desc: { ar: "تقديم سابقة أعمال التوريد المعتمدة للجهات الحكومية أو الخاصة لتعزيز تقييم ملف الشركة سواء في الأرز أو اللجان الأخرى.", en: "Submission of certified prior supply track records with public or private sectors to support company profile." }
+      title: { ar: "سابقة الأعمال في التوريد (إن وُجدت)", en: "Previous Track Record (If Available)", pl: "Doświadczenie w Dostawach (opcjonalnie)", uk: "Досвід поставок (за наявності)" },
+      desc: { ar: "تقديم سابقة أعمال التوريد المعتمدة لتعزيز تقييم ملف الشركة للمناقصات والبت (لا يُشترط تقديم عينات مسبقة).", en: "Submission of certified prior supply track records to support company profile (no advance samples required)." }
     },
     {
       icon: "Clock",
-      title: { ar: "المواعيد الرسمية ومقر الانعقاد", en: "Official Timing & Venue", pl: "Godziny i Miejsce", uk: "Час та місце проведення" },
-      desc: { ar: "انعقاد كافة الجلسات الساعة 02:00 ظهراً بمقر إدارة الشراء الموحد (توكانو مول - مدينة نصر). مع العلم أن لجنة الأرز تمنح الأولوية بأسبقية التواجد.", en: "All sessions convene at 02:00 PM at Agency HQ (Tucano Mall - Nasr City). Rice committee grants priority by attendance order." }
+      title: { ar: "ضوابط الحضور والتسجيل بقاعة اللجان", en: "Hall Attendance & Sign-In Rules", pl: "Zasady obecności i rejestracji", uk: "Правила присутності та реєстрації" },
+      desc: { ar: "التواجد بالقاعة المركزية بمقر الجهاز قبل الموعد لتسجيل بيانات الحضور واستلام العروض وبدء جلسة البت، مع تطبيق أسبقية الحضور في لجنة الأرز.", en: "Arrive at the Central Hall before session start to register and submit bids, with attendance priority applied for Rice." }
     }
   ]
 };

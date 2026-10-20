@@ -128,9 +128,9 @@ export default function CommitteesSection({ lang, theme }) {
                 {/* Top metallic ribbon strip */}
                 <div className={`h-2 bg-gradient-to-r ${ribbonColor}`}></div>
 
-                <div className="p-6 sm:p-7 space-y-6 flex-1 flex flex-col justify-between">
+                <div className="p-6 sm:p-7 space-y-5 flex-1 flex flex-col justify-between">
                   
-                  {/* Top Bar: Frequency Badge & Category */}
+                  {/* Top Bar: Cadence & Category */}
                   <div className="flex items-center justify-between gap-2">
                     <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${badgeStyle}`}>
                       <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
@@ -142,30 +142,30 @@ export default function CommitteesSection({ lang, theme }) {
                     </span>
                   </div>
 
-                  {/* Integrated Calendar Ticket & Day Header */}
+                  {/* Unified Date & Time Pass */}
                   <div className={`p-4 rounded-2xl border flex items-center justify-between gap-4 ${
                     theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-200'
                   }`}>
                     <div className="space-y-1">
-                      <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
-                        {session.dayName[lang] || session.dayName.ar}
+                      <div className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
+                        {session.dayName[lang] || session.dayName.ar} • {session.monthName[lang] || session.monthName.ar}
                       </div>
-                      <div className="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
-                        <span>{session.monthName[lang] || session.monthName.ar}</span>
+                      <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400">
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>{isAr ? 'موعد الانعقاد: 02:00 ظهراً' : 'Kickoff: 02:00 PM'}</span>
                       </div>
                     </div>
 
-                    {/* Date Number Badge */}
-                    <div className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl border ${badgeStyle} shadow-sm`}>
-                      <Calendar className="w-4 h-4 opacity-80" />
-                      <span className={`font-mono text-2xl sm:text-3xl font-black leading-none ${numberColor}`}>
+                    {/* Big Date Number Token */}
+                    <div className={`px-4 py-2 rounded-xl border flex flex-col items-center justify-center ${badgeStyle} shadow-sm`}>
+                      <span className={`font-mono text-3xl font-black leading-none ${numberColor}`}>
                         {session.dayNumber}
                       </span>
                     </div>
                   </div>
 
-                  {/* Commodity Title & Clear Scope */}
-                  <div className="space-y-2">
+                  {/* Commodity Title & Specification Scope */}
+                  <div className="space-y-1.5">
                     <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
                       {session.commodity[lang] || session.commodity.ar}
                     </h3>
@@ -174,7 +174,7 @@ export default function CommitteesSection({ lang, theme }) {
                     </p>
                   </div>
 
-                  {/* Priority / Schedule Details Box */}
+                  {/* Priority / Session Specific Rule Box (Zero Redundant Dates or Times) */}
                   <div className={`p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed ${themeBg}`}>
                     <div className="font-black mb-1.5 flex items-center gap-2 text-sm">
                       {isSunday && <AlertCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />}
@@ -182,47 +182,27 @@ export default function CommitteesSection({ lang, theme }) {
                       {isMonday && <span className="text-base flex-shrink-0">🦐</span>}
                       <span>{session.priorityRule[lang] || session.priorityRule.ar}</span>
                     </div>
-                    <p className="text-xs sm:text-sm opacity-90 leading-relaxed">
+                    <p className="text-xs sm:text-sm opacity-90 leading-relaxed font-medium">
                       {session.priorityDetails[lang] || session.priorityDetails.ar}
                     </p>
                   </div>
 
-                  {/* Required Documents Rule (Official Papers + Track record) */}
-                  <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
-                    <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
-                      <FileCheck className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                      <span>{isAr ? 'المستندات المطلوبة للبت والتوريد:' : 'Required Documentation:'}</span>
-                    </div>
-
-                    <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300 pr-1 pl-1">
-                      {(session.docsList || [
-                        { ar: session.docsRule?.ar || session.docsRule }
-                      ]).map((docItem, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-xs sm:text-[13px] leading-snug">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
-                          <span>{docItem[lang] || docItem.ar || docItem}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
                 </div>
 
-                {/* Bottom Session Pass Bar */}
-                <div className={`px-6 py-4 border-t flex items-center justify-between text-xs sm:text-sm font-bold ${
+                {/* Bottom Verification & Venue Footer (No duplicate dates or papers) */}
+                <div className={`px-6 py-3.5 border-t flex items-center justify-between text-xs font-bold ${
                   theme === 'dark' 
                     ? 'bg-slate-950 border-slate-800' 
                     : 'bg-slate-50 border-slate-200'
                 }`}>
-                  <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>{isAr ? 'تاريخ الجلسة:' : 'Session Date:'}</span>
-                    <span className="font-mono text-slate-900 dark:text-white font-bold">{session.exactDate}</span>
+                  <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                    <MapPin className="w-3.5 h-3.5 text-amber-500" />
+                    <span>{isAr ? 'قاعة اللجان المركزية' : 'Central Sessions Hall'}</span>
                   </div>
 
-                  <div className="flex items-center gap-1.5 font-mono text-xs sm:text-sm text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>02:00 PM</span>
+                  <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>{isAr ? 'جلسة معتمدة' : 'Official Session'}</span>
                   </div>
                 </div>
 
