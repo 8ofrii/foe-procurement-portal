@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" fill="none">
+  <!-- Sun and Field Emblem -->
+  <g transform="translate(15, 10)">
+    <circle cx="50" cy="50" r="48" stroke="#f59e0b" stroke-width="3" fill="#091426" />
+    <circle cx="50" cy="50" r="43" stroke="#d97706" stroke-width="1.5" stroke-dasharray="3 3" />
+    
+    <!-- Rising Sun Rays -->
+    <path d="M50 15 L50 24 M30 20 L35 28 M70 20 L65 28 M16 35 L25 38 M84 35 L75 38 M12 52 L22 52 M88 52 L78 52" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="50" cy="48" r="14" fill="#f59e0b" />
+    
+    <!-- Agricultural Field Furrows -->
+    <path d="M12 52 Q50 68 88 52" stroke="#10b981" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M18 64 Q50 82 82 64" stroke="#059669" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M26 76 Q50 92 74 76" stroke="#047857" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M36 86 Q50 96 64 86" stroke="#065f46" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Typography: Mostaqbal Misr & Unified Procurement -->
+  <text x="135" y="44" font-family="'Alexandria', 'Cairo', sans-serif" font-weight="900" font-size="25" fill="#ffffff" letter-spacing="0.5">
+    مُسْتَقْبَل مِصْر
+  </text>
+  <text x="135" y="66" font-family="'Cairo', sans-serif" font-weight="600" font-size="13" fill="#f59e0b" letter-spacing="1">
+    للتنمية المستدامة • رئاسة الجمهورية
+  </text>
+  <rect x="135" y="74" width="340" height="1.5" fill="url(#goldGradient)" />
+  <text x="135" y="98" font-family="'Alexandria', 'Cairo', sans-serif" font-weight="800" font-size="18" fill="#38bdf8">
+    إدارة الشراء الموحد وتأمين السلع الاستراتيجية
+  </text>
+
+  <defs>
+    <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="transparent" />
+    </linearGradient>
+  </defs>
+</svg>
