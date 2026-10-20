@@ -45,7 +45,7 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
               <Sparkles className="w-3.5 h-3.5" />
               <span>{isAr ? 'المرتكزات الست للشراء الموحد' : 'The Six Strategic Pillars'}</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+            <h2 className="text-2xl sm:text-4xl font-black leading-snug sm:leading-normal text-slate-900 dark:text-white">
               {isAr ? 'الركائز الاستراتيجية المعتمدة لجهاز مستقبل مصر' : 'Core Strategic Mandates & Pillars'}
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">

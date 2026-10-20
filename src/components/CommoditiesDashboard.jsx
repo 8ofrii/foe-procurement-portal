@@ -51,7 +51,7 @@ export default function CommoditiesDashboard({ lang, theme }) {
     }`}>
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <div className="text-center max-w-4xl mx-auto mb-14 space-y-3">
           <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-bold border ${
             theme === 'dark'
               ? 'bg-amber-500/10 border-amber-500/20 text-amber-400'
@@ -60,7 +60,7 @@ export default function CommoditiesDashboard({ lang, theme }) {
             <ShieldCheck className="w-3.5 h-3.5 text-amber-500" />
             <span>{isAr ? 'مرصد السلع والمخزون الاستراتيجي' : 'Strategic Commodities & Reserves Observatory'}</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white leading-[1.4] sm:leading-[1.45] pb-1">
             {isAr ? 'مؤشرات المخزون الاستراتيجي والسلع الأساسية' : 'Strategic Reserves & Commodity Indicators'}
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">

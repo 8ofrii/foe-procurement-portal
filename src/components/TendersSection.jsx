@@ -28,7 +28,7 @@ export default function TendersSection({ lang, theme }) {
               <FileSpreadsheet className="w-3.5 h-3.5" />
               <span>{isAr ? 'فرص التوريد والاحتياجات السلعية للجهاز' : 'Strategic Supply & Procurement Opportunities'}</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+            <h2 className="text-2xl sm:text-4xl font-black leading-snug sm:leading-normal text-slate-900 dark:text-white">
               {isAr ? 'إعلانات التوريد والاحتياجات السلعية القائمة' : 'Active Strategic Commodity Requirements'}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">

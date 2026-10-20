@@ -41,14 +41,14 @@ export default function Footer({ lang, theme, onScrollTo }) {
               <div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-base font-black text-slate-900 dark:text-white">
-                    {info.orgName}
+                    {info.deptName}
                   </span>
                   <span className="px-1.5 py-0.5 rounded text-[10px] font-black font-mono bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
                     FOE
                   </span>
                 </div>
-                <div className="text-xs text-amber-600 dark:text-amber-400 font-bold">
-                  {info.deptName}
+                <div className="text-xs text-amber-600 dark:text-amber-400 font-bold mt-0.5">
+                  {info.orgName}
                 </div>
               </div>
             </div>

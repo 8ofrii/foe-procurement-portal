@@ -78,7 +78,7 @@ export default function DepartmentsSection({ lang, theme }) {
             <span>{isAr ? 'الهيكل التنظيمي التخصصي' : 'Specialized Organizational Structure'}</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-4xl font-black leading-snug sm:leading-normal text-slate-900 dark:text-white">
             {isAr ? 'الإدارات والقطاعات التنفيذية للشراء الموحد' : 'Executive Directorates & Sectors'}
           </h2>
 

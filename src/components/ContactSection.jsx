@@ -32,7 +32,7 @@ export default function ContactSection({ lang, theme }) {
             <PhoneCall className="w-3.5 h-3.5" />
             <span>{isAr ? 'المقرات الرسمية وقنوات الاتصال' : 'Headquarters & Official Directory'}</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-4xl font-black leading-snug sm:leading-normal text-slate-900 dark:text-white">
             {isAr ? 'المقر الرئيسي والأسئلة الشائعة' : 'Main Headquarters & FAQ'}
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">

@@ -98,7 +98,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
             </div>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-slate-900 dark:text-white">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug text-slate-900 dark:text-white">
             {isAr ? (
               <>
                 منظومة <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600">الشراء الموحد</span>

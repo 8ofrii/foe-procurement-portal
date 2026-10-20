@@ -48,7 +48,7 @@ export default function CommitteesSection({ lang, theme }) {
             <span>{header.badge[lang] || header.badge.ar}</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-4xl font-black leading-snug sm:leading-normal text-slate-900 dark:text-white">
             {header.title[lang] || header.title.ar}
           </h2>
 
@@ -175,7 +175,7 @@ export default function CommitteesSection({ lang, theme }) {
 
                   {/* Commodity Title & Specification Scope */}
                   <div className="space-y-1.5">
-                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white leading-snug">
                       {session.commodity[lang] || session.commodity.ar}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">

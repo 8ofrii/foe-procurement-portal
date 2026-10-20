@@ -157,17 +157,17 @@ export default function Navbar({
             />
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col justify-center">
             <div className="flex items-center gap-1.5">
-              <span className="text-xs sm:text-sm font-black tracking-tight text-slate-900 dark:text-white leading-none">
-                {info.orgName}
+              <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white leading-tight">
+                {info.deptName}
               </span>
               <span className="px-1.5 py-0.5 rounded text-[10px] font-black font-mono bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 leading-none">
                 FOE
               </span>
             </div>
-            <div className="text-[10px] sm:text-[11px] font-bold text-amber-600 dark:text-amber-400 mt-1 leading-none">
-              {info.deptName}
+            <div className="text-[10px] sm:text-[11px] font-bold text-amber-600 dark:text-amber-400 mt-0.5 leading-tight">
+              {info.orgName}
             </div>
           </div>
         </div>

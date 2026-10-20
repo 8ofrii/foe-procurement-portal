@@ -32,7 +32,7 @@ export default function AccreditationStandardsSection({ lang, theme }) {
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>{isAr ? 'الشفافية والحوكمة التعاقدية' : 'Governance & Trade Standards'}</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-4xl font-black leading-snug sm:leading-normal text-slate-900 dark:text-white">
             {ACCREDITATION_STANDARDS.title[lang] || ACCREDITATION_STANDARDS.title.ar}
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">

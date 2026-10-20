@@ -31,7 +31,7 @@ export default function NewsSection({ lang, theme, onOpenInfographic }) {
               <Newspaper className="w-3.5 h-3.5" />
               <span>{isAr ? 'المركز الإعلامي والبيانات الرسمية' : 'Media Center & Press Releases'}</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+            <h2 className="text-2xl sm:text-4xl font-black leading-snug sm:leading-normal text-slate-900 dark:text-white">
               {isAr ? 'أحدث أخبار ومستجدات الشراء الموحد' : 'Latest News & Strategic Updates'}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
