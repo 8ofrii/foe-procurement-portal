@@ -939,20 +939,26 @@ export const COMMITTEES_DATA = {
   sessions: [
     {
       id: "sunday-rice",
-      dayName: { ar: "كل يوم أحد أسبوعياً", en: "Every Sunday", pl: "W każdą niedzielę", uk: "Щонеділі" },
+      dayName: { ar: "يوم الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
       dayCode: "SUNDAY",
       dayNumber: "25",
-      monthName: { ar: "أكتوبر 2026", en: "Oct 2026" },
+      monthName: { ar: "أكتوبر 2026", en: "Oct 2026", pl: "Paź 2026", uk: "Жов 2026" },
       exactDate: "25/10/2026",
-      time: { ar: "الساعة 02:00 ظهراً (02:00 PM)", en: "02:00 PM Sharp", pl: "Godz. 14:00", uk: "О 14:00" },
+      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
-        ar: "الأرز (مختلف الرتب والمواصفات التموينية المعتمدة)", 
-        en: "Rice (Certified Strategic Food Grades)", 
-        pl: "Ryż (Różne gatunki i normy jakościowe)", 
-        uk: "Рис (Різні ґатунки та стандарти якості)" 
+        ar: "توريد الأرز التمويني", 
+        en: "Strategic Rice Procurement", 
+        pl: "Dostawy Ryżu", 
+        uk: "Закупівля рису" 
       },
-      category: { ar: "سلع تموينية وحبوب أساسية", en: "Grains & Staple Crops", pl: "Zboża i Produkty Podstawowe", uk: "Зернові та базові товари" },
-      badge: { ar: "جلسة أسبوعية ثابتة", en: "Fixed Weekly Session", pl: "Stała Sesja Cotygodniowa", uk: "Постійна щотижнева сесія" },
+      commoditySpecs: {
+        ar: "مختلف الرتب والمواصفات التموينية والقياسية المعتمدة",
+        en: "All approved strategic, ration, and standard quality grades",
+        pl: "Różne gatunki i normy jakościowe",
+        uk: "Різні ґатунки та стандарти якості"
+      },
+      category: { ar: "حبوب وسلع تموينية", en: "Grains & Staple Crops", pl: "Zboża", uk: "Зернові" },
+      badge: { ar: "جلسة أسبوعية ثابتة", en: "Fixed Weekly Session", pl: "Sesja cotygodniowa", uk: "Щотижнева сесія" },
       priorityRule: {
         ar: "الأولوية بأسبقية التواجد",
         en: "Priority: First-Come Attendance",
@@ -960,32 +966,42 @@ export const COMMITTEES_DATA = {
         uk: "Пріоритет за черговістю присутності"
       },
       priorityDetails: {
-        ar: "تنعقد الجلسة أسبوعياً كل أحد في تمام الساعة 2:00 ظهراً. وتمنح أولوية مراجعة العروض والبت بأسبقية الحضور والتسجيل الفعلي للموردين بقاعة اللجنة.",
+        ar: "تنعقد الجلسة أسبوعياً كل أحد في تمام الساعة 2:00 ظهراً. تُمنح أولوية مراجعة العروض والبت بأسبقية الحضور والتسجيل الفعلي للموردين بقاعة اللجنة.",
         en: "Convenes weekly every Sunday at 02:00 PM. Review priority and bid adjudication are strictly determined by physical attendance and sign-in order.",
         pl: "Posiedzenie odbywa się w każdą niedzielę o 14:00. O kolejności rozpatrywania decyduje fizyczna obecność i rejestracja.",
         uk: "Засідання щонеділі рівно о 14:00. Пріоритет розгляду визначається виключно черговістю фізичного прибуття та реєстрації."
       },
       docsRule: {
-        ar: "المستندات الرسمية للشركة + سابقة الأعمال في التوريد إن وُجدت.",
+        ar: "المستندات الرسمية للشركة + سابقة أعمال التوريد إن وُجدت.",
         en: "Official corporate documents + previous supply track record if available.",
         pl: "Oficjalne dokumenty firmy + doświadczenie w dostawach.",
         uk: "Офіційні документи компанії + досвід поставок за наявності."
       },
+      docsList: [
+        { ar: "الأوراق والمستندات الرسمية للشركة (سجل تجاري، بطاقة ضريبية، تفويض رسمي)", en: "Official corporate documents (Commercial Register, Tax Card, Authorization)" },
+        { ar: "سابقة أعمال التوريد المعتمدة (إن وُجدت)", en: "Previous certified supply track record (if available)" }
+      ],
       tagColor: "amber"
     },
     {
       id: "tuesday-cattle",
-      dayName: { ar: "يوم الثلاثاء (أسبوع وأسبوع)", en: "Every Other Tuesday (Bi-weekly)", pl: "Co drugi wtorek", uk: "Щодва вівторки" },
+      dayName: { ar: "يوم الثلاثاء", en: "Tuesday", pl: "Wtorek", uk: "Вівторок" },
       dayCode: "TUESDAY",
       dayNumber: "27",
-      monthName: { ar: "أكتوبر 2026", en: "Oct 2026" },
+      monthName: { ar: "أكتوبر 2026", en: "Oct 2026", pl: "Paź 2026", uk: "Жов 2026" },
       exactDate: "27/10/2026",
-      time: { ar: "الساعة 02:00 ظهراً (02:00 PM)", en: "02:00 PM Sharp", pl: "Godz. 14:00", uk: "О 14:00" },
+      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
-        ar: "الرؤوس الحية (مواشي وعجول حية للذبيح والتسمين)", 
-        en: "Live Cattle & Livestock (Slaughter & Fattening)", 
+        ar: "توريد الرؤوس الحية", 
+        en: "Live Cattle & Livestock", 
         pl: "Żywe bydło i trzoda", 
         uk: "Жива худоба та телята" 
+      },
+      commoditySpecs: {
+        ar: "مواشي وعجول حية مخصصة للذبيح الفوري أو مشروعات التسمين",
+        en: "Live cattle and livestock for immediate slaughter or fattening",
+        pl: "Żywe bydło i trzoda na ubój lub opas",
+        uk: "Жива худоба та телята для забою або відгодівлі"
       },
       category: { ar: "ثروة حيوانية ولحوم", en: "Livestock & Meat", pl: "Żywy Inwentarz", uk: "Тваринництво" },
       badge: { ar: "نظام دوري أسبوع وأسبوع", en: "Bi-weekly Schedule", pl: "Cykl co dwa tygodnie", uk: "Почерговий графік" },
@@ -996,10 +1012,10 @@ export const COMMITTEES_DATA = {
         uk: "Наступна сесія: Вівторок 27/10/2026 🐂"
       },
       priorityDetails: {
-        ar: "تنعقد لجنة الرؤوس الحية يوم الثلاثاء بنظام أسبوع وأسبوع في تمام الساعة 2:00 ظهراً، وموعد الجلسة القادمة المنعقدة هو الثلاثاء 27/10/2026.",
-        en: "Live Cattle committee convenes on Tuesdays on a bi-weekly cycle at 02:00 PM. Next scheduled session: Tuesday 27/10/2026.",
+        ar: "تنعقد لجنة الرؤوس الحية بنظام أسبوع وأسبوع؛ موعد الجلسة القادمة هو الثلاثاء 27/10/2026 في تمام الساعة 2:00 ظهراً.",
+        en: "Live Cattle committee convenes on a bi-weekly cycle; next session is scheduled for Tuesday 27/10/2026 at 02:00 PM.",
         pl: "Posiedzenie komisji ds. żywego bydła odbywa się we wtorki co dwa tygodnie o 14:00. Najbliższa sesja: 27/10/2026.",
-        uk: "Комісія із закупівлі живої худоби збирається у вівторки раз на два тижні о 14:00. Наступна сесія: 27/10/2026."
+        uk: "Комісія із закупівлі живої худоби збирається раз на два тижні; наступна сесія: вівторок 27/10/2026 о 14:00."
       },
       docsRule: {
         ar: "المستندات الرسمية للشركة + سابقة أعمال التوريد إن وُجدت.",
@@ -1007,36 +1023,46 @@ export const COMMITTEES_DATA = {
         pl: "Oficjalne dokumenty firmy + doświadczenie w dostawach.",
         uk: "Офіційні документи компанії + досвід поставок за наявності."
       },
+      docsList: [
+        { ar: "الأوراق والمستندات الرسمية للشركة (سجل تجاري، بطاقة ضريبية، تفويض رسمي)", en: "Official corporate documents (Commercial Register, Tax Card, Authorization)" },
+        { ar: "سابقة أعمال التوريد المعتمدة (إن وُجدت)", en: "Previous certified supply track record (if available)" }
+      ],
       tagColor: "rose"
     },
     {
       id: "monday-shrimp",
-      dayName: { ar: "يوم الاثنين (أسبوع وأسبوع)", en: "Every Other Monday (Bi-weekly)", pl: "Co drugi poniedziałek", uk: "Щодва понеділки" },
+      dayName: { ar: "يوم الاثنين", en: "Monday", pl: "Poniedziałek", uk: "Понеділок" },
       dayCode: "MONDAY",
       dayNumber: "02",
-      monthName: { ar: "نوفمبر 2026", en: "Nov 2026" },
+      monthName: { ar: "نوفمبر 2026", en: "Nov 2026", pl: "Lis 2026", uk: "Лис 2026" },
       exactDate: "02/11/2026",
       lastHeldDate: "19/10/2026",
-      time: { ar: "الساعة 02:00 ظهراً (02:00 PM)", en: "02:00 PM Sharp", pl: "Godz. 14:00", uk: "О 14:00" },
+      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
-        ar: "الجمبري (مختلف الأحجام والتوريدات البحرية والمجمدة)", 
-        en: "Shrimp (Fresh & Frozen Marine Supplies)", 
-        pl: "Krewetki (Dostawy morskie i mrożone)", 
-        uk: "Креветки (Морські та заморожені поставки)" 
+        ar: "توريد الجمبري", 
+        en: "Shrimp Supplies", 
+        pl: "Dostawy Krewetek", 
+        uk: "Закупівля креветок" 
       },
-      category: { ar: "ثروة سمكية وبحرية", en: "Fisheries & Seafood", pl: "Rybołówstwo i Owoce Morza", uk: "Рибне господарство" },
+      commoditySpecs: {
+        ar: "مختلف الأحجام والتوريدات البحرية والمجمدة المعتمدة",
+        en: "Fresh marine and frozen shrimp across all certified commercial sizes",
+        pl: "Krewetki morskie i mrożone w różnych rozmiarach",
+        uk: "Креветки морські та заморожені різних калібрів"
+      },
+      category: { ar: "ثروة سمكية وبحرية", en: "Fisheries & Seafood", pl: "Rybołówstwo", uk: "Рибне господарство" },
       badge: { ar: "نظام دوري أسبوع وأسبوع", en: "Bi-weekly Schedule", pl: "Cykl co dwa tygodnie", uk: "Почерговий графік" },
       priorityRule: {
-        ar: "انعقدت 19/10 والقادمة: الاثنين 02/11/2026 🦐",
-        en: "Held on 19/10, Next on 02/11/2026 🦐",
-        pl: "Ostatnia 19/10, Następna 02/11/2026 🦐",
-        uk: "Відбулася 19/10, Наступна 02/11/2026 🦐"
+        ar: "انعقدت 19/10 • القادمة: الاثنين 02/11/2026 🦐",
+        en: "Held on 19/10 • Next on 02/11/2026 🦐",
+        pl: "Ostatnia 19/10 • Następna 02/11/2026 🦐",
+        uk: "Відбулася 19/10 • Наступна 02/11/2026 🦐"
       },
       priorityDetails: {
-        ar: "تنعقد لجنة الجمبري يوم الاثنين بنظام أسبوع وأسبوع في تمام الساعة 2:00 ظهراً. انعقدت الجلسة السابقة بنجاح يوم الاثنين 19/10/2026، وموعد الجلسة القادمة يوم الاثنين 02/11/2026.",
-        en: "Shrimp committee convenes on Mondays on a bi-weekly cycle at 02:00 PM. Last session was held on 19/10/2026, and the upcoming session convenes on Monday 02/11/2026.",
-        pl: "Komisja ds. krewetek obraduje w poniedziałki co dwa tygodnie o 14:00. Ostatnia sesja odbyła się 19/10/2026, a kolejna 02/11/2026.",
-        uk: "Комісія щодо креветок засідає у понеділки раз на два тижні о 14:00. Попередня успішно відбулася 19/10/2026, наступна — 02/11/2026."
+        ar: "انعقدت الجلسة السابقة بنجاح يوم 19/10/2026؛ وموعد الجلسة القادمة هو يوم الاثنين 02/11/2026 في تمام الساعة 2:00 ظهراً.",
+        en: "Previous session was successfully held on 19/10/2026; the upcoming session convenes on Monday 02/11/2026 at 02:00 PM.",
+        pl: "Poprzednia sesja odbyła się 19/10/2026; kolejna odbędzie się w poniedziałek 02/11/2026 o 14:00.",
+        uk: "Попередня сесія успішно відбулася 19/10/2026; наступна відбудеться у понеділок 02/11/2026 о 14:00."
       },
       docsRule: {
         ar: "المستندات الرسمية للشركة + سابقة أعمال التوريد إن وُجدت.",
@@ -1044,6 +1070,10 @@ export const COMMITTEES_DATA = {
         pl: "Oficjalne dokumenty firmy + doświadczenie w dostawach.",
         uk: "Офіційні документи компанії + досвід поставок за наявності."
       },
+      docsList: [
+        { ar: "الأوراق والمستندات الرسمية للشركة (سجل تجاري، بطاقة ضريبية، تفويض رسمي)", en: "Official corporate documents (Commercial Register, Tax Card, Authorization)" },
+        { ar: "سابقة أعمال التوريد المعتمدة (إن وُجدت)", en: "Previous certified supply track record (if available)" }
+      ],
       tagColor: "emerald"
     }
   ],
