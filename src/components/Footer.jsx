@@ -55,9 +55,9 @@ export default function Footer({ lang, theme, onScrollTo }) {
 
             <p className="text-xs leading-relaxed max-w-md text-slate-600 dark:text-slate-400">
               {isAr ? (
-                'إدارة الشراء الموحد وتأمين السلع الاستراتيجية بجهاز مستقبل مصر للتنمية المستدامة (FOE)، المعنية بتأمين احتياجات السلع والمحاصيل الأساسية وبناء احتياطي استراتيجي آمن بالربط مع مشروعات الدلتا الجديدة ومجمعات الصوامع الذكية.'
+                'إدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة (FOE)، المعنية بتأمين احتياجات السلع والمحاصيل الأساسية وبناء احتياطي استراتيجي آمن بالربط مع مشروعات الدلتا الجديدة ومجمعات الصوامع الذكية.'
               ) : (
-                'Unified Strategic Procurement Directorate of Future of Egypt Agency (FOE), securing essential commodities and strategic reserves in synergy with the New Delta agricultural infrastructure.'
+                'Unified Procurement Directorate of Future of Egypt Agency (FOE), securing essential commodities and strategic reserves in synergy with the New Delta agricultural infrastructure.'
               )}
             </p>
 
@@ -206,7 +206,7 @@ export default function Footer({ lang, theme, onScrollTo }) {
             © {new Date().getFullYear()} {info.orgName} — {info.entity}
           </div>
           <div className="text-amber-600 dark:text-amber-400/90 font-medium">
-            {isAr ? 'منظومة الشراء الموحد وتأمين السلع الاستراتيجية — جهاز مستقبل مصر للتنمية المستدامة (رئاسة الجمهورية) • بوابة للاطلاع العام' : 'Unified Strategic Procurement Directorate — Future of Egypt Agency for Sustainable Development • Official Public Portal'}
+            {isAr ? 'منظومة الشراء الموحد — جهاز مستقبل مصر للتنمية المستدامة (رئاسة الجمهورية) • بوابة للاطلاع العام' : 'Unified Procurement Directorate — Future of Egypt Agency for Sustainable Development • Official Public Portal'}
           </div>
         </div>
       </div>

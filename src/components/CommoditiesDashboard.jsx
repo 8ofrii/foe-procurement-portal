@@ -196,7 +196,7 @@ export default function CommoditiesDashboard({ lang, theme }) {
                 <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2">
                   {activeTab === 'poster' 
                     ? (isAr ? 'ملصق أرقام وإنجازات التنمية المستدامة' : 'Sustainable Milestones & Food Security Poster')
-                    : (isAr ? 'إنفوجرافيك إدارة الشراء الموحد المعتمد' : 'Approved Strategic Procurement Infographic')
+                    : (isAr ? 'إنفوجرافيك إدارة الشراء الموحد المعتمد' : 'Approved Unified Procurement Infographic')
                   }
                 </h3>
 
@@ -206,8 +206,8 @@ export default function CommoditiesDashboard({ lang, theme }) {
                         ? 'عرض توثيقي صادر عن الجهاز يبرز أرقام وطفرات التنمية المستدامة واستصلاح الدلتا الجديدة ومجمعات الصوامع.'
                         : 'Official agency publication showcasing sustainable achievements, New Delta expansion, and smart silos.')
                     : (isAr
-                        ? 'الإعلان الرسمي الصادر عن إدارة الشراء الموحد موضحاً الركائز الاستراتيجية الست لضبط الأسواق وتأمين السلع.'
-                        : 'Official announcement defining the six strategic pillars for national commodity security and price stability.')
+                        ? 'الإعلان الرسمي الصادر عن إدارة الشراء الموحد موضحاً الركائز الاستراتيجية الست لضبط الأسواق.'
+                        : 'Official announcement defining the six strategic pillars for national procurement.')
                   }
                 </p>
               </div>

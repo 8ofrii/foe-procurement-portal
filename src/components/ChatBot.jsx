@@ -478,11 +478,11 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
     if (lang === 'en') {
       return `Welcome to Mostaqbal Misr Unified Strategic Procurement Directorate. We lead sovereign commodity procurement, national strategic reserves, and weekly procurement committees (Rice on Sundays & Shrimp/Cattle on Mondays). Main HQ: Tucano Mall - Yousef Abbas St. - Nasr City - Cairo.`;
     } else if (lang === 'pl') {
-      return `Witamy w Dyrekcji ds. Zunifikowanych Zakupów Strategicznych Agencji Przyszłość Egiptu. Prowadzimy cotygodniowe komisje przetargowe (Ryż w niedziele, Krewetki/Bydło w poniedziałki). Główna siedziba: Tucano Mall - Nasr City - Kair.`;
+      return `Witamy w Dyrekcji ds. Zunifikowanych Zakupów Agencji Przyszłość Egiptu. Prowadzimy cotygodniowe komisje przetargowe (Ryż w niedziele, Bydło we wtorki, Krewetki w poniedziałki). Główna siedziba: Tucano Mall - 3. piętro - Nasr City - Kair.`;
     } else if (lang === 'uk') {
-      return `Ласкаво просимо до Директорату єдиних стратегічних закупівель Агентства Майбутнє Єгипту. Проводимо щотижневі комісії (Рис щонеділі, Креветки/Худоба щопонеділка). Головний офіс: Tucano Mall - Наср-Сіті - Каїр.`;
+      return `Ласкаво просимо до Директорату єдиних закупівель Агентства Майбутнє Єгипту. Проводимо щотижневі комісії (Рис щонеділі, Худоба щовівторка, Креветки щопонеділка). Головний офіс: Tucano Mall - 3-й поверх - Наср-Сіті - Каїр.`;
     } else {
-      return `أهلاً بكم في إدارة الشراء الموحد وتأمين السلع الاستراتيجية بجهاز مستقبل مصر للتنمية المستدامة. تتولى الإدارة تأمين السلع الأساسية والمخزون الاستراتيجي ولجان البت الأسبوعية (الأرز كل أحد، والجمبري/الرؤوس الحية كل اثنين). مقرنا: توكانو مول - شارع يوسف عباس - مدينة نصر.`;
+      return `أهلاً بكم في إدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. تتولى الإدارة إدارة التعاقدات واللجان الأسبوعية لتوريد السلع الأساسية (الأرز كل أحد، والرؤوس الحية كل ثلاثاء، والجمبري كل اثنين). مقرنا: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر.`;
     }
   };
 

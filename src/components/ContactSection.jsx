@@ -194,8 +194,8 @@ export default function ContactSection({ lang, theme }) {
               </div>
               <p className="text-[11px] text-slate-300">
                 {isAr 
-                  ? 'قاعة اللجان المركزية وإدارة الشراء الموحد وتأمين السلع الاستراتيجية — جهاز مستقبل مصر' 
-                  : 'Central Committees Hall & Unified Strategic Procurement Directorate — FOE'}
+                  ? 'قاعة اللجان المركزية وإدارة الشراء الموحد — جهاز مستقبل مصر' 
+                  : 'Central Committees Hall & Unified Procurement Directorate — FOE'}
               </p>
             </div>
           </div>

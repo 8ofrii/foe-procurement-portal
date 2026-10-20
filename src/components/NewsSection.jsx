@@ -129,8 +129,8 @@ export default function NewsSection({ lang, theme, onOpenInfographic }) {
               
               <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-700 dark:text-amber-300">
                 {isAr 
-                  ? 'المكتب الإعلامي والتنسيق الحكومي — إدارة الشراء الموحد وتأمين السلع الاستراتيجية — جهاز مستقبل مصر للتنمية المستدامة.' 
-                  : 'Media & Government Coordination Bureau — Unified Strategic Procurement Directorate — Future of Egypt Agency.'}
+                  ? 'المكتب الإعلامي والتنسيق الحكومي — إدارة الشراء الموحد — جهاز مستقبل مصر للتنمية المستدامة.' 
+                  : 'Media & Government Coordination Bureau — Unified Procurement Directorate — Future of Egypt Agency.'}
               </div>
             </div>
 

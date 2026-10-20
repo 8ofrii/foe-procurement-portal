@@ -1,13 +1,13 @@
-// Multilingual Portal Data for Unified Strategic Procurement Directorate
-// إدارة الشراء الموحد وتأمين السلع الاستراتيجية - جهاز مستقبل مصر للتنمية المستدامة
+// Multilingual Portal Data for Unified Procurement Directorate
+// إدارة الشراء الموحد - جهاز مستقبل مصر للتنمية المستدامة
 // Supported languages: 'ar' (Arabic), 'en' (English), 'pl' (Polish), 'uk' (Ukrainian)
 
 export const PORTAL_INFO = {
   ar: {
     orgName: "جهاز مستقبل مصر للتنمية المستدامة",
     orgAcronym: "FOE",
-    deptName: "إدارة الشراء الموحد وتأمين السلع الاستراتيجية",
-    deptNotice: "إدارة الشراء الموحد وتأمين السلع الاستراتيجية — جهاز مستقبل مصر للتنمية المستدامة (FOE)",
+    deptName: "إدارة الشراء الموحد",
+    deptNotice: "إدارة الشراء الموحد — جهاز مستقبل مصر للتنمية المستدامة (FOE)",
     motto: "جهد • تنمية • رخاء",
     slogan: "أمن سلعي.. أسعار منضبطة.. جودة مضمونة",
     entity: "رئاسة الجمهورية - جمهورية مصر العربية",
@@ -35,8 +35,8 @@ export const PORTAL_INFO = {
   en: {
     orgName: "Future of Egypt Agency for Sustainable Development",
     orgAcronym: "FOE",
-    deptName: "Unified Strategic Procurement Directorate",
-    deptNotice: "Unified Strategic Procurement Directorate — Future of Egypt Agency (FOE)",
+    deptName: "Unified Procurement Directorate",
+    deptNotice: "Unified Procurement Directorate — Future of Egypt Agency (FOE)",
     motto: "Effort • Development • Prosperity",
     slogan: "Commodity Security • Controlled Pricing • Certified Quality",
     entity: "Presidency of the Arab Republic of Egypt",
@@ -64,8 +64,8 @@ export const PORTAL_INFO = {
   pl: {
     orgName: "Agencja Przyszłość Egiptu na rzecz Zrównoważonego Rozwoju",
     orgAcronym: "FOE",
-    deptName: "Dyrekcja ds. Zunifikowanych Zakupów Strategicznych",
-    deptNotice: "Dyrekcja ds. Zunifikowanych Zakupów Strategicznych — Agencja Przyszłość Egiptu (FOE)",
+    deptName: "Dyrekcja ds. Zunifikowanych Zakupów",
+    deptNotice: "Dyrekcja ds. Zunifikowanych Zakupów — Agencja Przyszłość Egiptu (FOE)",
     motto: "Wysiłek • Rozwój • Dobrobyt",
     slogan: "Bezpieczeństwo towarowe • Kontrola cen • Certyfikowana jakość",
     entity: "Kancelaria Prezydenta Arabskiej Republiki Egiptu",
@@ -93,8 +93,8 @@ export const PORTAL_INFO = {
   uk: {
     orgName: "Агентство Майбутнє Єгипту для сталого розвитку",
     orgAcronym: "FOE",
-    deptName: "Директорат єдиних стратегічних закупівель",
-    deptNotice: "Директорат єдиних стратегічних закупівель — Агентство Майбутнє Єгипту (FOE)",
+    deptName: "Директорат єдиних закупівель",
+    deptNotice: "Директорат єдиних закупівель — Агентство Майбутнє Єгипту (FOE)",
     motto: "Праця • Розвиток • Процвітання",
     slogan: "Товарна безпека • Контроль цін • Гарантована якість",
     entity: "Адміністрація Президента Арабської Республіки Єгипет",
@@ -670,13 +670,13 @@ export const NEWS_ARTICLES = [
     category: { ar: "قرارات سيادية", en: "Sovereign Decrees", pl: "Decyzje Rządowe", uk: "Урядові рішення" },
     image: "/assets/hero-aerial.jpg",
     summary: {
-      ar: "إعمالاً للتوجيهات الرئاسية، وافق مجلس الوزراء في جلسته رقم (22) على إنابة جهاز مستقبل مصر للتنمية المستدامة في الشراء الموحد للسلع الاستراتيجية والأقماح التموينية بالتكامل مع الهيئة العامة للسلع التموينية (GASC).",
-      en: "Acting on presidential directives, the Egyptian Cabinet approved mandating Mostaqbal Misr Agency to manage unified strategic procurement for wheat and essential food commodities in full integration with GASC.",
-      pl: "Zgodnie z dyrektywami prezydenckimi, Rada Ministrów powierzyła Agencji Przyszłość Egiptu zarządzanie zunifikowanymi zakupami pszenicy i surowców strategicznych we współpracy z GASC.",
-      uk: "На виконання указів Президента, Кабінет Міністрів уповноважив Агентство Майбутнє Єгипту здійснювати єдині стратегічні закупівлі продовольчої пшениці у повній взаємодії з GASC."
+      ar: "إعمالاً للتوجيهات الرئاسية، وافق مجلس الوزراء في جلسته رقم (22) على إنابة جهاز مستقبل مصر للتنمية المستدامة في الشراء الموحد للسلع الاستراتيجية والأقماح بالتكامل والتنسيق مع كافة الجهات المعنية.",
+      en: "Acting on presidential directives, the Egyptian Cabinet approved mandating Mostaqbal Misr Agency to manage unified strategic procurement for wheat and essential commodities in coordination with relevant national entities.",
+      pl: "Zgodnie z dyrektywami prezydenckimi, Rada Ministrów powierzyła Agencji Przyszłość Egiptu zarządzanie zunifikowanymi zakupami pszenicy i surowców strategicznych we współpracy z właściwymi instytucjami.",
+      uk: "На виконання указів Президента, Кабінет Міністрів уповноважив Агентство Майбутнє Єгипту здійснювати єдині стратегічні закупівлі продовольчої пшениці у взаємодії з уповноваженими органами."
     },
     details: {
-      ar: `في إطار الرؤية الاستراتيجية للدولة المصرية لتعزيز الأمن الغذائي القومي وتأمين احتياطي استراتيجي آمن يغطي من 6 إلى 9 أشهر من المحاصيل والسلع الأساسية، وافق مجلس الوزراء في جلسته الرسمية على تكليف وإنابة جهاز مستقبل مصر للتنمية المستدامة بإدارة منظومة الشراء الموحد للسلع الاستراتيجية والأقماح لصالح الجهات والجهات العامة، وذلك بالتنسيق والتكامل الكامل مع الهيئة العامة للسلع التموينية (GASC).
+      ar: `في إطار الرؤية الاستراتيجية للدولة المصرية لتعزيز الأمن الغذائي القومي وتأمين احتياطي استراتيجي آمن يغطي من 6 إلى 9 أشهر من المحاصيل والسلع الأساسية، وافق مجلس الوزراء في جلسته الرسمية على تكليف وإنابة جهاز مستقبل مصر للتنمية المستدامة بإدارة منظومة الشراء الموحد للسلع الاستراتيجية والأقماح لصالح الجهات والجهات العامة، وذلك بالتنسيق والتكامل الكامل مع كافة الهيئات والجهات المعنية.
 
 ويهدف هذا القرار إلى توحيد القوة التفاوضية للجمهورية في أسواق السلع الدولية، وتحقيق أعلى درجات الوفر الدولاري، مع ربط سلاسل الإمداد والاستيراد الخارجي بالطاقات التخزينية العملاقة لشبكة الصوامع الذكية ومجمعات الإنتاج الزراعي بمشروع الدلتا الجديدة الممتد على مساحة 2.2 مليون فدان.`,
       en: `Under the sovereign directives of the Presidency to reinforce national food security, the Egyptian Cabinet officially ratified mandating the Future of Egypt Agency for Sustainable Development to execute unified strategic procurement for national wheat supplies and essential commodities in close coordination with GASC.
@@ -764,7 +764,7 @@ All consignments undergo rigorous three-tier laboratory testing (protein >12.5%,
     details: {
       ar: `أبرمت إدارة التعاقدات والشراء الدولي اتفاقيات استراتيجية مباشرة مع كبريات الشركات العالمية في أمريكا الجنوبية وأوروبا لتوريد زيوت الطعام الخام والمكررة (زيت الصويا وزيت عباد الشمس) بكميات تتجاوز 120 ألف طن على دفعات مجدولة.
 
-وتتيح هذه الاتفاقيات توفير تسهيلات سداد ائتمانية مرنة وأسعاراً تقل عن متوسطات البورصات العالمية، مما يدعم استقرار أسعار الزيوت التموينية والأسواق الحرة للمواطنين، فضلاً عن تعزيز قدرات معاصر واستخلاص الزيوت الوطنية التابعة للجهاز.`,
+وتتيح هذه الاتفاقيات توفير تسهيلات سداد ائتمانية مرنة وأسعاراً تقل عن متوسطات البورصات العالمية، مما يدعم استقرار أسعار زيوت الطعام والأسواق الحرة للمواطنين، فضلاً عن تعزيز قدرات معاصر واستخلاص الزيوت الوطنية التابعة للجهاز.`,
       en: `Direct agreements were signed with major South American and European agribusiness giants for 120,000 MT of crude and refined vegetable oils under structured delivery schedules, locking in prices below market averages and providing flexible credit facilities.`,
       pl: `Podpisano bezpośrednie kontrakty na dostawę 120 000 ton olejów roślinnych na preferencyjnych warunkach finansowych, wspierając stabilność cenową na rynku krajowym.`,
       uk: `Укладено прямі договори на постачання 120 000 тонн рослинної олії за цінами, нижчими за середньоринкові, що гарантує цінову стабільність для споживачів.`
@@ -834,10 +834,10 @@ export const FAQ_LIST = [
       uk: "Яка стратегічна візія системи єдиних закупівель Агентства Майбутнє Єгипту?"
     },
     a: {
-      ar: "تجسد المنظومة رؤية الدولة المصرية، بتوجيهات فخامة رئيس الجمهورية وقرار مجلس الوزراء، في إنابة جهاز مستقبل مصر للتنمية المستدامة لإدارة منظومة الشراء الموحد للسلع الاستراتيجية والأقماح، بالربط المباشر مع أضخم مشروعات الاستصلاح الزراعي والصوامع الرقمية بالدلتا الجديدة (2.2 مليون فدان). ترتكز الرؤية على تحقيق التكامل بين الإنتاج المحلي الواسع والشراء المباشر الذكي، لتأمين احتياطي استراتيجي آمن يغطي من 6 إلى 9 أشهر، وتحقيق الوفر الدولاري، وضبط حركة الأسواق لصالح المواطنين بالتكامل مع الهيئة العامة للسلع التموينية (GASC).",
-      en: "Embodying the sovereign directives of the Presidency and Egyptian Cabinet decrees, the system mandates Mostaqbal Misr Agency to lead unified strategic procurement of essential grains and commodities. It unites massive domestic agricultural production across the 2.2-million-feddan New Delta with smart direct international trading, securing 6-to-9 month national reserves, capturing significant foreign currency savings, and ensuring price stability in coordination with GASC.",
-      pl: "Wdrażając wytyczne Prezydenta i decyzje Rady Ministrów, system powierza Agencji Przyszłość Egiptu zarządzanie zunifikowanymi zakupami strategicznymi. Łączy wielką produkcję rolną projektu Nowa Delta z bezpośrednimi kontraktami międzynarodowymi, budując rezerwy na 6-9 miesięcy i stabilizując rynek we współpracy z GASC.",
-      uk: "Втілюючи директиви Президента та постанови Кабінету Міністрів Єгипту, система уповноважує Агентство Майбутнє Єгипту здійснювати єдині стратегічні закупівлі. Вона інтегрує масштабне агровиробництво Нової Дельти із прямими міжнародними контрактами, забезпечуючи 6-9 місяців держрезервів та валютну оптимізацію у партнерстві з GASC."
+      ar: "تجسد المنظومة رؤية الدولة المصرية، بتوجيهات فخامة رئيس الجمهورية وقرار مجلس الوزراء، في إنابة جهاز مستقبل مصر للتنمية المستدامة لإدارة منظومة الشراء الموحد للسلع الاستراتيجية والأقماح، بالربط المباشر مع أضخم مشروعات الاستصلاح الزراعي والصوامع الرقمية بالدلتا الجديدة (2.2 مليون فدان). ترتكز الرؤية على تحقيق التكامل بين الإنتاج المحلي الواسع والشراء المباشر الذكي، لتأمين احتياطي استراتيجي آمن يغطي من 6 إلى 9 أشهر، وتحقيق الوفر الدولاري، وضبط حركة الأسواق لصالح المواطنين بالتكامل والتنسيق مع كافة الجهات المعنية.",
+      en: "Embodying the sovereign directives of the Presidency and Egyptian Cabinet decrees, the system mandates Mostaqbal Misr Agency to lead unified strategic procurement of essential grains and commodities. It unites massive domestic agricultural production across the 2.2-million-feddan New Delta with smart direct international trading, securing 6-to-9 month national reserves, capturing significant foreign currency savings, and ensuring price stability in coordination with relevant national entities.",
+      pl: "Wdrażając wytyczne Prezydenta i decyzje Rady Ministrów, system powierza Agencji Przyszłość Egiptu zarządzanie zunifikowanymi zakupami strategicznymi. Łączy wielką produkcję rolną projektu Nowa Delta z bezpośrednimi kontraktami międzynarodowymi, budując rezerwy na 6-9 miesięcy i stabilizując rynek we współpracy z właściwymi instytucjami.",
+      uk: "Втілюючи директиви Президента та постанови Кабінету Міністрів Єгипту, система уповноважує Агентство Майбутнє Єгипту здійснювати єдині стратегічні закупівлі. Вона інтегрує масштабне агровиробництво Нової Дельти із прямими міжнародними контрактами, забезпечуючи 6-9 місяців держрезервів та валютну оптимізацію у партнерстві з державними органами."
     }
   },
   {
@@ -848,10 +848,10 @@ export const FAQ_LIST = [
       uk: "Яка правова база регулює повноваження Агентства щодо стратегічних закупівель?"
     },
     a: {
-      ar: "صدرت موافقة مجلس الوزراء إعمالاً للتوجيهات الرئاسية بإنابة جهاز مستقبل مصر للتنمية المستدامة في الشراء الموحد للسلع الاستراتيجية والأقماح لصالح الجهات العامة وفقاً لأحكام القانون رقم 182 لسنة 2018، بالتكامل مع الهيئة العامة للسلع التموينية (GASC).",
-      en: "Decrees from the Egyptian Cabinet, acting on presidential directives, mandated Mostaqbal Misr Agency to execute unified strategic procurement for national commodities under Law 182/2018 in coordination with GASC.",
-      pl: "Decyzja Rady Ministrów na mocy dekretu prezydenckiego upoważniła Agencję do prowadzenia zunifikowanych zakupów strategicznych na mocy ustawy 182/2018 we współpracy z GASC.",
-      uk: "Розпорядження Кабінету міністрів на виконання президентських указів уповноважило Агентство здійснювати єдині стратегічні закупівлі за Законом № 182/2018 у координації з GASC."
+      ar: "صدرت موافقة مجلس الوزراء إعمالاً للتوجيهات الرئاسية بإنابة جهاز مستقبل مصر للتنمية المستدامة في الشراء الموحد للسلع الاستراتيجية والأقماح لصالح الجهات العامة وفقاً لأحكام القانون رقم 182 لسنة 2018، بالتكامل والتنسيق مع كافة الجهات المعنية بالدولة.",
+      en: "Decrees from the Egyptian Cabinet, acting on presidential directives, mandated Mostaqbal Misr Agency to execute unified strategic procurement for national commodities under Law 182/2018 in coordination with relevant authorities.",
+      pl: "Decyzja Rady Ministrów na mocy dekretu prezydenckiego upoważniła Agencję do prowadzenia zunifikowanych zakupów strategicznych na mocy ustawy 182/2018 we współpracy z właściwymi organami.",
+      uk: "Розпорядження Кабінету міністрів на виконання президентських указів уповноважило Агентство здійснювати єдині стратегічні закупівлі за Законом № 182/2018 у координації з профільними органами."
     }
   },
   {
@@ -950,18 +950,18 @@ export const COMMITTEES_DATA = {
       exactDate: "25/10/2026",
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
-        ar: "توريد الأرز التمويني", 
-        en: "Strategic Rice Procurement", 
+        ar: "توريد الأرز", 
+        en: "Rice Procurement", 
         pl: "Dostawy Ryżu", 
         uk: "Закупівля рису" 
       },
       commoditySpecs: {
-        ar: "مختلف الرتب والمواصفات التموينية والقياسية المعتمدة",
-        en: "All approved strategic, ration, and standard quality grades",
+        ar: "مختلف الرتب والمواصفات القياسية المعتمدة",
+        en: "All approved standard and certified quality grades",
         pl: "Różne gatunki i normy jakościowe",
         uk: "Різні ґатунки та стандарти якості"
       },
-      category: { ar: "حبوب وسلع تموينية", en: "Grains & Staple Crops", pl: "Zboża", uk: "Зернові" },
+      category: { ar: "حبوب ومحاصيل زراعية", en: "Grains & Agricultural Crops", pl: "Zboża", uk: "Зернові" },
       badge: { ar: "جلسة أسبوعية ثابتة", en: "Weekly Fixed", pl: "Cotygodniowa", uk: "Щотижнева" },
       priorityRule: {
         ar: "الأولوية بأسبقية التواجد",
