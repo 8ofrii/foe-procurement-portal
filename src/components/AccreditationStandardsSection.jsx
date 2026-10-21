@@ -84,12 +84,12 @@ export default function AccreditationStandardsSection({ lang, theme }) {
         </div>
 
         {/* View-Only Sovereign Reference Banner */}
-        <div className={`p-6 sm:p-8 rounded-3xl border shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 ${
+        <div className={`p-5 sm:p-8 rounded-3xl border shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6 ${
           theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'
         }`}>
           <div className="space-y-2">
             <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Building2 className="w-5 h-5 text-amber-500" />
+              <Building2 className="w-5 h-5 text-amber-500 flex-shrink-0" />
               <span>{isAr ? 'قنوات التنسيق الرسمي لبيوت التجارة الدولية' : 'Official Trade Liaison Channels'}</span>
             </h4>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
@@ -101,10 +101,10 @@ export default function AccreditationStandardsSection({ lang, theme }) {
             </p>
           </div>
 
-          <div className="flex-shrink-0">
+          <div className="w-full md:w-auto flex-shrink-0">
             <a
               href={`mailto:${info.email}`}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md transition-all font-mono"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md transition-all font-mono"
             >
               <span>{info.email}</span>
             </a>

@@ -63,9 +63,9 @@ export default function CommitteesSection({ lang, theme }) {
             ? 'bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/5 border-amber-500/30 text-amber-200'
             : 'bg-gradient-to-r from-amber-50 via-white to-amber-50/80 border-amber-200 text-amber-950'
         }`}>
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-amber-500 text-slate-950 flex-shrink-0 font-bold shadow-md shadow-amber-500/20">
-              <MapPin className="w-5 h-5" />
+          <div className="flex items-start sm:items-center gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-amber-500 text-slate-950 flex-shrink-0 font-bold shadow-md shadow-amber-500/20 mt-0.5 sm:mt-0">
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
               <span className="font-bold block sm:inline">
@@ -74,21 +74,21 @@ export default function CommitteesSection({ lang, theme }) {
               <span className="opacity-90">{generalNotice[lang] || generalNotice.ar}</span>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
+          <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold border ${
               theme === 'dark' ? 'bg-slate-900 border-slate-700 text-slate-300' : 'bg-white border-amber-300 text-amber-900 shadow-sm'
             }`}>
-              <Clock className="w-3.5 h-3.5 text-amber-500" />
-              <span>{isAr ? 'مواعيد العمل الرسمية: من الأحد إلى الخميس (9:00 ص – 5:00 م)' : 'Official Hours: Sun – Thu (9:00 AM – 5:00 PM)'}</span>
+              <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+              <span>{isAr ? 'مواعيد العمل الرسمية: الأحد – الخميس (9 ص – 5 م)' : 'Official Hours: Sun – Thu (9 AM – 5 PM)'}</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold bg-amber-500/20 border border-amber-500/30 text-amber-600 dark:text-amber-400">
               <span>{isAr ? 'انعقاد اللجان: 02:00 PM' : 'Committees Kickoff: 02:00 PM'}</span>
             </span>
             <a
               href="https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shadow-sm"
             >
               <MapPin className="w-3.5 h-3.5" />
               <span>{isAr ? 'الموقع على خرائط Google ↗' : 'Google Maps ↗'}</span>
@@ -128,7 +128,7 @@ export default function CommitteesSection({ lang, theme }) {
             return (
               <div
                 key={session.id}
-                className={`rounded-3xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between shadow-xl hover:shadow-2xl ${borderColor} ${
+                className={`rounded-3xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between shadow-xl hover:shadow-2xl md:last:col-span-2 lg:last:col-span-1 md:last:max-w-md md:last:mx-auto lg:last:max-w-none w-full ${borderColor} ${
                   theme === 'dark'
                     ? 'bg-slate-900/95 shadow-black/60'
                     : 'bg-white shadow-slate-200'
@@ -137,7 +137,7 @@ export default function CommitteesSection({ lang, theme }) {
                 {/* Top metallic ribbon strip */}
                 <div className={`h-2 bg-gradient-to-r ${ribbonColor}`}></div>
 
-                <div className="p-6 sm:p-7 space-y-5 flex-1 flex flex-col justify-between">
+                <div className="p-5 sm:p-7 space-y-4 sm:space-y-5 flex-1 flex flex-col justify-between">
                   
                   {/* Top Bar: Cadence & Category */}
                   <div className="flex items-center justify-between gap-2">
@@ -232,11 +232,11 @@ export default function CommitteesSection({ lang, theme }) {
             </h4>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {attendanceRequirements.map((req, idx) => (
               <div 
                 key={idx}
-                className={`p-4 rounded-2xl border transition-all ${
+                className={`p-4 rounded-2xl border transition-all sm:last:col-span-2 lg:last:col-span-1 sm:last:max-w-md sm:last:mx-auto lg:last:max-w-none w-full ${
                   theme === 'dark' ? 'bg-slate-950/80 border-slate-800 hover:border-amber-500/50' : 'bg-slate-50 border-slate-200 hover:border-amber-400'
                 }`}
               >

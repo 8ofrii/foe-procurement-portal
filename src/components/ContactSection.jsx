@@ -147,16 +147,16 @@ export default function ContactSection({ lang, theme }) {
           theme === 'dark' ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200'
         }`}>
           {/* Header Bar */}
-          <div className="p-5 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold shadow-md shadow-amber-500/20 flex-shrink-0">
-                <MapPin className="w-5 h-5" />
+          <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+            <div className="flex items-start sm:items-center gap-3">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold shadow-md shadow-amber-500/20 flex-shrink-0 mt-0.5 sm:mt-0">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
+                <h3 className="text-sm sm:text-lg font-black text-slate-900 dark:text-white">
                   {isAr ? 'موقع المقر وقاعة اللجان: توكانو مول — الدور الثالث' : 'Headquarters & Committees Hall: Tucano Mall — Floor 3'}
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
                   {isAr 
                     ? 'شارع يوسف عباس — مدينة نصر — القاهرة (بالقرب من مستشفى دار الفؤاد وجامعة الأزهر)'
                     : 'Yousef Abbas St., Nasr City, Cairo (near Dar Al Fouad Hospital & Al-Azhar University)'}
@@ -168,7 +168,7 @@ export default function ContactSection({ lang, theme }) {
               href={info.mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all shadow-md shadow-amber-500/20 flex-shrink-0"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all shadow-md shadow-amber-500/20 flex-shrink-0"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>{isAr ? 'فتح في خرائط Google (Google Maps) ↗' : 'Open in Google Maps ↗'}</span>
@@ -176,7 +176,7 @@ export default function ContactSection({ lang, theme }) {
           </div>
 
           {/* Map Embed Container */}
-          <div className="relative w-full h-80 sm:h-96 bg-slate-950">
+          <div className="relative w-full h-64 sm:h-80 md:h-96 bg-slate-950">
             <iframe
               title="Tucano Mall Google Maps Location"
               src="https://maps.google.com/maps?q=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo&t=&z=16&ie=UTF8&iwloc=&output=embed"
@@ -221,7 +221,7 @@ export default function ContactSection({ lang, theme }) {
               >
                 <button
                   onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full text-right p-5 flex items-center justify-between gap-3"
+                  className={`w-full ${isAr ? 'text-right' : 'text-left'} p-3.5 sm:p-5 flex items-center justify-between gap-3 cursor-pointer`}
                 >
                   <span className={`text-sm sm:text-base font-bold leading-snug ${
                     isAr ? 'text-right' : 'text-left'

@@ -21,56 +21,56 @@ export default function OfficialInfographicModal({ isOpen, onClose, lang, theme 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md animate-fadeIn">
-      <div className={`border rounded-3xl max-w-5xl w-full p-4 sm:p-6 shadow-2xl relative max-h-[95vh] flex flex-col ${
+      <div className={`border rounded-3xl max-w-5xl w-full p-3.5 sm:p-6 shadow-2xl relative max-h-[92vh] sm:max-h-[95vh] flex flex-col ${
         theme === 'dark' ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'
       }`}>
         {/* Top bar */}
-        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-4">
-          <div className="flex items-center gap-3">
-            <div className={`p-2 rounded-xl border ${
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3 gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className={`p-1.5 sm:p-2 rounded-xl border flex-shrink-0 ${
               theme === 'dark' ? 'bg-amber-500/10 border-amber-500/20 text-amber-400' : 'bg-amber-50 border-amber-200 text-amber-700'
             }`}>
-              <ShieldCheck className="w-5 h-5" />
+              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div>
-              <h3 className="text-base sm:text-lg font-black">
-                {isAr ? 'الإعلان الرسمي المعتمد: إدارة الشراء الموحد' : 'Official Approved Procurement Notice'}
+            <div className="min-w-0">
+              <h3 className="text-xs sm:text-lg font-black truncate max-w-[140px] xs:max-w-[240px] sm:max-w-none">
+                {isAr ? 'الإعلان الرسمي: إدارة الشراء الموحد' : 'Official Procurement Notice'}
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                {isAr ? 'جهاز مستقبل مصر للتنمية المستدامة - رئاسة الجمهورية' : 'Future of Egypt Agency for Sustainable Development'}
+              <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 hidden xs:block truncate">
+                {isAr ? 'جهاز مستقبل مصر للتنمية المستدامة' : 'Future of Egypt Agency for Sustainable Development'}
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className={`hidden sm:flex items-center gap-1 p-1 rounded-xl border ${
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+            <div className={`flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-xl border ${
               theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-100 border-slate-200'
             }`}>
-              <button onClick={handleZoomOut} className="p-1.5 rounded-lg opacity-70 hover:opacity-100">
-                <ZoomOut className="w-4 h-4" />
+              <button onClick={handleZoomOut} className="p-1 sm:p-1.5 rounded-lg opacity-70 hover:opacity-100 cursor-pointer">
+                <ZoomOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
-              <button onClick={handleResetZoom} className="px-2 text-xs font-mono">
+              <button onClick={handleResetZoom} className="px-1.5 sm:px-2 text-[10px] sm:text-xs font-mono">
                 {Math.round(zoomLevel * 100)}%
               </button>
-              <button onClick={handleZoomIn} className="p-1.5 rounded-lg opacity-70 hover:opacity-100">
-                <ZoomIn className="w-4 h-4" />
+              <button onClick={handleZoomIn} className="p-1 sm:p-1.5 rounded-lg opacity-70 hover:opacity-100 cursor-pointer">
+                <ZoomIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
             </div>
 
             <a
               href="/assets/official-infographic.png"
               download="Mostaqbal-Misr-Notice.png"
-              className="p-2 rounded-xl border hover:text-amber-500 transition-colors"
+              className="p-1.5 sm:p-2 rounded-xl border hover:text-amber-500 transition-colors"
               title="تحميل الصورة"
             >
-              <Download className="w-4 h-4" />
+              <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </a>
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl border hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+              className="p-1.5 sm:p-2 rounded-xl border hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
@@ -82,13 +82,13 @@ export default function OfficialInfographicModal({ isOpen, onClose, lang, theme 
             theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-100 border-slate-200'
           }`}>
             <div 
-              className="transition-transform duration-200 origin-center max-h-[70vh] flex items-center justify-center"
+              className="transition-transform duration-200 origin-center max-h-[50vh] sm:max-h-[70vh] flex items-center justify-center"
               style={{ transform: `scale(${zoomLevel})` }}
             >
               <img 
                 src="/assets/official-infographic.png" 
                 alt="إدارة الشراء الموحد بجهاز مستقبل مصر" 
-                className="max-h-[68vh] object-contain rounded-xl shadow-2xl"
+                className="max-h-[48vh] sm:max-h-[68vh] object-contain rounded-xl shadow-2xl"
               />
             </div>
           </div>

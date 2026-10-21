@@ -98,7 +98,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
             </div>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug text-slate-900 dark:text-white">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug text-slate-900 dark:text-white">
             {isAr ? (
               <>
                 منظومة <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600">الشراء الموحد</span>
@@ -110,7 +110,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
             )}
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto">
+          <p className="text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto px-1 sm:px-0">
             {isAr ? (
               <>
                 الذراع التنفيذي السيادي لـ <strong className="font-bold text-slate-900 dark:text-white">جهاز مستقبل مصر للتنمية المستدامة (FOE)</strong>، المنوط به حماية الأمن الغذائي، وتأمين رصيد استراتيجي آمن يغطي من 6 إلى 9 أشهر من المحاصيل والسلع الأساسية، وتحقيق الوفر الدولاري عبر كفاءة سلاسل الإمداد ومجمعات الصوامع الرقمية بالدلتا الجديدة.
@@ -123,10 +123,10 @@ export default function Hero({ lang, theme, onScrollTo }) {
           </p>
 
           {/* Action Navigation Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 pt-4 w-full max-w-md sm:max-w-none mx-auto">
             <button
               onClick={() => onScrollTo('pillars')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm shadow-xl shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm shadow-xl shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all cursor-pointer"
             >
               <span>{isAr ? 'الركائز الاستراتيجية الست' : 'The Six Strategic Pillars'}</span>
               <ArrowIcon className="w-4 h-4" />
@@ -134,7 +134,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
 
             <button
               onClick={() => onScrollTo('tenders')}
-              className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm border transition-all ${
+              className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm border transition-all cursor-pointer ${
                 theme === 'dark'
                   ? 'bg-slate-900/90 border-slate-700 text-white hover:border-amber-500/50'
                   : 'bg-white border-slate-300 text-slate-800 hover:border-amber-500'
@@ -146,7 +146,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
 
             <button
               onClick={() => onScrollTo('standards')}
-              className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm border transition-all ${
+              className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm border transition-all cursor-pointer ${
                 theme === 'dark'
                   ? 'bg-slate-900/90 border-slate-700 text-slate-300 hover:text-white'
                   : 'bg-white border-slate-300 text-slate-700 hover:text-slate-900'
@@ -158,32 +158,32 @@ export default function Hero({ lang, theme, onScrollTo }) {
           </div>
         </div>
 
-        {/* Live Metrics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
+        {/* Live Metrics Grid - 2 cols on mobile, 4 cols on desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mt-12 sm:mt-16">
           {metrics.map((metric, idx) => {
             const Icon = metric.icon;
             return (
               <div 
                 key={idx}
-                className="glass-card p-5 rounded-2xl flex items-center gap-4 transition-all"
+                className="glass-card p-3 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 transition-all"
               >
-                <div className={`p-3 rounded-xl border flex-shrink-0 ${
+                <div className={`p-2 sm:p-3 rounded-xl border flex-shrink-0 ${
                   theme === 'dark' 
                     ? 'bg-slate-900 border-slate-800 text-amber-400' 
                     : 'bg-amber-50 border-amber-200 text-amber-700'
                 }`}>
-                  <Icon className="w-6 h-6" />
+                  <Icon className="w-4 h-4 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-2xl sm:text-3xl font-black font-mono text-slate-900 dark:text-white">
+                <div className="min-w-0">
+                  <div className="flex items-baseline gap-1 sm:gap-1.5 flex-wrap">
+                    <span className="text-lg xs:text-xl sm:text-3xl font-black font-mono text-slate-900 dark:text-white">
                       {metric.value}
                     </span>
-                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400">
+                    <span className="text-[10px] sm:text-xs font-bold text-amber-600 dark:text-amber-400">
                       {metric.unit[lang] || metric.unit.ar}
                     </span>
                   </div>
-                  <div className="text-xs text-slate-600 dark:text-slate-300 font-medium mt-0.5 leading-snug">
+                  <div className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-300 font-medium mt-0.5 leading-snug line-clamp-2">
                     {metric.title[lang] || metric.title.ar}
                   </div>
                 </div>

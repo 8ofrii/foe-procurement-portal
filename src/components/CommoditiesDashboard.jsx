@@ -225,14 +225,20 @@ export default function CommoditiesDashboard({ lang, theme }) {
                   className="w-full max-h-[380px] sm:max-h-[420px] object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-300" 
                 />
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 text-white p-4 text-center rounded-2xl backdrop-blur-xs">
+                {/* Hover Overlay for desktop */}
+                <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:flex flex-col items-center justify-center gap-2 text-white p-4 text-center rounded-2xl backdrop-blur-xs">
                   <div className="p-3 rounded-full bg-amber-500 text-slate-950 shadow-lg">
                     <Maximize2 className="w-5 h-5" />
                   </div>
                   <span className="text-xs font-black">
                     {isAr ? 'اضغط لتكبير وعرض المنشور بدقة كاملة' : 'Click to inspect high-resolution poster'}
                   </span>
+                </div>
+
+                {/* Mobile Tap-to-Enlarge Pill */}
+                <div className="absolute bottom-3 left-3 sm:hidden px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md border border-amber-500/50 text-[10px] font-bold text-amber-400 flex items-center gap-1 shadow-lg pointer-events-none">
+                  <Maximize2 className="w-3 h-3" />
+                  <span>{isAr ? 'انقر للتكبير' : 'Tap to zoom'}</span>
                 </div>
               </div>
 
@@ -273,70 +279,70 @@ export default function CommoditiesDashboard({ lang, theme }) {
             theme === 'dark' ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'
           }`}>
             {/* Modal Top Bar */}
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3">
-              <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-amber-500/10 text-amber-500 border border-amber-500/20">
-                  <Sparkles className="w-4 h-4" />
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3 gap-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="p-1.5 sm:p-2 rounded-xl bg-amber-500/10 text-amber-500 border border-amber-500/20 flex-shrink-0">
+                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
-                <div>
-                  <h3 className="text-sm sm:text-base font-black">
+                <div className="min-w-0">
+                  <h3 className="text-xs sm:text-base font-black truncate max-w-[140px] xs:max-w-[220px] sm:max-w-none">
                     {currentTitle}
                   </h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 hidden xs:block truncate">
                     {isAr ? 'جهاز مستقبل مصر للتنمية المستدامة' : 'Future of Egypt Agency for Sustainable Development'}
                   </p>
                 </div>
               </div>
 
               {/* Controls */}
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <div className={`flex items-center gap-1 p-1 rounded-xl border ${
+              <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                <div className={`flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-xl border ${
                   theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-100 border-slate-200'
                 }`}>
                   <button 
                     onClick={() => setZoomLevel(prev => Math.max(prev - 0.25, 0.75))} 
-                    className="p-1.5 rounded-lg opacity-70 hover:opacity-100"
+                    className="p-1 sm:p-1.5 rounded-lg opacity-70 hover:opacity-100 cursor-pointer"
                     title="تصغير"
                   >
-                    <ZoomOut className="w-4 h-4" />
+                    <ZoomOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </button>
                   <button 
                     onClick={() => setZoomLevel(1)} 
-                    className="px-2 text-xs font-mono"
+                    className="px-1.5 sm:px-2 text-[10px] sm:text-xs font-mono"
                     title="إعادة ضبط"
                   >
                     {Math.round(zoomLevel * 100)}%
                   </button>
                   <button 
                     onClick={() => setZoomLevel(prev => Math.min(prev + 0.25, 2.5))} 
-                    className="p-1.5 rounded-lg opacity-70 hover:opacity-100"
+                    className="p-1 sm:p-1.5 rounded-lg opacity-70 hover:opacity-100 cursor-pointer"
                     title="تكبير"
                   >
-                    <ZoomIn className="w-4 h-4" />
+                    <ZoomIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </button>
                 </div>
 
                 <a
                   href={currentImage}
                   download={activeTab === 'poster' ? 'Mostaqbal-Misr-Achievements.png' : 'Mostaqbal-Misr-Procurement.png'}
-                  className="p-2 rounded-xl border hover:text-amber-500 transition-colors"
+                  className="p-1.5 sm:p-2 rounded-xl border hover:text-amber-500 transition-colors"
                   title={isAr ? 'تحميل الصورة' : 'Download Image'}
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </a>
 
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="p-2 rounded-xl border hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                  className="p-1.5 sm:p-2 rounded-xl border hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                   title={isAr ? 'إغلاق' : 'Close'}
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </div>
 
             {/* Modal Body with Zoomable Image */}
-            <div className={`rounded-2xl border overflow-auto flex-1 flex items-center justify-center p-3 min-h-[60vh] max-h-[75vh] ${
+            <div className={`rounded-2xl border overflow-auto flex-1 flex items-center justify-center p-2 sm:p-3 min-h-[50vh] sm:min-h-[60vh] max-h-[68vh] sm:max-h-[75vh] ${
               theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-100 border-slate-200'
             }`}>
               <div 
@@ -346,19 +352,19 @@ export default function CommoditiesDashboard({ lang, theme }) {
                 <img 
                   src={currentImage} 
                   alt={currentTitle} 
-                  className="max-h-[70vh] object-contain rounded-xl shadow-2xl select-none"
+                  className="max-h-[60vh] sm:max-h-[70vh] object-contain rounded-xl shadow-2xl select-none"
                 />
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="flex items-center justify-between pt-3 mt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-3 mt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   onClick={() => { setActiveTab('poster'); setZoomLevel(1); }}
-                  className={`px-3 py-1 rounded-lg font-bold transition-all ${
+                  className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-1.5 sm:py-1 rounded-lg font-bold transition-all text-center cursor-pointer text-[11px] sm:text-xs ${
                     activeTab === 'poster'
-                      ? 'bg-amber-500 text-slate-950'
+                      ? 'bg-amber-500 text-slate-950 shadow-sm'
                       : 'border text-slate-500 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
@@ -366,9 +372,9 @@ export default function CommoditiesDashboard({ lang, theme }) {
                 </button>
                 <button
                   onClick={() => { setActiveTab('infographic'); setZoomLevel(1); }}
-                  className={`px-3 py-1 rounded-lg font-bold transition-all ${
+                  className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-1.5 sm:py-1 rounded-lg font-bold transition-all text-center cursor-pointer text-[11px] sm:text-xs ${
                     activeTab === 'infographic'
-                      ? 'bg-amber-500 text-slate-950'
+                      ? 'bg-amber-500 text-slate-950 shadow-sm'
                       : 'border text-slate-500 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
@@ -378,7 +384,7 @@ export default function CommoditiesDashboard({ lang, theme }) {
 
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 font-bold"
+                className="w-full sm:w-auto px-4 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 font-bold text-center cursor-pointer transition-colors"
               >
                 {isAr ? 'إغلاق' : 'Close'}
               </button>

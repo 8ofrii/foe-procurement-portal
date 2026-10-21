@@ -47,11 +47,11 @@ export default function TendersSection({ lang, theme }) {
           {TENDERS.map((tender) => (
             <div
               key={tender.id}
-              className="glass-card p-6 rounded-2xl"
+              className="glass-card p-4 sm:p-6 rounded-2xl"
             >
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
                 <div className="space-y-2.5 max-w-3xl">
-                  <div className="flex flex-wrap items-center gap-2.5">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                     <span className="font-mono text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-300 dark:border-amber-500/20">
                       {tender.id}
                     </span>
@@ -71,14 +71,14 @@ export default function TendersSection({ lang, theme }) {
                     {tender.specs[lang] || tender.specs.ar}
                   </p>
 
-                  <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-300 pt-1">
-                    <Calendar className="w-3.5 h-3.5 text-amber-500" />
+                  <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-300 pt-1 flex-wrap">
+                    <Calendar className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
                     <span>{isAr ? 'آخر موعد لتلقي العروض الفنية:' : 'Technical Submission Deadline:'}</span>
                     <strong className="font-mono text-slate-900 dark:text-white">{tender.deadline}</strong>
                   </div>
                 </div>
 
-                <div className="flex-shrink-0 flex items-center justify-end">
+                <div className="flex-shrink-0 flex items-center justify-start lg:justify-end">
                   <div className={`px-4 py-2 rounded-xl border text-xs font-bold flex items-center gap-2 ${
                     theme === 'dark' 
                       ? 'bg-slate-900/90 border-amber-500/30 text-amber-400' 

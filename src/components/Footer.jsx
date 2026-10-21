@@ -201,7 +201,7 @@ export default function Footer({ lang, theme, onScrollTo }) {
         </div>
 
         {/* Disclaimer & Copyright */}
-        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-[11px] text-slate-500 text-center sm:text-start">
           <div>
             © {new Date().getFullYear()} {info.orgName} — {info.entity}
           </div>

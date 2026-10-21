@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   FileText, 
   Scale, 
@@ -21,6 +21,7 @@ import { DEPARTMENTS } from '../data/portalData';
 export default function DepartmentsSection({ lang, theme }) {
   const isAr = lang === 'ar';
   const [selectedDeptId, setSelectedDeptId] = useState(DEPARTMENTS[0].id);
+  const detailRef = useRef(null);
 
   const iconMap = {
     FileText: FileText,
@@ -94,8 +95,8 @@ export default function DepartmentsSection({ lang, theme }) {
         {/* Two-Column Interactive Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
-          {/* Department List - 5 Columns */}
-          <div className="lg:col-span-5 space-y-2">
+          {/* Department List - 5 Columns on Desktop, 2 Columns on Tablet */}
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 lg:gap-0 lg:space-y-2">
             {DEPARTMENTS.map((dept) => {
               const Icon = iconMap[dept.icon] || Building;
               const isSelected = dept.id === selectedDeptId;
@@ -103,9 +104,14 @@ export default function DepartmentsSection({ lang, theme }) {
               return (
                 <button
                   key={dept.id}
-                  onClick={() => setSelectedDeptId(dept.id)}
+                  onClick={() => {
+                    setSelectedDeptId(dept.id);
+                    if (window.innerWidth < 1024) {
+                      detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                  }}
                   type="button"
-                  className={`w-full p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between gap-3 text-right cursor-pointer group ${
+                  className={`w-full p-3 sm:p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between gap-3 text-right cursor-pointer group ${
                     isSelected
                       ? (theme === 'dark'
                           ? 'bg-gradient-to-r from-amber-500/15 via-slate-800 to-amber-500/5 border-amber-500/70 shadow-lg shadow-amber-500/10 ring-1 ring-amber-500/40 text-white'
@@ -115,19 +121,19 @@ export default function DepartmentsSection({ lang, theme }) {
                           : 'bg-white border-slate-200/90 hover:bg-slate-100 hover:border-slate-300 text-slate-700')
                   }`}
                 >
-                  <div className="flex items-center gap-3.5">
+                  <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
                     {/* Icon Container */}
-                    <div className={`w-10 h-10 rounded-xl border flex items-center justify-center flex-shrink-0 transition-colors ${
+                    <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl border flex items-center justify-center flex-shrink-0 transition-colors ${
                       isSelected
                         ? (theme === 'dark' ? 'bg-amber-500/20 border-amber-500/50 text-amber-400' : 'bg-amber-500 text-slate-950 border-amber-600')
                         : (theme === 'dark' ? 'bg-slate-900 border-slate-800 text-slate-400 group-hover:text-amber-400' : 'bg-slate-100 border-slate-200 text-slate-600 group-hover:text-amber-600')
                     }`}>
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
 
-                    {/* Department Name (Numbers / Codes completely deleted) */}
-                    <div className={isAr ? 'text-right' : 'text-left'}>
-                      <div className={`text-sm sm:text-base font-bold transition-colors ${
+                    {/* Department Name */}
+                    <div className={`${isAr ? 'text-right' : 'text-left'} min-w-0`}>
+                      <div className={`text-xs sm:text-base font-bold transition-colors truncate sm:whitespace-normal ${
                         isSelected 
                           ? 'text-slate-900 dark:text-white font-black' 
                           : 'text-slate-800 dark:text-slate-200 group-hover:text-slate-950 dark:group-hover:text-white'
@@ -139,7 +145,7 @@ export default function DepartmentsSection({ lang, theme }) {
 
                   {/* Active selection indicator bar */}
                   {isSelected ? (
-                    <div className="w-2 h-6 rounded-full bg-amber-500 flex-shrink-0 animate-pulse shadow-sm shadow-amber-500/50"></div>
+                    <div className="w-2 h-5 sm:h-6 rounded-full bg-amber-500 flex-shrink-0 animate-pulse shadow-sm shadow-amber-500/50"></div>
                   ) : (
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-400/40 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   )}
@@ -149,7 +155,7 @@ export default function DepartmentsSection({ lang, theme }) {
           </div>
 
           {/* Department Detail Showcase - 7 Columns */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7" ref={detailRef}>
             <div className={`rounded-3xl border shadow-2xl relative overflow-hidden transition-all duration-300 ${
               theme === 'dark'
                 ? 'bg-slate-950/90 border-slate-800 shadow-black/60'

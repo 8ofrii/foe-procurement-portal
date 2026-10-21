@@ -82,26 +82,26 @@ export default function SearchModal({ isOpen, onClose, lang, theme, onSelectResu
   const totalResults = newsResults.length + tenderResults.length + deptResults.length + commResults.length + committeeResults.length;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className={`border rounded-3xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl relative max-h-[80vh] flex flex-col ${
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 sm:pt-20 p-2.5 sm:p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+      <div className={`border rounded-3xl max-w-2xl w-full p-3.5 sm:p-6 shadow-2xl relative max-h-[88vh] sm:max-h-[80vh] flex flex-col ${
         theme === 'dark' ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'
       }`}>
         {/* Search Input Bar */}
-        <div className="relative mb-4">
+        <div className="relative mb-3 sm:mb-4">
           <input
             type="text"
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={isAr ? 'ابحث في الأخبار، المناقصات، الإدارات، السلع الاستراتيجية...' : 'Search news, tenders, departments, commodities...'}
-            className={`w-full border rounded-2xl pl-4 pr-12 py-3.5 text-sm sm:text-base focus:outline-none focus:border-amber-500 ${
+            className={`w-full border rounded-2xl ${isAr ? 'pl-10 pr-12' : 'pr-10 pl-12'} py-3 sm:py-3.5 text-xs sm:text-base focus:outline-none focus:border-amber-500 ${
               theme === 'dark' ? 'bg-slate-950 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'
             }`}
           />
-          <Search className="w-5 h-5 text-amber-500 absolute right-4 top-4" />
+          <Search className={`w-4 h-4 sm:w-5 sm:h-5 text-amber-500 absolute ${isAr ? 'right-4' : 'left-4'} top-3.5 sm:top-4`} />
           <button
             onClick={onClose}
-            className="absolute left-3 top-3.5 p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400"
+            className={`absolute ${isAr ? 'left-3' : 'right-3'} top-3 sm:top-3.5 p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 cursor-pointer`}
           >
             <X className="w-4 h-4" />
           </button>

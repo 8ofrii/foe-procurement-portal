@@ -532,7 +532,7 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
   return (
     <>
       {/* Floating Bot Button - CIRCLE with Official Mostaqbal Misr Logo Emblem & Colors */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
         {/* Outer glowing pulsing ring */}
         <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 opacity-70 blur-sm animate-pulse pointer-events-none"></span>
 
@@ -540,7 +540,7 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
           onClick={() => setIsOpen(!isOpen)}
           type="button"
           aria-label="Mostaqbal Misr AI Assistant"
-          className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-slate-950 border-2 border-amber-400 shadow-2xl shadow-amber-500/40 hover:shadow-amber-500/70 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center p-1.5 cursor-pointer group overflow-hidden"
+          className="relative w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-slate-950 border-2 border-amber-400 shadow-2xl shadow-amber-500/40 hover:shadow-amber-500/70 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center p-1.5 cursor-pointer group overflow-hidden"
         >
           {/* Inner Golden Radial Sheen */}
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-emerald-500/10 rounded-full pointer-events-none"></div>
@@ -554,9 +554,9 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
         </button>
       </div>
 
-      {/* Floating Chat Window - Positioned on the RIGHT Side */}
+      {/* Floating Chat Window - Perfectly centered on mobile, docked right on desktop */}
       {isOpen && (
-        <div className={`fixed bottom-24 right-4 sm:right-6 z-50 w-[94vw] sm:w-[420px] h-[550px] max-h-[82vh] border rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn backdrop-blur-xl ${
+        <div className={`fixed bottom-20 sm:bottom-24 left-3 right-3 sm:left-auto sm:right-6 z-50 w-auto sm:w-[420px] max-w-[calc(100vw-24px)] h-[520px] max-h-[80vh] border rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn backdrop-blur-xl ${
           theme === 'dark' 
             ? 'bg-slate-950/95 border-amber-500/30 text-slate-100 shadow-black/80' 
             : 'bg-white/95 border-amber-400/40 text-slate-900 shadow-xl'
