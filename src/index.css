@@ -50,17 +50,10 @@ html.dark ::-moz-selection, html.dark *::-moz-selection {
     -webkit-text-size-adjust: 100%;
   }
 
-  /* Tablets (768px - 1023px): Smooth 90% scaling for balanced tablet view */
-  @media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablets & Desktops (>= 768px): 90% default zoom */
+  @media (min-width: 768px) {
     html {
       zoom: 90%;
-    }
-  }
-
-  /* Desktop & Laptops (>= 1024px): 85% executive zoom requested by user */
-  @media (min-width: 1024px) {
-    html {
-      zoom: 85%;
     }
   }
 
