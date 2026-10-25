@@ -134,308 +134,446 @@ export default function ChatBot({ lang, theme }) {
     scrollToBottom();
   }, [messages, isTyping]);
 
-// Modular Handler: handleContactQuery
-function handleContactQuery(q, lang, info, isAr) {
-    // 1. Contact, Hotline, Phone & Official Emails
-    if (
-      q.includes('هاتف') || 
-      q.includes('تليفون') || 
-      q.includes('تلفون') || 
-      q.includes('خط ساخن') || 
-      q.includes('ساخن') || 
-      q.includes('اتصال') || 
-      q.includes('تواصل') || 
-      q.includes('ايميل') || 
-      q.includes('إيميل') || 
-      q.includes('بريد') || 
-      q.includes('ارقام') || 
-      q.includes('أرقام') || 
-      q.includes('رقم') || 
-      q.includes('phone') || 
-      q.includes('hotline') || 
-      q.includes('call') || 
-      q.includes('contact') || 
-      q.includes('email') || 
-      q.includes('mail') || 
-      q.includes('infolinia') || 
-      q.includes('телефон') || 
-      q.includes('гаряча лінія')
-    ) {
+// Modular Handler: handleCommitteesQuery (Priority #1: Never intercepted by working hours)
+function handleCommitteesQuery(q, lang, info, isAr) {
+  const isRice = q.includes('ارز') || q.includes('أرز') || q.includes('رز') || q.includes('rice') || q.includes('ryż') || q.includes('рис');
+  const isCattle = q.includes('رؤوس') || q.includes('مواشي') || q.includes('عجول') || q.includes('لحوم') || q.includes('cattle') || q.includes('bydł') || q.includes('худоб');
+  const isShrimp = q.includes('جمبري') || q.includes('جمبرى') || q.includes('shrimp') || q.includes('krewetk') || q.includes('креветк');
+
+  const isCommitteeQuery = (
+    q.includes('لجان') || 
+    q.includes('لجنة') || 
+    q.includes('بت وتوريد') || 
+    q.includes('جلسات') || 
+    q.includes('جلسة') || 
+    q.includes('مواعيد اللجان') || 
+    q.includes('موعد اللجان') || 
+    q.includes('ميعاد اللجان') || 
+    q.includes('أيام اللجان') || 
+    q.includes('ايام اللجان') || 
+    q.includes('جدول اللجان') || 
+    q.includes('الأحد') || 
+    q.includes('الاحد') || 
+    q.includes('الاثنين') || 
+    q.includes('الإثنين') || 
+    q.includes('الثلاثاء') || 
+    q.includes('شروط حضور') ||
+    q.includes('اوراق اللجان') ||
+    q.includes('أوراق اللجان') ||
+    q.includes('قاعة اللجان') ||
+    q.includes('committee') || 
+    q.includes('komisj') ||
+    isRice || isCattle || isShrimp
+  );
+
+  if (isCommitteeQuery) {
+    let specificNote = '';
+    if (isRice && !isCattle && !isShrimp) {
       if (lang === 'en') {
-        return `Official Contact Channels of Mostaqbal Misr Unified Strategic Procurement Directorate:
-• Unified Direct Hotline: 19842 (Available during working hours).
+        specificNote = '\n\n📌 Regarding Rice Committee: Convenes weekly every Sunday at 02:00 PM in the Central Bidding Hall (Tucano Mall — Floor 3). Adjudication priority is strictly by physical sign-in order in the hall.';
+      } else if (lang === 'pl') {
+        specificNote = '\n\n📌 Komisja ds. Ryżu: Obraduje w każdą niedzielę o godz. 14:00 w Tucano Mall (3. piętro). Pierwszeństwo według kolejności rejestracji na sali.';
+      } else if (lang === 'uk') {
+        specificNote = '\n\n📌 Комісія із закупівель рису: Засідає щонеділі о 14:00 у залі торгів Tucano Mall (3-й поверх). Пріоритет за чергою фактичної реєстрації.';
+      } else {
+        specificNote = '\n\n📌 بخصوص لجنة الأرز: تنعقد أسبوعياً كل يوم أحد في تمام الساعة 02:00 ظهراً بقاعة اللجان المركزية (توكانو مول — الدور الثالث)، وتطبق قاعدة أسبقية التواجد الفعلي بالقاعة للتسجيل وترتيب الترسية.';
+      }
+    } else if (isCattle && !isRice && !isShrimp) {
+      if (lang === 'en') {
+        specificNote = '\n\n📌 Regarding Live Cattle (Livestock) Committee: Convenes Tuesdays at 02:00 PM on a bi-weekly alternating cycle with the Shrimp Committee.';
+      } else if (lang === 'pl') {
+        specificNote = '\n\n📌 Komisja ds. Żywego Bydła: Obraduje we wtorki o godz. 14:00 co dwa tygodnie (naprzemiennie z krewetkami).';
+      } else if (lang === 'uk') {
+        specificNote = '\n\n📌 Комісія з живої худоби: Засідає щовівторка о 14:00 раз на два тижні (почергово з креветками).';
+      } else {
+        specificNote = '\n\n📌 بخصوص لجنة الرؤوس الحية (المواشي والعجول): تنعقد كل يوم ثلاثاء في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الجمبري بقاعة اللجان المركزية.';
+      }
+    } else if (isShrimp && !isRice && !isCattle) {
+      if (lang === 'en') {
+        specificNote = '\n\n📌 Regarding Shrimp & Seafood Committee: Convenes Mondays at 02:00 PM on a bi-weekly alternating schedule with the Live Cattle Committee.';
+      } else if (lang === 'pl') {
+        specificNote = '\n\n📌 Komisja ds. Krewetek: Obraduje w poniedziałki o godz. 14:00 co dwa tygodnie (naprzemiennie z bydłem).';
+      } else if (lang === 'uk') {
+        specificNote = '\n\n📌 Комісія із закупівель креветок: Засідає щопонеділка о 14:00 раз на два тижні (почергово з худобою).';
+      } else {
+        specificNote = '\n\n📌 بخصوص لجنة الجمبري والأسماك: تنعقد كل يوم اثنين في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الرؤوس الحية بقاعة اللجان المركزية.';
+      }
+    }
+
+    let mainTitle = '';
+    if (lang === 'en') {
+      mainTitle = `Official Sourcing & Procurement Committees Schedule (Tucano Mall HQ — Floor 3):${specificNote}`;
+    } else if (lang === 'pl') {
+      mainTitle = `Oficjalny Harmonogram Komisji Przetargowych (Tucano Mall — 3. piętro):${specificNote}`;
+    } else if (lang === 'uk') {
+      mainTitle = `Офіційний графік закупівельних комісій (Tucano Mall — 3-й поверх):${specificNote}`;
+    } else {
+      mainTitle = `جدول ومواعيد لجان البت والتوريد المعتمدة (بمقر إدارة الشراء الموحد بتوكانو مول):${specificNote}`;
+    }
+
+    return {
+      type: 'committees',
+      text: mainTitle
+    };
+  }
+
+  return null;
+}
+
+// Modular Handler: handleLocationQuery (Priority #2: Clean text with dedicated card, ZERO raw URLs)
+function handleLocationQuery(q, lang, info, isAr) {
+  if (
+    q.includes('مقر') || 
+    q.includes('عنوان') || 
+    q.includes('مكان') || 
+    q.includes('موقعكم') || 
+    q.includes('فين') || 
+    q.includes('أين') || 
+    q.includes('اين') || 
+    q.includes('توكانو') || 
+    q.includes('مدينة نصر') || 
+    q.includes('يوسف عباس') || 
+    q.includes('خريطة') || 
+    q.includes('خرائط') || 
+    q.includes('الدور') || 
+    q.includes('لوكيشن') || 
+    q.includes('اللوكيشن') || 
+    q.includes('address') || 
+    q.includes('location') || 
+    q.includes('where') || 
+    q.includes('maps') || 
+    q.includes('map') || 
+    q.includes('siedzib') || 
+    q.includes('gdzie') || 
+    q.includes('адрес') || 
+    q.includes('офіс') || 
+    q.includes('де')
+  ) {
+    let text = '';
+    if (lang === 'en') {
+      text = `Official Main Headquarters of Mostaqbal Misr Unified Strategic Procurement Directorate:
+• Location: Tucano Commercial Complex — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
+• Central Sessions Hall: Dedicated venue for weekly procurement committees and vendor reception.
+• Working Hours: Sunday through Thursday (09:00 AM – 05:00 PM).
+• Direct Unified Hotline: 19842 | Official Email: procurement@foe.gov.eg`;
+    } else if (lang === 'pl') {
+      text = `Oficjalna Główna Siedziba Dyrekcji ds. Zakupów Agencji Przyszłość Egiptu:
+• Adres: Tucano Commercial Complex — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
+• Sala posiedzeń: Centralna sala przetargowa do obsługi komisji i dostawców.
+• Godziny urzędowania: Niedziela – Czwartek (09:00 – 17:00).
+• Główna Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
+    } else if (lang === 'uk') {
+      text = `Офіційний головний офіс Директорату єдиних закупівель Агентства Майбутнє Єгипту:
+• Адреса: Tucano Commercial Complex — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
+• Зала засідань: Центральна зала торгів для щотижневих комісій та прийому постачальників.
+• Години роботи: Неділя – Четвер (09:00 – 17:00).
+• Єдина гаряча лінія: +20 19842 | Email: procurement@foe.gov.eg`;
+    } else {
+      text = `المقر الرسمي الرئيسي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
+• العنوان: مجمع توكانو التجاري — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
+• قاعة اللجان المركزية: مجهزة بالكامل لعقد جلسات البت والتوريد الأسبوعية واستقبال السادة الموردين.
+• مواعيد الاستقبال والعمل: من الأحد إلى الخميس (من 09:00 صباحاً حتى 05:00 مساءً).
+• الخط الساخن الموحد: 19842 | البريد الرسمي: procurement@foe.gov.eg`;
+    }
+
+    return {
+      type: 'location',
+      text: text
+    };
+  }
+
+  return null;
+}
+
+// Modular Handler: handleWorkingHoursQuery (Priority #3: Guarded against false positives)
+function handleWorkingHoursQuery(q, lang, info, isAr) {
+  // Prevent false matches for committee, tender, or specific commodities
+  if (
+    q.includes('لجان') || 
+    q.includes('لجنة') || 
+    q.includes('ارز') || 
+    q.includes('أرز') || 
+    q.includes('رز') || 
+    q.includes('جمبري') || 
+    q.includes('رؤوس') || 
+    q.includes('مواشي') || 
+    q.includes('عجول') || 
+    q.includes('مناقص') || 
+    q.includes('توريد')
+  ) {
+    return null;
+  }
+
+  if (
+    q.includes('ساعات العمل') || 
+    q.includes('مواعيد العمل') || 
+    q.includes('أوقات العمل') || 
+    q.includes('وقت العمل') || 
+    q.includes('دوام') || 
+    q.includes('شغالين') || 
+    q.includes('فاتحين') || 
+    q.includes('أيام العمل') || 
+    q.includes('ايام العمل') || 
+    q.includes('إجازة') || 
+    q.includes('اجازة') || 
+    q.includes('عطلة') || 
+    q.includes('working hours') || 
+    q.includes('work time') || 
+    q.includes('opening hours') || 
+    q.includes('schedule') || 
+    q.includes('godziny') || 
+    q.includes('czas pracy') || 
+    q.includes('години') || 
+    q.includes('графік') ||
+    ((q.includes('مواعيد') || q.includes('ساعات')) && !q.includes('لجان') && !q.includes('لجنة'))
+  ) {
+    if (lang === 'en') {
+      return `Official Working Hours of Mostaqbal Misr Unified Strategic Procurement Directorate:
+• Working Days: Sunday through Thursday weekly.
+• Operational Hours: 09:00 AM to 05:00 PM (9 to 5).
+• Official Weekend: Friday & Saturday.
+• Procurement & Bidding Sessions: Convene at 02:00 PM on designated committee days in the Central Hall.
+• Venue: Tucano Mall — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.`;
+    } else if (lang === 'pl') {
+      return `Oficjalne Godziny Pracy Dyrekcji ds. Zakupów:
+• Dni robocze: Od niedzieli do czwartku.
+• Godziny urzędowania: 09:00 – 17:00 (od 9 do 17).
+• Weekend: Piątek i sobota.
+• Posiedzenia komisji przetargowych: Godzina 14:00 w wyznaczone dni.
+• Siedziba: Tucano Mall — 3. piętro — Nasr City — Kair.`;
+    } else if (lang === 'uk') {
+      return `Офіційні години роботи Директорату закупівель:
+• Робочі дні: З неділі по четвер щотижня.
+• Години роботи: 09:00 – 17:00 (з 9 до 17).
+• Вихідні дні: П'ятниця та субота.
+• Засідання комісій із закупівель: О 14:00 у визначені дні у центральній залі.
+• Штаб-квартира: Tucano Mall — 3-й поверх — Наср-Сіті — Каїр.`;
+    } else {
+      return `مواعيد وساعات العمل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر:
+• أيام العمل الرسمية: من الأحد إلى الخميس أسبوعياً (يومياً عدا الجمعة والسبت).
+• ساعات الدوام الرسمي: من الساعة 09:00 صباحاً حتى 05:00 مساءً (من 9 إلى 5).
+• العطلة الأسبوعية: يومي الجمعة والسبت.
+• جلسات لجان البت والتوريد: تبدأ في تمام الساعة 02:00 ظهراً بالقاعة المركزية بتوكانو مول.
+• مواعيد الاستقبال والمراجعات: متاحة طوال ساعات العمل الرسمية.`;
+    }
+  }
+
+  return null;
+}
+
+// Modular Handler: handleContactQuery (Priority #4: Guarded against single word 'رقم' collisions)
+function handleContactQuery(q, lang, info, isAr) {
+  const isContactKeyword = (
+    q.includes('هاتف') || 
+    q.includes('تليفون') || 
+    q.includes('تلفون') || 
+    q.includes('خط ساخن') || 
+    q.includes('ساخن') || 
+    q.includes('اتصال') || 
+    q.includes('تواصل') || 
+    q.includes('ايميل') || 
+    q.includes('إيميل') || 
+    q.includes('بريد') || 
+    q.includes('ارقام') || 
+    q.includes('أرقام') || 
+    (q.includes('رقم') && (q.includes('هاتف') || q.includes('تلفون') || q.includes('تواصل') || q.includes('خط') || q.includes('اتصال') || q.includes('الساخن'))) ||
+    q.includes('خدمة العملاء') ||
+    q.includes('phone') || 
+    q.includes('hotline') || 
+    q.includes('call') || 
+    q.includes('contact') || 
+    q.includes('email') || 
+    q.includes('mail') || 
+    q.includes('infolinia') || 
+    q.includes('телефон') || 
+    q.includes('гаряча лінія')
+  );
+
+  if (isContactKeyword) {
+    if (lang === 'en') {
+      return `Official Contact Channels of Mostaqbal Misr Unified Strategic Procurement Directorate:
+• Unified Direct Hotline: 19842 (Available during official working hours).
 • Official Procurement Email: procurement@foe.gov.eg
 • General Inquiries Email: info@foe.gov.eg
 • Main HQ: Tucano Commercial Complex — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
 • Working Hours: Sunday through Thursday (09:00 AM – 05:00 PM).`;
-      } else if (lang === 'pl') {
-        return `Oficjalne Dane Kontaktowe Dyrekcji ds. Zakupów Agencji Przyszłość Egiptu:
-• Główna Infolinia: +20 19842
+    } else if (lang === 'pl') {
+      return `Oficjalne Dane Kontaktowe Dyrekcji ds. Zakupów Agencji Przyszłość Egiptu:
+• Główna Infolinia: +20 19842 (W godzinach urzędowania).
 • Oficjalny E-mail ds. Zakupów: procurement@foe.gov.eg
 • E-mail ogólny: info@foe.gov.eg
 • Adres: Tucano Commercial Complex — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
 • Godziny urzędowania: Niedziela – Czwartek (09:00 – 17:00).`;
-      } else if (lang === 'uk') {
-        return `Офіційні контакти Директорату єдиних закупівель Агентства Майбутнє Єгипту:
-• Єдина гаряча лінія: +20 19842
+    } else if (lang === 'uk') {
+      return `Офіційні контакти Директорату єдиних закупівель Агентства Майбутнє Єгипту:
+• Єдина гаряча лінія: +20 19842 (У робочі години).
 • Офіційний email із закупівель: procurement@foe.gov.eg
 • Загальний email: info@foe.gov.eg
 • Адреса: Tucano Commercial Complex — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
 • Години роботи: Неділя – Четвер (09:00 – 17:00).`;
-      } else {
-        return `قنوات التواصل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
+    } else {
+      return `قنوات التواصل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
 • الخط الساخن الموحد: 19842 (متاح خلال أوقات العمل الرسمية).
 • البريد الإلكتروني الرسمي لإدارة المشتريات والتعاقدات: procurement@foe.gov.eg
 • البريد الإلكتروني العام للاستفسارات: info@foe.gov.eg
-• المقر الرئيسي: توكانو مول التجاري — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
+• المقر الرئيسي: مجمع توكانو التجاري — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
 • مواعيد استقبال الاتصالات والزيارات: من الأحد إلى الخميس (من 09:00 صباحاً حتى 05:00 مساءً).`;
-      }
     }
-
-  return null;
-}
-
-// Modular Handler: handleLocationQuery
-function handleLocationQuery(q, lang, info, isAr) {
-    // 2. Location, Address & Google Maps (Prioritized before generic departments)
-    if (
-      q.includes('مقر') || 
-      q.includes('عنوان') || 
-      q.includes('مكان') || 
-      q.includes('موقعكم') || 
-      q.includes('فين') || 
-      q.includes('أين') || 
-      q.includes('اين') || 
-      q.includes('توكانو') || 
-      q.includes('مدينة نصر') || 
-      q.includes('يوسف عباس') || 
-      q.includes('خريطة') || 
-      q.includes('خرائط') || 
-      q.includes('الدور') || 
-      q.includes('address') || 
-      q.includes('location') || 
-      q.includes('where') || 
-      q.includes('maps') || 
-      q.includes('map') || 
-      q.includes('siedzib') || 
-      q.includes('gdzie') || 
-      q.includes('адрес') || 
-      q.includes('офіс') || 
-      q.includes('де')
-    ) {
-      if (lang === 'en') {
-        return `Official Main Headquarters of Mostaqbal Misr Unified Strategic Procurement Directorate:
-• Location: Tucano Commercial Complex — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
-• Google Maps: https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh
-• Direct Hotline: 19842
-• Email: procurement@foe.gov.eg
-• Working Hours: Sunday through Thursday (09:00 AM – 05:00 PM).`;
-      } else if (lang === 'pl') {
-        return `Oficjalna Główna Siedziba Dyrekcji ds. Zakupów:
-• Adres: Tucano Commercial Complex — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
-• Google Maps: https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh
-• Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg
-• Godziny pracy: Niedziela – Czwartek (09:00 – 17:00).`;
-      } else if (lang === 'uk') {
-        return `Офіційний головний офіс Директорату закупівель:
-• Адреса: Tucano Commercial Complex — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
-• Google Maps: https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh
-• Гаряча лінія: +20 19842 | Email: procurement@foe.gov.eg
-• Години роботи: Неділя – Четвер (09:00 – 17:00).`;
-      } else {
-        return `المقر الرسمي الرئيسي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
-• العنوان: توكانو مول التجاري — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
-• رابط خرائط Google: https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh
-• الخط الساخن: 19842
-• البريد الرسمي: procurement@foe.gov.eg
-• أوقات استقبال الموردين والمراجعين: من الأحد إلى الخميس (09:00 صباحاً – 05:00 مساءً).`;
-      }
-    }
-
-  return null;
-}
-
-// Modular Handler: handleWorkingHoursQuery
-function handleWorkingHoursQuery(q, lang, info, isAr) {
-    // 3. Working Hours & Operation Schedule
-    if (
-      q.includes('ساعات العمل') || 
-      q.includes('مواعيد العمل') || 
-      q.includes('أوقات العمل') || 
-      q.includes('وقت العمل') || 
-      q.includes('ساعات') || 
-      q.includes('مواعيد') || 
-      q.includes('دوام') || 
-      q.includes('شغالين') || 
-      q.includes('فاتحين') || 
-      q.includes('أيام العمل') || 
-      q.includes('ايام العمل') || 
-      q.includes('إجازة') || 
-      q.includes('اجازة') || 
-      q.includes('عطلة') || 
-      q.includes('working hours') || 
-      q.includes('work time') || 
-      q.includes('opening hours') || 
-      q.includes('schedule') || 
-      q.includes('godziny') || 
-      q.includes('czas pracy') || 
-      q.includes('години') || 
-      q.includes('графік')
-    ) {
-      if (lang === 'en') {
-        return `Official Working Hours of Mostaqbal Misr Unified Strategic Procurement Directorate:
-• Working Days: Sunday through Thursday weekly.
-• Operational Hours: 09:00 AM to 05:00 PM (9 to 5).
-• Official Weekend: Friday & Saturday.
-• Procurement & Bidding Committees: Kick off at 02:00 PM in the Central Bidding Hall.
-Venue: Tucano Mall — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.`;
-      } else if (lang === 'pl') {
-        return `Oficjalne Godziny Pracy Dyrekcji ds. Zakupów:
-• Dni robocze: Od niedzieli do czwartku.
-• Godziny: 09:00 – 17:00 (od 9 do 17).
-• Weekend: Piątek i sobota.
-• Rozpoczęcie posiedzeń komisji przetargowych: Godzina 14:00.
-Siedziba: Tucano Mall — 3. piętro — Nasr City — Kair.`;
-      } else if (lang === 'uk') {
-        return `Офіційні години роботи Директорату закупівель:
-• Робочі дні: З неділі по четвер щотижня.
-• Години роботи: 09:00 – 17:00 (з 9 до 17).
-• Вихідні дні: П'ятниця та субота.
-• Засідання комісій із закупівель: Початок о 14:00 у центральній залі торгів.
-Штаб-квартира: Tucano Mall — 3-й поверх — Наср-Сіті — Каїр.`;
-      } else {
-        return `مواعيد وساعات العمل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر:
-• أيام العمل الرسمية: من الأحد إلى الخميس أسبوعياً (يومياً عدا الجمعة والسبت).
-• ساعات الدوام الرسمي: من الساعة 09:00 صباحاً حتى 05:00 مساءً (من 9 إلى 5).
-• العطلة الأسبوعية: يومي الجمعة والسبت.
-• جلسات لجان البت والتوريد: تبدأ في تمام الساعة 02:00 ظهراً بالقاعة المركزية.
-المقر: توكانو مول — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.`;
-      }
-    }
-
-  return null;
-}
-
-// Modular Handler: handleCommitteesQuery
-function handleCommitteesQuery(q, lang, info, isAr) {
-    // 4. Weekly Committees Query (Sunday Rice, Tuesday Live Cattle, Monday Shrimp)
-    if (
-      q.includes('لجان') || 
-      q.includes('لجنة') || 
-      q.includes('ارز') || 
-      q.includes('أرز') || 
-      q.includes('رز') || 
-      q.includes('جمبري') || 
-      q.includes('رؤوس') || 
-      q.includes('مواشي') || 
-      q.includes('عجول') || 
-      q.includes('الأحد') || 
-      q.includes('الاحد') || 
-      q.includes('الاثنين') || 
-      q.includes('الإثنين') || 
-      q.includes('الثلاثاء') || 
-      q.includes('بت وتوريد') || 
-      q.includes('جلسات') || 
-      q.includes('جلسة') || 
-      q.includes('committee') || 
-      q.includes('komisj') || 
-      q.includes('rice') || 
-      q.includes('shrimp') || 
-      q.includes('cattle')
-    ) {
-      return {
-        type: 'committees',
-        text: isAr 
-          ? `جدول ومواعيد لجان البت والتوريد المعتمدة (بمقر إدارة الشراء الموحد):`
-          : `Official Procurement Committees Schedule:`
-      };
-    }
+  }
 
   return null;
 }
 
 // Modular Handler: handleSocialQuery
 function handleSocialQuery(q, lang, info, isAr) {
-    // 5. Social Media & Official Channels Query
-    if (
-      q.includes('فيس') || 
-      q.includes('فيسبوك') || 
-      q.includes('لينكد') || 
-      q.includes('لينكدان') || 
-      q.includes('تويتر') || 
-      q.includes('سوشيال') || 
-      q.includes('روابط') || 
-      q.includes('رابط') || 
-      q.includes('مواقع التواصل') || 
-      q.includes('social') || 
-      q.includes('facebook') || 
-      q.includes('linkedin') || 
-      q.includes('twitter') || 
-      q.includes('x.com') ||
-      q.includes('قنوات')
-    ) {
-      return {
-        type: 'social_links',
-        text: isAr 
-          ? `إليك القنوات والروابط الرسمية المعتمدة لجهاز مستقبل مصر للتنمية المستدامة (FOE):`
-          : `Official verified channels of Future of Egypt Agency (FOE):`
-      };
+  if (
+    q.includes('فيس') || 
+    q.includes('فيسبوك') || 
+    q.includes('لينكد') || 
+    q.includes('لينكدان') || 
+    q.includes('تويتر') || 
+    q.includes('سوشيال') || 
+    q.includes('روابط') || 
+    q.includes('رابط') || 
+    q.includes('مواقع التواصل') || 
+    q.includes('social') || 
+    q.includes('facebook') || 
+    q.includes('linkedin') || 
+    q.includes('twitter') || 
+    q.includes('x.com') ||
+    q.includes('قنوات')
+  ) {
+    return {
+      type: 'social_links',
+      text: isAr 
+        ? `إليك القنوات والروابط الرسمية المعتمدة لجهاز مستقبل مصر للتنمية المستدامة (FOE):`
+        : `Official verified channels of Future of Egypt Agency (FOE):`
+    };
+  }
+
+  return null;
+}
+
+// Modular Handler: handleTendersQuery
+function handleTendersQuery(q, lang, info, isAr) {
+  if (
+    q.includes('مورد') || 
+    q.includes('موردين') || 
+    q.includes('تسجيل') || 
+    q.includes('سجل الموردين') || 
+    q.includes('مناقصة') || 
+    q.includes('مناقصات') || 
+    q.includes('مزايدة') || 
+    q.includes('مزايدات') || 
+    q.includes('ممارسة') || 
+    q.includes('كراسة الشروط') || 
+    q.includes('شروط التوريد') || 
+    q.includes('توريد') || 
+    q.includes('تأهيل') || 
+    q.includes('عروض فنية') || 
+    q.includes('tender') || 
+    q.includes('bidding') || 
+    q.includes('supplier') || 
+    q.includes('przetarg') || 
+    q.includes('dostawc') || 
+    q.includes('тендер') || 
+    q.includes('постачальник')
+  ) {
+    if (lang === 'en') {
+      return `Active Strategic Procurement Operations & Suppliers Registry:
+• Open Procurement Tenders:
+  1. FOE-REQ-2026-092: 420,000 MT Bulk Milling Wheat (FOB/CIF) — Open for Technical Offers.
+  2. FOE-REQ-2026-090: 60,000 MT Vegetable Oils (Soybean & Sunflower) — Open for Technical Offers.
+  3. FOE-REQ-2026-088: 120,000 MT Grade-1 Yellow Feed Corn — Open for Technical Offers.
+  4. FOE-REQ-2026-085: Grain Spectral Analysis & Telemetry at Smart Silos — Technical Inquiries Stage.
+• Certified Suppliers Registry:
+  Open at the Government Contracting Directorate (Tucano Commercial Complex — Floor 3).
+  Requirements: Valid Commercial Registry, Tax Compliance, Audited Financials (3 years), and Quality Certifications (ISO/HACCP/GAFTA/FOSFA).
+• Contact: procurement@foe.gov.eg | Unified Hotline: 19842.`;
+    } else if (lang === 'pl') {
+      return `Rejestracja Dostawców i Aktualne Postępowania Przetargowe:
+• Aktualne Zapytania i Przetargi:
+  1. FOE-REQ-2026-092: 420 000 ton pszenicy konsumpcyjnej (FOB/CIF).
+  2. FOE-REQ-2026-090: 60 000 ton olejów roślinnych (sojowy i słonecznikowy).
+  3. FOE-REQ-2026-088: 120 000 ton kukurydzy paszowej I klasy.
+  4. FOE-REQ-2026-085: Systemy telemetryczne i spektrometryczne dla silosów.
+• Rejestr Dostawców: Dyrekcja ds. Zamówień Rządowych (Tucano Mall — 3. piętro).
+• Kontakt: procurement@foe.gov.eg | Infolinia: 19842.`;
+    } else if (lang === 'uk') {
+      return `Тендери та реєстрація в реєстрі постачальників:
+• Поточні закупівлі:
+  1. FOE-REQ-2026-092: 420 000 тонн продовольчої пшениці (FOB/CIF).
+  2. FOE-REQ-2026-090: 60 000 тонн рослинних олій (соєва та соняшникова).
+  3. FOE-REQ-2026-088: 120 000 тонн жовтої кормової кукурудзи.
+  4. FOE-REQ-2026-085: Системи спектрального аналізу для елеваторів.
+• Реєстрація постачальників: Директорат урядових контрактів (Tucano Mall — 3-й поверх).
+• Зв'язок: procurement@foe.gov.eg | Гаряча лінія: 19842.`;
+    } else {
+      return `العمليات الاستراتيجية الحالية وإجراءات القيد في سجل الموردين:
+• المناقصات وعمليات التوريد المطروحة حالياً:
+  1. عملية توريد 420 ألف طن قمح طاحن مستورد صب (FOE-REQ-2026-092) — مفتوحة لتلقي العروض الفنية.
+  2. طلب عروض أسعار لتوريد 60 ألف طن زيوت نباتية صويا وعباد شمس (FOE-REQ-2026-090) — مفتوحة لتلقي العروض.
+  3. توريد 120 ألف طن ذرة صفراء علفية لتعزيز المخزون القومي (FOE-REQ-2026-088) — مفتوحة لتلقي العروض.
+  4. تجهيز أنظمة الفحص الطيفي السريع للحبوب بالصوامع الذكية (FOE-REQ-2026-085) — جلسة الاستفسارات الفنية.
+• إجراءات القيد بسجل الموردين المعتمد:
+  مفتوح لدى إدارة التعاقدات الحكومية بمقر الإدارة (توكانو مول — الدور الثالث — مدينة نصر).
+  المستندات المطلوبة: السجل التجاري الساري، البطاقة الضريبية، القوائم المالية المدققة، وشهادات الجودة والسلامة الغذائية.
+• للاستعلام وسحب كراسات الشروط: التواصل عبر procurement@foe.gov.eg أو الخط الساخن 19842.`;
     }
+  }
 
   return null;
 }
 
 // Modular Handler: handleReservesQuery
 function handleReservesQuery(q, lang, info, isAr) {
-    // 6. Strategic Reserves & Commodity Buffers
-    if (
-      q.includes('مخزون') || 
-      q.includes('احتياطي') || 
-      q.includes('ارصدة') || 
-      q.includes('أرصدة') || 
-      q.includes('رصيد') || 
-      q.includes('سلع استراتيجية') || 
-      q.includes('سلع أساسية') || 
-      q.includes('قمح') || 
-      q.includes('زيوت') || 
-      q.includes('سكر') || 
-      q.includes('ذرة') || 
-      q.includes('كم يغطي') || 
-      q.includes('reserve') || 
-      q.includes('stock') || 
-      q.includes('buffer') || 
-      q.includes('wheat') || 
-      q.includes('rezerw') || 
-      q.includes('резерв')
-    ) {
-      if (lang === 'en') {
-        return `National Strategic Reserves Buffer managed by Mostaqbal Misr:
-• Milling Wheat: 7.8 months safe buffer (5.8 Million Metric Tons).
-• Vegetable Oils: 6.9 months reserve (1.4 Million Metric Tons).
-• Sugar: 8.2 months self-sufficiency supported by New Delta refineries.
-• Yellow Corn: 6.2 months reserve supporting feedmills and livestock.
-All reserves undergo automated digital monitoring across modern silos nationwide.`;
-      } else if (lang === 'pl') {
-        return `Poziom Państwowych Rezerw Strategicznych:
+  if (
+    q.includes('مخزون') || 
+    q.includes('احتياطي') || 
+    q.includes('ارصدة') || 
+    q.includes('أرصدة') || 
+    q.includes('رصيد') || 
+    q.includes('سلع استراتيجية') || 
+    q.includes('سلع أساسية') || 
+    q.includes('كم يغطي') || 
+    q.includes('مخزون الدولة') || 
+    q.includes('كم شهر') || 
+    q.includes('reserve') || 
+    q.includes('stock') || 
+    q.includes('buffer') || 
+    q.includes('wheat') || 
+    q.includes('rezerw') || 
+    q.includes('резерв') ||
+    ((q.includes('قمح') || q.includes('زيوت') || q.includes('سكر') || q.includes('ذرة')) && !q.includes('مناقص') && !q.includes('توريد'))
+  ) {
+    if (lang === 'en') {
+      return `National Strategic Commodity Reserves Buffer managed by Mostaqbal Misr:
+• Milling Wheat: 7.8 Months safe buffer (5.8 Million Metric Tons).
+• Vegetable Oils: 6.9 Months reserve (1.4 Million Metric Tons).
+• Sugar: 8.2 Months self-sufficiency supported by New Delta refineries.
+• Yellow Corn: 6.2 Months reserve (3.2 Million Metric Tons) supporting livestock and feedmills.
+All commodity inventories undergo real-time automated monitoring across modern smart silos nationwide.`;
+    } else if (lang === 'pl') {
+      return `Poziom Państwowych Rezerw Strategicznych:
 • Pszenica konsumpcyjna: 7.8 miesięcy (5.8 mln ton metrycznych).
 • Oleje roślinne: 6.9 miesięcy (1.4 mln ton metrycznych).
-• Cukier: 8.2 miesięcy samowystarczalności.
-• Kukurydza żółta: 6.2 miesięcy.`;
-      } else if (lang === 'uk') {
-        return `Рівень стратегічних резервів держави:
+• Cukier: 8.2 miesięcy samowystarczalności dzięki cukrowniom Nowej Delty.
+• Kukurydza żółta: 6.2 miesięcy (3.2 mln ton metrycznych).`;
+    } else if (lang === 'uk') {
+      return `Рівень стратегічних резервів держави:
 • Пшениця борошномельна: 7.8 місяців (5.8 млн метричних тонн).
 • Рослинні олії: 6.9 місяців (1.4 млн метричних тонн).
-• Цукор: 8.2 місяців завдяки переробним потужностям Нової Дельти.
-• Кукурудза жовта: 6.2 місяців.`;
-      } else {
-        return `مؤشرات أرصدة السلع والمخزون الاستراتيجي لجهاز مستقبل مصر:
-• القمح الطاحن: يغطي 7.8 أشهر (بإجمالي 5.8 مليون طن لتأمين الخبز المدعم).
+• Цукор: 8.2 місяців завдяки агроіндустріальним потужностям Нової Дельти.
+• Кукурудза жовта: 6.2 місяців (3.2 млн метричних тонн).`;
+    } else {
+      return `مؤشرات أرصدة السلع والمخزون الاستراتيجي لجهاز مستقبل مصر للتنمية المستدامة:
+• القمح الطاحن: يغطي 7.8 أشهر (بإجمالي 5.8 مليون طن متري لتأمين الخبز المدعم).
 • الزيوت النباتية: تغطي 6.9 أشهر (بإجمالي 1.4 مليون طن من زيوت الصويا وعباد الشمس).
-• السكر التمويني والحر: يغطي 8.2 أشهر (طفرة اكتفاء مدعومة بمجمعات السكر بالدلتا الجديدة).
-• الذرة الصفراء: تغطي 6.2 أشهر لدعم الثروة الحيوانية وصناعة الأعلاف.
-تتم المتابعة اللحظية للأرصدة عبر منظومة رقمية متصلة بكافة الصوامع الاستراتيجية.`;
-      }
+• السكر التمويني والحر: يغطي 8.2 أشهر (طفرة اكتفاء مدعومة بمجمعات ومصانع سكر الدلتا الجديدة).
+• الذرة الصفراء: تغطي 6.2 أشهر (3.2 مليون طن لدعم الثروة الحيوانية وصناعة الأعلاف).
+تتم المتابعة اللحظية للأرصدة عبر منظومة رقمية متصلة بكافة الصوامع الاستراتيجية على مستوى الجمهورية.`;
     }
+  }
 
   return null;
 }
@@ -872,18 +1010,19 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
   const generateAnswer = (query) => {
     const q = query.toLowerCase();
 
+    // Priority order: Specific inquiries (Committees, Location, Hours) tested before generic fallbacks
     return (
-      handleContactQuery(q, lang, info, isAr) ||
+      handleCommitteesQuery(q, lang, info, isAr) ||
       handleLocationQuery(q, lang, info, isAr) ||
       handleWorkingHoursQuery(q, lang, info, isAr) ||
-      handleCommitteesQuery(q, lang, info, isAr) ||
+      handleContactQuery(q, lang, info, isAr) ||
       handleSocialQuery(q, lang, info, isAr) ||
-      handleReservesQuery(q, lang, info, isAr) ||
-      handlePillarsQuery(q, lang, info, isAr) ||
       handleTendersQuery(q, lang, info, isAr) ||
+      handleReservesQuery(q, lang, info, isAr) ||
       handleQualityQuery(q, lang, info, isAr) ||
       handleStorageQuery(q, lang, info, isAr) ||
       handleDirectoratesQuery(q, lang, info, isAr) ||
+      handlePillarsQuery(q, lang, info, isAr) ||
       handleVisionQuery(q, lang, info, isAr) ||
       handleGreetingQuery(q, lang, info, isAr) ||
       handleFallbackResponse(lang, info, isAr)
@@ -1092,6 +1231,52 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                   }`}
                 >
                   <div className="whitespace-pre-line">{msg.text}</div>
+
+                  {/* Render Visual Location Card when msg.type === 'location' (No raw URL) */}
+                  {msg.type === 'location' && (
+                    <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
+                      <div className="p-3 sm:p-3.5 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent space-y-2.5 shadow-2xs">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold shadow-md shadow-amber-500/20 flex-shrink-0">
+                            <Building2 className="w-5 h-5" />
+                          </div>
+                          <div className="min-w-0">
+                            <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
+                              {isAr ? 'مجمع توكانو التجاري — الدور الثالث' : 'Tucano Commercial Complex — Floor 3'}
+                            </div>
+                            <div className="text-[11px] text-amber-700 dark:text-amber-400 font-semibold truncate">
+                              {isAr ? 'المقر الإداري وقاعة لجان البت المركزية' : 'Headquarters & Central Committees Hall'}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-1.5 pt-1.5 border-t border-amber-500/20">
+                          <div className="flex items-start gap-1.5">
+                            <MapPin className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
+                            <span>{isAr ? 'شارع يوسف عباس — متفرع من طريق النصر — مدينة نصر — القاهرة' : 'Yousef Abbas St., off Al-Nasr Road, Nasr City, Cairo, Egypt'}</span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                            <span>{isAr ? 'مواعيد الاستقبال: من الأحد إلى الخميس (09:00 ص – 05:00 م)' : 'Working Hours: Sun – Thu (09:00 AM – 05:00 PM)'}</span>
+                          </div>
+                        </div>
+
+                        {/* Styled One-Click Button for Google Maps */}
+                        <div className="pt-1">
+                          <a
+                            href="https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="w-full py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-amber-500/20 transition-all cursor-pointer group"
+                          >
+                            <MapPin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                            <span>{isAr ? 'فتح الموقع عبر خرائط Google' : 'Open in Google Maps'}</span>
+                            <ExternalLink className="w-3.5 h-3.5 opacity-75" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Render Visual Social Media Link Cards if message type is social_links */}
                   {msg.type === 'social_links' && (
