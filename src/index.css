@@ -189,3 +189,19 @@ html.light .glass-card:hover {
 .animate-ticker:hover {
   animation-play-state: paused;
 }
+
+/* Completely disable video captions/subtitles across WebKit, Blink, and Gecko */
+video::cue {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+video::-webkit-media-text-track-container {
+  display: none !important;
+}
+video::-webkit-media-text-track-display {
+  display: none !important;
+}
+video::-webkit-media-text-track-region {
+  display: none !important;
+}

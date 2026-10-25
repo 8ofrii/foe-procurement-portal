@@ -31,6 +31,13 @@ export default function Hero({ lang, theme, onScrollTo }) {
     if (videoRef.current) {
       videoRef.current.defaultMuted = true;
       videoRef.current.muted = true;
+      try {
+        if (videoRef.current.textTracks) {
+          for (let i = 0; i < videoRef.current.textTracks.length; i++) {
+            videoRef.current.textTracks[i].mode = 'disabled';
+          }
+        }
+      } catch (e) {}
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise
@@ -108,10 +115,12 @@ export default function Hero({ lang, theme, onScrollTo }) {
           loop
           muted
           playsInline
+          disablePictureInPicture
+          controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
           src="/assets/hero-bg.mp4"
           poster="/assets/hero-aerial.jpg"
           className={`w-full h-full object-cover object-center transition-opacity duration-700 ${
-            theme === 'dark' ? 'opacity-85 brightness-95 contrast-105' : 'opacity-75 brightness-100 contrast-100'
+            theme === 'dark' ? 'opacity-70 brightness-90 contrast-105' : 'opacity-45 brightness-95 contrast-100'
           }`}
         >
           <source src="/assets/hero-bg.mp4" type="video/mp4" />
@@ -119,8 +128,8 @@ export default function Hero({ lang, theme, onScrollTo }) {
         {/* Soft luxury vignettes and gradient protection for crystal clear text */}
         <div className={`absolute inset-0 ${
           theme === 'dark' 
-            ? 'bg-gradient-to-b from-slate-950/85 via-slate-950/55 to-slate-950' 
-            : 'bg-gradient-to-b from-white/90 via-white/70 to-white/95'
+            ? 'bg-gradient-to-b from-slate-950/90 via-slate-950/60 to-slate-950' 
+            : 'bg-gradient-to-b from-white/90 via-white/60 to-white/95'
         }`}></div>
         {/* Ambient gold glow core */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -131,24 +140,18 @@ export default function Hero({ lang, theme, onScrollTo }) {
         <button
           onClick={toggleVideoPlayback}
           type="button"
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer backdrop-blur-md shadow-lg ${
+          className={`inline-flex items-center justify-center w-8 h-8 rounded-full border transition-all cursor-pointer backdrop-blur-md shadow-lg ${
             theme === 'dark'
               ? 'bg-slate-950/85 border-slate-700/80 text-slate-200 hover:text-amber-400 hover:border-amber-400 shadow-black/60'
               : 'bg-white/95 border-slate-300 text-slate-800 hover:text-amber-700 hover:border-amber-500 shadow-slate-300/80'
           }`}
           title={isPlaying ? (isAr ? 'إيقاف الفيديو مؤقتاً' : 'Pause Video') : (isAr ? 'تشغيل الفيديو' : 'Play Video')}
+          aria-label={isPlaying ? (isAr ? 'إيقاف الفيديو مؤقتاً' : 'Pause Video') : (isAr ? 'تشغيل الفيديو' : 'Play Video')}
         >
-          <span className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`}></span>
           {isPlaying ? (
-            <>
-              <Pause className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-              <span>{isAr ? 'خلفية سينمائية' : 'Live Motion'}</span>
-            </>
+            <Pause className="w-3.5 h-3.5 text-amber-500" />
           ) : (
-            <>
-              <Play className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-              <span>{isAr ? 'تشغيل الفيديو' : 'Play Video'}</span>
-            </>
+            <Play className="w-3.5 h-3.5 text-amber-500 ml-0.5" />
           )}
         </button>
       </div>
