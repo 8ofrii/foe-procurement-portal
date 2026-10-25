@@ -908,6 +908,98 @@ export const FAQ_LIST = [
   }
 ];
 
+// Dynamic Next Committee Date Calculator & Formatter
+export function getNextCommitteeDateObj(committeeId, now = new Date()) {
+  const SESSION_HOUR = 14; // 02:00 PM (14:00)
+
+  if (committeeId === 'sunday-rice') {
+    const anchor = new Date(2026, 10, 1, SESSION_HOUR, 0, 0); // 1 Nov 2026 14:00
+    if (now < anchor) {
+      return anchor;
+    }
+    const d = new Date(now);
+    const day = d.getDay(); // 0 is Sunday
+    let daysUntil = (7 - day) % 7;
+    if (day === 0) {
+      if (d.getHours() >= SESSION_HOUR) {
+        daysUntil = 7;
+      } else {
+        daysUntil = 0;
+      }
+    }
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + daysUntil, SESSION_HOUR, 0, 0);
+  }
+
+  if (committeeId === 'monday-shrimp') {
+    const anchor = new Date(2026, 10, 2, SESSION_HOUR, 0, 0); // 2 Nov 2026 14:00
+    if (now < anchor) {
+      return anchor;
+    }
+    const msIn2Weeks = 14 * 24 * 60 * 60 * 1000;
+    const diff = now.getTime() - anchor.getTime();
+    const cyclesPassed = Math.floor(diff / msIn2Weeks);
+    let candidate = new Date(anchor.getTime() + cyclesPassed * msIn2Weeks);
+    if (candidate <= now) {
+      candidate = new Date(candidate.getTime() + msIn2Weeks);
+    }
+    return candidate;
+  }
+
+  if (committeeId === 'tuesday-cattle') {
+    const anchor = new Date(2026, 10, 10, SESSION_HOUR, 0, 0); // 10 Nov 2026 14:00
+    if (now < anchor) {
+      return anchor;
+    }
+    const msIn2Weeks = 14 * 24 * 60 * 60 * 1000;
+    const diff = now.getTime() - anchor.getTime();
+    const cyclesPassed = Math.floor(diff / msIn2Weeks);
+    let candidate = new Date(anchor.getTime() + cyclesPassed * msIn2Weeks);
+    if (candidate <= now) {
+      candidate = new Date(candidate.getTime() + msIn2Weeks);
+    }
+    return candidate;
+  }
+
+  return new Date();
+}
+
+export function formatCommitteeDate(dateObj, lang = 'ar') {
+  const d = dateObj.getDate();
+  const m = dateObj.getMonth();
+  const y = dateObj.getFullYear();
+  const dayIdx = dateObj.getDay();
+
+  const dayNames = {
+    ar: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+    en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    pl: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+    uk: ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'Пʼятниця', 'Субота']
+  };
+
+  const monthNames = {
+    ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    pl: ['sty', 'lut', 'mar', 'kwi', 'maj', 'cze', 'lip', 'sie', 'wrz', 'paź', 'lis', 'gru'],
+    uk: ['січ', 'лют', 'бер', 'кві', 'тра', 'чер', 'лип', 'сер', 'вер', 'жов', 'лис', 'гру']
+  };
+
+  const dayName = (dayNames[lang] || dayNames.ar)[dayIdx];
+  const monthName = (monthNames[lang] || monthNames.ar)[m];
+
+  if (lang === 'en') {
+    return `${dayName}, ${monthName} ${d}, ${y}`;
+  }
+  if (lang === 'pl' || lang === 'uk') {
+    return `${dayName}, ${d} ${monthName} ${y}`;
+  }
+  return `${dayName}، ${d} ${monthName} ${y}`;
+}
+
+export function getNextSessionDisplay(committeeId, lang = 'ar', now = new Date()) {
+  const dateObj = getNextCommitteeDateObj(committeeId, now);
+  return formatCommitteeDate(dateObj, lang);
+}
+
 // Weekly Committees Schedule (جدول لجان البت والتوريد الأسبوعية)
 export const COMMITTEES_DATA = {
   header: {
@@ -936,27 +1028,13 @@ export const COMMITTEES_DATA = {
     pl: "Wszystkie komisje obradują w siedzibie Dyrekcji: Tucano Mall, 3. piętro, ul. Yousef Abbas, Nasr City, Kair.",
     uk: "Усі комісії засідають у штаб-квартирі Директорату: Tucano Mall, 3-й поверх, вул. Юсефа Аббаса, Наср-Сіті, Каїр."
   },
-    sessions: [
+  sessions: [
     {
       id: "sunday-rice",
       dayName: { ar: "يوم الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
       dayCode: "SUNDAY",
       cadence: { ar: "جلسة أسبوعية ثابتة", en: "Weekly Fixed Session", pl: "Stała sesja tygodniowa", uk: "Щотижнева сесія" },
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      nextDate: {
-        ar: "الأحد، 1 نوفمبر 2026",
-        en: "Sunday, Nov 1, 2026",
-        pl: "Niedziela, 1 lis 2026",
-        uk: "Неділя, 1 лис 2026",
-        iso: "2026-11-01"
-      },
-      upcomingDates: [
-        { iso: "2026-11-01", ar: "1 نوفمبر 2026", en: "1 Nov 2026", pl: "1 lis 2026", uk: "1 лис 2026", status: "مؤكدة" },
-        { iso: "2026-11-08", ar: "8 نوفمبر 2026", en: "8 Nov 2026", pl: "8 lis 2026", uk: "8 лис 2026", status: "مؤكدة" },
-        { iso: "2026-11-15", ar: "15 نوفمبر 2026", en: "15 Nov 2026", pl: "15 lis 2026", uk: "15 лис 2026", status: "مجدولة" },
-        { iso: "2026-11-22", ar: "22 نوفمبر 2026", en: "22 Nov 2026", pl: "22 lis 2026", uk: "22 лис 2026", status: "مجدولة" },
-        { iso: "2026-11-29", ar: "29 نوفمبر 2026", en: "29 Nov 2026", pl: "29 lis 2026", uk: "29 лис 2026", status: "مجدولة" }
-      ],
       commodity: { 
         ar: "لجنة الأرز", 
         en: "Rice Committee", 
@@ -991,19 +1069,6 @@ export const COMMITTEES_DATA = {
       dayCode: "TUESDAY",
       cadence: { ar: "جلسة دورية تبادلية", en: "Bi-weekly Alternating Session", pl: "Sesja naprzemienna", uk: "Почергова сесія" },
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      nextDate: {
-        ar: "الثلاثاء، 10 نوفمبر 2026",
-        en: "Tuesday, Nov 10, 2026",
-        pl: "Wtorek, 10 lis 2026",
-        uk: "Вівторок, 10 лис 2026",
-        iso: "2026-11-10"
-      },
-      upcomingDates: [
-        { iso: "2026-11-10", ar: "10 نوفمبر 2026", en: "10 Nov 2026", pl: "10 lis 2026", uk: "10 лис 2026", status: "مؤكدة" },
-        { iso: "2026-11-24", ar: "24 نوفمبر 2026", en: "24 Nov 2026", pl: "24 lis 2026", uk: "24 лис 2026", status: "مجدولة" },
-        { iso: "2026-12-08", ar: "8 ديسمبر 2026", en: "8 Dec 2026", pl: "8 gru 2026", uk: "8 гру 2026", status: "مجدولة" },
-        { iso: "2026-12-22", ar: "22 ديسمبر 2026", en: "22 Dec 2026", pl: "22 gru 2026", uk: "22 гру 2026", status: "مجدولة" }
-      ],
       commodity: { 
         ar: "لجنة الرؤوس الحية", 
         en: "Live Cattle Committee", 
@@ -1038,19 +1103,6 @@ export const COMMITTEES_DATA = {
       dayCode: "MONDAY",
       cadence: { ar: "جلسة دورية تبادلية", en: "Bi-weekly Alternating Session", pl: "Sesja naprzemienna", uk: "Почергова сесія" },
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      nextDate: {
-        ar: "الاثنين، 2 نوفمبر 2026",
-        en: "Monday, Nov 2, 2026",
-        pl: "Poniedziałek, 2 lis 2026",
-        uk: "Понеділок, 2 лис 2026",
-        iso: "2026-11-02"
-      },
-      upcomingDates: [
-        { iso: "2026-11-02", ar: "2 نوفمبر 2026", en: "2 Nov 2026", pl: "2 lis 2026", uk: "2 лис 2026", status: "مؤكدة" },
-        { iso: "2026-11-16", ar: "16 نوفمبر 2026", en: "16 Nov 2026", pl: "16 lis 2026", uk: "16 лис 2026", status: "مجدولة" },
-        { iso: "2026-11-30", ar: "30 نوفمبر 2026", en: "30 Nov 2026", pl: "30 lis 2026", uk: "30 лис 2026", status: "مجدولة" },
-        { iso: "2026-12-14", ar: "14 ديسمبر 2026", en: "14 Dec 2026", pl: "14 gru 2026", uk: "14 гру 2026", status: "مجدولة" }
-      ],
       commodity: { 
         ar: "لجنة الجمبري", 
         en: "Shrimp Committee", 
@@ -1077,119 +1129,6 @@ export const COMMITTEES_DATA = {
         pl: "Obrady naprzemienne co tydzień z komisją ds. żywego bydła.",
         uk: "Засідання чергуються щотижня з комісією щодо живої худоби."
       },
-      tagColor: "emerald"
-    }
-  ],
-    // Chronological Schedule of Upcoming Committee Dates (November & December 2026)
-  calendarDates: [
-    {
-      iso: "2026-11-01",
-      committeeId: "sunday-rice",
-      dayName: { ar: "الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
-      dateStr: { ar: "1 نوفمبر 2026", en: "1 Nov 2026", pl: "1 lis 2026", uk: "1 лис 2026" },
-      commodity: { ar: "لجنة الأرز", en: "Rice Committee", pl: "Komisja ds. Ryżu", uk: "Комісія щодо рису" },
-      cadence: { ar: "أسبوعية ثابتة", en: "Weekly Fixed", pl: "Tygodniowa", uk: "Щотижнева" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مؤكدة", en: "Confirmed", pl: "Potwierdzona", uk: "Підтверджена" },
-      tagColor: "amber"
-    },
-    {
-      iso: "2026-11-02",
-      committeeId: "monday-shrimp",
-      dayName: { ar: "الاثنين", en: "Monday", pl: "Poniedziałek", uk: "Понеділок" },
-      dateStr: { ar: "2 نوفمبر 2026", en: "2 Nov 2026", pl: "2 lis 2026", uk: "2 лис 2026" },
-      commodity: { ar: "لجنة الجمبري", en: "Shrimp Committee", pl: "Komisja ds. Krewetek", uk: "Комісія щодо креветок" },
-      cadence: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مؤكدة", en: "Confirmed", pl: "Potwierdzona", uk: "Підтверджена" },
-      tagColor: "emerald"
-    },
-    {
-      iso: "2026-11-08",
-      committeeId: "sunday-rice",
-      dayName: { ar: "الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
-      dateStr: { ar: "8 نوفمبر 2026", en: "8 Nov 2026", pl: "8 lis 2026", uk: "8 лис 2026" },
-      commodity: { ar: "لجنة الأرز", en: "Rice Committee", pl: "Komisja ds. Ryżu", uk: "Комісія щодо рису" },
-      cadence: { ar: "أسبوعية ثابتة", en: "Weekly Fixed", pl: "Tygodniowa", uk: "Щотижнева" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مؤكدة", en: "Confirmed", pl: "Potwierdzona", uk: "Підтверджена" },
-      tagColor: "amber"
-    },
-    {
-      iso: "2026-11-10",
-      committeeId: "tuesday-cattle",
-      dayName: { ar: "الثلاثاء", en: "Tuesday", pl: "Wtorek", uk: "Вівторок" },
-      dateStr: { ar: "10 نوفمبر 2026", en: "10 Nov 2026", pl: "10 lis 2026", uk: "10 лис 2026" },
-      commodity: { ar: "لجنة الرؤوس الحية", en: "Live Cattle Committee", pl: "Komisja ds. Żywego Bydła", uk: "Комісія щодо живої худоби" },
-      cadence: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مؤكدة", en: "Confirmed", pl: "Potwierdzona", uk: "Підтверджена" },
-      tagColor: "rose"
-    },
-    {
-      iso: "2026-11-15",
-      committeeId: "sunday-rice",
-      dayName: { ar: "الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
-      dateStr: { ar: "15 نوفمبر 2026", en: "15 Nov 2026", pl: "15 lis 2026", uk: "15 лис 2026" },
-      commodity: { ar: "لجنة الأرز", en: "Rice Committee", pl: "Komisja ds. Ryżu", uk: "Комісія щодо рису" },
-      cadence: { ar: "أسبوعية ثابتة", en: "Weekly Fixed", pl: "Tygodniowa", uk: "Щотижнева" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مجدولة", en: "Scheduled", pl: "Zaplanowana", uk: "Запланована" },
-      tagColor: "amber"
-    },
-    {
-      iso: "2026-11-16",
-      committeeId: "monday-shrimp",
-      dayName: { ar: "الاثنين", en: "Monday", pl: "Poniedziałek", uk: "Понеділок" },
-      dateStr: { ar: "16 نوفمبر 2026", en: "16 Nov 2026", pl: "16 lis 2026", uk: "16 лис 2026" },
-      commodity: { ar: "لجنة الجمبري", en: "Shrimp Committee", pl: "Komisja ds. Krewetek", uk: "Комісія щодо креветок" },
-      cadence: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مجدولة", en: "Scheduled", pl: "Zaplanowana", uk: "Запланована" },
-      tagColor: "emerald"
-    },
-    {
-      iso: "2026-11-22",
-      committeeId: "sunday-rice",
-      dayName: { ar: "الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
-      dateStr: { ar: "22 نوفمبر 2026", en: "22 Nov 2026", pl: "22 lis 2026", uk: "22 лис 2026" },
-      commodity: { ar: "لجنة الأرز", en: "Rice Committee", pl: "Komisja ds. Ryżu", uk: "Комісія щодо рису" },
-      cadence: { ar: "أسبوعية ثابتة", en: "Weekly Fixed", pl: "Tygodniowa", uk: "Щотижнева" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مجدولة", en: "Scheduled", pl: "Zaplanowana", uk: "Запланована" },
-      tagColor: "amber"
-    },
-    {
-      iso: "2026-11-24",
-      committeeId: "tuesday-cattle",
-      dayName: { ar: "الثلاثاء", en: "Tuesday", pl: "Wtorek", uk: "Вівторок" },
-      dateStr: { ar: "24 نوفمبر 2026", en: "24 Nov 2026", pl: "24 lis 2026", uk: "24 лис 2026" },
-      commodity: { ar: "لجنة الرؤوس الحية", en: "Live Cattle Committee", pl: "Komisja ds. Żywego Bydła", uk: "Комісія щодо живої худоби" },
-      cadence: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مجدولة", en: "Scheduled", pl: "Zaplanowana", uk: "Запланована" },
-      tagColor: "rose"
-    },
-    {
-      iso: "2026-11-29",
-      committeeId: "sunday-rice",
-      dayName: { ar: "الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
-      dateStr: { ar: "29 نوفمبر 2026", en: "29 Nov 2026", pl: "29 lis 2026", uk: "29 лис 2026" },
-      commodity: { ar: "لجنة الأرز", en: "Rice Committee", pl: "Komisja ds. Ryżu", uk: "Комісія щодо рису" },
-      cadence: { ar: "أسبوعية ثابتة", en: "Weekly Fixed", pl: "Tygodniowa", uk: "Щотижнева" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مجدولة", en: "Scheduled", pl: "Zaplanowana", uk: "Запланована" },
-      tagColor: "amber"
-    },
-    {
-      iso: "2026-11-30",
-      committeeId: "monday-shrimp",
-      dayName: { ar: "الاثنين", en: "Monday", pl: "Poniedziałek", uk: "Понеділок" },
-      dateStr: { ar: "30 نوفمبر 2026", en: "30 Nov 2026", pl: "30 lis 2026", uk: "30 лис 2026" },
-      commodity: { ar: "لجنة الجمبري", en: "Shrimp Committee", pl: "Komisja ds. Krewetek", uk: "Комісія щодо креветок" },
-      cadence: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
-      time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
-      status: { ar: "مجدولة", en: "Scheduled", pl: "Zaplanowana", uk: "Запланована" },
       tagColor: "emerald"
     }
   ],
