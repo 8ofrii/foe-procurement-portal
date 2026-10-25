@@ -44,6 +44,10 @@ html.dark ::-moz-selection, html.dark *::-moz-selection {
     --font-body: 'Cairo', system-ui, sans-serif;
   }
 
+  html {
+    zoom: 85%;
+  }
+
   body {
     font-family: var(--font-body);
     transition: background-color 0.25s ease, color 0.25s ease;
