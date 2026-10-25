@@ -44,8 +44,24 @@ html.dark ::-moz-selection, html.dark *::-moz-selection {
     --font-body: 'Cairo', system-ui, sans-serif;
   }
 
+  /* Base scaling for mobile devices: 100% native legibility & touch targets */
   html {
-    zoom: 85%;
+    zoom: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Tablets (768px - 1023px): Smooth 90% scaling for balanced tablet view */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    html {
+      zoom: 90%;
+    }
+  }
+
+  /* Desktop & Laptops (>= 1024px): 85% executive zoom requested by user */
+  @media (min-width: 1024px) {
+    html {
+      zoom: 85%;
+    }
   }
 
   body {

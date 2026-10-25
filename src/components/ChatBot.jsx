@@ -500,7 +500,7 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
   return (
     <>
       {/* Floating Bot Button - CIRCLE with Official Mostaqbal Misr Logo Emblem & Colors */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+      <div className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 ${isOpen ? 'hidden sm:block' : 'block'}`}>
         {/* Outer glowing pulsing ring */}
         <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 opacity-70 blur-sm animate-pulse pointer-events-none"></span>
 
@@ -535,8 +535,8 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
       {isOpen && (
         <div className={`fixed z-50 border shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl transition-all duration-300 ease-out animate-fadeIn ${
           isExpanded
-            ? 'inset-3 sm:inset-6 md:inset-10 lg:inset-14 max-w-5xl max-h-[90vh] m-auto rounded-3xl'
-            : 'bottom-20 sm:bottom-24 left-3 right-3 sm:left-auto sm:right-6 w-auto sm:w-[440px] max-w-[calc(100vw-24px)] h-[540px] max-h-[82vh] rounded-3xl'
+            ? 'inset-2 sm:inset-6 md:inset-10 lg:inset-14 max-w-5xl h-[calc(100dvh-16px)] sm:h-auto max-h-[94dvh] sm:max-h-[90vh] m-auto rounded-2xl sm:rounded-3xl'
+            : 'bottom-2 sm:bottom-24 left-2 right-2 sm:left-auto sm:right-6 w-auto sm:w-[440px] max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] h-[calc(100dvh-20px)] sm:h-[540px] max-h-[88dvh] sm:max-h-[82vh] rounded-2xl sm:rounded-3xl'
         } ${
           theme === 'dark' 
             ? 'bg-slate-950/95 border-amber-500/30 text-slate-100 shadow-black/80' 
@@ -544,18 +544,18 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
         }`}>
           
           {/* Header */}
-          <div className="p-3.5 sm:p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-amber-500/15 via-transparent to-amber-500/5">
-            <div className="flex items-center gap-2.5 sm:gap-3">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950 border border-amber-400/80 p-1 flex items-center justify-center shadow-md flex-shrink-0">
+          <div className="p-2.5 sm:p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-amber-500/15 via-transparent to-amber-500/5">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-950 border border-amber-400/80 p-1 flex items-center justify-center shadow-md flex-shrink-0">
                 <img 
                   src="/assets/foe-emblem-official.png" 
                   alt="شعار الجهاز" 
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-xs sm:text-base font-black text-slate-900 dark:text-white leading-none">
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h3 className="text-xs sm:text-base font-black text-slate-900 dark:text-white leading-tight truncate">
                     {isAr ? 'المساعد الذكي للشراء الموحد' : 'Unified Procurement AI Assistant'}
                   </h3>
                   {isExpanded && (
@@ -564,13 +564,13 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                     </span>
                   )}
                 </div>
-                <span className="text-[10px] sm:text-xs text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1 mt-1 leading-none">
+                <span className="text-[10px] sm:text-xs text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1 mt-0.5 leading-none truncate">
                   <span>{isAr ? 'إدارة الشراء الموحد — جهاز مستقبل مصر (FOE)' : 'Future of Egypt Agency (FOE)'}</span>
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-1 sm:gap-1.5">
+            <div className="flex items-center gap-0.5 sm:gap-1.5 flex-shrink-0">
               <button
                 onClick={handleResetChat}
                 type="button"
@@ -601,18 +601,18 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
           </div>
 
           {/* Social Media Quick Bar inside Bot Header */}
-          <div className="px-3.5 sm:px-4 py-1.5 border-b border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/70 flex items-center justify-between text-[11px]">
-            <span className="font-bold text-slate-600 dark:text-slate-400 flex items-center gap-1">
-              <Share2 className="w-3 h-3 text-amber-500" />
-              <span>{isAr ? 'منصات التواصل الرسمية:' : 'Official Channels:'}</span>
+          <div className="px-3 sm:px-4 py-1.5 border-b border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/70 flex items-center justify-between text-[11px] gap-2">
+            <span className="font-bold text-slate-600 dark:text-slate-400 flex items-center gap-1 min-w-0 truncate text-[10px] sm:text-[11px]">
+              <Share2 className="w-3 h-3 text-amber-500 flex-shrink-0" />
+              <span className="truncate">{isAr ? 'منصات التواصل الرسمية:' : 'Official Channels:'}</span>
             </span>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
               <a 
                 href={info.facebookUrl} 
                 target="_blank" 
                 rel="noreferrer"
                 title="Facebook"
-                className="px-2 py-0.5 rounded-md bg-blue-600/10 hover:bg-blue-600 text-blue-600 hover:text-white font-bold text-[10px] transition-all flex items-center gap-1 border border-blue-500/20"
+                className="px-1.5 sm:px-2 py-0.5 rounded-md bg-blue-600/10 hover:bg-blue-600 text-blue-600 hover:text-white font-bold text-[10px] transition-all flex items-center gap-1 border border-blue-500/20"
               >
                 <span>FB</span>
                 <ExternalLink className="w-2.5 h-2.5" />
@@ -622,7 +622,7 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                 target="_blank" 
                 rel="noreferrer"
                 title="LinkedIn"
-                className="px-2 py-0.5 rounded-md bg-sky-600/10 hover:bg-sky-600 text-sky-600 hover:text-white font-bold text-[10px] transition-all flex items-center gap-1 border border-sky-500/20"
+                className="px-1.5 sm:px-2 py-0.5 rounded-md bg-sky-600/10 hover:bg-sky-600 text-sky-600 hover:text-white font-bold text-[10px] transition-all flex items-center gap-1 border border-sky-500/20"
               >
                 <span>IN</span>
                 <ExternalLink className="w-2.5 h-2.5" />
@@ -632,7 +632,7 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                 target="_blank" 
                 rel="noreferrer"
                 title="Twitter / X"
-                className="px-2 py-0.5 rounded-md bg-slate-500/10 hover:bg-slate-900 hover:text-white text-slate-700 dark:text-slate-300 font-bold text-[10px] transition-all flex items-center gap-1 border border-slate-500/20"
+                className="px-1.5 sm:px-2 py-0.5 rounded-md bg-slate-500/10 hover:bg-slate-900 hover:text-white text-slate-700 dark:text-slate-300 font-bold text-[10px] transition-all flex items-center gap-1 border border-slate-500/20"
               >
                 <span>X</span>
                 <ExternalLink className="w-2.5 h-2.5" />
@@ -872,7 +872,7 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
           </div>
 
           {/* Input Box */}
-          <div className="p-3 sm:p-3.5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+          <div className="p-2.5 sm:p-3.5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
             <div className="flex items-center gap-2">
               <input
                 type="text"
@@ -880,12 +880,12 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder={isAr ? 'اسأل عن مواعيد اللجان، السلع، الروابط...' : 'Ask about committees, commodities, links...'}
-                className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
+                className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 sm:px-3.5 py-2 sm:py-2.5 text-base sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
               />
               <button
                 onClick={() => handleSendMessage()}
                 disabled={!inputValue.trim()}
-                className="p-2.5 sm:p-3 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-40 text-slate-950 transition-colors shadow-sm cursor-pointer flex-shrink-0"
+                className="p-2 sm:p-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-40 text-slate-950 transition-colors shadow-sm cursor-pointer flex-shrink-0"
               >
                 <Send className="w-4 h-4" />
               </button>
