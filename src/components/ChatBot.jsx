@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
-  X, 
+  X,
+  Copy,
+  Check, 
   Send, 
   Sparkles, 
   MapPin,
@@ -26,7 +28,17 @@ export default function ChatBot({ lang, theme }) {
   const isAr = lang === 'ar';
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
   const [isOpen, setIsOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [chatSize, setChatSize] = useState('normal'); // 'compact' | 'normal' | 'expanded'
+  const isExpanded = chatSize === 'expanded';
+  const [copiedId, setCopiedId] = useState(null);
+
+  const handleCopy = (id, text) => {
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    }
+  };
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -1099,7 +1111,7 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
           onClick={() => setIsOpen(!isOpen)}
           type="button"
           aria-label="Mostaqbal Misr AI Assistant"
-          className="relative w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-slate-950 border-2 border-amber-400 shadow-2xl shadow-amber-500/40 hover:shadow-amber-500/70 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center p-1.5 cursor-pointer group overflow-hidden"
+          className="relative w-13 h-13 sm:w-15 sm:h-15 rounded-full bg-slate-950 border-2 border-amber-400 shadow-2xl shadow-amber-500/40 hover:shadow-amber-500/70 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center p-1.5 cursor-pointer group overflow-hidden"
         >
           {/* Inner Golden Radial Sheen */}
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-emerald-500/10 rounded-full pointer-events-none"></div>
@@ -1116,74 +1128,117 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
       {/* Dimmed backdrop when expanded to center of page */}
       {isOpen && isExpanded && (
         <div 
-          onClick={() => setIsExpanded(false)}
+          onClick={() => setChatSize('normal')}
           className="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 transition-opacity duration-300 animate-fadeIn"
           aria-hidden="true"
         />
       )}
 
-      {/* Floating or Centered Expanded Chat Window */}
+      {/* Floating or Centered Dynamic Chat Window with 3 Size Modes */}
       {isOpen && (
-        <div role="dialog" aria-modal="true" aria-label={isAr ? "المساعد الذكي لبوابة الشراء الموحد" : "Smart Procurement Assistant"} className={`fixed z-50 border shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl transition-all duration-300 ease-out animate-fadeIn ${
-          isExpanded
-            ? 'inset-2 sm:inset-6 md:inset-10 lg:inset-14 max-w-5xl h-[calc(100dvh-16px)] sm:h-auto max-h-[94dvh] sm:max-h-[90vh] m-auto rounded-2xl sm:rounded-3xl'
-            : 'bottom-2 sm:bottom-24 left-2 right-2 sm:left-auto sm:right-6 w-auto sm:w-[440px] max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] h-[calc(100dvh-20px)] sm:h-[540px] max-h-[88dvh] sm:max-h-[82vh] rounded-2xl sm:rounded-3xl'
-        } ${
-          theme === 'dark' 
-            ? 'bg-slate-950/95 border-amber-500/30 text-slate-100 shadow-black/80' 
-            : 'bg-white/95 border-amber-400/40 text-slate-900 shadow-2xl'
-        }`}>
+        <div 
+          role="dialog" 
+          aria-modal="true" 
+          aria-label={isAr ? "المساعد الذكي لبوابة الشراء الموحد" : "Smart Procurement Assistant"} 
+          className={`fixed z-50 border shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl transition-all duration-300 ease-out animate-fadeIn ${
+            chatSize === 'compact'
+              ? 'bottom-3 sm:bottom-5 left-2 right-2 sm:left-auto sm:right-6 w-auto sm:w-[380px] h-[calc(100dvh-28px)] sm:h-[490px] max-h-[82dvh] sm:max-h-[76vh] rounded-2xl shadow-2xl'
+              : chatSize === 'expanded'
+                ? 'inset-2 sm:inset-6 md:inset-8 lg:inset-10 max-w-4xl w-auto h-[calc(100dvh-16px)] sm:h-[84vh] max-h-[800px] m-auto rounded-2xl sm:rounded-3xl shadow-2xl'
+                : 'bottom-3 sm:bottom-5 left-2 right-2 sm:left-auto sm:right-6 w-auto sm:w-[450px] max-w-[calc(100vw-20px)] h-[calc(100dvh-28px)] sm:h-[590px] max-h-[88dvh] sm:max-h-[82vh] rounded-2xl sm:rounded-3xl shadow-2xl'
+          } ${
+            theme === 'dark' 
+              ? 'bg-slate-950/95 border-amber-500/30 text-slate-100 shadow-black/80' 
+              : 'bg-white/95 border-amber-400/40 text-slate-900 shadow-2xl'
+          }`}
+        >
           
-          {/* Header */}
-          <div className="p-2.5 sm:p-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-amber-500/15 via-transparent to-amber-500/5">
-            <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-950 border border-amber-400/80 p-1 flex items-center justify-center shadow-md flex-shrink-0">
-                <img 
-                  src="/assets/foe-emblem-official.png" 
-                  alt="شعار الجهاز" 
-                  className="w-full h-full object-contain"
-                />
+          {/* Streamlined Sovereign Header */}
+          <div className="p-3 sm:p-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-amber-500/15 via-transparent to-amber-500/5 gap-2">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="relative flex-shrink-0">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-950 border border-amber-400/80 p-1 flex items-center justify-center shadow-md">
+                  <img 
+                    src="/assets/foe-emblem-official.png" 
+                    alt="شعار الجهاز" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-slate-950 animate-pulse"></span>
               </div>
+
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-xs sm:text-sm font-black text-slate-900 dark:text-white leading-tight whitespace-nowrap">
-                    {isAr ? 'المساعد الذكي للشراء الموحد' : 'Unified Procurement AI Assistant'}
+                  <h3 className="text-xs sm:text-sm font-black text-slate-900 dark:text-white leading-tight truncate">
+                    {isAr ? 'المساعد الذكي للشراء الموحد' : 'Unified Procurement AI'}
                   </h3>
-                  {isExpanded && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 hidden sm:inline-block">
-                      {isAr ? 'نافذة موسعة' : 'Expanded'}
-                    </span>
-                  )}
                 </div>
-                <span className="text-[10px] sm:text-[11px] text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1 mt-0.5 leading-none whitespace-nowrap">
-                  <span>{isAr ? 'إدارة الشراء الموحد — جهاز مستقبل مصر (FOE)' : 'Future of Egypt Agency (FOE)'}</span>
+                <span className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1 mt-0.5 leading-none truncate">
+                  <span>{isAr ? 'جهاز مستقبل مصر (FOE)' : 'Future of Egypt Agency'}</span>
+                  <span className="text-slate-400">•</span>
+                  <span className="text-emerald-500 font-bold">{isAr ? 'متصل الآن' : 'Online'}</span>
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
+            {/* Header Controls: Size Selector & Actions */}
+            <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
+              
+              {/* 3 Size Selector Pills */}
+              <div className="flex items-center gap-0.5 bg-slate-200/70 dark:bg-slate-900/90 p-0.5 rounded-lg border border-slate-300 dark:border-slate-800 text-[10px] font-bold">
+                <button
+                  type="button"
+                  onClick={() => setChatSize('compact')}
+                  className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
+                    chatSize === 'compact'
+                      ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
+                      : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                  title={isAr ? 'حجم مدمج (Compact)' : 'Compact View'}
+                >
+                  {isAr ? 'مدمج' : 'S'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setChatSize('normal')}
+                  className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
+                    chatSize === 'normal'
+                      ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
+                      : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                  title={isAr ? 'حجم قياسي (Normal)' : 'Normal View'}
+                >
+                  {isAr ? 'عادي' : 'M'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setChatSize('expanded')}
+                  className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
+                    chatSize === 'expanded'
+                      ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
+                      : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                  title={isAr ? 'تكبير النافذة (Expanded Studio)' : 'Expanded View'}
+                >
+                  {isAr ? 'مكبّر' : 'L'}
+                </button>
+              </div>
+
+              {/* Reset Conversation */}
               <button
                 onClick={handleResetChat}
                 type="button"
                 className="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                title={isAr ? 'بدء محادثة جديدة (إعادة ضبط)' : 'Restart Chat'}
+                title={isAr ? 'بدء محادثة جديدة' : 'Restart Chat'}
               >
-                <RotateCcw className="w-4 h-4" />
+                <RotateCcw className="w-3.5 h-3.5" />
               </button>
 
+              {/* Close */}
               <button
-                onClick={() => setIsExpanded(!isExpanded)}
+                onClick={() => { setIsOpen(false); setChatSize('normal'); }}
                 type="button"
-                className="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                title={isAr ? (isExpanded ? 'استعادة الحجم العادي' : 'تكبير وتوسيط المحادثة في الصفحة') : (isExpanded ? 'Restore Normal Size' : 'Expand to Center')}
-              >
-                {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-              </button>
-
-              <button
-                onClick={() => { setIsOpen(false); setIsExpanded(false); }}
-                type="button"
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 title={isAr ? 'إغلاق' : 'Close'}
               >
                 <X className="w-4 h-4" />
@@ -1191,194 +1246,89 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
             </div>
           </div>
 
-          {/* Social Media Quick Bar inside Bot Header */}
-          <div className="px-3 sm:px-4 py-1.5 border-b border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/70 flex items-center justify-between text-[11px] gap-2">
-            <span className="font-bold text-slate-600 dark:text-slate-400 flex items-center gap-1 min-w-0 truncate text-[10px] sm:text-[11px]">
-              <Share2 className="w-3 h-3 text-amber-500 flex-shrink-0" />
-              <span className="truncate">{isAr ? 'منصات التواصل الرسمية:' : 'Official Channels:'}</span>
-            </span>
-            <div className="flex items-center gap-1.5 flex-shrink-0">
-              <a 
-                href={info.facebookUrl} 
-                target="_blank" 
-                rel="noreferrer"
-                title="Facebook"
-                className="w-6 h-6 rounded-lg bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white transition-all flex items-center justify-center border border-[#1877F2]/25 shadow-2xs cursor-pointer"
-              >
-                <FacebookIcon className="w-3.5 h-3.5" />
-              </a>
-              <a 
-                href={info.linkedinUrl} 
-                target="_blank" 
-                rel="noreferrer"
-                title="LinkedIn"
-                className="w-6 h-6 rounded-lg bg-[#0A66C2]/10 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white transition-all flex items-center justify-center border border-[#0A66C2]/25 shadow-2xs cursor-pointer"
-              >
-                <LinkedInIcon className="w-3.5 h-3.5" />
-              </a>
-              <a 
-                href={info.twitterUrl} 
-                target="_blank" 
-                rel="noreferrer"
-                title="Twitter / X"
-                className="w-6 h-6 rounded-lg bg-slate-500/10 hover:bg-slate-950 hover:text-white dark:hover:bg-white dark:hover:text-slate-950 text-slate-800 dark:text-slate-200 transition-all flex items-center justify-center border border-slate-500/25 shadow-2xs cursor-pointer"
-              >
-                <XTwitterIcon className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-
           {/* Messages Container */}
-          <div className={`flex-1 p-3.5 sm:p-5 overflow-y-auto space-y-3.5 text-xs sm:text-sm ${
+          <div className={`flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-3.5 text-xs sm:text-sm chat-scroll ${
             theme === 'dark' ? 'bg-slate-950/70' : 'bg-slate-50/70'
           }`}>
             {messages.map((msg) => (
               <div
                 key={msg.id}
-                className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
+                className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} group`}
               >
                 <div
-                  className={`p-3 sm:p-3.5 rounded-2xl text-xs sm:text-[13px] leading-relaxed shadow-xs ${
+                  className={`p-3 sm:p-3.5 rounded-2xl text-xs sm:text-[13px] leading-relaxed relative ${
                     msg.sender === 'user'
-                      ? (isExpanded ? 'max-w-[75%]' : 'max-w-[85%]') + ' bg-amber-500 text-slate-950 font-bold rounded-br-none whitespace-pre-line'
-                      : (isExpanded ? 'max-w-[82%]' : 'max-w-[88%]') + (theme === 'dark' 
-                          ? ' bg-slate-900 border border-slate-800 text-slate-100 rounded-bl-none font-medium' 
-                          : ' bg-white border border-slate-200 text-slate-900 rounded-bl-none font-medium shadow-2xs')
+                      ? (isExpanded ? 'max-w-[70%]' : 'max-w-[85%]') + ' bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-slate-950 font-bold rounded-br-xs shadow-md shadow-amber-500/20 whitespace-pre-line'
+                      : (isExpanded ? 'max-w-[80%]' : 'max-w-[90%]') + (theme === 'dark' 
+                          ? ' bg-slate-900/90 border border-amber-500/20 text-slate-100 rounded-bl-xs font-medium shadow-sm shadow-black/40' 
+                          : ' bg-white border border-amber-400/30 text-slate-900 rounded-bl-xs font-medium shadow-sm')
                   }`}
                 >
+                  {/* Bot Message Header Pill & Copy Button */}
+                  {msg.sender === 'bot' && (
+                    <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-200/60 dark:border-slate-800 text-[10px] text-amber-600 dark:text-amber-400 font-bold">
+                      <div className="flex items-center gap-1.5">
+                        <Sparkles className="w-3 h-3 text-amber-500" />
+                        <span>{isAr ? 'رد المساعد الذكي المعتمد' : 'Official AI Response'}</span>
+                      </div>
+                      <button
+                        onClick={() => handleCopy(msg.id, msg.text)}
+                        type="button"
+                        className="p-1 rounded hover:bg-amber-500/10 text-slate-400 hover:text-amber-500 transition-colors cursor-pointer flex items-center gap-1"
+                        title={isAr ? 'نسخ النص' : 'Copy'}
+                      >
+                        {copiedId === msg.id ? (
+                          <>
+                            <Check className="w-3 h-3 text-emerald-500" />
+                            <span className="text-emerald-500 text-[9px]">{isAr ? 'تم النسخ' : 'Copied'}</span>
+                          </>
+                        ) : (
+                          <Copy className="w-3 h-3" />
+                        )}
+                      </button>
+                    </div>
+                  )}
+
                   <div className="whitespace-pre-line">{msg.text}</div>
 
-                  {/* Render Visual Location Card when msg.type === 'location' (No raw URL) */}
+                  {/* Render Visual Location Card with Direct 1-Click Google Maps Button */}
                   {msg.type === 'location' && (
                     <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
-                      <div className="p-3 sm:p-3.5 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent space-y-2.5 shadow-2xs">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold shadow-md shadow-amber-500/20 flex-shrink-0">
-                            <Building2 className="w-5 h-5" />
+                      <div className="p-3 rounded-xl border border-amber-500/30 bg-amber-500/10 flex items-start justify-between gap-3 shadow-xs">
+                        <div className="flex items-start gap-2.5">
+                          <div className="p-2 rounded-lg bg-amber-500 text-slate-950 font-bold flex-shrink-0 shadow-sm mt-0.5">
+                            <MapPin className="w-4 h-4" />
                           </div>
-                          <div className="min-w-0">
-                            <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
-                              {isAr ? 'مجمع توكانو التجاري — الدور الثالث' : 'Tucano Commercial Complex — Floor 3'}
+                          <div>
+                            <div className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
+                              <span>{isAr ? 'مجمع توكانو التجاري (Tucano Mall)' : 'Tucano Commercial Complex'}</span>
+                              <span className="text-[10px] font-semibold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-800 dark:text-amber-300">
+                                {isAr ? 'الدور 3' : 'Floor 3'}
+                              </span>
                             </div>
-                            <div className="text-[11px] text-amber-700 dark:text-amber-400 font-semibold truncate">
-                              {isAr ? 'المقر الإداري وقاعة لجان البت المركزية' : 'Headquarters & Central Committees Hall'}
-                            </div>
+                            <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5 leading-relaxed">
+                              {isAr 
+                                ? 'شارع يوسف عباس — مدينة نصر — القاهرة (قاعة اللجان المركزية وإدارة الشراء الموحد)' 
+                                : 'Yousef Abbas St. — Nasr City — Cairo (Central Committees Hall)'}
+                            </p>
                           </div>
-                        </div>
-
-                        <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-1.5 pt-1.5 border-t border-amber-500/20">
-                          <div className="flex items-start gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
-                            <span>{isAr ? 'شارع يوسف عباس — متفرع من طريق النصر — مدينة نصر — القاهرة' : 'Yousef Abbas St., off Al-Nasr Road, Nasr City, Cairo, Egypt'}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-                            <span>{isAr ? 'مواعيد الاستقبال: من الأحد إلى الخميس (09:00 ص – 05:00 م)' : 'Working Hours: Sun – Thu (09:00 AM – 05:00 PM)'}</span>
-                          </div>
-                        </div>
-
-                        {/* Styled One-Click Button for Google Maps */}
-                        <div className="pt-1">
-                          <a
-                            href="https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="w-full py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-amber-500/20 transition-all cursor-pointer group"
-                          >
-                            <MapPin className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                            <span>{isAr ? 'فتح الموقع عبر خرائط Google' : 'Open in Google Maps'}</span>
-                            <ExternalLink className="w-3.5 h-3.5 opacity-75" />
-                          </a>
                         </div>
                       </div>
+
+                      {/* Direct 1-Click Google Maps Button */}
+                      <a
+                        href="https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full py-2 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-500/20 cursor-pointer"
+                      >
+                        <MapPin className="w-3.5 h-3.5" />
+                        <span>{isAr ? 'فتح موقع توكانو مول على خرائط Google ↗' : 'Open Location in Google Maps ↗'}</span>
+                      </a>
                     </div>
                   )}
 
-                  {/* Render Visual Social Media Link Cards if message type is social_links */}
-                  {msg.type === 'social_links' && (
-                    <div className={`mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 ${
-                      isExpanded ? 'grid grid-cols-1 sm:grid-cols-3 gap-2.5' : 'space-y-2'
-                    }`}>
-                      
-                      {/* Facebook Card */}
-                      <a 
-                        href={info.facebookUrl} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="p-3 rounded-2xl border border-blue-500/30 bg-blue-500/5 hover:bg-blue-500/15 hover:border-blue-500 transition-all flex items-center justify-between gap-3 group text-slate-900 dark:text-white shadow-2xs"
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-9 h-9 rounded-xl bg-[#1877F2] text-white flex items-center justify-center shadow-md shadow-[#1877F2]/25 flex-shrink-0 group-hover:scale-105 transition-transform">
-                            <FacebookIcon className="w-5 h-5" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                              {isAr ? 'الصفحة الرسمية على فيسبوك' : 'Official Facebook Page'}
-                            </div>
-                            <div className="text-[11px] text-blue-600 dark:text-blue-400 font-mono font-medium truncate mt-0.5">
-                              @foe.eg
-                            </div>
-                          </div>
-                        </div>
-                        <div className="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </div>
-                      </a>
-
-                      {/* LinkedIn Card */}
-                      <a 
-                        href={info.linkedinUrl} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="p-3 rounded-2xl border border-sky-500/30 bg-sky-500/5 hover:bg-sky-500/15 hover:border-sky-500 transition-all flex items-center justify-between gap-3 group text-slate-900 dark:text-white shadow-2xs"
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-9 h-9 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center shadow-md shadow-[#0A66C2]/25 flex-shrink-0 group-hover:scale-105 transition-transform">
-                            <LinkedInIcon className="w-5 h-5" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                              {isAr ? 'المنصة الرسمية على لينكد إن' : 'Official LinkedIn Profile'}
-                            </div>
-                            <div className="text-[11px] text-sky-600 dark:text-sky-400 font-mono font-medium truncate mt-0.5">
-                              Future of Egypt Agency
-                            </div>
-                          </div>
-                        </div>
-                        <div className="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center flex-shrink-0 group-hover:bg-[#0A66C2] group-hover:text-white transition-colors">
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </div>
-                      </a>
-
-                      {/* Twitter / X Card */}
-                      <a 
-                        href={info.twitterUrl} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="p-3 rounded-2xl border border-slate-300 dark:border-slate-700/80 bg-slate-500/5 hover:bg-slate-500/15 hover:border-slate-800 dark:hover:border-slate-400 transition-all flex items-center justify-between gap-3 group text-slate-900 dark:text-white shadow-2xs"
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-9 h-9 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center shadow-md shadow-black/25 flex-shrink-0 group-hover:scale-105 transition-transform">
-                            <XTwitterIcon className="w-4 h-4" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                              {isAr ? 'الحساب الرسمي على منصة X (تويتر)' : 'Official X (Twitter) Account'}
-                            </div>
-                            <div className="text-[11px] text-slate-600 dark:text-slate-400 font-mono font-medium truncate mt-0.5">
-                              @futureofegypt_
-                            </div>
-                          </div>
-                        </div>
-                        <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-950 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-colors">
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </div>
-                      </a>
-
-                    </div>
-                  )}
-
-                  {/* Render Visual Committees Schedule Cards with Lucide Icons (Zero Emojis) */}
+                  {/* Render Visual Committees Schedule Cards with Lucide Icons */}
                   {msg.type === 'committees' && (
                     <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
                       <div className="flex items-center gap-2 pb-1 text-xs font-bold text-slate-900 dark:text-white">
@@ -1386,9 +1336,9 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                         <span>{isAr ? 'جدول ومواعيد لجان البت والتوريد المعتمدة:' : 'Official Procurement Committees Schedule:'}</span>
                       </div>
 
-                      <div className={`grid ${isExpanded ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1'} gap-2`}>
+                      <div className={`grid ${chatSize === 'expanded' ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1'} gap-2`}>
                         {/* Sunday Rice */}
-                        <div className="p-3 rounded-xl border border-amber-500/25 bg-amber-500/5 space-y-1">
+                        <div className="p-2.5 sm:p-3 rounded-xl border border-amber-500/30 bg-amber-500/5 space-y-1">
                           <div className="flex items-center gap-1.5 font-bold text-xs text-amber-700 dark:text-amber-400">
                             <Wheat className="w-4 h-4 text-amber-500 flex-shrink-0" />
                             <span>{isAr ? '1. لجنة الأرز (كل أحد)' : '1. Rice Committee (Sundays)'}</span>
@@ -1408,7 +1358,7 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                         </div>
 
                         {/* Tuesday Live Cattle */}
-                        <div className="p-3 rounded-xl border border-rose-500/25 bg-rose-500/5 space-y-1">
+                        <div className="p-2.5 sm:p-3 rounded-xl border border-rose-500/30 bg-rose-500/5 space-y-1">
                           <div className="flex items-center gap-1.5 font-bold text-xs text-rose-700 dark:text-rose-400">
                             <Award className="w-4 h-4 text-rose-500 flex-shrink-0" />
                             <span>{isAr ? '2. لجنة الرؤوس الحية (الثلاثاء)' : '2. Live Cattle Committee (Tue)'}</span>
@@ -1428,7 +1378,7 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                         </div>
 
                         {/* Monday Shrimp */}
-                        <div className="p-3 rounded-xl border border-emerald-500/25 bg-emerald-500/5 space-y-1">
+                        <div className="p-2.5 sm:p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/5 space-y-1">
                           <div className="flex items-center gap-1.5 font-bold text-xs text-emerald-700 dark:text-emerald-400">
                             <Fish className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                             <span>{isAr ? '3. لجنة الجمبري (الاثنين)' : '3. Shrimp Committee (Mondays)'}</span>
@@ -1462,31 +1412,51 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                     </div>
                   )}
 
-                  {/* Suggested Topics in the Welcome Message (Shown in Expanded Mode Only to avoid traffic) */}
-                  {msg.id === 1 && isExpanded && (
-                    <div className="mt-3.5 pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
-                      <div className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        <span>{isAr ? 'الاستفسارات الشائعة (اضغط للسؤال فوراً):' : 'Suggested Topics (Click to ask):'}</span>
+                  {/* Interactive Quick Action Chips inside the Initial Welcome Message */}
+                  {msg.id === 1 && (
+                    <div className="mt-3 pt-2.5 border-t border-slate-200/80 dark:border-slate-800 space-y-2">
+                      <div className="text-[11px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                        <span>{isAr ? 'خدمات الاستعلام الفوري (اضغط للسؤال):' : 'Instant Inquiries (Click to ask):'}</span>
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 pt-0.5">
-                        {activePrompts.slice(0, 6).map((promptText, pIdx) => (
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                        {[
+                          { text: isAr ? 'ما هي مواعيد اللجان (الأرز، الرؤوس الحية، والجمبري)؟' : 'Committees Schedule', label: isAr ? '📅 مواعيد وتواريخ اللجان المعتمدة' : '📅 Committees Schedule' },
+                          { text: isAr ? 'أين يقع المقر الرئيسي للإدارة؟' : 'Location of Tucano Mall', label: isAr ? '📍 موقع المقر وقاعة اللجان بتوكانو مول' : '📍 Headquarters & Central Hall' },
+                          { text: isAr ? 'ما هي مواعيد وساعات العمل الرسمية؟' : 'Official Working Hours', label: isAr ? '⏰ ساعات ومواعيد الدوام الرسمي' : '⏰ Official Working Hours' },
+                          { text: isAr ? 'ما هو رقم الخط الساخن وقنوات التواصل؟' : 'Direct Hotline 19842', label: isAr ? '📞 الخط الساخن الموحد (19842)' : '📞 Official Hotline 19842' },
+                        ].map((item, qIdx) => (
                           <button
-                            key={pIdx}
-                            onClick={() => handleSendMessage(promptText)}
+                            key={qIdx}
+                            onClick={() => handleSendMessage(item.text)}
                             type="button"
-                            className={`w-full ${isAr ? 'text-right' : 'text-left'} px-3 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer flex items-center justify-between gap-2 group ${
+                            className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer flex items-center justify-between text-right ${
                               theme === 'dark'
-                                ? 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-amber-500/60 hover:bg-amber-500/10 hover:text-amber-300'
-                                : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-900'
+                                ? 'bg-slate-950/80 border-slate-800 text-slate-200 hover:border-amber-500/60 hover:bg-amber-500/10 hover:text-amber-300'
+                                : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-950 shadow-2xs'
                             }`}
                           >
-                            <span className="leading-snug">{promptText}</span>
-                            <span className="text-amber-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform flex-shrink-0 text-xs">
-                              {isAr ? '←' : '→'}
-                            </span>
+                            <span>{item.label}</span>
+                            <span className="text-amber-500 text-xs">←</span>
                           </button>
                         ))}
+                      </div>
+
+                      {/* Official Channels Micro-Strip inside Welcome Message */}
+                      <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500">
+                        <span className="font-semibold">{isAr ? 'القنوات الرسمية المعتمدة:' : 'Official Channels:'}</span>
+                        <div className="flex items-center gap-1.5">
+                          <a href={info.facebookUrl} target="_blank" rel="noreferrer" className="w-5 h-5 rounded-md bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white flex items-center justify-center transition-colors">
+                            <FacebookIcon className="w-3 h-3" />
+                          </a>
+                          <a href={info.linkedinUrl} target="_blank" rel="noreferrer" className="w-5 h-5 rounded-md bg-[#0A66C2]/10 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white flex items-center justify-center transition-colors">
+                            <LinkedInIcon className="w-3 h-3" />
+                          </a>
+                          <a href={info.twitterUrl} target="_blank" rel="noreferrer" className="w-5 h-5 rounded-md bg-slate-500/10 hover:bg-slate-900 text-slate-600 hover:text-white dark:hover:bg-white dark:hover:text-slate-950 flex items-center justify-center transition-colors">
+                            <XTwitterIcon className="w-2.5 h-2.5" />
+                          </a>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -1499,20 +1469,20 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
             ))}
 
             {isTyping && (
-              <div className="flex items-center gap-1 p-2.5 rounded-2xl bg-slate-200 dark:bg-slate-800 w-14">
-                <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce"></div>
-                <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce [animation-delay:0.2s]"></div>
-                <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce [animation-delay:0.4s]"></div>
+              <div className="flex items-center gap-1.5 p-2.5 rounded-2xl bg-slate-200/80 dark:bg-slate-800/80 w-16 shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce [animation-delay:0.4s]"></span>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Questions Pills - Primary streamlined suggestion bar */}
-          <div className="px-3 sm:px-4 py-2 border-t border-slate-200 dark:border-slate-800 bg-slate-50/95 dark:bg-slate-950/95">
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 no-scrollbar">
+          {/* Quick Questions Pills - Streamlined horizontal bar with ZERO visible scrollbar */}
+          <div className="px-3 sm:px-4 py-2 border-t border-slate-200 dark:border-slate-800 bg-slate-50/95 dark:bg-slate-950/95 relative">
+            <div className="flex items-center gap-1.5 overflow-x-auto py-0.5 no-scrollbar">
               <span className="text-[10px] font-black text-amber-600 dark:text-amber-400 flex items-center gap-1 flex-shrink-0">
-                <Sparkles className="w-3.5 h-3.5 flex-shrink-0 text-amber-500" />
+                <Sparkles className="w-3 h-3 flex-shrink-0 text-amber-500" />
                 <span>{isAr ? 'أسئلة مقترحة:' : 'Quick:'}</span>
               </span>
               {activePrompts.map((p, idx) => (
@@ -1520,7 +1490,7 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                   key={idx}
                   onClick={() => handleSendMessage(p)}
                   type="button"
-                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all flex-shrink-0 cursor-pointer shadow-2xs ${
+                  className={`whitespace-nowrap px-2.5 py-1 rounded-full text-[11px] font-bold border transition-all flex-shrink-0 cursor-pointer shadow-2xs hover:scale-105 active:scale-95 ${
                     theme === 'dark'
                       ? 'bg-slate-900 border-slate-700/80 text-slate-200 hover:border-amber-400 hover:bg-amber-500/10 hover:text-amber-300'
                       : 'bg-white border-amber-500/30 text-slate-800 hover:border-amber-500 hover:bg-amber-50 hover:text-amber-950'
@@ -1532,26 +1502,40 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
             </div>
           </div>
 
-          {/* Input Box */}
-          <div className="p-2.5 sm:p-3.5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-            <div className="flex items-center gap-2">
+          {/* Modern Capsule Input Box */}
+          <div className="p-2.5 sm:p-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95">
+            <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-2xl px-3 py-1.5 focus-within:border-amber-500 focus-within:ring-2 focus-within:ring-amber-500/20 transition-all shadow-inner">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder={isAr ? 'اسأل عن مواعيد اللجان، السلع، الروابط...' : 'Ask about committees, commodities, links...'}
-                className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 sm:px-3.5 py-2 sm:py-2.5 text-base sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
+                className="flex-1 bg-transparent border-0 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none py-1"
               />
+
+              {inputValue.trim() && (
+                <button
+                  type="button"
+                  onClick={() => setInputValue('')}
+                  className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-0.5 rounded cursor-pointer"
+                  title={isAr ? 'مسح النص' : 'Clear text'}
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+
               <button
                 onClick={() => handleSendMessage()}
                 disabled={!inputValue.trim()}
-                className="p-2 sm:p-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-40 text-slate-950 transition-colors shadow-sm cursor-pointer flex-shrink-0"
+                className="w-8 h-8 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 disabled:opacity-40 text-slate-950 font-bold transition-all shadow-sm flex items-center justify-center cursor-pointer flex-shrink-0 hover:scale-105 active:scale-95"
+                title={isAr ? 'إرسال الرسالة' : 'Send Message'}
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
+
         </div>
       )}
     </>
