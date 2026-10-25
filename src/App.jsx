@@ -119,8 +119,6 @@ export default function App() {
         setLang={setLang}
         theme={theme}
         setTheme={setTheme}
-        zoomScale={zoomScale}
-        setZoomScale={setZoomScale}
         onOpenSearch={() => setIsSearchOpen(true)}
         activeSection={activeSection}
         setActiveSection={setActiveSection}

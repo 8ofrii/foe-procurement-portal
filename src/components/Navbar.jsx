@@ -6,8 +6,7 @@ import {
   Check,
   ChevronDown,
   Globe,
-  SlidersHorizontal
-} from 'lucide-react';
+  } from 'lucide-react';
 import { PORTAL_INFO, NAV_LINKS } from '../data/portalData';
 import { NAV_OFFSET } from '../constants';
 
@@ -82,10 +81,8 @@ export default function Navbar({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const [sizeMenuOpen, setSizeMenuOpen] = useState(false);
-  const langDropdownRef = useRef(null);
-  const sizeDropdownRef = useRef(null);
-
+    const langDropdownRef = useRef(null);
+  
   const isAr = lang === 'ar';
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
   const navItems = NAV_LINKS[lang] || NAV_LINKS.ar;
@@ -105,10 +102,7 @@ export default function Navbar({
       if (langDropdownRef.current && !langDropdownRef.current.contains(event.target)) {
         setLangMenuOpen(false);
       }
-      if (sizeDropdownRef.current && !sizeDropdownRef.current.contains(event.target)) {
-        setSizeMenuOpen(false);
-      }
-    };
+          };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -123,16 +117,7 @@ export default function Navbar({
 
   const currentLangObj = languages.find(l => l.code === lang) || languages[0];
 
-  // Size options: 90% is the default Main Level across all languages
-  const sizeOptions = [
-    { value: '0.85', percent: 85, label: { ar: '85% (مدمج)', en: '85% (Compact)', pl: '85% (Kompakt)', uk: '85% (Компакт)' } },
-    { value: '0.9', percent: 90, isMain: true, label: { ar: '90% (الرئيسي) ★', en: '90% (Main Level) ★', pl: '90% (Główny) ★', uk: '90% (Основний) ★' } },
-    { value: '1', percent: 100, label: { ar: '100% (القياسي)', en: '100% (Standard)', pl: '100% (Standard)', uk: '100% (Стандарт)' } },
-  ];
-
-  const zoomPercent = Math.round(parseFloat(zoomScale || '0.9') * 100);
-
-  const scrollTo = (id) => {
+    const scrollTo = (id) => {
     setMobileMenuOpen(false);
     setActiveSection(id);
     const element = document.getElementById(id);
@@ -313,83 +298,6 @@ export default function Navbar({
                         }`}>
                           {l.shortCode}
                         </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Explicit Display Size Option - Default 90% (Main Level) Uniform Across All Languages */}
-          <div className="relative" ref={sizeDropdownRef}>
-            <button
-              onClick={() => {
-                setSizeMenuOpen(!sizeMenuOpen);
-                setLangMenuOpen(false);
-              }}
-              type="button"
-              aria-label="Display Size Option"
-              title={isAr ? "خيارات الحجم ومستوى العرض (الرئيسي 90%)" : "Display Size Option (Default 90%)"}
-              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl border text-xs font-bold transition-all duration-200 cursor-pointer shadow-xs select-none ${
-                sizeMenuOpen
-                  ? (theme === 'dark'
-                      ? 'bg-slate-800/95 border-amber-500/80 text-amber-400 ring-2 ring-amber-500/20'
-                      : 'bg-amber-50 border-amber-500 text-amber-900 ring-2 ring-amber-500/20')
-                  : (theme === 'dark'
-                      ? 'bg-slate-900/90 border-slate-700/80 text-slate-300 hover:text-white hover:border-amber-400/80 hover:bg-slate-800/80'
-                      : 'bg-white border-slate-300 text-slate-700 hover:border-amber-500 hover:bg-slate-50')
-              }`}
-            >
-              <span className="font-mono text-[11px] font-black tracking-tight">{zoomPercent}%</span>
-              <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${sizeMenuOpen ? 'rotate-180 text-amber-500' : ''}`} />
-            </button>
-
-            {/* Size Options Dropdown */}
-            {sizeMenuOpen && (
-              <div
-                className={`absolute top-full mt-2 w-48 rounded-2xl border shadow-2xl p-1.5 z-50 animate-fadeIn backdrop-blur-xl ${
-                  theme === 'dark'
-                    ? 'bg-slate-950/95 border-slate-800 text-white shadow-black/80 ring-1 ring-white/5'
-                    : 'bg-white/98 border-slate-200 text-slate-900 shadow-xl ring-1 ring-black/5'
-                }`}
-                style={{
-                  [isAr ? 'left' : 'right']: 0
-                }}
-              >
-                <div className="px-2.5 pt-1.5 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 mb-1">
-                  <span>{isAr ? 'حجم العرض للغات' : 'Display Size'}</span>
-                  <span className="text-amber-500 text-[10px] font-mono font-bold">90% {isAr ? 'الرئيسي' : 'Main'}</span>
-                </div>
-                <div className="flex flex-col gap-1">
-                  {sizeOptions.map((opt) => {
-                    const isCurrent = (zoomScale || '0.9') === opt.value;
-                    return (
-                      <button
-                        key={opt.value}
-                        onClick={() => {
-                          if (setZoomScale) setZoomScale(opt.value);
-                          setSizeMenuOpen(false);
-                        }}
-                        type="button"
-                        className={`w-full py-1.5 px-2.5 rounded-xl text-xs flex items-center justify-between transition-all cursor-pointer ${
-                          isCurrent
-                            ? (theme === 'dark'
-                                ? 'bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40 shadow-xs'
-                                : 'bg-amber-50 text-amber-900 font-bold border border-amber-300 shadow-xs')
-                            : (theme === 'dark'
-                                ? 'text-slate-300 hover:bg-slate-900 hover:text-white'
-                                : 'text-slate-700 hover:bg-slate-100 hover:text-slate-950')
-                        }`}
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center ${isCurrent ? 'text-amber-500' : 'text-transparent'}`}>
-                            {isCurrent && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                          </span>
-                          <span className={opt.isMain ? 'font-black text-amber-500 dark:text-amber-400' : 'font-medium'}>
-                            {opt.label[lang] || opt.label.ar}
-                          </span>
-                        </div>
                       </button>
                     );
                   })}

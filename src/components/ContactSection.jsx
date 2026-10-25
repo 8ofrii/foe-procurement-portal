@@ -16,6 +16,7 @@ export default function ContactSection({ lang, theme }) {
   const isAr = lang === 'ar';
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
   const [openFaq, setOpenFaq] = useState(0);
+  const [mapProvider, setMapProvider] = useState('google');
 
   return (
     <section id="contact" className={`py-20 relative border-t transition-colors duration-300 ${
@@ -142,12 +143,12 @@ export default function ContactSection({ lang, theme }) {
           </div>
         </div>
 
-        {/* Interactive Google Maps Card for Tucano Mall Floor 3 */}
+        {/* Interactive Maps Card for Tucano Mall Floor 3 */}
         <div className={`mb-16 rounded-3xl border overflow-hidden shadow-2xl relative transition-all ${
           theme === 'dark' ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200'
         }`}>
           {/* Header Bar */}
-          <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div className="flex items-start sm:items-center gap-3">
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold shadow-md shadow-amber-500/20 flex-shrink-0 mt-0.5 sm:mt-0">
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -158,45 +159,102 @@ export default function ContactSection({ lang, theme }) {
                 </h3>
                 <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
                   {isAr 
-                    ? 'شارع يوسف عباس — مدينة نصر — القاهرة (بالقرب من مستشفى دار الفؤاد وجامعة الأزهر)'
-                    : 'Yousef Abbas St., Nasr City, Cairo (near Dar Al Fouad Hospital & Al-Azhar University)'}
+                    ? 'شارع يوسف عباس — مدينة نصر — القاهرة (بالقرب من مستشفى دار الفؤاد ونادي الزهور وجامعة الأزهر)'
+                    : 'Yousef Abbas St., Nasr City, Cairo (near Dar Al Fouad Hospital, Al-Zohour Club & Al-Azhar University)'}
                 </p>
               </div>
             </div>
 
-            <a
-              href={info.mapsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all shadow-md shadow-amber-500/20 flex-shrink-0"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              <span>{isAr ? 'فتح في خرائط Google (Google Maps) ↗' : 'Open in Google Maps ↗'}</span>
-            </a>
+            <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto justify-start lg:justify-end">
+              {/* Map Provider Selector */}
+              <div className={`p-1 rounded-xl border flex items-center text-xs font-bold ${
+                theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-100 border-slate-200'
+              }`}>
+                <button
+                  type="button"
+                  onClick={() => setMapProvider('google')}
+                  className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    mapProvider === 'google'
+                      ? 'bg-amber-500 text-slate-950 shadow-sm font-black'
+                      : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  Google Maps
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMapProvider('osm')}
+                  className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    mapProvider === 'osm'
+                      ? 'bg-amber-500 text-slate-950 shadow-sm font-black'
+                      : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  OpenStreetMap
+                </button>
+              </div>
+
+              {/* Direct Link to Google Maps App / Web */}
+              <a
+                href={info.mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all shadow-md shadow-amber-500/20 flex-shrink-0 cursor-pointer"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>{isAr ? 'فتح في خرائط Google ↗' : 'Open in Google Maps ↗'}</span>
+              </a>
+            </div>
           </div>
 
           {/* Map Embed Container */}
-          <div className="relative w-full h-64 sm:h-80 md:h-96 bg-slate-950">
-            <iframe
-              title="Tucano Mall Google Maps Location"
-              src="https://maps.google.com/maps?q=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo&t=&z=16&ie=UTF8&iwloc=&output=embed"
-              className="w-full h-full border-0"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+          <div className="relative w-full h-72 sm:h-96 md:h-[420px] bg-slate-950">
+            {mapProvider === 'google' ? (
+              <iframe
+                title="Tucano Mall Google Maps Official Embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.3087222713177!2d31.3174413!3d30.0657908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e5a5a5a5a5b%3A0x0!2zMzDCsDAzJzU2LjkiTiAzMcKwMTknMTAuNyJF!5e0!3m2!1sar!2seg!4v1710000000000!5m2!1sar!2seg"
+                className="w-full h-full border-0"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            ) : (
+              <iframe
+                title="Tucano Mall OpenStreetMap"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=31.3140%2C30.0620%2C31.3250%2C30.0690&layer=mapnik&marker=30.06579%2C31.31963"
+                className="w-full h-full border-0"
+                loading="lazy"
+              ></iframe>
+            )}
 
             {/* Floating Info Overlay Pill */}
-            <div className="absolute bottom-4 right-4 max-w-sm p-4 rounded-2xl border backdrop-blur-md shadow-xl bg-slate-950/90 border-amber-500/40 text-white text-xs space-y-1 hidden sm:block">
-              <div className="font-bold text-amber-400 flex items-center gap-1.5">
-                <Building className="w-3.5 h-3.5" />
-                <span>{isAr ? 'توكانو مول — الدور الثالث' : 'Tucano Mall — Floor 3'}</span>
+            <div className="absolute bottom-4 right-4 max-w-sm p-4 rounded-2xl border backdrop-blur-md shadow-xl bg-slate-950/90 border-amber-500/40 text-white text-xs space-y-1.5 hidden sm:block pointer-events-auto">
+              <div className="font-bold text-amber-400 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <Building className="w-3.5 h-3.5" />
+                  <span>{isAr ? 'توكانو مول — الدور الثالث' : 'Tucano Mall — Floor 3'}</span>
+                </div>
+                <span className="font-mono text-[10px] text-amber-300/80 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">
+                  FOE HQ
+                </span>
               </div>
-              <p className="text-[11px] text-slate-300">
+              <p className="text-[11px] text-slate-300 leading-relaxed">
                 {isAr 
-                  ? 'قاعة اللجان المركزية وإدارة الشراء الموحد — جهاز مستقبل مصر' 
-                  : 'Central Committees Hall & Unified Procurement Directorate — FOE'}
+                  ? 'قاعة اللجان المركزية وإدارة الشراء الموحد — جهاز مستقبل مصر للتنمية المستدامة' 
+                  : 'Central Committees Hall & Unified Strategic Procurement Directorate — FOE'}
               </p>
+              <div className="pt-1 flex items-center justify-between text-[10px] text-slate-400 border-t border-slate-800">
+                <span className="font-mono">30°03'56.8"N 31°19'10.7"E</span>
+                <a
+                  href={info.mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-amber-400 hover:underline font-bold inline-flex items-center gap-1"
+                >
+                  <span>{isAr ? 'الاتجاهات' : 'Get Directions'}</span>
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
