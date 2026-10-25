@@ -226,26 +226,26 @@ function handleLocationQuery(q, lang, info, isAr) {
       if (lang === 'en') {
         return `Official Main Headquarters of Mostaqbal Misr Unified Strategic Procurement Directorate:
 • Location: Tucano Commercial Complex — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
-• Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+• Google Maps: https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh
 • Direct Hotline: 19842
 • Email: procurement@foe.gov.eg
 • Working Hours: Sunday through Thursday (09:00 AM – 05:00 PM).`;
       } else if (lang === 'pl') {
         return `Oficjalna Główna Siedziba Dyrekcji ds. Zakupów:
 • Adres: Tucano Commercial Complex — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
-• Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+• Google Maps: https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh
 • Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg
 • Godziny pracy: Niedziela – Czwartek (09:00 – 17:00).`;
       } else if (lang === 'uk') {
         return `Офіційний головний офіс Директорату закупівель:
 • Адреса: Tucano Commercial Complex — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
-• Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+• Google Maps: https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh
 • Гаряча лінія: +20 19842 | Email: procurement@foe.gov.eg
 • Години роботи: Неділя – Четвер (09:00 – 17:00).`;
       } else {
         return `المقر الرسمي الرئيسي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
 • العنوان: توكانو مول التجاري — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
-• رابط خرائط Google: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+• رابط خرائط Google: https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh
 • الخط الساخن: 19842
 • البريد الرسمي: procurement@foe.gov.eg
 • أوقات استقبال الموردين والمراجعين: من الأحد إلى الخميس (09:00 صباحاً – 05:00 مساءً).`;

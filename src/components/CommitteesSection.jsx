@@ -96,7 +96,7 @@ export default function CommitteesSection({ lang, theme }) {
             </span>
 
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo"
+              href="https://www.google.com/maps/place/Tucano+Commercial+Complex/@30.0608796,31.3200135,17z/data=!3m1!4b1!4m6!3m5!1s0x14583f5f7da2e537:0x71310f58dac3832f!8m2!3d30.060875!4d31.3225884!16s%2Fg%2F11ry5fvchh"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shadow-sm flex-shrink-0"

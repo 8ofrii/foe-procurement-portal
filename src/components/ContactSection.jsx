@@ -212,7 +212,7 @@ export default function ContactSection({ lang, theme }) {
             {mapProvider === 'google' ? (
               <iframe
                 title="Tucano Mall Google Maps Embed"
-                src="https://maps.google.com/maps?q=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.5186064016597!2d31.3200135!3d30.0608796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f5f7da2e537%3A0x71310f58dac3832f!2sTucano%20Commercial%20Complex!5e0!3m2!1sar!2seg!4v1710000000000!5m2!1sar!2seg"
                 className="w-full h-full border-0"
                 allowFullScreen=""
                 loading="lazy"
@@ -221,7 +221,7 @@ export default function ContactSection({ lang, theme }) {
             ) : (
               <iframe
                 title="Tucano Mall OpenStreetMap"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=31.3140%2C30.0620%2C31.3250%2C30.0690&layer=mapnik&marker=30.0652%2C31.3205"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=31.3170%2C30.0560%2C31.3280%2C30.0650&layer=mapnik&marker=30.060875%2C31.3225884"
                 className="w-full h-full border-0"
                 loading="lazy"
               ></iframe>
