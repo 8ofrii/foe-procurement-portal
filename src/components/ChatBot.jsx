@@ -168,35 +168,47 @@ function handleCommitteesQuery(q, lang, info, isAr) {
 
   if (isCommitteeQuery) {
     let specificNote = '';
-    if (isRice && !isCattle && !isShrimp) {
+    const isDatesQuery = q.includes('تاريخ') || q.includes('تواريخ') || q.includes('تاريخ اللجان') || q.includes('تواريخ اللجان') || q.includes('date') || q.includes('dates');
+
+    if (isDatesQuery) {
       if (lang === 'en') {
-        specificNote = '\n\n📌 Regarding Rice Committee: Convenes weekly every Sunday at 02:00 PM in the Central Bidding Hall (Tucano Mall — Floor 3). Adjudication priority is strictly by physical sign-in order in the hall.';
+        specificNote = '\n\n📅 Upcoming Confirmed Committee Dates (November 2026):\n• Sunday, Nov 1, 2026 (02:00 PM): Rice Committee.\n• Monday, Nov 2, 2026 (02:00 PM): Shrimp Committee.\n• Sunday, Nov 8, 2026 (02:00 PM): Rice Committee.\n• Tuesday, Nov 10, 2026 (02:00 PM): Live Cattle Committee.\nVenue: Tucano Commercial Complex — Floor 3 — Central Sessions Hall.';
       } else if (lang === 'pl') {
-        specificNote = '\n\n📌 Komisja ds. Ryżu: Obraduje w każdą niedzielę o godz. 14:00 w Tucano Mall (3. piętro). Pierwszeństwo według kolejności rejestracji na sali.';
+        specificNote = '\n\n📅 Najbliższe Zatwierdzone Terminy Posiedzeń (Listopad 2026):\n• Niedziela, 1 lis 2026 (14:00): Komisja ds. Ryżu.\n• Poniedziałek, 2 lis 2026 (14:00): Komisja ds. Krewetek.\n• Wtorek, 10 lis 2026 (14:00): Komisja ds. Żywego Bydła.';
       } else if (lang === 'uk') {
-        specificNote = '\n\n📌 Комісія із закупівель рису: Засідає щонеділі о 14:00 у залі торгів Tucano Mall (3-й поверх). Пріоритет за чергою фактичної реєстрації.';
+        specificNote = '\n\n📅 Найближчі Затверджені Дати Комісій (Листопад 2026):\n• Неділя, 1 лис 2026 (14:00): Комісія з рису.\n• Понеділок, 2 лис 2026 (14:00): Комісія з креветок.\n• Вівторок, 10 лис 2026 (14:00): Комісія з живої худоби.';
       } else {
-        specificNote = '\n\n📌 بخصوص لجنة الأرز: تنعقد أسبوعياً كل يوم أحد في تمام الساعة 02:00 ظهراً بقاعة اللجان المركزية (توكانو مول — الدور الثالث)، وتطبق قاعدة أسبقية التواجد الفعلي بالقاعة للتسجيل وترتيب الترسية.';
+        specificNote = '\n\n📅 جدول التواريخ المعتمدة للجلسات القادمة (شهر نوفمبر 2026):\n• الأحد 1 نوفمبر 2026 (02:00 ظهراً): لجنة الأرز (جلسة أسبوعية ثابتة).\n• الاثنين 2 نوفمبر 2026 (02:00 ظهراً): لجنة الجمبري (جلسة دورية تبادلية).\n• الأحد 8 نوفمبر 2026 (02:00 ظهراً): لجنة الأرز.\n• الثلاثاء 10 نوفمبر 2026 (02:00 ظهراً): لجنة الرؤوس الحية (المواشي).\nالمقر: مجمع توكانو التجاري — الدور الثالث — قاعة اللجان المركزية.';
+      }
+    } else if (isRice && !isCattle && !isShrimp) {
+      if (lang === 'en') {
+        specificNote = '\n\n📌 Regarding Rice Committee: Convenes weekly every Sunday at 02:00 PM in the Central Bidding Hall (Tucano Mall — Floor 3). Next Session: Sunday, Nov 1, 2026. Adjudication priority is strictly by physical sign-in order in the hall.';
+      } else if (lang === 'pl') {
+        specificNote = '\n\n📌 Komisja ds. Ryżu: Obraduje w każdą niedzielę o godz. 14:00 w Tucano Mall (3. piętro). Najbliższa sesja: 1 lis 2026.';
+      } else if (lang === 'uk') {
+        specificNote = '\n\n📌 Комісія із закупівель рису: Засідає щонеділі о 14:00 у залі торгів Tucano Mall (3-й поверх). Найближча дата: 1 лис 2026.';
+      } else {
+        specificNote = '\n\n📌 بخصوص لجنة الأرز: تنعقد أسبوعياً كل يوم أحد في تمام الساعة 02:00 ظهراً بقاعة اللجان المركزية (توكانو مول — الدور الثالث). الجلسة القادمة: الأحد، 1 نوفمبر 2026. وتطبق قاعدة أسبقية التواجد الفعلي بالقاعة للتسجيل وترتيب الترسية.';
       }
     } else if (isCattle && !isRice && !isShrimp) {
       if (lang === 'en') {
-        specificNote = '\n\n📌 Regarding Live Cattle (Livestock) Committee: Convenes Tuesdays at 02:00 PM on a bi-weekly alternating cycle with the Shrimp Committee.';
+        specificNote = '\n\n📌 Regarding Live Cattle (Livestock) Committee: Convenes Tuesdays at 02:00 PM on a bi-weekly alternating cycle with the Shrimp Committee. Next Session: Tuesday, Nov 10, 2026.';
       } else if (lang === 'pl') {
-        specificNote = '\n\n📌 Komisja ds. Żywego Bydła: Obraduje we wtorki o godz. 14:00 co dwa tygodnie (naprzemiennie z krewetkami).';
+        specificNote = '\n\n📌 Komisja ds. Żywego Bydła: Obraduje we wtorki o godz. 14:00 co dwa tygodnie. Najbliższa sesja: 10 lis 2026.';
       } else if (lang === 'uk') {
-        specificNote = '\n\n📌 Комісія з живої худоби: Засідає щовівторка о 14:00 раз на два тижні (почергово з креветками).';
+        specificNote = '\n\n📌 Комісія з живої худоби: Засідає щовівторка о 14:00 раз на два тижні. Найближча дата: 10 лис 2026.';
       } else {
-        specificNote = '\n\n📌 بخصوص لجنة الرؤوس الحية (المواشي والعجول): تنعقد كل يوم ثلاثاء في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الجمبري بقاعة اللجان المركزية.';
+        specificNote = '\n\n📌 بخصوص لجنة الرؤوس الحية (المواشي والعجول): تنعقد كل يوم ثلاثاء في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الجمبري بقاعة اللجان المركزية. الجلسة القادمة: الثلاثاء، 10 نوفمبر 2026.';
       }
     } else if (isShrimp && !isRice && !isCattle) {
       if (lang === 'en') {
-        specificNote = '\n\n📌 Regarding Shrimp & Seafood Committee: Convenes Mondays at 02:00 PM on a bi-weekly alternating schedule with the Live Cattle Committee.';
+        specificNote = '\n\n📌 Regarding Shrimp & Seafood Committee: Convenes Mondays at 02:00 PM on a bi-weekly alternating schedule with the Live Cattle Committee. Next Session: Monday, Nov 2, 2026.';
       } else if (lang === 'pl') {
-        specificNote = '\n\n📌 Komisja ds. Krewetek: Obraduje w poniedziałki o godz. 14:00 co dwa tygodnie (naprzemiennie z bydłem).';
+        specificNote = '\n\n📌 Komisja ds. Krewetek: Obraduje w poniedziałki o godz. 14:00 co dwa tygodnie. Najbliższa sesja: 2 lis 2026.';
       } else if (lang === 'uk') {
-        specificNote = '\n\n📌 Комісія із закупівель креветок: Засідає щопонеділка о 14:00 раз на два тижні (почергово з худобою).';
+        specificNote = '\n\n📌 Комісія із закупівель креветок: Засідає щопонеділка о 14:00 раз на два тижні. Найближча дата: 2 лис 2026.';
       } else {
-        specificNote = '\n\n📌 بخصوص لجنة الجمبري والأسماك: تنعقد كل يوم اثنين في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الرؤوس الحية بقاعة اللجان المركزية.';
+        specificNote = '\n\n📌 بخصوص لجنة الجمبري والأسماك: تنعقد كل يوم اثنين في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الرؤوس الحية بقاعة اللجان المركزية. الجلسة القادمة: الاثنين، 2 نوفمبر 2026.';
       }
     }
 
@@ -1377,10 +1389,13 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                             <Wheat className="w-4 h-4 text-amber-500 flex-shrink-0" />
                             <span>{isAr ? '1. لجنة الأرز (كل أحد)' : '1. Rice Committee (Sundays)'}</span>
                           </div>
-                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-0.5">
+                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-1">
                             <div className="flex items-center gap-1">
                               <Clock className="w-3 h-3 text-amber-500 flex-shrink-0" />
                               <span>{isAr ? 'أسبوعياً — 02:00 ظهراً' : 'Weekly — 02:00 PM'}</span>
+                            </div>
+                            <div className="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 font-bold text-[10px] text-amber-800 dark:text-amber-300">
+                              {isAr ? '📅 الجلسة القادمة: الأحد 1 نوفمبر 2026' : '📅 Next: Sunday, Nov 1, 2026'}
                             </div>
                             <div className="text-[10px] text-slate-500 dark:text-slate-400">
                               {isAr ? 'الأولوية بأسبقية التواجد الفعلي بالقاعة.' : 'Adjudication by physical sign-in order.'}
@@ -1394,10 +1409,13 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                             <Award className="w-4 h-4 text-rose-500 flex-shrink-0" />
                             <span>{isAr ? '2. لجنة الرؤوس الحية (الثلاثاء)' : '2. Live Cattle Committee (Tue)'}</span>
                           </div>
-                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-0.5">
+                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-1">
                             <div className="flex items-center gap-1">
                               <Clock className="w-3 h-3 text-rose-500 flex-shrink-0" />
                               <span>{isAr ? 'دورية تبادلية — 02:00 ظهراً' : 'Bi-weekly — 02:00 PM'}</span>
+                            </div>
+                            <div className="px-2 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 font-bold text-[10px] text-rose-800 dark:text-rose-300">
+                              {isAr ? '📅 الجلسة القادمة: الثلاثاء 10 نوفمبر 2026' : '📅 Next: Tuesday, Nov 10, 2026'}
                             </div>
                             <div className="text-[10px] text-slate-500 dark:text-slate-400">
                               {isAr ? 'بالتبادل الأسبوعي مع لجنة الجمبري.' : 'Alternating weekly with Shrimp.'}
@@ -1411,10 +1429,13 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                             <Fish className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                             <span>{isAr ? '3. لجنة الجمبري (الاثنين)' : '3. Shrimp Committee (Mondays)'}</span>
                           </div>
-                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-0.5">
+                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-1">
                             <div className="flex items-center gap-1">
                               <Clock className="w-3 h-3 text-emerald-500 flex-shrink-0" />
                               <span>{isAr ? 'دورية تبادلية — 02:00 ظهراً' : 'Bi-weekly — 02:00 PM'}</span>
+                            </div>
+                            <div className="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 font-bold text-[10px] text-emerald-800 dark:text-emerald-300">
+                              {isAr ? '📅 الجلسة القادمة: الاثنين 2 نوفمبر 2026' : '📅 Next: Monday, Nov 2, 2026'}
                             </div>
                             <div className="text-[10px] text-slate-500 dark:text-slate-400">
                               {isAr ? 'بالتبادل الأسبوعي مع لجنة الرؤوس الحية.' : 'Alternating weekly with Cattle.'}
