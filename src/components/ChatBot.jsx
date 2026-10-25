@@ -16,7 +16,8 @@ import {
   Clock,
   Building2,
   Maximize2,
-  Minimize2
+  Minimize2,
+  Award
 } from 'lucide-react';
 import { PORTAL_INFO } from '../data/portalData';
 
@@ -151,8 +152,8 @@ export default function ChatBot({ lang, theme }) {
       return {
         type: 'social_links',
         text: isAr 
-          ? `🌐 إليك القنوات والروابط الرسمية المعتمدة لجهاز مستقبل مصر للتنمية المستدامة (FOE):`
-          : `🌐 Official verified channels of Future of Egypt Agency (FOE):`
+          ? `إليك القنوات والروابط الرسمية المعتمدة لجهاز مستقبل مصر للتنمية المستدامة (FOE):`
+          : `Official verified channels of Future of Egypt Agency (FOE):`
       };
     }
 
@@ -175,74 +176,12 @@ export default function ChatBot({ lang, theme }) {
       q.includes('shrimp') || 
       q.includes('cattle')
     ) {
-      if (lang === 'en') {
-        return `📅 Official Procurement Committees Schedule:
-
-1. Sunday Committee — Rice (الأرز):
-   • Schedule: Every Sunday at 02:00 PM Sharp (Fixed Weekly Session).
-   • Priority Rule: Priority strictly by physical arrival & sign-in order.
-   • Required: Official company documents + supply track record.
-
-2. Tuesday Committee — Live Cattle & Livestock (الرؤوس الحية 🐂):
-   • Schedule: Bi-weekly (Every other Tuesday) at 02:00 PM Sharp.
-   • Required: Official company documents + supply track record.
-
-3. Monday Committee — Shrimp (الجمبري 🦐):
-   • Schedule: Bi-weekly (Every other Monday) at 02:00 PM Sharp.
-   • Required: Official company documents + supply track record.
-
-📍 Official Venue: Unified Procurement Directorate HQ — Tucano Mall, Floor 3, Yousef Abbas St., Nasr City, Cairo.`;
-      } else if (lang === 'pl') {
-        return `📅 Oficjalny Harmonogram Komisji Zakupowych:
-
-1. Niedziela — Ryż (الأرز):
-   • Czas: Każda niedziela o 14:00 (Stała sesja cotygodniowa).
-   • Zasada: Pierwszeństwo według kolejności przybycia.
-
-2. Wtorek — Żywe bydło (الرؤوس الحية 🐂):
-   • Czas: Co dwa tygodnie we wtorki o 14:00.
-
-3. Poniedziałek — Krewetki (الجمبري 🦐):
-   • Czas: Co dwa tygodnie w poniedziałki o 14:00.
-
-📄 Wymagane: Wyłącznie oficjalne dokumenty firmy + doświadczenie w dostawach.
-📍 Siedziba: Tucano Mall - 3. piętro - ul. Yousef Abbas - Nasr City - Kair.`;
-      } else if (lang === 'uk') {
-        return `📅 Офіційний графік комісій із закупівель:
-
-1. Неділя — Рис (الأرز):
-   • Щонеділі о 14:00 (Постійна щотижнева сесія).
-   • Пріоритет за черговістю прибуття.
-
-2. Вівторок — Жива худоба (الرؤوس الحية 🐂):
-   • Раз на два тижні щовівторка о 14:00.
-
-3. Понеділок — Креветки (الجمبري 🦐):
-   • Раз на два тижні щопонеділка о 14:00.
-
-📄 Потрібні лише офіційні документи компанії + підтверджений досвід поставок.
-📍 Штаб-квартира: Tucano Mall - 3-й поверх - вул. Юсефа Аббаса - Наср-Сіті - Каїр.`;
-      } else {
-        return `📅 جدول ومواعيد لجان البت والتوريد المعتمدة (بمقر إدارة الشراء الموحد):
-
-1. لجنة الأرز (جلسة أسبوعية ثابتة كل أحد):
-   • التوقيت: أسبوعياً كل يوم أحد في تمام الساعة 02:00 ظهراً (02:00 PM).
-   • ⚠️ الضابط الأساسي: الأولوية بأسبقية التواجد والحضور الفعلي والتسجيل بقاعة اللجنة.
-
-2. لجنة الرؤوس الحية (يوم الثلاثاء — دورية أسبوع وأسبوع):
-   • التوقيت: الساعة 02:00 ظهراً (02:00 PM).
-   • 🐂 النظام: انعقاد دوري كل أسبوعين بالتناوب مع لجنة الجمبري.
-
-3. لجنة الجمبري (يوم الاثنين — دورية أسبوع وأسبوع):
-   • التوقيت: الساعة 02:00 ظهراً (02:00 PM).
-   • 🦐 النظام: انعقاد دوري كل أسبوعين بالتناوب مع لجنة الرؤوس الحية.
-
-📄 المستندات المطلوبة (لكافة اللجان):
-• الأوراق والمستندات الرسمية للشركة (السجل التجاري الساري، البطاقة الضريبية، القيمة المضافة، التفويض المعتمد).
-• سابقة الأعمال والخبرة في التوريد إن وُجدت لدعم ملف المورد (دون اشتراط عينات مسبقة).
-
-📍 مقر الانعقاد: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر - القاهرة (قاعة اللجان المركزية).`;
-      }
+      return {
+        type: 'committees',
+        text: isAr 
+          ? `جدول ومواعيد لجان البت والتوريد المعتمدة (بمقر إدارة الشراء الموحد):`
+          : `Official Procurement Committees Schedule:`
+      };
     }
 
     // 3. Strategic Vision, Mandate & Governance Query
@@ -265,7 +204,7 @@ export default function ChatBot({ lang, theme }) {
       q.includes('мета')
     ) {
       if (lang === 'en') {
-        return `🏛️ Strategic Vision of Mostaqbal Misr Unified Procurement Directorate:
+        return `Strategic Vision of Mostaqbal Misr Unified Procurement Directorate:
 Pursuant to Egyptian Cabinet decrees and presidential directives, the Directorate is mandated to lead unified sovereign procurement of essential food commodities and grains.
 Core Strategic Pillars:
 1. Harmonizing mega-agricultural production across the 2.2M-feddan New Delta with smart direct international trading.
@@ -273,21 +212,21 @@ Core Strategic Pillars:
 3. Capturing foreign currency savings and optimizing payment facilities via bulk direct trading agreements.
 4. Expanding digital smart silos complexes and port logistics for zero demurrage and certified food safety.`;
       } else if (lang === 'pl') {
-        return `🏛️ Strategiczna Wizja Dyrekcji ds. Zunifikowanych Zakupów:
+        return `Strategiczna Wizja Dyrekcji ds. Zunifikowanych Zakupów:
 Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszłość Egiptu realizuje zunifikowane zakupy strategiczne:
 1. Połączenie gigantycznej produkcji rolniczej Nowej Delty (2.2 mln feddanów) z bezpośrednim handlem globalnym.
 2. Rozbudowa rezerw strategicznych kraju na 6–9 miesięcy (pszenica, oleje, kukurydza, cukier).
 3. Oszczędności walutowe i bezpośrednie kontrakty z międzynarodowymi partnerami handlowymi.
 4. Nowoczesne silosy cyfrowe i sprawna logistyka portowa bez opłat postojowych.`;
       } else if (lang === 'uk') {
-        return `🏛️ Стратегічна візія Директорату єдиних закупівель:
+        return `Стратегічна візія Директорату єдиних закупівель:
 На виконання постанов Кабінету Міністрів та указів Президента Єгипту:
 1. Інтеграція масштабного агровиробництва Нової Дельти (2.2 млн федданів) із прямими міжнародними закупівлями.
 2. Формування гарантованого державного резерву базових культур на 6–9 місяців.
 3. Валютна оптимізація та довгострокові контракти з провідними світовими експортерами.
 4. Розбудова мережі цифрових елеваторів та ефективна логістика у портах.`;
       } else {
-        return `🏛️ الرؤية الاستراتيجية لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
+        return `الرؤية الاستراتيجية لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
 إعمالاً لتوجيهات فخامة رئيس الجمهورية وقرار مجلس الوزراء بإنابة الجهاز في إدارة الشراء الموحد للسلع الاستراتيجية والأقماح:
 1. الربط والتكامل المباشر بين الإنتاج الزراعي والصناعي الضخم بمشروع الدلتا الجديدة (2.2 مليون فدان) والشراء المباشر الذكي.
 2. بناء مخزون استراتيجي آمن يغطي من 6 إلى 9 أشهر من القمح والزيوت والذرة والسكر.
@@ -321,7 +260,7 @@ Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszł
       q.includes('logistics')
     ) {
       if (lang === 'en') {
-        return `🏛️ The 8 Executive Internal Directorates of Mostaqbal Misr Unified Procurement:
+        return `The 8 Executive Internal Directorates of Mostaqbal Misr Unified Procurement:
 1. Government Contracting Directorate (التعاقدات الحكومية)
 2. Legal Affairs Directorate (الإدارة القانونية)
 3. Foreign Commercial Directorate (الإدارة التجارية الخارجية)
@@ -331,7 +270,7 @@ Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszł
 7. Planning Directorate (إدارة التخطيط)
 8. Domestic Trade Directorate (إدارة التجارة الداخلية)`;
       } else if (lang === 'pl') {
-        return `🏛️ 8 Wewnętrznych Dyrekcji Wykonawczych:
+        return `8 Wewnętrznych Dyrekcji Wykonawczych:
 1. Dyrekcja ds. Zamówień Rządowych
 2. Dyrekcja ds. Prawnych
 3. Dyrekcja ds. Handlu Zagranicznego
@@ -341,7 +280,7 @@ Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszł
 7. Dyrekcja ds. Planowania
 8. Dyrekcja ds. Handlu Wewnętrznego`;
       } else if (lang === 'uk') {
-        return `🏛️ 8 Внутрішніх Виконавчих Директоратів:
+        return `8 Внутрішніх Виконавчих Директоратів:
 1. Директорат урядових контрактів
 2. Юридичний директорат
 3. Директорат зовнішньої торгівлі
@@ -351,7 +290,7 @@ Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszł
 7. Директорат планування
 8. Директорат внутрішньої торгівлі`;
       } else {
-        return `🏛️ الإدارات التنفيذية الثمانية المعتمدة داخل إدارة الشراء الموحد بجهاز مستقبل مصر:
+        return `الإدارات التنفيذية الثمانية المعتمدة داخل إدارة الشراء الموحد بجهاز مستقبل مصر:
 1. التعاقدات الحكومية (تنظيم وطرح وإدارة المناقصات الاستراتيجية)
 2. الإدارة القانونية (الصياغات التعاقدية وحماية حقوق الدولة)
 3. الإدارة التجارية الخارجية (التفاوض الدولي ورصد البورصات السلعية)
@@ -380,33 +319,33 @@ Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszł
       q.includes('години')
     ) {
       if (lang === 'en') {
-        return `⏰ Official Working Hours of Mostaqbal Misr Unified Procurement Directorate:
+        return `Official Working Hours of Mostaqbal Misr Unified Procurement Directorate:
 • Days: Sunday to Thursday (Everyday except Friday & Saturday).
 • Working Time: 09:00 AM – 05:00 PM (9 to 5).
 • Official Weekend: Friday & Saturday.
 • Procurement & Bidding Committees: Kick off at 02:00 PM.
-📍 Venue: Tucano Mall - Yousef Abbas St. - Nasr City - Cairo.`;
+Venue: Tucano Mall - Yousef Abbas St. - Nasr City - Cairo.`;
       } else if (lang === 'pl') {
-        return `⏰ Oficjalne Godziny Pracy Dyrekcji ds. Zakupów:
+        return `Oficjalne Godziny Pracy Dyrekcji ds. Zakupów:
 • Dni robocze: Od niedzieli do czwartku.
 • Godziny: 09:00 – 17:00 (od 9 do 17).
 • Weekend: Piątek i sobota.
 • Rozpoczęcie posiedzeń komisji: Godzina 14:00.
-📍 Siedziba: Tucano Mall - Nasr City - Kair.`;
+Siedziba: Tucano Mall - Nasr City - Kair.`;
       } else if (lang === 'uk') {
-        return `⏰ Офіційні години роботи Директорату закупівель:
+        return `Офіційні години роботи Директорату закупівель:
 • Робочі дні: З неділі по четвер.
 • Години роботи: 09:00 – 17:00 (з 9 до 17).
 • Вихідні: П'ятниця та субота.
 • Засідання комісій: Рівно о 14:00.
-📍 Штаб-квартира: Tucano Mall - Наср-Сіті - Каїр.`;
+Штаб-квартира: Tucano Mall - Наср-Сіті - Каїр.`;
       } else {
-        return `⏰ مواعيد وساعات العمل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر:
+        return `مواعيد وساعات العمل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر:
 • أيام العمل: من الأحد إلى الخميس أسبوعياً (يومياً عدا الجمعة والسبت).
 • ساعات العمل: من الساعة 09:00 صباحاً حتى 05:00 مساءً (من 9 إلى 5).
 • العطلة الأسبوعية الرسمية: يومي الجمعة والسبت.
 • جلسات لجان البت والتوريد: تبدأ في تمام الساعة 02:00 ظهراً (الأحد، الاثنين، الثلاثاء حسب الجدول المعتمد).
-📍 المقر الرئيسي: توكانو مول - شارع يوسف عباس - مدينة نصر - القاهرة.`;
+المقر الرئيسي: توكانو مول - شارع يوسف عباس - مدينة نصر - القاهرة.`;
       }
     }
 
@@ -414,25 +353,25 @@ Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszł
     if (q.includes('مقر') || q.includes('عنوان') || q.includes('مكان') || q.includes('توكانو') || q.includes('مدينة نصر') || q.includes('دور') || q.includes('floor') || q.includes('address') || q.includes('location') || q.includes('siedzib') || q.includes('адрес') || q.includes('офіс') || q.includes('map') || q.includes('خريطة')) {
       if (lang === 'en') {
         return `Official Main Headquarters of Mostaqbal Misr Unified Procurement Directorate:
-📍 Location: Tucano Mall — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
-🗺️ Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
-⏰ Working Hours: Sunday to Thursday (09:00 AM – 05:00 PM).
+Location: Tucano Mall — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
+Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+Working Hours: Sunday to Thursday (09:00 AM – 05:00 PM).
 Direct Hotline: 19842 | Email: procurement@foe.gov.eg`;
       } else if (lang === 'pl') {
         return `Oficjalna Główna Siedziba Dyrekcji ds. Zakupów:
-📍 Adres: Tucano Mall — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
-⏰ Godziny pracy: Niedziela – Czwartek (09:00 – 17:00).
+Adres: Tucano Mall — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
+Godziny pracy: Niedziela – Czwartek (09:00 – 17:00).
 Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
       } else if (lang === 'uk') {
         return `Офіційний головний офіс Директорату закупівель:
-📍 Адреса: Tucano Mall — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
-⏰ Години роботи: Неділя – Четвер (09:00 – 17:00).
+Адреса: Tucano Mall — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
+Години роботи: Неділя – Четвер (09:00 – 17:00).
 Гаряча лінія: +20 19842 | Email: procurement@foe.gov.eg`;
       } else {
         return `المقر الرسمي الرئيسي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
-📍 العنوان: توكانو مول — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
-🗺️ رابط خرائط Google: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
-⏰ مواعيد العمل: من الأحد إلى الخميس (من 09:00 صباحاً حتى 05:00 مساءً).
+العنوان: توكانو مول — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
+رابط خرائط Google: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+مواعيد العمل: من الأحد إلى الخميس (من 09:00 صباحاً حتى 05:00 مساءً).
 الخط الساخن: 19842 | البريد الرسمي: procurement@foe.gov.eg`;
       }
     }
@@ -534,11 +473,11 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
       const answer = generateAnswer(text);
       let botResponse;
 
-      if (typeof answer === 'object' && answer.type === 'social_links') {
+      if (typeof answer === 'object' && answer.type) {
         botResponse = {
           id: Date.now() + 1,
           sender: 'bot',
-          type: 'social_links',
+          type: answer.type,
           text: answer.text,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         };
@@ -784,6 +723,81 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                         <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                       </a>
 
+                    </div>
+                  )}
+
+                  {/* Render Visual Committees Schedule Cards with Lucide Icons (Zero Emojis) */}
+                  {msg.type === 'committees' && (
+                    <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
+                      <div className="flex items-center gap-2 pb-1 text-xs font-bold text-slate-900 dark:text-white">
+                        <Calendar className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                        <span>{isAr ? 'جدول ومواعيد لجان البت والتوريد المعتمدة:' : 'Official Procurement Committees Schedule:'}</span>
+                      </div>
+
+                      <div className={`grid ${isExpanded ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1'} gap-2`}>
+                        {/* Sunday Rice */}
+                        <div className="p-3 rounded-xl border border-amber-500/25 bg-amber-500/5 space-y-1">
+                          <div className="flex items-center gap-1.5 font-bold text-xs text-amber-700 dark:text-amber-400">
+                            <Wheat className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                            <span>{isAr ? '1. لجنة الأرز (كل أحد)' : '1. Rice Committee (Sundays)'}</span>
+                          </div>
+                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-0.5">
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                              <span>{isAr ? 'أسبوعياً — 02:00 ظهراً' : 'Weekly — 02:00 PM'}</span>
+                            </div>
+                            <div className="text-[10px] text-slate-500 dark:text-slate-400">
+                              {isAr ? 'الأولوية بأسبقية التواجد الفعلي بالقاعة.' : 'Adjudication by physical sign-in order.'}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Tuesday Live Cattle */}
+                        <div className="p-3 rounded-xl border border-rose-500/25 bg-rose-500/5 space-y-1">
+                          <div className="flex items-center gap-1.5 font-bold text-xs text-rose-700 dark:text-rose-400">
+                            <Award className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                            <span>{isAr ? '2. لجنة الرؤوس الحية (الثلاثاء)' : '2. Live Cattle Committee (Tue)'}</span>
+                          </div>
+                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-0.5">
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-3 h-3 text-rose-500 flex-shrink-0" />
+                              <span>{isAr ? 'دورية تبادلية — 02:00 ظهراً' : 'Bi-weekly — 02:00 PM'}</span>
+                            </div>
+                            <div className="text-[10px] text-slate-500 dark:text-slate-400">
+                              {isAr ? 'بالتبادل الأسبوعي مع لجنة الجمبري.' : 'Alternating weekly with Shrimp.'}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Monday Shrimp */}
+                        <div className="p-3 rounded-xl border border-emerald-500/25 bg-emerald-500/5 space-y-1">
+                          <div className="flex items-center gap-1.5 font-bold text-xs text-emerald-700 dark:text-emerald-400">
+                            <Fish className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                            <span>{isAr ? '3. لجنة الجمبري (الاثنين)' : '3. Shrimp Committee (Mondays)'}</span>
+                          </div>
+                          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-0.5">
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-3 h-3 text-emerald-500 flex-shrink-0" />
+                              <span>{isAr ? 'دورية تبادلية — 02:00 ظهراً' : 'Bi-weekly — 02:00 PM'}</span>
+                            </div>
+                            <div className="text-[10px] text-slate-500 dark:text-slate-400">
+                              {isAr ? 'بالتبادل الأسبوعي مع لجنة الرؤوس الحية.' : 'Alternating weekly with Cattle.'}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Requirements & Venue Box */}
+                      <div className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 space-y-1 text-[11px]">
+                        <div className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
+                          <ShieldCheck className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                          <span>{isAr ? 'المستندات المطلوبة: الأوراق القانونية السارية والتفويض المعتمد.' : 'Required: Valid statutory docs and official authorization.'}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
+                          <MapPin className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                          <span>{isAr ? 'المقر: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر (قاعة اللجان المركزية).' : 'Venue: Tucano Mall, Floor 3, Yousef Abbas St., Nasr City (Central Sessions Hall).'}</span>
+                        </div>
+                      </div>
                     </div>
                   )}
 

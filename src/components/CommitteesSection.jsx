@@ -202,9 +202,9 @@ export default function CommitteesSection({ lang, theme }) {
                   {/* Priority / Session Specific Rule Box (Compact & Balanced) */}
                   <div className={`p-3 rounded-xl border text-xs leading-relaxed ${themeBg}`}>
                     <div className="font-bold mb-1 flex items-center gap-1.5 text-xs">
-                      {isSunday && <AlertCircle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />}
-                      {isTuesday && <span className="text-sm flex-shrink-0">🐂</span>}
-                      {isMonday && <span className="text-sm flex-shrink-0">🦐</span>}
+                      {isSunday && <Wheat className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />}
+                      {isTuesday && <Award className="w-3.5 h-3.5 text-rose-500 flex-shrink-0" />}
+                      {isMonday && <Fish className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />}
                       <span>{session.priorityRule[lang] || session.priorityRule.ar}</span>
                     </div>
                     <p className="text-[11px] sm:text-xs opacity-90 leading-relaxed font-normal">

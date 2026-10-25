@@ -992,10 +992,10 @@ export const COMMITTEES_DATA = {
       category: { ar: "ثروة حيوانية ولحوم", en: "Livestock & Meat", pl: "Żywy Inwentarz", uk: "Тваринництво" },
       badge: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
       priorityRule: {
-        ar: "دورة الانعقاد التبادلية 🐂",
-        en: "Bi-weekly Alternating Cycle 🐂",
-        pl: "Cykl naprzemienny 🐂",
-        uk: "Почерговий цикл 🐂"
+        ar: "دورة الانعقاد التبادلية",
+        en: "Bi-weekly Alternating Cycle",
+        pl: "Cykl naprzemienny",
+        uk: "Почерговий цикл"
       },
       priorityDetails: {
         ar: "تنعقد الجلسة بالتبادل الأسبوعي مع لجنة الجمبري (أسبوع مخصص للرؤوس الحية وأسبوع للجمبري).",
@@ -1026,10 +1026,10 @@ export const COMMITTEES_DATA = {
       category: { ar: "ثروة سمكية وبحرية", en: "Fisheries & Seafood", pl: "Rybołówstwo", uk: "Рибне господарство" },
       badge: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
       priorityRule: {
-        ar: "دورة الانعقاد التبادلية 🦐",
-        en: "Bi-weekly Alternating Cycle 🦐",
-        pl: "Cykl naprzemienny 🦐",
-        uk: "Почерговий цикл 🦐"
+        ar: "دورة الانعقاد التبادلية",
+        en: "Bi-weekly Alternating Cycle",
+        pl: "Cykl naprzemienny",
+        uk: "Почерговий цикл"
       },
       priorityDetails: {
         ar: "تنعقد الجلسة بالتبادل الأسبوعي مع لجنة الرؤوس الحية بقاعة اللجان المركزية.",

@@ -64,18 +64,18 @@ export default function SearchModal({ isOpen, onClose, lang, theme, onSelectResu
   ) ? [
     {
       id: 'sunday-rice',
-      title: isAr ? 'لجنة الأرز الأسبوعية (كل أحد 2:00 ظهراً — 25/10/2026 — الأولوية بالتواجد)' : 'Weekly Rice Committee (Sundays 02:00 PM — 25/10/2026)',
+      title: isAr ? 'لجنة الأرز الأسبوعية (كل أحد 02:00 ظهراً — الأولوية بأسبقية التواجد)' : 'Weekly Rice Committee (Sundays 02:00 PM — Physical Attendance Priority)',
       badge: isAr ? 'أسبوعي ثابت' : 'Fixed Weekly'
     },
     {
       id: 'tuesday-cattle',
-      title: isAr ? 'لجنة الرؤوس الحية (الثلاثاء 27/10/2026 — 2:00 ظهراً — أسبوع وأسبوع 🐂)' : 'Live Cattle Committee (Tuesday 27/10/2026 — Bi-weekly 🐂)',
-      badge: isAr ? 'الثلاثاء 27/10' : 'Tue 27/10'
+      title: isAr ? 'لجنة الرؤوس الحية (الثلاثاء 02:00 ظهراً — دورية تبادلية)' : 'Live Cattle Committee (Tuesday 02:00 PM — Bi-weekly)',
+      badge: isAr ? 'الثلاثاء' : 'Tuesday'
     },
     {
       id: 'monday-shrimp',
-      title: isAr ? 'لجنة الجمبري (الاثنين 2:00 ظهراً — انعقدت 19/10 والقادمة: 02/11/2026 🦐)' : 'Shrimp Committee (Mondays — Held 19/10, Next: 02/11 🦐)',
-      badge: isAr ? 'الاثنين 02/11' : 'Mon 02/11'
+      title: isAr ? 'لجنة الجمبري (الاثنين 02:00 ظهراً — دورية تبادلية)' : 'Shrimp Committee (Monday 02:00 PM — Bi-weekly)',
+      badge: isAr ? 'الاثنين' : 'Monday'
     }
   ] : [];
 
