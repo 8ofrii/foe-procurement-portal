@@ -86,39 +86,43 @@ export default function ChatBot({ lang, theme }) {
   const quickPrompts = {
     ar: [
       'ما هي مواعيد وساعات العمل الرسمية؟',
-      'ما هي مواعيد اللجان (لجنة الأرز، لجنة الرؤوس الحية، ولجنة الجمبري)؟',
-      'ما هي القنوات والروابط الرسمية للجهاز؟',
-      'ما هي رؤية وأهداف إدارة الشراء الموحد؟',
-      'ما هي الإدارات التخصصية الثمانية؟',
+      'ما هي مواعيد اللجان (الأرز، الرؤوس الحية، والجمبري)؟',
+      'ما هو رقم الخط الساخن وقنوات التواصل؟',
       'أين يقع المقر الرئيسي للإدارة؟',
-      'كم يغطي المخزون الاستراتيجي للدولة؟'
+      'كم يغطي المخزون الاستراتيجي للدولة؟',
+      'كيفية التسجيل في سجل الموردين والمناقصات؟',
+      'ما هي رؤية وأهداف إدارة الشراء الموحد؟',
+      'ما هي الإدارات التخصصية الثمانية؟'
     ],
     en: [
       'What are the official working hours?',
       'What is the weekly committees schedule (Rice & Shrimp)?',
-      'What are the official social media channels?',
-      'What is the vision of Unified Procurement?',
-      'What are the 8 internal directorates?',
+      'What is the direct hotline and contact info?',
       'Where is the main headquarters located?',
-      'What is the strategic reserve coverage?'
+      'What is the strategic reserve coverage?',
+      'How to register in the suppliers registry?',
+      'What is the vision of Unified Procurement?',
+      'What are the 8 internal directorates?'
     ],
     pl: [
       'Jakie są oficjalne godziny pracy?',
       'Jaki jest harmonogram komisji (Ryż i Krewetki)?',
-      'Jakie są oficjalne kanały społecznościowe?',
-      'Jaka jest wizja Zunifikowanego Systemu Zakupów?',
-      'Jakie jest 8 wewnętrznych departamentów?',
+      'Jaki jest numer infolinii i kontakt?',
       'Gdzie znajduje się główna siedziba?',
-      'Jaki jest stan rezerw strategicznych?'
+      'Jaki jest stan rezerw strategicznych?',
+      'Jak zarejestrować się w rejestrze dostawców?',
+      'Jaka jest wizja Dyrekcji ds. Zakupów?',
+      'Jakie jest 8 wewnętrznych departamentów?'
     ],
     uk: [
       'Які офіційні години роботи?',
       'Який графік комісій із закупівель (Рис та Креветки)?',
-      'Які офіційні канали в соцмережах?',
-      'Яка стратегічна візія системи єдиних закупівель?',
-      'Які є 8 внутрішніх департаментів?',
+      'Який номер гарячої лінії та контакти?',
       'Де розташований головний офіс?',
-      'На скільки місяців вистачає резервів?'
+      'На скільки місяців вистачає резервів?',
+      'Як зареєструватися в реєстрі постачальників?',
+      'Яка стратегічна візія системи єдиних закупівель?',
+      'Які є 8 внутрішніх департаментів?'
     ]
   };
 
@@ -133,7 +137,207 @@ export default function ChatBot({ lang, theme }) {
   const generateAnswer = (query) => {
     const q = query.toLowerCase();
 
-    // 1. Social Media & Official Channels Query
+    // 1. Contact, Hotline, Phone & Official Emails
+    if (
+      q.includes('هاتف') || 
+      q.includes('تليفون') || 
+      q.includes('تلفون') || 
+      q.includes('خط ساخن') || 
+      q.includes('ساخن') || 
+      q.includes('اتصال') || 
+      q.includes('تواصل') || 
+      q.includes('ايميل') || 
+      q.includes('إيميل') || 
+      q.includes('بريد') || 
+      q.includes('ارقام') || 
+      q.includes('أرقام') || 
+      q.includes('رقم') || 
+      q.includes('phone') || 
+      q.includes('hotline') || 
+      q.includes('call') || 
+      q.includes('contact') || 
+      q.includes('email') || 
+      q.includes('mail') || 
+      q.includes('infolinia') || 
+      q.includes('телефон') || 
+      q.includes('гаряча лінія')
+    ) {
+      if (lang === 'en') {
+        return `Official Contact Channels of Mostaqbal Misr Unified Strategic Procurement Directorate:
+• Unified Direct Hotline: 19842 (Available during working hours).
+• Official Procurement Email: procurement@foe.gov.eg
+• General Inquiries Email: info@foe.gov.eg
+• Main HQ: Tucano Commercial Complex — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
+• Working Hours: Sunday through Thursday (09:00 AM – 05:00 PM).`;
+      } else if (lang === 'pl') {
+        return `Oficjalne Dane Kontaktowe Dyrekcji ds. Zakupów Agencji Przyszłość Egiptu:
+• Główna Infolinia: +20 19842
+• Oficjalny E-mail ds. Zakupów: procurement@foe.gov.eg
+• E-mail ogólny: info@foe.gov.eg
+• Adres: Tucano Commercial Complex — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
+• Godziny urzędowania: Niedziela – Czwartek (09:00 – 17:00).`;
+      } else if (lang === 'uk') {
+        return `Офіційні контакти Директорату єдиних закупівель Агентства Майбутнє Єгипту:
+• Єдина гаряча лінія: +20 19842
+• Офіційний email із закупівель: procurement@foe.gov.eg
+• Загальний email: info@foe.gov.eg
+• Адреса: Tucano Commercial Complex — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
+• Години роботи: Неділя – Четвер (09:00 – 17:00).`;
+      } else {
+        return `قنوات التواصل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
+• الخط الساخن الموحد: 19842 (متاح خلال أوقات العمل الرسمية).
+• البريد الإلكتروني الرسمي لإدارة المشتريات والتعاقدات: procurement@foe.gov.eg
+• البريد الإلكتروني العام للاستفسارات: info@foe.gov.eg
+• المقر الرئيسي: توكانو مول التجاري — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
+• مواعيد استقبال الاتصالات والزيارات: من الأحد إلى الخميس (من 09:00 صباحاً حتى 05:00 مساءً).`;
+      }
+    }
+
+    // 2. Location, Address & Google Maps (Prioritized before generic departments)
+    if (
+      q.includes('مقر') || 
+      q.includes('عنوان') || 
+      q.includes('مكان') || 
+      q.includes('موقعكم') || 
+      q.includes('فين') || 
+      q.includes('أين') || 
+      q.includes('اين') || 
+      q.includes('توكانو') || 
+      q.includes('مدينة نصر') || 
+      q.includes('يوسف عباس') || 
+      q.includes('خريطة') || 
+      q.includes('خرائط') || 
+      q.includes('الدور') || 
+      q.includes('address') || 
+      q.includes('location') || 
+      q.includes('where') || 
+      q.includes('maps') || 
+      q.includes('map') || 
+      q.includes('siedzib') || 
+      q.includes('gdzie') || 
+      q.includes('адрес') || 
+      q.includes('офіс') || 
+      q.includes('де')
+    ) {
+      if (lang === 'en') {
+        return `Official Main Headquarters of Mostaqbal Misr Unified Strategic Procurement Directorate:
+• Location: Tucano Commercial Complex — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
+• Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+• Direct Hotline: 19842
+• Email: procurement@foe.gov.eg
+• Working Hours: Sunday through Thursday (09:00 AM – 05:00 PM).`;
+      } else if (lang === 'pl') {
+        return `Oficjalna Główna Siedziba Dyrekcji ds. Zakupów:
+• Adres: Tucano Commercial Complex — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
+• Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+• Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg
+• Godziny pracy: Niedziela – Czwartek (09:00 – 17:00).`;
+      } else if (lang === 'uk') {
+        return `Офіційний головний офіс Директорату закупівель:
+• Адреса: Tucano Commercial Complex — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
+• Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+• Гаряча лінія: +20 19842 | Email: procurement@foe.gov.eg
+• Години роботи: Неділя – Четвер (09:00 – 17:00).`;
+      } else {
+        return `المقر الرسمي الرئيسي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
+• العنوان: توكانو مول التجاري — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
+• رابط خرائط Google: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
+• الخط الساخن: 19842
+• البريد الرسمي: procurement@foe.gov.eg
+• أوقات استقبال الموردين والمراجعين: من الأحد إلى الخميس (09:00 صباحاً – 05:00 مساءً).`;
+      }
+    }
+
+    // 3. Working Hours & Operation Schedule
+    if (
+      q.includes('ساعات العمل') || 
+      q.includes('مواعيد العمل') || 
+      q.includes('أوقات العمل') || 
+      q.includes('وقت العمل') || 
+      q.includes('ساعات') || 
+      q.includes('مواعيد') || 
+      q.includes('دوام') || 
+      q.includes('شغالين') || 
+      q.includes('فاتحين') || 
+      q.includes('أيام العمل') || 
+      q.includes('ايام العمل') || 
+      q.includes('إجازة') || 
+      q.includes('اجازة') || 
+      q.includes('عطلة') || 
+      q.includes('working hours') || 
+      q.includes('work time') || 
+      q.includes('opening hours') || 
+      q.includes('schedule') || 
+      q.includes('godziny') || 
+      q.includes('czas pracy') || 
+      q.includes('години') || 
+      q.includes('графік')
+    ) {
+      if (lang === 'en') {
+        return `Official Working Hours of Mostaqbal Misr Unified Strategic Procurement Directorate:
+• Working Days: Sunday through Thursday weekly.
+• Operational Hours: 09:00 AM to 05:00 PM (9 to 5).
+• Official Weekend: Friday & Saturday.
+• Procurement & Bidding Committees: Kick off at 02:00 PM in the Central Bidding Hall.
+Venue: Tucano Mall — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.`;
+      } else if (lang === 'pl') {
+        return `Oficjalne Godziny Pracy Dyrekcji ds. Zakupów:
+• Dni robocze: Od niedzieli do czwartku.
+• Godziny: 09:00 – 17:00 (od 9 do 17).
+• Weekend: Piątek i sobota.
+• Rozpoczęcie posiedzeń komisji przetargowych: Godzina 14:00.
+Siedziba: Tucano Mall — 3. piętro — Nasr City — Kair.`;
+      } else if (lang === 'uk') {
+        return `Офіційні години роботи Директорату закупівель:
+• Робочі дні: З неділі по четвер щотижня.
+• Години роботи: 09:00 – 17:00 (з 9 до 17).
+• Вихідні дні: П'ятниця та субота.
+• Засідання комісій із закупівель: Початок о 14:00 у центральній залі торгів.
+Штаб-квартира: Tucano Mall — 3-й поверх — Наср-Сіті — Каїр.`;
+      } else {
+        return `مواعيد وساعات العمل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر:
+• أيام العمل الرسمية: من الأحد إلى الخميس أسبوعياً (يومياً عدا الجمعة والسبت).
+• ساعات الدوام الرسمي: من الساعة 09:00 صباحاً حتى 05:00 مساءً (من 9 إلى 5).
+• العطلة الأسبوعية: يومي الجمعة والسبت.
+• جلسات لجان البت والتوريد: تبدأ في تمام الساعة 02:00 ظهراً بالقاعة المركزية.
+المقر: توكانو مول — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.`;
+      }
+    }
+
+    // 4. Weekly Committees Query (Sunday Rice, Tuesday Live Cattle, Monday Shrimp)
+    if (
+      q.includes('لجان') || 
+      q.includes('لجنة') || 
+      q.includes('ارز') || 
+      q.includes('أرز') || 
+      q.includes('رز') || 
+      q.includes('جمبري') || 
+      q.includes('رؤوس') || 
+      q.includes('مواشي') || 
+      q.includes('عجول') || 
+      q.includes('الأحد') || 
+      q.includes('الاحد') || 
+      q.includes('الاثنين') || 
+      q.includes('الإثنين') || 
+      q.includes('الثلاثاء') || 
+      q.includes('بت وتوريد') || 
+      q.includes('جلسات') || 
+      q.includes('جلسة') || 
+      q.includes('committee') || 
+      q.includes('komisj') || 
+      q.includes('rice') || 
+      q.includes('shrimp') || 
+      q.includes('cattle')
+    ) {
+      return {
+        type: 'committees',
+        text: isAr 
+          ? `جدول ومواعيد لجان البت والتوريد المعتمدة (بمقر إدارة الشراء الموحد):`
+          : `Official Procurement Committees Schedule:`
+      };
+    }
+
+    // 5. Social Media & Official Channels Query
     if (
       q.includes('فيس') || 
       q.includes('فيسبوك') || 
@@ -148,7 +352,8 @@ export default function ChatBot({ lang, theme }) {
       q.includes('facebook') || 
       q.includes('linkedin') || 
       q.includes('twitter') || 
-      q.includes('x')
+      q.includes('x.com') ||
+      q.includes('قنوات')
     ) {
       return {
         type: 'social_links',
@@ -158,300 +363,444 @@ export default function ChatBot({ lang, theme }) {
       };
     }
 
-    // 2. Weekly Committees Query (Sunday Rice, Tuesday Live Cattle, Monday Shrimp)
+    // 6. Strategic Reserves & Commodity Buffers
     if (
-      q.includes('لجان') || 
-      q.includes('لجنة') || 
-      q.includes('ارز') || 
-      q.includes('أرز') || 
-      q.includes('رز') || 
-      q.includes('جمبري') || 
-      q.includes('رؤوس') || 
-      q.includes('مواشي') || 
-      q.includes('الأحد') || 
-      q.includes('الاثنين') || 
-      q.includes('الثلاثاء') || 
-      q.includes('committee') || 
-      q.includes('komisj') ||
-      q.includes('rice') || 
-      q.includes('shrimp') || 
-      q.includes('cattle')
+      q.includes('مخزون') || 
+      q.includes('احتياطي') || 
+      q.includes('ارصدة') || 
+      q.includes('أرصدة') || 
+      q.includes('رصيد') || 
+      q.includes('سلع استراتيجية') || 
+      q.includes('سلع أساسية') || 
+      q.includes('قمح') || 
+      q.includes('زيوت') || 
+      q.includes('سكر') || 
+      q.includes('ذرة') || 
+      q.includes('كم يغطي') || 
+      q.includes('reserve') || 
+      q.includes('stock') || 
+      q.includes('buffer') || 
+      q.includes('wheat') || 
+      q.includes('rezerw') || 
+      q.includes('резерв')
     ) {
-      return {
-        type: 'committees',
-        text: isAr 
-          ? `جدول ومواعيد لجان البت والتوريد المعتمدة (بمقر إدارة الشراء الموحد):`
-          : `Official Procurement Committees Schedule:`
-      };
+      if (lang === 'en') {
+        return `National Strategic Reserves Buffer managed by Mostaqbal Misr:
+• Milling Wheat: 7.8 months safe buffer (5.8 Million Metric Tons).
+• Vegetable Oils: 6.9 months reserve (1.4 Million Metric Tons).
+• Sugar: 8.2 months self-sufficiency supported by New Delta refineries.
+• Yellow Corn: 6.2 months reserve supporting feedmills and livestock.
+All reserves undergo automated digital monitoring across modern silos nationwide.`;
+      } else if (lang === 'pl') {
+        return `Poziom Państwowych Rezerw Strategicznych:
+• Pszenica konsumpcyjna: 7.8 miesięcy (5.8 mln ton metrycznych).
+• Oleje roślinne: 6.9 miesięcy (1.4 mln ton metrycznych).
+• Cukier: 8.2 miesięcy samowystarczalności.
+• Kukurydza żółta: 6.2 miesięcy.`;
+      } else if (lang === 'uk') {
+        return `Рівень стратегічних резервів держави:
+• Пшениця борошномельна: 7.8 місяців (5.8 млн метричних тонн).
+• Рослинні олії: 6.9 місяців (1.4 млн метричних тонн).
+• Цукор: 8.2 місяців завдяки переробним потужностям Нової Дельти.
+• Кукурудза жовта: 6.2 місяців.`;
+      } else {
+        return `مؤشرات أرصدة السلع والمخزون الاستراتيجي لجهاز مستقبل مصر:
+• القمح الطاحن: يغطي 7.8 أشهر (بإجمالي 5.8 مليون طن لتأمين الخبز المدعم).
+• الزيوت النباتية: تغطي 6.9 أشهر (بإجمالي 1.4 مليون طن من زيوت الصويا وعباد الشمس).
+• السكر التمويني والحر: يغطي 8.2 أشهر (طفرة اكتفاء مدعومة بمجمعات السكر بالدلتا الجديدة).
+• الذرة الصفراء: تغطي 6.2 أشهر لدعم الثروة الحيوانية وصناعة الأعلاف.
+تتم المتابعة اللحظية للأرصدة عبر منظومة رقمية متصلة بكافة الصوامع الاستراتيجية.`;
+      }
     }
 
-    // 3. Strategic Vision, Mandate & Governance Query
+    // 7. Strategic Pillars
+    if (
+      q.includes('ركائز') || 
+      q.includes('مبادئ') || 
+      q.includes('محاور') || 
+      q.includes('pillars') || 
+      q.includes('filarów') || 
+      q.includes('стовп')
+    ) {
+      if (lang === 'en') {
+        return `The 6 Strategic Pillars of Mostaqbal Misr Unified Strategic Procurement:
+1. Commodity security, controlled pricing, and certified international quality.
+2. Fortifying state strategic reserves of essential grains and commodities.
+3. Regulating price fluctuations through supply augmentation and direct trading.
+4. Rigorous quality auditing ensuring citizen health and food safety.
+5. Diversifying import origins across 18+ sovereign nations to mitigate geopolitical risks.
+6. Professional high-level negotiation achieving substantial foreign currency savings.`;
+      } else if (lang === 'pl') {
+        return `Sześć Strategicznych Filarów Zunifikowanych Zakupów:
+1. Bezpieczeństwo towarowe, kontrola cen i certyfikowana jakość.
+2. Wzmocnienie państwowych rezerw strategicznych kluczowych surowców.
+3. Stabilizacja cen poprzez zwiększenie podaży rynkowej.
+4. Rygorystyczna kontrola jakości zgodna ze standardami NFSA.
+5. Dywersyfikacja źródeł importu z ponad 18 krajów.
+6. Profesjonalne negocjacje przynoszące wymierne oszczędności walutowe.`;
+      } else if (lang === 'uk') {
+        return `Шість стратегічних стовпів Директорату єдиних закупівель:
+1. Товарна безпека, стабільні контрольовані ціни та гарантована якість.
+2. Зміцнення державних резервів зернових та стратегічних культур.
+3. Регулювання ринкових цін шляхом нарощування товарної пропозиції.
+4. Суворий аудит якості у відповідності до стандартів NFSA.
+5. Диверсифікація джерел постачання з понад 18 країн світу.
+6. Професійні переговори, що забезпечують збереження валютних резервів.`;
+      } else {
+        return `الركائز الاستراتيجية الست المعتمدة لإدارة الشراء الموحد:
+1. أمن سلعي.. وأسعار منضبطة.. وجودة مضمونة.
+2. تعزيز مخزون الدولة من السلع والمحاصيل الأساسية والاستراتيجية.
+3. ضبط حركة الأسعار من خلال زيادة المعروض السلعي في الأسواق.
+4. مراجعة الجودة الشاملة لضمان سلع آمنة وصحية للمواطنين.
+5. تنويع مناشئ الاستيراد لضمان استمرارية الإمدادات والتحوط ضد المخاطر الجيوسياسية.
+6. تفاوض احترافي يحقق وفر دولاري مباشر للدولة ويحسن شروط السداد والتوريد.`;
+      }
+    }
+
+    // 8. Tenders, Bidding & Suppliers Registry
+    if (
+      q.includes('مورد') || 
+      q.includes('موردين') || 
+      q.includes('تسجيل') || 
+      q.includes('سجل الموردين') || 
+      q.includes('مناقصة') || 
+      q.includes('مناقصات') || 
+      q.includes('مزايدة') || 
+      q.includes('مزايدات') || 
+      q.includes('ممارسة') || 
+      q.includes('كراسة الشروط') || 
+      q.includes('شروط التوريد') || 
+      q.includes('توريد') || 
+      q.includes('tender') || 
+      q.includes('bidding') || 
+      q.includes('supplier') || 
+      q.includes('przetarg') || 
+      q.includes('dostawc') || 
+      q.includes('тендер') || 
+      q.includes('постачальник')
+    ) {
+      if (lang === 'en') {
+        return `Tenders & Certified Suppliers Registration:
+• Suppliers Registry: Open for domestic and international suppliers at the Government Contracting Directorate.
+• Registration Requirements: Valid Commercial Registry, Tax Card, Audited Financials, and Quality Certifications (ISO/HACCP).
+• Central Bidding Sessions: Conducted at Tucano Mall HQ (Floor 3) starting 02:00 PM on designated committee days.
+• Submission & Registration: Contact the Government Contracting Directorate at procurement@foe.gov.eg or hotline 19842.`;
+      } else if (lang === 'pl') {
+        return `Rejestracja Dostawców i Przetargi Publiczne:
+• Rejestr Dostawców: Otwarty dla firm krajowych i międzynarodowych w Dyrekcji ds. Zamówień Rządowych.
+• Wymagania: Wpis do KRS/Rejestru Handlowego, NIP, sprawozdania finansowe i certyfikaty jakości.
+• Posiedzenia komisji: Tucano Mall (3. piętro) o godz. 14:00 w wyznaczone dni robocze.
+• Kontakt: procurement@foe.gov.eg | Infolinia: 19842.`;
+      } else if (lang === 'uk') {
+        return `Тендери та реєстрація постачальників:
+• Реєстр постачальників: Відкритий для єгипетських та міжнародних компаній у Директораті урядових контрактів.
+• Необхідні документи: Витяг з комерційного реєстру, податковий номер, фінансова звітність та сертифікати якості.
+• Засідання комісій: Штаб-квартира Tucano Mall (3-й поверх) о 14:00.
+• Зв'язок: procurement@foe.gov.eg або лінія 19842.`;
+      } else {
+        return `إجراءات التسجيل في سجل الموردين والمناقصات المركزية:
+• سجل الموردين المعتمد: مفتوح للشركات والموردين المحليين والدوليين بإدارة التعاقدات الحكومية.
+• المستندات المطلوبة للتأهيل: السجل التجاري الساري، البطاقة الضريبية، القوائم المالية المعتمدة، وشهادات الجودة المعتمدة.
+• جلسات فتح المظاريف والبت: تعقد أسبوعياً بمقر الإدارة بتوكانو مول (الدور الثالث) بدءاً من الساعة 02:00 ظهراً.
+• للاستعلام وسحب كراسات الشروط: التواصل عبر البريد الرسمي procurement@foe.gov.eg أو عبر الخط الساخن 19842.`;
+      }
+    }
+
+    // 9. Quality, Food Safety & Specifications
+    if (
+      q.includes('جودة') || 
+      q.includes('سلامة الغذاء') || 
+      q.includes('سلامه الغذاء') || 
+      q.includes('هيئة سلامة الغذاء') || 
+      q.includes('مواصفات') || 
+      q.includes('معايير') || 
+      q.includes('فحص') || 
+      q.includes('تحليل') || 
+      q.includes('رقابة') || 
+      q.includes('quality') || 
+      q.includes('standards') || 
+      q.includes('food safety') || 
+      q.includes('nfsa') || 
+      q.includes('gafta') || 
+      q.includes('fosfa') || 
+      q.includes('jakość') || 
+      q.includes('якість')
+    ) {
+      if (lang === 'en') {
+        return `Quality & Food Safety Assurance Framework:
+• Regulatory Authority: All consignments comply with Egyptian National Food Safety Authority (NFSA) and EOS standards.
+• International Standards: Full compliance with CODEX Alimentarius, GAFTA (grains), and FOSFA (oils) grading.
+• 3-Tier Verification: Rigorous pre-shipment inspection at port of origin, onboard sampling, and accredited lab release upon arrival.
+• Zero Tolerance: Consignments failing biological or chemical thresholds are strictly rejected before port discharge.`;
+      } else if (lang === 'pl') {
+        return `Standardy Jakości i Bezpieczeństwa Żywności:
+• Nadzór: Pełna zgodność z normami Egipskiego Urzędu ds. Bezpieczeństwa Żywności (NFSA) i EOS.
+• Standardy międzynarodowe: Certyfikacja CODEX, reguły GAFTA (zboża) oraz FOSFA (oleje).
+• Trzystopniowa kontrola: Kontrola w porcie załadunku, badania próbek na statkach i testy laboratoryjne w portach egipskich.`;
+      } else if (lang === 'uk') {
+        return `Стандарти якості та безпечності харчової продукції:
+• Контроль: Сувора відповідність нормам Національного агентства безпечності харчових продуктів (NFSA).
+• Світові стандарти: Сертифікація за правилами GAFTA (зернові), FOSFA (олії) та CODEX Alimentarius.
+• Трирівнева перевірка: Інспекція в порту відправлення, лабораторний відбір на судні та фінальний аналіз у портах Єгипту.`;
+      } else {
+        return `معايير الجودة وسلامة الغذاء المعتمدة بإدارة الشراء الموحد:
+• الرقابة والاعتماد: خضوع كافة الشحنات الواردة لرقابة الهيئة القومية لسلامة الغذاء (NFSA) وهيئة المواصفات والجودة (EOS).
+• المعايير الدولية: الالتزام الصارم بلائحة الكودكس (CODEX Alimentarius)، وقواعد جافتا (GAFTA) للأقماح، وفوسفا (FOSFA) للزيوت.
+• الفحص الثلاثي الإلزامي: فحص وفحص مسبق بموانئ الشحن، فحص على متن البواخر، ثم سحب عينات وتحليل بمعامل وزارة الصحة والموانئ المصرية قبل الإفراج.
+• جودة وطنية: لا يتم استلام أي شحنة إلا بعد مطابقتها التامة لكافة الاشتراطات الفنية والصحية لحماية المستهلك المصري.`;
+      }
+    }
+
+    // 10. Silos, Storage & Logistics Network
+    if (
+      q.includes('صوامع') || 
+      q.includes('صومعة') || 
+      q.includes('تخزين') || 
+      q.includes('سعات') || 
+      q.includes('سعة') || 
+      q.includes('موانئ') || 
+      q.includes('ميناء') || 
+      q.includes('تفريغ') || 
+      q.includes('لوجستيات') || 
+      q.includes('سلاسل امداد') || 
+      q.includes('سلاسل الإمداد') || 
+      q.includes('غرامات') || 
+      q.includes('demurrage') || 
+      q.includes('silos') || 
+      q.includes('storage') || 
+      q.includes('ports') || 
+      q.includes('discharge') || 
+      q.includes('logistics') || 
+      q.includes('magazyn') || 
+      q.includes('елеватор')
+    ) {
+      if (lang === 'en') {
+        return `Silos & Integrated Port Logistics:
+• Smart Silos Network: Total aggregate storage capacity exceeding 5.5 Million Metric Tons equipped with temperature sensors and automated aeration.
+• Port Discharge Velocity: Fast daily discharge rate surpassing 45,000 MT/day across Alexandria, Damietta, Port Said, Dekheila, and Safaga.
+• Zero Demurrage: Advanced logistics scheduling reducing vessel idle times and eliminating costly maritime demurrage fees.`;
+      } else if (lang === 'pl') {
+        return `Silosy i Zintegrowana Logistyka Portowa:
+• Pojemność silosów: Ponad 5.5 mln ton metrycznych w nowoczesnych cyfrowych silosach w całym kraju.
+• Rozładunek portowy: Ponad 45 000 ton dziennie w portach Aleksandria, Damietta, Port Said i Safaga.
+• Zero opłat postojowych: Cyfrowe zarządzanie ruchem statków eliminujące kary demurrage.`;
+      } else if (lang === 'uk') {
+        return `Мережа елеваторів та портова логістика:
+• Місткість елеваторів: Понад 5.5 млн метричних тонн у сучасних цифрових зерносховищах.
+• Швидкість розвантаження: Понад 45 000 тонн на добу в портах Александрія, Дамієтта, Порт-Саїд та Сафага.
+• Нульовий демередж: Цифровий диспетчеринг суден для уникнення витрат на простій флоту.`;
+      } else {
+        return `منظومة الصوامع والقدرات اللوجستية لإدارة الشراء الموحد:
+• شبكة الصوامع الذكية: طاقة استيعابية تتجاوز 5.5 مليون طن متري مدعومة بأنظمة التحكم الرقمي والمراقبة الحرارية.
+• سرعة التفريغ بالموانئ: معدل تفريغ يتخطى 45 ألف طن يومياً بموانئ الإسكندرية، ودمياط، وبورسعيد، والدخيلة، وسفاجا.
+• مبادرة صفر غرامات تأخير (Zero Demurrage): إدارة تشغيلية متكاملة لدخول وتفريغ البواخر تمنع أي هدر بالعملة الأجنبية.
+• ربط رقمي متكامل: اتصال فوري بين موانئ التفريغ، ومجمعات الصوامع، وشبكة النقل بالسكك الحديدية والأسطول البري.`;
+      }
+    }
+
+    // 11. The 8 Internal Directorates (Must NOT trigger on single word 'ادارة')
+    if (
+      q.includes('ادارات') || 
+      q.includes('إدارات') || 
+      q.includes('هيكل') || 
+      q.includes('الهيكل') || 
+      q.includes('قطاعات') || 
+      q.includes('اقسام') || 
+      q.includes('أقسام') || 
+      q.includes('department') || 
+      q.includes('directorates') || 
+      q.includes('departament') || 
+      q.includes('департамент') || 
+      q.includes('структура') ||
+      (q.includes('الادارات') && q.includes('الثمانية')) ||
+      (q.includes('الإدارات') && q.includes('الثمانية'))
+    ) {
+      if (lang === 'en') {
+        return `The 8 Executive Internal Directorates of Mostaqbal Misr Unified Strategic Procurement:
+1. Government Contracting Directorate (التعاقدات الحكومية) — Bidding, sovereign tenders, and vendor accreditation.
+2. Legal Affairs Directorate (الإدارة القانونية) — International contracts drafting and dispute prevention.
+3. Foreign Commercial Directorate (الإدارة التجارية الخارجية) — Global commodity exchanges tracking and negotiations.
+4. Financial Directorate (المالية) — Budget allocations, letters of credit (LCs), and supplier payments.
+5. Supply Chain Directorate (إدارة سلاسل الإمداد) — Crop flow harmonization connecting New Delta with strategic reserves.
+6. Logistics Directorate (إدارة اللوجستيات) — Port operations, immediate discharge, and freight monitoring.
+7. Strategic Planning Directorate (إدارة التخطيط) — Strategic gap forecasting and annual consumption mapping.
+8. Domestic Trade Directorate (إدارة التجارة الداخلية) — Local market supply stabilization and essential commodity distribution.`;
+      } else if (lang === 'pl') {
+        return `8 Wewnętrznych Dyrekcji Wykonawczych:
+1. Dyrekcja ds. Zamówień Rządowych (Przetargi i rejestracja dostawców)
+2. Dyrekcja ds. Prawnych (Umowy międzynarodowe)
+3. Dyrekcja ds. Handlu Zagranicznego (Giełdy surowcowe i negocjacje)
+4. Dyrekcja Finansowa (Akredytywy i rozliczenia)
+5. Dyrekcja ds. Łańcucha Dostaw (Koordynacja z Nową Deltą)
+6. Dyrekcja Logistyki (Porty, rozładunek i transport)
+7. Dyrekcja ds. Planowania (Prognozy zapotrzebowania państwa)
+8. Dyrekcja ds. Handlu Wewnętrznego (Dystrybucja krajowa)`;
+      } else if (lang === 'uk') {
+        return `8 Внутрішніх Виконавчих Директоратів:
+1. Директорат урядових контрактів (Тендери та кваліфікація постачальників)
+2. Юридичний директорат (Міжнародні контракти та правовий захист)
+3. Директорат зовнішньої торгівлі (Моніторинг бірж та прямі закупівлі)
+4. Фінансовий директорат (Акредитиви та фінансові потоки)
+5. Директорат ланцюгів постачання (Інтеграція з проектом Нова Дельта)
+6. Директорат логістики (Портові операції та перевезення)
+7. Директорат стратегічного планування (Прогнозування потреб ринку)
+8. Директорат внутрішньої торгівлі (Стабілізація внутрішнього ринку)`;
+      } else {
+        return `الإدارات التنفيذية الثمانية المعتمدة داخل إدارة الشراء الموحد بجهاز مستقبل مصر:
+1. إدارة التعاقدات الحكومية: تنظيم وطرح وإدارة المناقصات الاستراتيجية واعتماد سجل الموردين.
+2. الإدارة القانونية: إعداد وصياغة العقود النموذجية الدولية وصون حقوق ومصالح الدولة.
+3. الإدارة التجارية الخارجية: رصد البورصات السلعية العالمية والتفاوض المباشر مع كبرى الشركات الدولية.
+4. الإدارة المالية: التخطيط المالي وتوفير السيولة والاعتمادات المستندية وحسابات الموردين.
+5. إدارة سلاسل الإمداد: تنظيم تدفق المحاصيل والربط المحكم مع إنتاجية الدلتا الجديدة ومجمعات الصناعات.
+6. إدارة اللوجستيات: إدارة عمليات الموانئ والتفريغ الفوري وتتبع أساطيل النقل وشبكة الصوامع.
+7. إدارة التخطيط: التخطيط الاستراتيجي لاحتياجات البلاد والتنبؤ بالفجوات السلعية ومعدلات الاستهلاك.
+8. إدارة التجارة الداخلية: توجيه التدفقات السلعية للأسواق وضبط حركة المعروض واستقرار الأسعار للمواطنين.`;
+      }
+    }
+
+    // 12. Strategic Vision, Cabinet Mandate & Governance
     if (
       q.includes('رؤية') || 
       q.includes('اهداف') || 
       q.includes('أهداف') || 
-      q.includes('vision') || 
       q.includes('اختصاص') || 
       q.includes('دور') || 
       q.includes('مجلس الوزراء') || 
       q.includes('وزراء') || 
+      q.includes('قرار') || 
       q.includes('قرارات') || 
       q.includes('مين انتو') || 
+      q.includes('مين انتم') || 
       q.includes('من انتم') || 
       q.includes('من أنتم') || 
+      q.includes('تأسيس') || 
       q.includes('who are you') || 
+      q.includes('vision') || 
+      q.includes('mandate') || 
+      q.includes('mission') || 
       q.includes('wizja') || 
       q.includes('візія') || 
       q.includes('мета')
     ) {
       if (lang === 'en') {
-        return `Strategic Vision of Mostaqbal Misr Unified Procurement Directorate:
-Pursuant to Egyptian Cabinet decrees and presidential directives, the Directorate is mandated to lead unified sovereign procurement of essential food commodities and grains.
-Core Strategic Pillars:
-1. Harmonizing mega-agricultural production across the 2.2M-feddan New Delta with smart direct international trading.
-2. Extending state strategic reserves to a secure 6 to 9 months buffer (wheat, oils, corn, sugar).
-3. Capturing foreign currency savings and optimizing payment facilities via bulk direct trading agreements.
-4. Expanding digital smart silos complexes and port logistics for zero demurrage and certified food safety.`;
+        return `Strategic Vision of Mostaqbal Misr Unified Strategic Procurement Directorate:
+Pursuant to presidential directives and Egyptian Cabinet decrees mandating the Future of Egypt Agency (FOE) for unified sovereign strategic procurement:
+1. Sovereign Integration: Seamless integration between the mega-agricultural output of the 2.2M-feddan New Delta and strategic global procurement.
+2. Long-term Security: Extending national strategic reserves to 6–9 months buffer across all essential food crops.
+3. Financial Optimization: Direct bulk contracting and advanced payment terms achieving significant foreign currency savings.
+4. Logistics Superiority: Operating automated modern silos and achieving zero port demurrage.`;
       } else if (lang === 'pl') {
-        return `Strategiczna Wizja Dyrekcji ds. Zunifikowanych Zakupów:
-Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta, Agencja Przyszłość Egiptu realizuje zunifikowane zakupy strategiczne:
-1. Połączenie gigantycznej produkcji rolniczej Nowej Delty (2.2 mln feddanów) z bezpośrednim handlem globalnym.
-2. Rozbudowa rezerw strategicznych kraju na 6–9 miesięcy (pszenica, oleje, kukurydza, cukier).
-3. Oszczędności walutowe i bezpośrednie kontrakty z międzynarodowymi partnerami handlowymi.
-4. Nowoczesne silosy cyfrowe i sprawna logistyka portowa bez opłat postojowych.`;
+        return `Strategiczna Wizja Dyrekcji ds. Zunifikowanych Zakupów Agencji Przyszłość Egiptu:
+Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta:
+1. Połączenie potężnej produkcji rolnej Nowej Delty (2.2 mln feddanów) ze strategicznym handlem globalnym.
+2. Bezpieczny poziom rezerw strategicznych państwa na 6 do 9 miesięcy.
+3. Oszczędności walutowe dzięki bezpośrednim zakupom hurtowym.
+4. Nowoczesne silosy cyfrowe i brak kar za opóźnienia w portach.`;
       } else if (lang === 'uk') {
-        return `Стратегічна візія Директорату єдиних закупівель:
-На виконання постанов Кабінету Міністрів та указів Президента Єгипту:
-1. Інтеграція масштабного агровиробництва Нової Дельти (2.2 млн федданів) із прямими міжнародними закупівлями.
-2. Формування гарантованого державного резерву базових культур на 6–9 місяців.
-3. Валютна оптимізація та довгострокові контракти з провідними світовими експортерами.
-4. Розбудова мережі цифрових елеваторів та ефективна логістика у портах.`;
+        return `Стратегічна візія Директорату єдиних закупівель Агентства Майбутнє Єгипту:
+Відповідно до указів Президента Єгипту та постанов Кабінету Міністрів:
+1. Об'єднання агропотенціалу Нової Дельти (2.2 млн feddanów) із прямими світовими закупівлями.
+2. Гарантування державних запасів продовольства на безпечні 6–9 місяців.
+3. Оптимізація валютних витрат завдяки масштабним прямим контрактам.
+4. Цифрові елеватори та швидка портова логістика без демереджу.`;
       } else {
         return `الرؤية الاستراتيجية لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
-إعمالاً لتوجيهات فخامة رئيس الجمهورية وقرار مجلس الوزراء بإنابة الجهاز في إدارة الشراء الموحد للسلع الاستراتيجية والأقماح:
-1. الربط والتكامل المباشر بين الإنتاج الزراعي والصناعي الضخم بمشروع الدلتا الجديدة (2.2 مليون فدان) والشراء المباشر الذكي.
+إعمالاً للتوجيهات الرئاسية وقرارات مجلس الوزراء بإنابة الجهاز في إدارة الشراء الموحد للسلع الاستراتيجية والحبوب:
+1. التكامل السيادي المباشر بين الإنتاج الزراعي والصناعي بمشروع الدلتا الجديدة (2.2 مليون فدان) والشراء المباشر الذكي.
 2. بناء مخزون استراتيجي آمن يغطي من 6 إلى 9 أشهر من القمح والزيوت والذرة والسكر.
 3. تحقيق وفورات دولارية نوعية عبر الشراء بالكميات المجمعة والاستفادة من تقلبات البورصات السلعية العالمية.
 4. إدارة سلاسل الإمداد اللوجستية وشبكة الصوامع الرقمية الذكية والتفريغ الفوري بالموانئ دون غرامات تأخير.`;
       }
     }
 
-    // 4. Departments Query
+    // 13. Polite Greetings & Courtesy
     if (
-      q.includes('ادارات') || 
-      q.includes('إدارات') || 
-      q.includes('ادارة') || 
-      q.includes('إدارة') || 
-      q.includes('اقسام') || 
-      q.includes('أقسام') || 
-      q.includes('department') || 
-      q.includes('departament') || 
-      q.includes('департамент') || 
-      q.includes('قطاعات') ||
-      q.includes('تعاقدات') ||
-      q.includes('قانونية') ||
-      q.includes('تجارية') ||
-      q.includes('مالية') ||
-      q.includes('تخطيط') ||
-      q.includes('داخلية') ||
-      q.includes('تجارة داخلية') ||
-      q.includes('planning') ||
-      q.includes('domestic') ||
-      q.includes('supply chain') ||
-      q.includes('logistics')
+      q.includes('سلام') || 
+      q.includes('السلام عليكم') || 
+      q.includes('صباح') || 
+      q.includes('مساء') || 
+      q.includes('شكرا') || 
+      q.includes('شكراً') || 
+      q.includes('أهلا') || 
+      q.includes('اهلا') || 
+      q.includes('مرحبا') || 
+      q.includes('ازيك') || 
+      q.includes('عامل ايه') || 
+      q.includes('hello') || 
+      q.includes('hi') || 
+      q.includes('good morning') || 
+      q.includes('good evening') || 
+      q.includes('thank') || 
+      q.includes('thanks') || 
+      q.includes('dzień dobry') || 
+      q.includes('dziękuj') || 
+      q.includes('привіт') || 
+      q.includes('дякую')
     ) {
       if (lang === 'en') {
-        return `The 8 Executive Internal Directorates of Mostaqbal Misr Unified Procurement:
-1. Government Contracting Directorate (التعاقدات الحكومية)
-2. Legal Affairs Directorate (الإدارة القانونية)
-3. Foreign Commercial Directorate (الإدارة التجارية الخارجية)
-4. Financial Directorate / Finance (المالية)
-5. Supply Chain Directorate (إدارة سلاسل الإمداد)
-6. Logistics Directorate (إدارة اللوجستيات)
-7. Planning Directorate (إدارة التخطيط)
-8. Domestic Trade Directorate (إدارة التجارة الداخلية)`;
+        return `Welcome to the Unified Strategic Procurement Directorate of Future of Egypt Agency (FOE).
+I am at your service to assist you with:
+• Official working hours and headquarters location (Tucano Mall).
+• Weekly procurement committees schedule (Rice on Sundays, Cattle on Tuesdays, Shrimp on Mondays).
+• National strategic commodity reserves coverage.
+• Supplier registration guidelines and tender procedures.
+How can I assist you today?`;
       } else if (lang === 'pl') {
-        return `8 Wewnętrznych Dyrekcji Wykonawczych:
-1. Dyrekcja ds. Zamówień Rządowych
-2. Dyrekcja ds. Prawnych
-3. Dyrekcja ds. Handlu Zagranicznego
-4. Dyrekcja Finansowa
-5. Dyrekcja ds. Łańcucha Dostaw (Supply Chain)
-6. Dyrekcja Logistyki
-7. Dyrekcja ds. Planowania
-8. Dyrekcja ds. Handlu Wewnętrznego`;
+        return `Witamy w Dyrekcji ds. Zunifikowanych Zakupów Agencji Przyszłość Egiptu.
+Służę pomocą w zakresie:
+• Oficjalnych godzin pracy i siedziby (Tucano Mall).
+• Harmonogramu cotygodniowych komisji przetargowych.
+• Stanu rezerw strategicznych kraju.
+• Rejestracji dostawców i udziału w przetargach.
+W czym mogę dziś pomóc?`;
       } else if (lang === 'uk') {
-        return `8 Внутрішніх Виконавчих Директоратів:
-1. Директорат урядових контрактів
-2. Юридичний директорат
-3. Директорат зовнішньої торгівлі
-4. Фінансовий директорат (Finance)
-5. Директорат ланцюгів постачання (Supply Chain)
-6. Директорат логістики
-7. Директорат планування
-8. Директорат внутрішньої торгівлі`;
+        return `Ласкаво просимо до Директорату єдиних закупівель Агентства Майбутнє Єгипту.
+Я готовий допомогти вам у таких питаннях:
+• Години роботи та розташування штаб-квартири (Tucano Mall).
+• Графік щотижневих закупівельних комісій.
+• Стан стратегічних державних запасів.
+• Процедури акредитації постачальників та тендери.
+Чим можу бути корисним?`;
       } else {
-        return `الإدارات التنفيذية الثمانية المعتمدة داخل إدارة الشراء الموحد بجهاز مستقبل مصر:
-1. التعاقدات الحكومية (تنظيم وطرح وإدارة المناقصات الاستراتيجية)
-2. الإدارة القانونية (الصياغات التعاقدية وحماية حقوق الدولة)
-3. الإدارة التجارية الخارجية (التفاوض الدولي ورصد البورصات السلعية)
-4. المالية (التخطيط المالي وتوفير السيولة والاعتمادات المستندية)
-5. إدارة سلاسل الإمداد — Supply Chain (التدفقات السلعية والربط مع الدلتا)
-6. إدارة اللوجستيات — Logistics (عمليات الموانئ والتفريغ الفوري والصوامع)
-7. إدارة التخطيط (التخطيط الاستراتيجي لاحتياجات الدولة والتنبؤ بالفجوة السلعية)
-8. إدارة التجارة الداخلية (توزيع التدفقات السلعية ومتابعة استقرار الأسواق المحلية)`;
+        return `أهلاً وسهلاً بك في إدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة.
+أنا في خدمتك لتقديم كافة البيانات المعتمدة حول:
+• مواعيد وساعات العمل الرسمية ومقر الإدارة (توكانو مول).
+• جدول لجان البت والتوريد الأسبوعية (الأرز كل أحد، والرؤوس الحية كل ثلاثاء، والجمبري كل اثنين).
+• مؤشرات المخزون الاستراتيجي والأرصدة التموينية.
+• شروط التسجيل في سجل الموردين والمناقصات.
+كيف يمكنني مساعدتك اليوم؟`;
       }
     }
 
-    // 5. Working Hours & Operation Schedule
-    if (
-      q.includes('ساعات العمل') || 
-      q.includes('مواعيد العمل') || 
-      q.includes('أوقات العمل') || 
-      q.includes('وقت العمل') || 
-      q.includes('ساعات') || 
-      q.includes('دوام') || 
-      q.includes('شغالين') || 
-      q.includes('فاتحين') || 
-      q.includes('working hours') || 
-      q.includes('work time') || 
-      q.includes('hours') || 
-      q.includes('godziny') || 
-      q.includes('години')
-    ) {
-      if (lang === 'en') {
-        return `Official Working Hours of Mostaqbal Misr Unified Procurement Directorate:
-• Days: Sunday to Thursday (Everyday except Friday & Saturday).
-• Working Time: 09:00 AM – 05:00 PM (9 to 5).
-• Official Weekend: Friday & Saturday.
-• Procurement & Bidding Committees: Kick off at 02:00 PM.
-Venue: Tucano Mall - Yousef Abbas St. - Nasr City - Cairo.`;
-      } else if (lang === 'pl') {
-        return `Oficjalne Godziny Pracy Dyrekcji ds. Zakupów:
-• Dni robocze: Od niedzieli do czwartku.
-• Godziny: 09:00 – 17:00 (od 9 do 17).
-• Weekend: Piątek i sobota.
-• Rozpoczęcie posiedzeń komisji: Godzina 14:00.
-Siedziba: Tucano Mall - Nasr City - Kair.`;
-      } else if (lang === 'uk') {
-        return `Офіційні години роботи Директорату закупівель:
-• Робочі дні: З неділі по четвер.
-• Години роботи: 09:00 – 17:00 (з 9 до 17).
-• Вихідні: П'ятниця та субота.
-• Засідання комісій: Рівно о 14:00.
-Штаб-квартира: Tucano Mall - Наср-Сіті - Каїр.`;
-      } else {
-        return `مواعيد وساعات العمل الرسمية لإدارة الشراء الموحد بجهاز مستقبل مصر:
-• أيام العمل: من الأحد إلى الخميس أسبوعياً (يومياً عدا الجمعة والسبت).
-• ساعات العمل: من الساعة 09:00 صباحاً حتى 05:00 مساءً (من 9 إلى 5).
-• العطلة الأسبوعية الرسمية: يومي الجمعة والسبت.
-• جلسات لجان البت والتوريد: تبدأ في تمام الساعة 02:00 ظهراً (الأحد، الاثنين، الثلاثاء حسب الجدول المعتمد).
-المقر الرئيسي: توكانو مول - شارع يوسف عباس - مدينة نصر - القاهرة.`;
-      }
-    }
-
-    // 6. Address & Headquarters Query
-    if (q.includes('مقر') || q.includes('عنوان') || q.includes('مكان') || q.includes('توكانو') || q.includes('مدينة نصر') || q.includes('دور') || q.includes('floor') || q.includes('address') || q.includes('location') || q.includes('siedzib') || q.includes('адрес') || q.includes('офіс') || q.includes('map') || q.includes('خريطة')) {
-      if (lang === 'en') {
-        return `Official Main Headquarters of Mostaqbal Misr Unified Procurement Directorate:
-Location: Tucano Mall — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
-Google Maps: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
-Working Hours: Sunday to Thursday (09:00 AM – 05:00 PM).
-Direct Hotline: 19842 | Email: procurement@foe.gov.eg`;
-      } else if (lang === 'pl') {
-        return `Oficjalna Główna Siedziba Dyrekcji ds. Zakupów:
-Adres: Tucano Mall — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
-Godziny pracy: Niedziela – Czwartek (09:00 – 17:00).
-Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
-      } else if (lang === 'uk') {
-        return `Офіційний головний офіс Директорату закупівель:
-Адреса: Tucano Mall — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
-Години роботи: Неділя – Четвер (09:00 – 17:00).
-Гаряча лінія: +20 19842 | Email: procurement@foe.gov.eg`;
-      } else {
-        return `المقر الرسمي الرئيسي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة:
-العنوان: توكانو مول — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
-رابط خرائط Google: https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo
-مواعيد العمل: من الأحد إلى الخميس (من 09:00 صباحاً حتى 05:00 مساءً).
-الخط الساخن: 19842 | البريد الرسمي: procurement@foe.gov.eg`;
-      }
-    }
-
-    // 6. Strategic Pillars
-    if (q.includes('ركائز') || q.includes('pillars') || q.includes('filarów') || q.includes('стовп')) {
-      if (lang === 'en') {
-        return `The 6 Strategic Pillars of Mostaqbal Misr Unified Procurement:
-1. Commodity security, controlled pricing, and certified quality.
-2. Fortifying state strategic reserves of essential crops & commodities.
-3. Regulating price fluctuations through supply augmentation.
-4. Rigorous quality auditing ensuring citizen safety.
-5. Diversifying import origins to mitigate supply chain risks.
-6. Professional high-level negotiation achieving foreign currency savings.`;
-      } else if (lang === 'pl') {
-        return `Sześć Strategicznych Filarów:
-1. Bezpieczeństwo towarowe, kontrola cen i certyfikowana jakość.
-2. Wzmocnienie państwowych rezerw strategicznych.
-3. Stabilizacja cen poprzez zwiększenie podaży.
-4. Rygorystyczna kontrola jakości w portach.
-5. Dywersyfikacja źródeł importu z ponad 18 krajów.
-6. Profesjonalne negocjacje przynoszące oszczędności walutowe.`;
-      } else if (lang === 'uk') {
-        return `Шість стратегічних стовпів Директорату єдиних закупівель:
-1. Товарна безпека, контрольовані ціни та гарантована якість.
-2. Зміцнення державних резервів зернових та олійних культур.
-3. Регулювання цін шляхом збільшення товарної пропозиції.
-4. Суворий контроль якості в портах та референс-лабораторіях.
-5. Диверсифікація імпорту з понад 18 країн світу.
-6. Валютна оптимізація через масштабні прямі контракти.`;
-      } else {
-        return `الركائز الاستراتيجية الست المعتمدة للشراء الموحد:
-1. أمن سلعي.. وأسعار منضبطة.. وجودة مضمونة.
-2. تعزيز مخزون الدولة من السلع والمحاصيل الأساسية والاستراتيجية.
-3. ضبط حركة الأسعار من خلال زيادة المعروض في الأسواق.
-4. مراجعة الجودة لضمان سلع آمنة وصحية للمواطنين.
-5. تنويع مناشئ الاستيراد لضمان استمرارية الإمدادات وتقليل المخاطر.
-6. تفاوض احترافي يحقق وفر دولاري للدولة ويحسن شروط التوريد.`;
-      }
-    }
-
-    // 7. Reserves
-    if (q.includes('مخزون') || q.includes('reserve') || q.includes('rezerw') || q.includes('резерв') || q.includes('قمح') || q.includes('wheat') || q.includes('كم يغطي')) {
-      if (lang === 'en') {
-        return `Strategic Reserves Buffer:
-• Milling Wheat: 7.8 months safe coverage (5.8M MT).
-• Vegetable Oils: 6.9 months buffer (1.4M MT).
-• Sugar: 8.2 months (supported by New Delta factories).
-• Yellow Corn: 6.2 months.`;
-      } else if (lang === 'pl') {
-        return `Poziom Rezerw Strategicznych:
-• Pszenica: 7.8 miesięcy (5.8 mln ton).
-• Oleje Roślinne: 6.9 miesięcy (1.4 mln ton).
-• Cukier: 8.2 miesięcy.
-• Kukurydza: 6.2 miesięcy.`;
-      } else if (lang === 'uk') {
-        return `Рівень стратегічних запасів Єгипту:
-• Пшениця: 7.8 місяців (5.8 млн тонн).
-• Рослинні олії: 6.9 місяців (1.4 млн тонн).
-• Цукор: 8.2 місяців.
-• Кукурудза: 6.2 місяців.`;
-      } else {
-        return `مؤشرات أرصدة السلع والمخزون الاستراتيجي لجهاز مستقبل مصر:
-• القمح الطاحن: يغطي 7.8 أشهر (بإجمالي 5.8 مليون طن).
-• الزيوت النباتية: تغطي 6.9 أشهر (بإجمالي 1.4 مليون طن).
-• السكر: يغطي 8.2 أشهر (طفرة اكتفاء بدعم مصانع الدلتا الجديدة).
-• الذرة الصفراء: تغطي 6.2 أشهر.`;
-      }
-    }
-
-    // Default response
+    // 14. Fallback Default Response
     if (lang === 'en') {
-      return `Welcome to Mostaqbal Misr Unified Strategic Procurement Directorate. We lead sovereign commodity procurement, national strategic reserves, and weekly procurement committees (Rice on Sundays & Shrimp/Cattle on Mondays). Main HQ: Tucano Mall - Yousef Abbas St. - Nasr City - Cairo.`;
+      return `Welcome to Mostaqbal Misr Unified Strategic Procurement Directorate.
+We lead sovereign commodity procurement, national strategic reserves, and weekly procurement committees (Rice on Sundays, Cattle on Tuesdays, Shrimp on Mondays at 02:00 PM).
+• Main HQ: Tucano Commercial Complex — Floor 3 — Yousef Abbas St. — Nasr City — Cairo.
+• Direct Hotline: 19842 | Email: procurement@foe.gov.eg
+• Working Hours: Sunday to Thursday (09:00 AM – 05:00 PM).
+You can inquire about committees, strategic reserves, quality standards, or supplier registration.`;
     } else if (lang === 'pl') {
-      return `Witamy w Dyrekcji ds. Zunifikowanych Zakupów Agencji Przyszłość Egiptu. Prowadzimy cotygodniowe komisje przetargowe (Ryż w niedziele, Bydło we wtorki, Krewetki w poniedziałki). Główna siedziba: Tucano Mall - 3. piętro - Nasr City - Kair.`;
+      return `Witamy w Dyrekcji ds. Zunifikowanych Zakupów Agencji Przyszłość Egiptu.
+Prowadzimy zunifikowane zakupy strategiczne, rezerwy państwowe oraz cotygodniowe posiedzenia komisji przetargowych.
+• Siedziba: Tucano Mall — 3. piętro — ul. Yousef Abbas — Nasr City — Kair.
+• Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg
+• Godziny pracy: Niedziela – Czwartek (09:00 – 17:00).
+Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
     } else if (lang === 'uk') {
-      return `Ласкаво просимо до Директорату єдиних закупівель Агентства Майбутнє Єгипту. Проводимо щотижневі комісії (Рис щонеділі, Худоба щовівторка, Креветки щопонеділка). Головний офіс: Tucano Mall - 3-й поверх - Наср-Сіті - Каїр.`;
+      return `Ласкаво просимо до Директорату єдиних закупівель Агентства Майбутнє Єгипту.
+Ми керуємо державними стратегічними закупівлями, резервами базових культур та щотижневими комісіями.
+• Штаб-квартира: Tucano Mall — 3-й поверх — вул. Юсефа Аббаса — Наср-Сіті — Каїр.
+• Гаряча лінія: +20 19842 | Email: procurement@foe.gov.eg
+• Години роботи: Неділя – Четвер (09:00 – 17:00).
+Ви можете дізнатися про графік комісій, обсяги резервів або умови реєстрації постачальників.`;
     } else {
-      return `أهلاً بكم في إدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. تتولى الإدارة إدارة التعاقدات وجلسات اللجان الأسبوعية (لجنة الأرز كل أحد، ولجنة الرؤوس الحية كل ثلاثاء، ولجنة الجمبري كل اثنين). مقرنا: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر.`;
+      return `أهلاً بكم في إدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة.
+تتولى الإدارة التعاقدات السيادية وبناء المخزون الاستراتيجي للدولة وجلسات اللجان الأسبوعية (الأرز كل أحد، والرؤوس الحية كل ثلاثاء، والجمبري كل اثنين في تمام الساعة 02:00 ظهراً).
+• المقر الرئيسي: توكانو مول — الدور الثالث — شارع يوسف عباس — مدينة نصر — القاهرة.
+• الخط الساخن: 19842 | البريد الرسمي: procurement@foe.gov.eg
+• مواعيد الدوام: من الأحد إلى الخميس (09:00 صباحاً – 05:00 مساءً).
+يمكنك السؤال عن: جدول اللجان، مؤشرات المخزون، سجل الموردين، أو معايير الجودة والصوامع.`;
     }
   };
 
