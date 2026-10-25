@@ -9,6 +9,7 @@ import {
   MapPin
 } from 'lucide-react';
 import { PORTAL_INFO, NAV_LINKS } from '../data/portalData';
+import { FacebookIcon, LinkedInIcon, XTwitterIcon } from './SocialIcons';
 
 export default function Footer({ lang, theme, onScrollTo }) {
   const isAr = lang === 'ar';
@@ -90,8 +91,8 @@ export default function Footer({ lang, theme, onScrollTo }) {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-sm shadow-sm flex-shrink-0">
-                    f
+                  <div className="w-8 h-8 rounded-xl bg-[#1877F2] text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <FacebookIcon className="w-4.5 h-4.5" />
                   </div>
                   <div className={isAr ? 'text-right' : 'text-left'}>
                     <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors">
@@ -117,8 +118,8 @@ export default function Footer({ lang, theme, onScrollTo }) {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center font-black text-xs shadow-sm flex-shrink-0">
-                    in
+                  <div className="w-8 h-8 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <LinkedInIcon className="w-4.5 h-4.5" />
                   </div>
                   <div className={isAr ? 'text-right' : 'text-left'}>
                     <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-sky-500 transition-colors">
@@ -144,8 +145,8 @@ export default function Footer({ lang, theme, onScrollTo }) {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center font-black text-xs shadow-sm flex-shrink-0">
-                    𝕏
+                  <div className="w-8 h-8 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <XTwitterIcon className="w-4 h-4" />
                   </div>
                   <div className={isAr ? 'text-right' : 'text-left'}>
                     <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">

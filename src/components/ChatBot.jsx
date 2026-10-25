@@ -20,6 +20,7 @@ import {
   Award
 } from 'lucide-react';
 import { PORTAL_INFO } from '../data/portalData';
+import { FacebookIcon, LinkedInIcon, XTwitterIcon } from './SocialIcons';
 
 export default function ChatBot({ lang, theme }) {
   const isAr = lang === 'ar';
@@ -606,36 +607,33 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
               <Share2 className="w-3 h-3 text-amber-500 flex-shrink-0" />
               <span className="truncate">{isAr ? 'منصات التواصل الرسمية:' : 'Official Channels:'}</span>
             </span>
-            <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
+            <div className="flex items-center gap-1.5 flex-shrink-0">
               <a 
                 href={info.facebookUrl} 
                 target="_blank" 
                 rel="noreferrer"
                 title="Facebook"
-                className="px-1.5 sm:px-2 py-0.5 rounded-md bg-blue-600/10 hover:bg-blue-600 text-blue-600 hover:text-white font-bold text-[10px] transition-all flex items-center gap-1 border border-blue-500/20"
+                className="w-6 h-6 rounded-lg bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white transition-all flex items-center justify-center border border-[#1877F2]/25 shadow-2xs cursor-pointer"
               >
-                <span>FB</span>
-                <ExternalLink className="w-2.5 h-2.5" />
+                <FacebookIcon className="w-3.5 h-3.5" />
               </a>
               <a 
                 href={info.linkedinUrl} 
                 target="_blank" 
                 rel="noreferrer"
                 title="LinkedIn"
-                className="px-1.5 sm:px-2 py-0.5 rounded-md bg-sky-600/10 hover:bg-sky-600 text-sky-600 hover:text-white font-bold text-[10px] transition-all flex items-center gap-1 border border-sky-500/20"
+                className="w-6 h-6 rounded-lg bg-[#0A66C2]/10 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white transition-all flex items-center justify-center border border-[#0A66C2]/25 shadow-2xs cursor-pointer"
               >
-                <span>IN</span>
-                <ExternalLink className="w-2.5 h-2.5" />
+                <LinkedInIcon className="w-3.5 h-3.5" />
               </a>
               <a 
                 href={info.twitterUrl} 
                 target="_blank" 
                 rel="noreferrer"
                 title="Twitter / X"
-                className="px-1.5 sm:px-2 py-0.5 rounded-md bg-slate-500/10 hover:bg-slate-900 hover:text-white text-slate-700 dark:text-slate-300 font-bold text-[10px] transition-all flex items-center gap-1 border border-slate-500/20"
+                className="w-6 h-6 rounded-lg bg-slate-500/10 hover:bg-slate-950 hover:text-white dark:hover:bg-white dark:hover:text-slate-950 text-slate-800 dark:text-slate-200 transition-all flex items-center justify-center border border-slate-500/25 shadow-2xs cursor-pointer"
               >
-                <span>X</span>
-                <ExternalLink className="w-2.5 h-2.5" />
+                <XTwitterIcon className="w-3 h-3" />
               </a>
             </div>
           </div>
@@ -671,18 +669,24 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                         href={info.facebookUrl} 
                         target="_blank" 
                         rel="noreferrer"
-                        className="p-2.5 rounded-xl border border-blue-500/30 bg-blue-500/5 hover:bg-blue-500/15 transition-all flex items-center justify-between gap-2 group text-slate-900 dark:text-white"
+                        className="p-3 rounded-2xl border border-blue-500/30 bg-blue-500/5 hover:bg-blue-500/15 hover:border-blue-500 transition-all flex items-center justify-between gap-3 group text-slate-900 dark:text-white shadow-2xs"
                       >
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs">
-                            f
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-9 h-9 rounded-xl bg-[#1877F2] text-white flex items-center justify-center shadow-md shadow-[#1877F2]/25 flex-shrink-0 group-hover:scale-105 transition-transform">
+                            <FacebookIcon className="w-5 h-5" />
                           </div>
-                          <div>
-                            <div className="text-xs font-bold">{isAr ? 'الصفحة الرسمية على فيسبوك' : 'Official Facebook Page'}</div>
-                            <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">@foe.eg</div>
+                          <div className="min-w-0">
+                            <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                              {isAr ? 'الصفحة الرسمية على فيسبوك' : 'Official Facebook Page'}
+                            </div>
+                            <div className="text-[11px] text-blue-600 dark:text-blue-400 font-mono font-medium truncate mt-0.5">
+                              @foe.eg
+                            </div>
                           </div>
                         </div>
-                        <ExternalLink className="w-3.5 h-3.5 text-blue-500 group-hover:translate-x-0.5 transition-transform" />
+                        <div className="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </div>
                       </a>
 
                       {/* LinkedIn Card */}
@@ -690,18 +694,24 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                         href={info.linkedinUrl} 
                         target="_blank" 
                         rel="noreferrer"
-                        className="p-2.5 rounded-xl border border-sky-500/30 bg-sky-500/5 hover:bg-sky-500/15 transition-all flex items-center justify-between gap-2 group text-slate-900 dark:text-white"
+                        className="p-3 rounded-2xl border border-sky-500/30 bg-sky-500/5 hover:bg-sky-500/15 hover:border-sky-500 transition-all flex items-center justify-between gap-3 group text-slate-900 dark:text-white shadow-2xs"
                       >
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-lg bg-[#0A66C2] text-white flex items-center justify-center font-bold text-xs">
-                            in
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-9 h-9 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center shadow-md shadow-[#0A66C2]/25 flex-shrink-0 group-hover:scale-105 transition-transform">
+                            <LinkedInIcon className="w-5 h-5" />
                           </div>
-                          <div>
-                            <div className="text-xs font-bold">{isAr ? 'المنصة الرسمية على لينكد إن' : 'Official LinkedIn Profile'}</div>
-                            <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Future of Egypt Agency</div>
+                          <div className="min-w-0">
+                            <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                              {isAr ? 'المنصة الرسمية على لينكد إن' : 'Official LinkedIn Profile'}
+                            </div>
+                            <div className="text-[11px] text-sky-600 dark:text-sky-400 font-mono font-medium truncate mt-0.5">
+                              Future of Egypt Agency
+                            </div>
                           </div>
                         </div>
-                        <ExternalLink className="w-3.5 h-3.5 text-sky-500 group-hover:translate-x-0.5 transition-transform" />
+                        <div className="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center flex-shrink-0 group-hover:bg-[#0A66C2] group-hover:text-white transition-colors">
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </div>
                       </a>
 
                       {/* Twitter / X Card */}
@@ -709,18 +719,24 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                         href={info.twitterUrl} 
                         target="_blank" 
                         rel="noreferrer"
-                        className="p-2.5 rounded-xl border border-slate-500/30 bg-slate-500/5 hover:bg-slate-500/15 transition-all flex items-center justify-between gap-2 group text-slate-900 dark:text-white"
+                        className="p-3 rounded-2xl border border-slate-300 dark:border-slate-700/80 bg-slate-500/5 hover:bg-slate-500/15 hover:border-slate-800 dark:hover:border-slate-400 transition-all flex items-center justify-between gap-3 group text-slate-900 dark:text-white shadow-2xs"
                       >
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold text-xs">
-                            𝕏
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-9 h-9 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center shadow-md shadow-black/25 flex-shrink-0 group-hover:scale-105 transition-transform">
+                            <XTwitterIcon className="w-4 h-4" />
                           </div>
-                          <div>
-                            <div className="text-xs font-bold">{isAr ? 'الحساب الرسمي على منصة X (تويتر)' : 'Official X (Twitter) Account'}</div>
-                            <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">@futureofegypt_</div>
+                          <div className="min-w-0">
+                            <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                              {isAr ? 'الحساب الرسمي على منصة X (تويتر)' : 'Official X (Twitter) Account'}
+                            </div>
+                            <div className="text-[11px] text-slate-600 dark:text-slate-400 font-mono font-medium truncate mt-0.5">
+                              @futureofegypt_
+                            </div>
                           </div>
                         </div>
-                        <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                        <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-950 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-colors">
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </div>
                       </a>
 
                     </div>
