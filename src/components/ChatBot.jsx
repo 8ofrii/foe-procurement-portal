@@ -28,8 +28,7 @@ export default function ChatBot({ lang, theme }) {
   const isAr = lang === 'ar';
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
   const [isOpen, setIsOpen] = useState(false);
-  const [chatSize, setChatSize] = useState('normal'); // 'compact' | 'normal' | 'expanded'
-  const isExpanded = chatSize === 'expanded';
+  const [isExpanded, setIsExpanded] = useState(false);
   const [copiedId, setCopiedId] = useState(null);
 
   const handleCopy = (id, text) => {
@@ -1128,7 +1127,7 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
       {/* Dimmed backdrop when expanded to center of page */}
       {isOpen && isExpanded && (
         <div 
-          onClick={() => setChatSize('normal')}
+          onClick={() => setIsExpanded(false)}
           className="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 transition-opacity duration-300 animate-fadeIn"
           aria-hidden="true"
         />
@@ -1141,11 +1140,9 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
           aria-modal="true" 
           aria-label={isAr ? "المساعد الذكي لبوابة الشراء الموحد" : "Smart Procurement Assistant"} 
           className={`fixed z-50 border shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl transition-all duration-300 ease-out animate-fadeIn ${
-            chatSize === 'compact'
-              ? 'bottom-3 sm:bottom-5 left-2 right-2 sm:left-auto sm:right-6 w-auto sm:w-[380px] h-[calc(100dvh-28px)] sm:h-[490px] max-h-[82dvh] sm:max-h-[76vh] rounded-2xl shadow-2xl'
-              : chatSize === 'expanded'
-                ? 'inset-2 sm:inset-6 md:inset-8 lg:inset-10 max-w-4xl w-auto h-[calc(100dvh-16px)] sm:h-[84vh] max-h-[800px] m-auto rounded-2xl sm:rounded-3xl shadow-2xl'
-                : 'bottom-3 sm:bottom-5 left-2 right-2 sm:left-auto sm:right-6 w-auto sm:w-[450px] max-w-[calc(100vw-20px)] h-[calc(100dvh-28px)] sm:h-[590px] max-h-[88dvh] sm:max-h-[82vh] rounded-2xl sm:rounded-3xl shadow-2xl'
+            isExpanded
+              ? 'inset-2 sm:inset-6 md:inset-8 lg:inset-10 max-w-4xl w-auto h-[calc(100dvh-16px)] sm:h-[84vh] max-h-[800px] m-auto rounded-2xl sm:rounded-3xl shadow-2xl'
+              : 'bottom-3 sm:bottom-5 left-2 right-2 sm:left-auto sm:right-6 w-auto sm:w-[450px] max-w-[calc(100vw-20px)] h-[calc(100dvh-28px)] sm:h-[590px] max-h-[88dvh] sm:max-h-[82vh] rounded-2xl sm:rounded-3xl shadow-2xl'
           } ${
             theme === 'dark' 
               ? 'bg-slate-950/95 border-amber-500/30 text-slate-100 shadow-black/80' 
@@ -1181,49 +1178,8 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
               </div>
             </div>
 
-            {/* Header Controls: Size Selector & Actions */}
+            {/* Header Controls: Maximize & Actions */}
             <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
-              
-              {/* 3 Size Selector Pills */}
-              <div className="flex items-center gap-0.5 bg-slate-200/70 dark:bg-slate-900/90 p-0.5 rounded-lg border border-slate-300 dark:border-slate-800 text-[10px] font-bold">
-                <button
-                  type="button"
-                  onClick={() => setChatSize('compact')}
-                  className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                    chatSize === 'compact'
-                      ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
-                      : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                  title={isAr ? 'حجم مدمج (Compact)' : 'Compact View'}
-                >
-                  {isAr ? 'مدمج' : 'S'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setChatSize('normal')}
-                  className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                    chatSize === 'normal'
-                      ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
-                      : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                  title={isAr ? 'حجم قياسي (Normal)' : 'Normal View'}
-                >
-                  {isAr ? 'عادي' : 'M'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setChatSize('expanded')}
-                  className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                    chatSize === 'expanded'
-                      ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
-                      : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                  title={isAr ? 'تكبير النافذة (Expanded Studio)' : 'Expanded View'}
-                >
-                  {isAr ? 'مكبّر' : 'L'}
-                </button>
-              </div>
-
               {/* Reset Conversation */}
               <button
                 onClick={handleResetChat}
@@ -1234,9 +1190,19 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
 
+              {/* Maximize / Restore Toggle (as in the past) */}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                type="button"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                title={isAr ? (isExpanded ? 'استعادة الحجم العادي' : 'تكبير وتوسيط النافذة') : (isExpanded ? 'Restore Normal Size' : 'Maximize Window')}
+              >
+                {isExpanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+              </button>
+
               {/* Close */}
               <button
-                onClick={() => { setIsOpen(false); setChatSize('normal'); }}
+                onClick={() => { setIsOpen(false); setIsExpanded(false); }}
                 type="button"
                 className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 title={isAr ? 'إغلاق' : 'Close'}
@@ -1336,7 +1302,7 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                         <span>{isAr ? 'جدول ومواعيد لجان البت والتوريد المعتمدة:' : 'Official Procurement Committees Schedule:'}</span>
                       </div>
 
-                      <div className={`grid ${chatSize === 'expanded' ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1'} gap-2`}>
+                      <div className={`grid ${isExpanded ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1'} gap-2`}>
                         {/* Sunday Rice */}
                         <div className="p-2.5 sm:p-3 rounded-xl border border-amber-500/30 bg-amber-500/5 space-y-1">
                           <div className="flex items-center gap-1.5 font-bold text-xs text-amber-700 dark:text-amber-400">
