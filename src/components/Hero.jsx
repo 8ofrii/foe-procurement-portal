@@ -102,40 +102,41 @@ export default function Hero({ lang, theme, onScrollTo }) {
         {/* Soft luxury vignettes and gradient protection for crystal clear text */}
         <div className={`absolute inset-0 ${
           theme === 'dark' 
-            ? 'bg-gradient-to-b from-slate-950/80 via-slate-950/45 to-slate-950/95' 
-            : 'bg-gradient-to-b from-white/80 via-white/35 to-white/90'
+            ? 'bg-gradient-to-b from-slate-950/85 via-slate-950/55 to-slate-950' 
+            : 'bg-gradient-to-b from-white/90 via-white/70 to-white/95'
         }`}></div>
         {/* Ambient gold glow core */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
+      {/* Floating Video Play/Pause Control Button Pinned to Corner (Bottom Left) */}
+      <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-30 pointer-events-auto">
+        <button
+          onClick={toggleVideoPlayback}
+          type="button"
+          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border transition-all cursor-pointer backdrop-blur-md shadow-lg ${
+            theme === 'dark'
+              ? 'bg-slate-950/85 border-slate-700/80 text-slate-200 hover:text-amber-400 hover:border-amber-400 shadow-black/60'
+              : 'bg-white/95 border-slate-300 text-slate-800 hover:text-amber-700 hover:border-amber-500 shadow-slate-300/80'
+          }`}
+          title={isPlaying ? (isAr ? 'إيقاف الفيديو مؤقتاً' : 'Pause Video') : (isAr ? 'تشغيل الفيديو' : 'Play Video')}
+        >
+          <span className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`}></span>
+          {isPlaying ? (
+            <>
+              <Pause className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+              <span>{isAr ? 'خلفية سينمائية' : 'Live Motion'}</span>
+            </>
+          ) : (
+            <>
+              <Play className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+              <span>{isAr ? 'تشغيل الفيديو' : 'Play Video'}</span>
+            </>
+          )}
+        </button>
+      </div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-4">
-        {/* Floating Live Video Status Indicator & Toggle Pill */}
-        <div className="flex justify-end mb-2">
-          <button
-            onClick={toggleVideoPlayback}
-            type="button"
-            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer backdrop-blur-md shadow-sm ${
-              theme === 'dark'
-                ? 'bg-slate-950/80 border-slate-700/80 text-slate-300 hover:text-amber-400 hover:border-amber-400'
-                : 'bg-white/85 border-slate-300 text-slate-700 hover:text-amber-700 hover:border-amber-400'
-            }`}
-            title={isPlaying ? (isAr ? 'إيقاف الفيديو مؤقتاً' : 'Pause Video') : (isAr ? 'تشغيل الفيديو' : 'Play Video')}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            {isPlaying ? (
-              <>
-                <Pause className="w-3 h-3 text-amber-500" />
-                <span>{isAr ? 'خلفية سينمائية حية' : 'Live Motion Active'}</span>
-              </>
-            ) : (
-              <>
-                <Play className="w-3 h-3 text-amber-500" />
-                <span>{isAr ? 'تشغيل الفيديو' : 'Play Background'}</span>
-              </>
-            )}
-          </button>
-        </div>
         {/* Sovereign Mandate Ribbon */}
         <div className="flex justify-center mb-6">
           <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm border ${
@@ -172,7 +173,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
             </div>
           </div>
 
-          <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug text-slate-900 dark:text-white">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug text-slate-900 dark:text-white drop-shadow-sm">
             {isAr ? (
               <>
                 منظومة <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600">الشراء الموحد</span>
@@ -184,14 +185,14 @@ export default function Hero({ lang, theme, onScrollTo }) {
             )}
           </h1>
 
-          <p className="text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto px-1 sm:px-0">
+          <p className="text-sm sm:text-lg md:text-xl text-slate-900 dark:text-slate-100 leading-relaxed font-semibold max-w-3xl mx-auto px-1 sm:px-0 drop-shadow-xs">
             {isAr ? (
               <>
-                الذراع التنفيذي السيادي لـ <strong className="font-bold text-slate-900 dark:text-white">جهاز مستقبل مصر للتنمية المستدامة (FOE)</strong>، المنوط به حماية الأمن الغذائي، وتأمين رصيد استراتيجي آمن يغطي من 6 إلى 9 أشهر من المحاصيل والسلع الأساسية، وتحقيق الوفر الدولاري عبر كفاءة سلاسل الإمداد ومجمعات الصوامع الرقمية بالدلتا الجديدة.
+                الذراع التنفيذي السيادي لـ <strong className="font-black text-slate-950 dark:text-white">جهاز مستقبل مصر للتنمية المستدامة (FOE)</strong>، المنوط به حماية الأمن الغذائي، وتأمين رصيد استراتيجي آمن يغطي من 6 إلى 9 أشهر من المحاصيل والسلع الأساسية، وتحقيق الوفر الدولاري عبر كفاءة سلاسل الإمداد ومجمعات الصوامع الرقمية بالدلتا الجديدة.
               </>
             ) : (
               <>
-                The sovereign executive directorate of <strong className="font-bold text-slate-900 dark:text-white">Future of Egypt Agency for Sustainable Development (FOE)</strong>, safeguarding food security, building resilient 6-to-9 month strategic commodity reserves, and capturing foreign currency savings across the New Delta agricultural infrastructure.
+                The sovereign executive directorate of <strong className="font-black text-slate-950 dark:text-white">Future of Egypt Agency for Sustainable Development (FOE)</strong>, safeguarding food security, building resilient 6-to-9 month strategic commodity reserves, and capturing foreign currency savings across the New Delta agricultural infrastructure.
               </>
             )}
           </p>
