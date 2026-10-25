@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -8,8 +8,13 @@ import {
   ShieldCheck, 
   TrendingUp, 
   Layers, 
-  Sparkles,
-  FileText
+  Sparkles, 
+  FileText,
+  Radio,
+  Clock,
+  MapPin,
+  Play,
+  Pause
 } from 'lucide-react';
 import { PORTAL_INFO } from '../data/portalData';
 
@@ -17,16 +22,47 @@ export default function Hero({ lang, theme, onScrollTo }) {
   const isAr = lang === 'ar';
   const ArrowIcon = isAr ? ArrowLeft : ArrowRight;
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  // Guarantee browser autoplay by setting muted and invoking play on mount
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch((err) => {
+            console.warn("Autoplay was prevented by browser:", err);
+            setIsPlaying(false);
+          });
+      }
+    }
+  }, []);
+
+  const toggleVideoPlayback = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
 
   const metrics = [
     {
-      value: "7.4+",
+      value: "7.8+",
       unit: { ar: "أشهر", en: "Months", pl: "Miesięcy", uk: "Місяців" },
       title: { ar: "تغطية المخزون الاستراتيجي للدولة", en: "Strategic Reserve Coverage Buffer", pl: "Poziom Rezerw Strategicznych", uk: "Покриття стратегічного резерву" },
       icon: Wheat
     },
     {
-      value: "14.2",
+      value: "14.5",
       unit: { ar: "مليون طن", en: "Million MT", pl: "Mln Ton", uk: "Млн Тонн" },
       title: { ar: "إجمالي السلع المدارة والموردة سنوياً", en: "Annual Managed Strategic Commodities", pl: "Roczne Dostawy Surowców", uk: "Обсяг стратегічних поставок" },
       icon: Ship
@@ -46,24 +82,60 @@ export default function Hero({ lang, theme, onScrollTo }) {
   ];
 
   return (
-    <section id="hero" className="relative pt-10 pb-20 overflow-hidden transition-colors duration-300">
-      {/* Background Aerial & Glow Overlays */}
-      <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-        <img 
-          src="/assets/hero-aerial.jpg" 
-          alt="Mostaqbal Misr Aerial" 
-          className={`w-full h-full object-cover object-center filter ${
-            theme === 'dark' ? 'opacity-15 brightness-75' : 'opacity-10 brightness-110'
-          }`} 
-        />
+    <section id="hero" className="relative isolate pt-8 pb-20 overflow-hidden transition-colors duration-300">
+      {/* Background Cinematic Video Loop & Overlays (Isolated Stacking Context) */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          src="/assets/hero-bg.mp4"
+          poster="/assets/hero-aerial.jpg"
+          className={`w-full h-full object-cover object-center transition-opacity duration-700 ${
+            theme === 'dark' ? 'opacity-85 brightness-95 contrast-105' : 'opacity-75 brightness-100 contrast-100'
+          }`}
+        >
+          <source src="/assets/hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* Soft luxury vignettes and gradient protection for crystal clear text */}
         <div className={`absolute inset-0 ${
           theme === 'dark' 
-            ? 'bg-gradient-to-b from-slate-950 via-slate-950/90 to-slate-950' 
-            : 'bg-gradient-to-b from-slate-50/90 via-white/95 to-slate-50'
+            ? 'bg-gradient-to-b from-slate-950/80 via-slate-950/45 to-slate-950/95' 
+            : 'bg-gradient-to-b from-white/80 via-white/35 to-white/90'
         }`}></div>
+        {/* Ambient gold glow core */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="relative z-10 max-w-7xl mx-auto px-4">
+        {/* Floating Live Video Status Indicator & Toggle Pill */}
+        <div className="flex justify-end mb-2">
+          <button
+            onClick={toggleVideoPlayback}
+            type="button"
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer backdrop-blur-md shadow-sm ${
+              theme === 'dark'
+                ? 'bg-slate-950/80 border-slate-700/80 text-slate-300 hover:text-amber-400 hover:border-amber-400'
+                : 'bg-white/85 border-slate-300 text-slate-700 hover:text-amber-700 hover:border-amber-400'
+            }`}
+            title={isPlaying ? (isAr ? 'إيقاف الفيديو مؤقتاً' : 'Pause Video') : (isAr ? 'تشغيل الفيديو' : 'Play Video')}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            {isPlaying ? (
+              <>
+                <Pause className="w-3 h-3 text-amber-500" />
+                <span>{isAr ? 'خلفية سينمائية حية' : 'Live Motion Active'}</span>
+              </>
+            ) : (
+              <>
+                <Play className="w-3 h-3 text-amber-500" />
+                <span>{isAr ? 'تشغيل الفيديو' : 'Play Background'}</span>
+              </>
+            )}
+          </button>
+        </div>
         {/* Sovereign Mandate Ribbon */}
         <div className="flex justify-center mb-6">
           <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm border ${
@@ -87,7 +159,9 @@ export default function Hero({ lang, theme, onScrollTo }) {
         <div className="text-center max-w-4xl mx-auto space-y-6">
           <div className="flex justify-center mb-3">
             <div className="relative group cursor-pointer">
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full blur-md opacity-40 group-hover:opacity-75 transition duration-500"></div>
+              {/* Animated pulsating radar waves */}
+              <div className="absolute -inset-4 rounded-full bg-amber-500/20 blur-md animate-ping opacity-25 pointer-events-none"></div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 rounded-full blur-md opacity-50 group-hover:opacity-85 transition duration-500 animate-pulse"></div>
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-950 border-2 border-amber-400 p-1.5 shadow-2xl flex items-center justify-center">
                 <img 
                   src="/assets/foe-badge-circle.png" 
@@ -190,6 +264,64 @@ export default function Hero({ lang, theme, onScrollTo }) {
               </div>
             );
           })}
+        </div>
+
+        {/* Live Sovereign Operational Ticker Strip */}
+        <div className={`mt-8 sm:mt-10 rounded-2xl border p-2.5 sm:p-3 flex items-center gap-3 overflow-hidden shadow-lg backdrop-blur-md transition-all ${
+          theme === 'dark' 
+            ? 'bg-slate-900/80 border-amber-500/30 shadow-black/50 text-slate-200' 
+            : 'bg-white/90 border-amber-300 shadow-amber-500/10 text-slate-800'
+        }`}>
+          {/* Static Live Badge */}
+          <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-amber-500 text-slate-950 text-xs font-black flex-shrink-0 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-slate-950 animate-ping"></span>
+            <span className="whitespace-nowrap">{isAr ? 'مؤشرات حية' : 'Live Radar'}</span>
+          </div>
+
+          {/* Marquee Content */}
+          <div className="overflow-hidden flex-1 relative">
+            <div className="animate-ticker text-xs font-bold flex items-center gap-8 text-slate-700 dark:text-slate-300">
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <Wheat className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                <span>{isAr ? 'رصيد القمح الاستراتيجي للدولة: 7.8+ أشهر آمنة' : 'Sovereign Wheat Buffer: 7.8+ Months Secured'}</span>
+              </span>
+              <span className="text-amber-500/50">•</span>
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <Ship className="w-3.5 h-3.5 text-sky-500 flex-shrink-0" />
+                <span>{isAr ? 'تفريغ موانئ دمياط والإسكندرية: 0 غرامات تأخير (Zero Demurrage)' : 'Port Discharge: Zero Demurrage at Damietta & Alex'}</span>
+              </span>
+              <span className="text-amber-500/50">•</span>
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <Building2 className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                <span>{isAr ? 'الصوامع الذكية بالدلتا الجديدة: طاقة استيعابية 5.5 مليون طن' : 'Smart Digital Silos: 5.5M MT Storage Capacity'}</span>
+              </span>
+              <span className="text-amber-500/50">•</span>
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <MapPin className="w-3.5 h-3.5 text-rose-500 flex-shrink-0" />
+                <span>{isAr ? 'مقر اللجان المركزية: توكانو مول — الدور الثالث — شارع يوسف عباس' : 'Sessions Hall: Tucano Mall — Floor 3 — Nasr City'}</span>
+              </span>
+              <span className="text-amber-500/50">•</span>
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                <span>{isAr ? 'رقابة الجودة: مطابقة لمعايير سلامة الغذاء (NFSA) و GAFTA و FOSFA' : 'Quality: ES, CODEX, GAFTA & FOSFA Certified'}</span>
+              </span>
+              <span className="text-amber-500/50">•</span>
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <Wheat className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                <span>{isAr ? 'رصيد القمح الاستراتيجي للدولة: 7.8+ أشهر آمنة' : 'Sovereign Wheat Buffer: 7.8+ Months Secured'}</span>
+              </span>
+              <span className="text-amber-500/50">•</span>
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <Ship className="w-3.5 h-3.5 text-sky-500 flex-shrink-0" />
+                <span>{isAr ? 'تفريغ موانئ دمياط والإسكندرية: 0 غرامات تأخير (Zero Demurrage)' : 'Port Discharge: Zero Demurrage at Damietta & Alex'}</span>
+              </span>
+              <span className="text-amber-500/50">•</span>
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <Building2 className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                <span>{isAr ? 'الصوامع الذكية بالدلتا الجديدة: طاقة استيعابية 5.5 مليون طن' : 'Smart Digital Silos: 5.5M MT Storage Capacity'}</span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

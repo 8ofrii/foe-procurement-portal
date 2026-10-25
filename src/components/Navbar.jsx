@@ -330,10 +330,10 @@ export default function Navbar({
               <span>{isAr ? 'بحث سريع' : 'Search'}</span>
             </button>
             <a
-              href="tel:19842"
+              href={`tel:${(info.hotline || '19842').replace(/\s+/g, '')}`}
               className="py-2 px-3 rounded-xl bg-amber-500 text-slate-950 font-black flex items-center justify-center gap-1.5 shadow-sm"
             >
-              <span>19842</span>
+              <span>{info.hotline || '19842'}</span>
             </a>
           </div>
         </div>

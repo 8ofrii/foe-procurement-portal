@@ -129,3 +129,30 @@ html.light .glass-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.08);
 }
+
+/* ========================================================
+   Live Sovereign Ticker Keyframe Animations
+   ======================================================== */
+@keyframes ticker-slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes ticker-slide-rtl {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker-slide 38s linear infinite;
+}
+
+[dir="rtl"] .animate-ticker {
+  animation: ticker-slide-rtl 38s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}

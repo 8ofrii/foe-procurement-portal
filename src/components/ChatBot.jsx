@@ -119,7 +119,7 @@ export default function ChatBot({ lang, theme }) {
       };
     }
 
-    // 2. Weekly Committees Query (Sunday Rice, Tuesday Live Cattle 27/10, Monday Shrimp 19/10 & 02/11)
+    // 2. Weekly Committees Query (Sunday Rice, Tuesday Live Cattle, Monday Shrimp)
     if (
       q.includes('لجان') || 
       q.includes('لجنة') || 
@@ -142,77 +142,69 @@ export default function ChatBot({ lang, theme }) {
         return `📅 Official Procurement Committees Schedule:
 
 1. Sunday Committee — Rice (الأرز):
-   • Timing: Every Sunday at 02:00 PM Sharp.
-   • Target Date: 25/10/2026.
-   • Priority Rule: Priority strictly by first-come attendance & sign-in.
-   • Required: Official company documents + supply track record if available.
+   • Schedule: Every Sunday at 02:00 PM Sharp (Fixed Weekly Session).
+   • Priority Rule: Priority strictly by physical arrival & sign-in order.
+   • Required: Official company documents + supply track record.
 
 2. Tuesday Committee — Live Cattle & Livestock (الرؤوس الحية 🐂):
-   • Schedule: Every other Tuesday (Bi-weekly).
-   • Target Date: Tuesday 27/10/2026 at 02:00 PM Sharp.
-   • Required: Official company documents + supply track record if available.
+   • Schedule: Bi-weekly (Every other Tuesday) at 02:00 PM Sharp.
+   • Required: Official company documents + supply track record.
 
 3. Monday Committee — Shrimp (الجمبري 🦐):
-   • Schedule: Every other Monday (Bi-weekly).
-   • Reference: Last session was held on Monday 19/10/2026.
-   • Next Target Date: Monday 02/11/2026 at 02:00 PM Sharp.
-   • Required: Official company documents + supply track record if available.
+   • Schedule: Bi-weekly (Every other Monday) at 02:00 PM Sharp.
+   • Required: Official company documents + supply track record.
 
-📍 Official Venue: Unified Procurement Directorate HQ — Tucano Mall, Yousef Abbas St., Nasr City, Cairo.`;
+📍 Official Venue: Unified Procurement Directorate HQ — Tucano Mall, Floor 3, Yousef Abbas St., Nasr City, Cairo.`;
       } else if (lang === 'pl') {
         return `📅 Oficjalny Harmonogram Komisji Zakupowych:
 
 1. Niedziela — Ryż (الأرز):
-   • Czas: Każda niedziela o 14:00 (25/10/2026).
+   • Czas: Każda niedziela o 14:00 (Stała sesja cotygodniowa).
    • Zasada: Pierwszeństwo według kolejności przybycia.
 
 2. Wtorek — Żywe bydło (الرؤوس الحية 🐂):
-   • Czas: Co dwa tygodnie, najbliższa sesja: Wtorek 27/10/2026 o 14:00.
+   • Czas: Co dwa tygodnie we wtorki o 14:00.
 
 3. Poniedziałek — Krewetki (الجمبري 🦐):
-   • Czas: Co dwa tygodnie. Ostatnia sesja odbyła się 19/10/2026, następna: Poniedziałek 02/11/2026 o 14:00.
+   • Czas: Co dwa tygodnie w poniedziałki o 14:00.
 
 📄 Wymagane: Wyłącznie oficjalne dokumenty firmy + doświadczenie w dostawach.
-📍 Siedziba: Tucano Mall - ul. Yousef Abbas - Nasr City - Kair.`;
+📍 Siedziba: Tucano Mall - 3. piętro - ul. Yousef Abbas - Nasr City - Kair.`;
       } else if (lang === 'uk') {
         return `📅 Офіційний графік комісій із закупівель:
 
 1. Неділя — Рис (الأرز):
-   • Щонеділі о 14:00 (25/10/2026).
+   • Щонеділі о 14:00 (Постійна щотижнева сесія).
    • Пріоритет за черговістю прибуття.
 
 2. Вівторок — Жива худоба (الرؤوس الحية 🐂):
-   • Раз на два тижні, найближча сесія: Вівторок 27/10/2026 о 14:00.
+   • Раз на два тижні щовівторка о 14:00.
 
 3. Понеділок — Креветки (الجمبري 🦐):
-   • Раз на два тижні. Попередня була 19/10/2026, наступна: Понеділок 02/11/2026 о 14:00.
+   • Раз на два тижні щопонеділка о 14:00.
 
 📄 Потрібні лише офіційні документи компанії + підтверджений досвід поставок.
-📍 Штаб-квартира: Tucano Mall - вул. Юсефа Аббаса - Наср-Сіті - Каїр.`;
+📍 Штаб-квартира: Tucano Mall - 3-й поверх - вул. Юсефа Аббаса - Наср-Сіті - Каїр.`;
       } else {
         return `📅 جدول ومواعيد لجان البت والتوريد المعتمدة (بمقر إدارة الشراء الموحد):
 
-1. لجنة الأرز (أسبوعياً كل أحد):
-   • التوقيت: الساعة 02:00 ظهراً (02:00 PM).
-   • التاريخ المحدد: الأحد 25/10/2026.
+1. لجنة الأرز (جلسة أسبوعية ثابتة كل أحد):
+   • التوقيت: أسبوعياً كل يوم أحد في تمام الساعة 02:00 ظهراً (02:00 PM).
    • ⚠️ الضابط الأساسي: الأولوية بأسبقية التواجد والحضور الفعلي والتسجيل بقاعة اللجنة.
 
-2. لجنة الرؤوس الحية (يوم الثلاثاء — أسبوع وأسبوع):
+2. لجنة الرؤوس الحية (يوم الثلاثاء — دورية أسبوع وأسبوع):
    • التوقيت: الساعة 02:00 ظهراً (02:00 PM).
-   • 🐂 موعد الجلسة القادمة المنعقدة: الثلاثاء 27/10/2026.
-   • النظام: انعقاد دوري كل أسبوعين (أسبوع وأسبوع).
+   • 🐂 النظام: انعقاد دوري كل أسبوعين بالتناوب مع لجنة الجمبري.
 
-3. لجنة الجمبري (يوم الاثنين — أسبوع وأسبوع):
+3. لجنة الجمبري (يوم الاثنين — دورية أسبوع وأسبوع):
    • التوقيت: الساعة 02:00 ظهراً (02:00 PM).
-   • 🦐 آخر جلسة انعقدت: الاثنين 19/10/2026 (تمت بنجاح).
-   • موعد الجلسة القادمة: الاثنين 02/11/2026.
-   • النظام: انعقاد دوري كل أسبوعين (أسبوع وأسبوع).
+   • 🦐 النظام: انعقاد دوري كل أسبوعين بالتناوب مع لجنة الرؤوس الحية.
 
 📄 المستندات المطلوبة (لكافة اللجان):
 • الأوراق والمستندات الرسمية للشركة (السجل التجاري الساري، البطاقة الضريبية، القيمة المضافة، التفويض المعتمد).
 • سابقة الأعمال والخبرة في التوريد إن وُجدت لدعم ملف المورد (دون اشتراط عينات مسبقة).
 
-📍 مقر الانعقاد: توكانو مول - شارع يوسف عباس - مدينة نصر - القاهرة (قاعة اللجان المركزية).`;
+📍 مقر الانعقاد: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر - القاهرة (قاعة اللجان المركزية).`;
       }
     }
 
