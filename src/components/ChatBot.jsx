@@ -49,10 +49,10 @@ export default function ChatBot({ lang, theme }) {
 
   const getWelcomeText = (l) => {
     const welcomeMessages = {
-      ar: 'مرحباً بك! أنا المساعد الذكي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. كيف يمكنني إفادتك اليوم بخصوص مواعيد اللجان (لجنة الأرز، لجنة الرؤوس الحية، لجنة الجمبري)، السلع والمخزون، أو القنوات الرسمية؟',
-      en: 'Welcome! I am the AI Assistant of Mostaqbal Misr Unified Procurement Directorate. How can I assist you regarding committees schedule (Rice, Live Cattle, Shrimp), strategic reserves, or official channels?',
-      pl: 'Witamy! Jestem Asystentem AI ds. Zakupów Strategicznych Agencji Przyszłość Egiptu. W czym mogę pomóc w kwestii harmonogramu komisji, surowców lub oficjalnych kanałów?',
-      uk: 'Вітаємо! Я інтелектуальний помічник Директорату єдиних закупівель Агентства Майбутнє Єгипту. Чим можу допомогти щодо графіка комісій, стратегічних запасів чи контактів?'
+      ar: 'مرحباً بك! أنا المساعد الذكي لإدارة الشراء الموحد بجهاز مستقبل مصر (FOE).\nيسعدني إفادتك بمواعيد لجان البت والتوريد، أرصدة السلع والمخزون، أو الروابط والقنوات الرسمية.',
+      en: 'Welcome! I am the AI Assistant of Mostaqbal Misr Unified Procurement Directorate (FOE).\nI can assist you regarding committees schedule, strategic commodity reserves, or official channels.',
+      pl: 'Witamy! Jestem Asystentem AI ds. Zakupów Strategicznych Agencji Przyszłość Egiptu (FOE).\nW czym mogę pomóc w kwestii harmonogramu komisji, surowców lub oficjalnych kanałów?',
+      uk: 'Вітаємо! Я інтелектуальний помічник Директорату єдиних закупівель Агентства Майбутнє Єгипту (FOE).\nЧим можу допомогти щодо графіка комісій, стратегічних запасів чи контактів?'
     };
     return welcomeMessages[l] || welcomeMessages.ar;
   };
@@ -501,7 +501,7 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
   return (
     <>
       {/* Floating Bot Button - CIRCLE with Official Mostaqbal Misr Logo Emblem & Colors */}
-      <div className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 ${isOpen ? 'hidden sm:block' : 'block'}`}>
+      <div className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 ${isOpen ? 'hidden' : 'block'}`}>
         {/* Outer glowing pulsing ring */}
         <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 opacity-70 blur-sm animate-pulse pointer-events-none"></span>
 
@@ -545,9 +545,9 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
         }`}>
           
           {/* Header */}
-          <div className="p-2.5 sm:p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-amber-500/15 via-transparent to-amber-500/5">
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-950 border border-amber-400/80 p-1 flex items-center justify-center shadow-md flex-shrink-0">
+          <div className="p-2.5 sm:p-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-amber-500/15 via-transparent to-amber-500/5">
+            <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-950 border border-amber-400/80 p-1 flex items-center justify-center shadow-md flex-shrink-0">
                 <img 
                   src="/assets/foe-emblem-official.png" 
                   alt="شعار الجهاز" 
@@ -555,48 +555,48 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                 />
               </div>
               <div className="min-w-0">
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <h3 className="text-xs sm:text-base font-black text-slate-900 dark:text-white leading-tight truncate">
+                <div className="flex items-center gap-1.5">
+                  <h3 className="text-xs sm:text-sm font-black text-slate-900 dark:text-white leading-tight whitespace-nowrap">
                     {isAr ? 'المساعد الذكي للشراء الموحد' : 'Unified Procurement AI Assistant'}
                   </h3>
                   {isExpanded && (
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 hidden sm:inline-block">
-                      {isAr ? 'نافذة موسعة' : 'Expanded Mode'}
+                      {isAr ? 'نافذة موسعة' : 'Expanded'}
                     </span>
                   )}
                 </div>
-                <span className="text-[10px] sm:text-xs text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1 mt-0.5 leading-none truncate">
+                <span className="text-[10px] sm:text-[11px] text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1 mt-0.5 leading-none whitespace-nowrap">
                   <span>{isAr ? 'إدارة الشراء الموحد — جهاز مستقبل مصر (FOE)' : 'Future of Egypt Agency (FOE)'}</span>
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-0.5 sm:gap-1.5 flex-shrink-0">
+            <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
               <button
                 onClick={handleResetChat}
                 type="button"
-                className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 title={isAr ? 'بدء محادثة جديدة (إعادة ضبط)' : 'Restart Chat'}
               >
-                <RotateCcw className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                <RotateCcw className="w-4 h-4" />
               </button>
 
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 type="button"
-                className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 title={isAr ? (isExpanded ? 'استعادة الحجم العادي' : 'تكبير وتوسيط المحادثة في الصفحة') : (isExpanded ? 'Restore Normal Size' : 'Expand to Center')}
               >
-                {isExpanded ? <Minimize2 className="w-4 h-4 sm:w-4.5 sm:h-4.5" /> : <Maximize2 className="w-4 h-4 sm:w-4.5 sm:h-4.5" />}
+                {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
               </button>
 
               <button
                 onClick={() => { setIsOpen(false); setIsExpanded(false); }}
                 type="button"
-                className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 title={isAr ? 'إغلاق' : 'Close'}
               >
-                <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -648,12 +648,12 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                 className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
               >
                 <div
-                  className={`p-3.5 sm:p-4 rounded-2xl leading-relaxed shadow-sm ${
+                  className={`p-3 sm:p-3.5 rounded-2xl text-xs sm:text-[13px] leading-relaxed shadow-xs ${
                     msg.sender === 'user'
-                      ? (isExpanded ? 'max-w-[75%]' : 'max-w-[88%]') + ' bg-amber-500 text-slate-950 font-semibold rounded-br-none whitespace-pre-line'
+                      ? (isExpanded ? 'max-w-[75%]' : 'max-w-[85%]') + ' bg-amber-500 text-slate-950 font-bold rounded-br-none whitespace-pre-line'
                       : (isExpanded ? 'max-w-[82%]' : 'max-w-[88%]') + (theme === 'dark' 
-                          ? ' bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none' 
-                          : ' bg-white border border-slate-200 text-slate-800 rounded-bl-none')
+                          ? ' bg-slate-900 border border-slate-800 text-slate-100 rounded-bl-none font-medium' 
+                          : ' bg-white border border-slate-200 text-slate-900 rounded-bl-none font-medium shadow-2xs')
                   }`}
                 >
                   <div className="whitespace-pre-line">{msg.text}</div>
@@ -817,15 +817,15 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                     </div>
                   )}
 
-                  {/* Suggested Topics in the Welcome Message */}
-                  {msg.id === 1 && (
+                  {/* Suggested Topics in the Welcome Message (Shown in Expanded Mode Only to avoid traffic) */}
+                  {msg.id === 1 && isExpanded && (
                     <div className="mt-3.5 pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
                       <div className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
                         <Sparkles className="w-3.5 h-3.5" />
                         <span>{isAr ? 'الاستفسارات الشائعة (اضغط للسؤال فوراً):' : 'Suggested Topics (Click to ask):'}</span>
                       </div>
-                      <div className={`grid ${isExpanded ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'} gap-2 pt-0.5`}>
-                        {activePrompts.slice(0, isExpanded ? 6 : 4).map((promptText, pIdx) => (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 pt-0.5">
+                        {activePrompts.slice(0, 6).map((promptText, pIdx) => (
                           <button
                             key={pIdx}
                             onClick={() => handleSendMessage(promptText)}
@@ -863,22 +863,22 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Questions Pills */}
-          <div className="px-3 sm:px-4 py-2 border-t border-slate-200 dark:border-slate-800 bg-slate-100/90 dark:bg-slate-950/90">
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5">
+          {/* Quick Questions Pills - Primary streamlined suggestion bar */}
+          <div className="px-3 sm:px-4 py-2 border-t border-slate-200 dark:border-slate-800 bg-slate-50/95 dark:bg-slate-950/95">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 no-scrollbar">
               <span className="text-[10px] font-black text-amber-600 dark:text-amber-400 flex items-center gap-1 flex-shrink-0">
-                <HelpCircle className="w-3.5 h-3.5" />
-                <span>{isAr ? 'أسئلة سريعة:' : 'Quick:'}</span>
+                <Sparkles className="w-3.5 h-3.5 flex-shrink-0 text-amber-500" />
+                <span>{isAr ? 'أسئلة مقترحة:' : 'Quick:'}</span>
               </span>
               {activePrompts.map((p, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(p)}
                   type="button"
-                  className={`whitespace-nowrap px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all flex-shrink-0 cursor-pointer shadow-xs ${
+                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all flex-shrink-0 cursor-pointer shadow-2xs ${
                     theme === 'dark'
                       ? 'bg-slate-900 border-slate-700/80 text-slate-200 hover:border-amber-400 hover:bg-amber-500/10 hover:text-amber-300'
-                      : 'bg-white border-slate-300 text-slate-800 hover:border-amber-500 hover:bg-amber-50 hover:text-amber-900'
+                      : 'bg-white border-amber-500/30 text-slate-800 hover:border-amber-500 hover:bg-amber-50 hover:text-amber-950'
                   }`}
                 >
                   {p}
