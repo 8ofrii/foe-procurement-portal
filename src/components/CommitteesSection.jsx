@@ -191,7 +191,7 @@ export default function CommitteesSection({ lang, theme }) {
 
                   {/* Commodity Title & Specification Scope */}
                   <div className="space-y-1">
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-normal">
                       {session.commodity[lang] || session.commodity.ar}
                     </h3>
                     <p className="text-xs text-slate-600 dark:text-slate-400 font-normal leading-relaxed">

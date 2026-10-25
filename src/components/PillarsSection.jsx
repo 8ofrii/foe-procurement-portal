@@ -135,7 +135,7 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
               <div
                 key={pillar.id}
                 onClick={() => setSelectedPillar(pillar.id)}
-                className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 border group flex flex-col justify-between ${
+                className={`p-5 sm:p-6 rounded-2xl cursor-pointer transition-all duration-300 border group flex flex-col justify-between ${
                   isSelected 
                     ? (theme === 'dark'
                         ? `bg-slate-900 ${t.borderSelected} scale-[1.02]`
@@ -147,8 +147,8 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
               >
                 <div>
                   {/* Top Header: Simple Semantic Icon on one side, Pill Badge & Number on other side */}
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <div className={`w-11 h-11 rounded-xl border flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105 shadow-xs ${t.iconBox}`}>
+                  <div className="flex items-center justify-between gap-3 mb-3.5">
+                    <div className={`w-10 h-10 rounded-xl border flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105 shadow-xs ${t.iconBox}`}>
                       <Icon className="w-5 h-5" />
                     </div>
 
@@ -164,20 +164,20 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
                     </div>
                   </div>
 
-                  {/* Title (Full width, clear, elegant) */}
-                  <h3 className="text-base sm:text-lg font-bold leading-snug text-slate-900 dark:text-white mb-2.5">
+                  {/* Title (Harmonious font size & natural line-height) */}
+                  <h3 className="text-sm sm:text-base font-bold leading-normal text-slate-900 dark:text-white mb-2">
                     {pillar.title[lang] || pillar.title.ar}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                  {/* Description (Optimal line spacing and comfortable reading flow) */}
+                  <p className="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                     {pillar.desc[lang] || pillar.desc.ar}
                   </p>
                 </div>
 
                 {/* Active indicator */}
                 {isSelected && (
-                  <div className={`mt-5 pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-bold ${t.accentText}`}>
+                  <div className={`mt-4 pt-2.5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-bold ${t.accentText}`}>
                     <span>{isAr ? 'الركيزة المحددة' : 'Selected Pillar'}</span>
                     <CheckCircle2 className="w-4 h-4" />
                   </div>
@@ -188,13 +188,13 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
         </div>
 
         {/* Selected Pillar Detailed Banner */}
-        <div className={`mt-10 p-6 sm:p-8 rounded-3xl border shadow-xl relative overflow-hidden transition-all duration-300 ${
+        <div className={`mt-8 sm:mt-10 p-5 sm:p-7 rounded-3xl border shadow-xl relative overflow-hidden transition-all duration-300 ${
           theme === 'dark' 
             ? 'bg-slate-900/90 border-slate-700 text-slate-100' 
             : 'bg-white border-slate-200 text-slate-900'
         }`}>
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="space-y-3 max-w-3xl">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
+            <div className="space-y-2.5 max-w-3xl">
               <div className="flex items-center gap-2">
                 <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-lg border ${activeTheme.bannerBadge}`}>
                   {isAr ? `الركيزة رقم 0${activePillar.id}` : `Pillar #0${activePillar.id}`}
@@ -204,25 +204,25 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
                 </span>
               </div>
 
-              <h4 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+              <h4 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white leading-normal">
                 {activePillar.title[lang] || activePillar.title.ar}
               </h4>
 
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                 {activePillar.desc[lang] || activePillar.desc.ar}
               </p>
             </div>
 
-            <div className={`flex-shrink-0 flex flex-col items-center justify-center p-6 rounded-2xl border text-center w-full lg:w-72 transition-all ${
+            <div className={`flex-shrink-0 flex flex-col items-center justify-center p-5 rounded-2xl border text-center w-full lg:w-64 transition-all ${
               theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'
             }`}>
-              <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center mb-3 shadow-sm ${activeTheme.iconBox}`}>
-                <ActiveIcon className="w-7 h-7" />
+              <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-2.5 shadow-sm ${activeTheme.iconBox}`}>
+                <ActiveIcon className="w-6 h-6" />
               </div>
               <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                 {isAr ? 'جهاز مستقبل مصر للتنمية المستدامة' : 'Mostaqbal Misr Agency'}
               </div>
-              <div className={`text-sm font-bold mt-0.5 ${activeTheme.accentText}`}>
+              <div className={`text-xs sm:text-sm font-bold mt-0.5 ${activeTheme.accentText}`}>
                 {isAr ? 'إدارة الشراء الموحد' : 'Unified Procurement'}
               </div>
             </div>
