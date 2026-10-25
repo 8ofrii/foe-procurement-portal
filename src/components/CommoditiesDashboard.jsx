@@ -274,7 +274,7 @@ export default function CommoditiesDashboard({ lang, theme }) {
 
       {/* High-Resolution Poster Lightbox Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md animate-fadeIn">
+        <div role="dialog" aria-modal="true" aria-label={currentTitle} className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md animate-fadeIn">
           <div className={`border rounded-3xl max-w-4xl w-full p-4 sm:p-6 shadow-2xl relative max-h-[95vh] flex flex-col ${
             theme === 'dark' ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'
           }`}>

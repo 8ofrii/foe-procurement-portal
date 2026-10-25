@@ -220,6 +220,9 @@ export default function ContactSection({ lang, theme }) {
                 }`}
               >
                 <button
+                  id={`faq-btn-${idx}`}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${idx}`}
                   onClick={() => setOpenFaq(isOpen ? null : idx)}
                   className={`w-full ${isAr ? 'text-right' : 'text-left'} p-3.5 sm:p-5 flex items-center justify-between gap-3 cursor-pointer`}
                 >
@@ -234,9 +237,14 @@ export default function ContactSection({ lang, theme }) {
                 </button>
 
                 {isOpen && (
-                  <div className={`px-5 pb-5 pt-1 text-xs sm:text-sm leading-relaxed border-t ${
-                    theme === 'dark' ? 'border-slate-800 text-slate-200' : 'border-slate-100 text-slate-700'
-                  }`}>
+                  <div
+                    id={`faq-panel-${idx}`}
+                    role="region"
+                    aria-labelledby={`faq-btn-${idx}`}
+                    className={`px-5 pb-5 pt-1 text-xs sm:text-sm leading-relaxed border-t ${
+                      theme === 'dark' ? 'border-slate-800 text-slate-200' : 'border-slate-100 text-slate-700'
+                    }`}
+                  >
                     {faq.a[lang] || faq.a.ar}
                   </div>
                 )}

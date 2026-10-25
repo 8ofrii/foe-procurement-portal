@@ -6,7 +6,8 @@ import {
   ShieldCheck,
   Clock,
   Share2,
-  MapPin
+  MapPin,
+  Compass
 } from 'lucide-react';
 import { PORTAL_INFO, NAV_LINKS } from '../data/portalData';
 import { FacebookIcon, LinkedInIcon, XTwitterIcon } from './SocialIcons';
@@ -28,9 +29,9 @@ export default function Footer({ lang, theme, onScrollTo }) {
       <div className="h-1 bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500"></div>
 
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
-          {/* Col 1: Official Logo & Identity (5 cols) */}
-          <div className="lg:col-span-5 space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
+          {/* Col 1: Official Logo & Identity (4 cols) */}
+          <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg border border-amber-400/80 bg-slate-950 p-1 flex-shrink-0">
                 <img 
@@ -52,7 +53,7 @@ export default function Footer({ lang, theme, onScrollTo }) {
               </div>
             </div>
 
-            <p className="text-xs leading-relaxed max-w-md text-slate-600 dark:text-slate-400">
+            <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-400">
               {isAr ? (
                 'إدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة (FOE)، المعنية بتأمين احتياجات السلع والمحاصيل الأساسية وبناء احتياطي استراتيجي آمن بالربط مع مشروعات الدلتا الجديدة ومجمعات الصوامع الذكية.'
               ) : (
@@ -60,50 +61,70 @@ export default function Footer({ lang, theme, onScrollTo }) {
               )}
             </p>
 
-            <div className="pt-1 space-y-3">
+            <div className="pt-1">
               <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border ${
                 theme === 'dark' ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
               }`}>
                 <ShieldCheck className="w-3.5 h-3.5 text-amber-500" />
                 <span>FOE • {info.entity} • {info.motto}</span>
               </span>
-
             </div>
           </div>
 
-          {/* Col 2: Official Social Media Channels */}
-          <div className="lg:col-span-4 space-y-3">
+          {/* Col 2: Fast Portal Navigation Links (2 cols) */}
+          <div className="lg:col-span-2 space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-1.5">
+              <Compass className="w-3.5 h-3.5 text-amber-500" />
+              <span>{isAr ? 'أقسام البوابة' : 'Portal Sections'}</span>
+            </h4>
+            <ul className="space-y-1.5">
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => onScrollTo ? onScrollTo(item.id) : null}
+                    className="text-[11px] text-slate-500 hover:text-amber-500 dark:text-slate-400 dark:hover:text-amber-400 transition-colors cursor-pointer text-start flex items-center gap-1"
+                  >
+                    <span>›</span>
+                    <span>{item.label}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 3: Official Social Media Channels (3 cols) */}
+          <div className="lg:col-span-3 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
               <Share2 className="w-3.5 h-3.5 text-amber-500" />
-              <span>{isAr ? 'منصات التواصل الاجتماعي الرسمية' : 'Official Social Media Channels'}</span>
+              <span>{isAr ? 'منصات التواصل' : 'Official Channels'}</span>
             </h4>
             
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {/* Facebook */}
               <a 
                 href={info.facebookUrl} 
                 target="_blank" 
                 rel="noreferrer"
-                className={`p-3 rounded-2xl border transition-all flex items-center justify-between gap-3 group ${
+                className={`p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2.5 group ${
                   theme === 'dark' 
                     ? 'bg-slate-900/50 border-slate-800 hover:border-blue-500/60 hover:bg-blue-600/10' 
                     : 'bg-slate-50 border-slate-200 hover:border-blue-500 hover:bg-blue-50'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-[#1877F2] text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <FacebookIcon className="w-4.5 h-4.5" />
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-[#1877F2] text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <FacebookIcon className="w-4 h-4" />
                   </div>
                   <div className={isAr ? 'text-right' : 'text-left'}>
                     <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors">
-                      {isAr ? 'الصفحة الرسمية على فيسبوك' : 'Official Facebook Page'}
+                      {isAr ? 'فيسبوك الرسمي' : 'Official Facebook'}
                     </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                       @foe.eg
                     </div>
                   </div>
                 </div>
-                <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors flex-shrink-0" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors flex-shrink-0" />
               </a>
 
               {/* LinkedIn */}
@@ -111,26 +132,26 @@ export default function Footer({ lang, theme, onScrollTo }) {
                 href={info.linkedinUrl} 
                 target="_blank" 
                 rel="noreferrer"
-                className={`p-3 rounded-2xl border transition-all flex items-center justify-between gap-3 group ${
+                className={`p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2.5 group ${
                   theme === 'dark' 
                     ? 'bg-slate-900/50 border-slate-800 hover:border-sky-500/60 hover:bg-sky-600/10' 
                     : 'bg-slate-50 border-slate-200 hover:border-sky-500 hover:bg-sky-50'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <LinkedInIcon className="w-4.5 h-4.5" />
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-[#0A66C2] text-white flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <LinkedInIcon className="w-4 h-4" />
                   </div>
                   <div className={isAr ? 'text-right' : 'text-left'}>
                     <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-sky-500 transition-colors">
-                      {isAr ? 'المنصة الرسمية على لينكد إن' : 'Official LinkedIn Profile'}
+                      {isAr ? 'لينكد إن الرسمي' : 'Official LinkedIn'}
                     </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                      Future of Egypt Agency
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
+                      FOE Agency
                     </div>
                   </div>
                 </div>
-                <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-sky-500 transition-colors flex-shrink-0" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-500 transition-colors flex-shrink-0" />
               </a>
 
               {/* Twitter / X */}
@@ -138,39 +159,39 @@ export default function Footer({ lang, theme, onScrollTo }) {
                 href={info.twitterUrl} 
                 target="_blank" 
                 rel="noreferrer"
-                className={`p-3 rounded-2xl border transition-all flex items-center justify-between gap-3 group ${
+                className={`p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2.5 group ${
                   theme === 'dark' 
                     ? 'bg-slate-900/50 border-slate-800 hover:border-slate-600 hover:bg-slate-800/40' 
                     : 'bg-slate-50 border-slate-200 hover:border-slate-400 hover:bg-slate-100'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <XTwitterIcon className="w-4 h-4" />
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <XTwitterIcon className="w-3.5 h-3.5" />
                   </div>
                   <div className={isAr ? 'text-right' : 'text-left'}>
                     <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
-                      {isAr ? 'الحساب الرسمي على منصة X' : 'Official X (Twitter) Account'}
+                      {isAr ? 'منصة X' : 'Official X'}
                     </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                       @futureofegypt_
                     </div>
                   </div>
                 </div>
-                <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-amber-500 transition-colors flex-shrink-0" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-500 transition-colors flex-shrink-0" />
               </a>
             </div>
           </div>
 
-          {/* Col 3: Support & Back to Top (3 cols) */}
+          {/* Col 4: Support & Back to Top (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-              {isAr ? 'الخط الساخن والبريد' : 'Hotline & Contact'}
+              {isAr ? 'الخط الساخن والمقر' : 'Hotline & Location'}
             </h4>
             <div className="space-y-1">
               <div className="text-amber-600 dark:text-amber-400 font-mono font-bold text-sm">{info.hotline}</div>
               <div className="font-mono text-xs text-slate-500">{info.email}</div>
-              <div className="text-[11px] text-slate-600 dark:text-slate-400 pt-1.5 flex items-center gap-1.5 font-medium">
+              <div className="text-[11px] text-slate-600 dark:text-slate-400 pt-1 flex items-center gap-1.5 font-medium">
                 <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
                 <span>{info.workingHours}</span>
               </div>
@@ -187,7 +208,7 @@ export default function Footer({ lang, theme, onScrollTo }) {
 
             <button
               onClick={scrollToTop}
-              className={`w-full inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-semibold transition-all ${
+              className={`w-full inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
                 theme === 'dark' 
                   ? 'bg-slate-900 border-slate-700 text-slate-300 hover:text-white' 
                   : 'bg-slate-100 border-slate-200 text-slate-700 hover:text-slate-950'

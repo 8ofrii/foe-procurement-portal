@@ -9,6 +9,7 @@ import {
   SlidersHorizontal
 } from 'lucide-react';
 import { PORTAL_INFO, NAV_LINKS } from '../data/portalData';
+import { NAV_OFFSET } from '../constants';
 
 // Custom Animated Day & Night Capsule Switch (pixel-perfect matching user screenshots)
 function ThemeToggle({ theme, toggleTheme }) {
@@ -136,7 +137,7 @@ export default function Navbar({
     setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      const navOffset = 60;
+      const navOffset = NAV_OFFSET;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navOffset;
       window.scrollTo({

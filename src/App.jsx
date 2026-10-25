@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
 import OfficialInfographicModal from './components/OfficialInfographicModal';
 import SearchModal from './components/SearchModal';
+import { NAV_OFFSET, SECTIONS } from './constants';
 
 export default function App() {
   const [lang, setLang] = useState(() => {
@@ -76,12 +77,10 @@ export default function App() {
 
   // Automatic ScrollSpy: update active navbar section when scrolling up or down
   useEffect(() => {
-    const sections = ['hero', 'pillars', 'departments', 'commodities', 'news', 'tenders', 'committees', 'standards', 'contact'];
-    
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 120;
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const sectionId = sections[i];
+      for (let i = SECTIONS.length - 1; i >= 0; i--) {
+        const sectionId = SECTIONS[i];
         const el = document.getElementById(sectionId);
         if (el) {
           const top = el.offsetTop;
@@ -101,9 +100,8 @@ export default function App() {
     setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      const navOffset = 65;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      const offsetPosition = elementPosition + window.pageYOffset - NAV_OFFSET;
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'

@@ -42,6 +42,20 @@ export default function NewsSection({ lang, theme, onOpenInfographic }) {
               )}
             </p>
           </div>
+
+          {onOpenInfographic && (
+            <button
+              onClick={onOpenInfographic}
+              className={`self-start md:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer ${
+                theme === 'dark'
+                  ? 'bg-slate-900 border-slate-700 text-slate-200 hover:border-amber-500/50 hover:text-amber-300'
+                  : 'bg-white border-slate-300 text-slate-800 hover:border-amber-500 hover:text-amber-700'
+              }`}
+            >
+              <Eye className="w-4 h-4 text-amber-500" />
+              <span>{isAr ? 'مطالعة الإعلان الأصلي المعتمد' : 'View Official Notice'}</span>
+            </button>
+          )}
         </div>
 
         {/* News Cards Grid */}
@@ -100,12 +114,18 @@ export default function NewsSection({ lang, theme, onOpenInfographic }) {
 
       {/* Read Article Modal */}
       {selectedArticle && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+        <div 
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="article-modal-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
+        >
           <div className={`border rounded-3xl max-w-2xl w-full p-4 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto ${
             theme === 'dark' ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-200 text-slate-800'
           }`}>
             <button
               onClick={() => setSelectedArticle(null)}
+              aria-label={isAr ? 'إغلاق' : 'Close'}
               className="absolute top-3.5 left-3.5 sm:top-5 sm:left-5 p-1.5 sm:p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
             >
               <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -118,7 +138,7 @@ export default function NewsSection({ lang, theme, onOpenInfographic }) {
               <span className="text-xs text-slate-400 font-mono">{selectedArticle.date}</span>
             </div>
 
-            <h3 className="text-base sm:text-2xl font-black text-slate-900 dark:text-white leading-snug mb-4 pr-6 sm:pr-0">
+            <h3 id="article-modal-title" className="text-base sm:text-2xl font-black text-slate-900 dark:text-white leading-snug mb-4 pr-6 sm:pr-0">
               {selectedArticle.title[lang] || selectedArticle.title.ar}
             </h3>
 

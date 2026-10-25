@@ -12,6 +12,16 @@ import { TENDERS } from '../data/portalData';
 export default function TendersSection({ lang, theme }) {
   const isAr = lang === 'ar';
 
+  const getStatusBadgeClass = (statusColor) => {
+    if (statusColor && (statusColor.includes('amber') || statusColor.includes('yellow'))) {
+      return 'text-amber-600 dark:text-amber-400 border-amber-500/30 bg-amber-500/10';
+    }
+    if (statusColor && (statusColor.includes('rose') || statusColor.includes('red'))) {
+      return 'text-rose-600 dark:text-rose-400 border-rose-500/30 bg-rose-500/10';
+    }
+    return 'text-emerald-600 dark:text-emerald-400 border-emerald-500/30 bg-emerald-500/10';
+  };
+
   return (
     <section id="tenders" className={`py-20 relative border-t transition-colors duration-300 ${
       theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'
@@ -41,7 +51,6 @@ export default function TendersSection({ lang, theme }) {
           </div>
         </div>
 
-
         {/* Tenders Cards Grid */}
         <div className="space-y-4">
           {TENDERS.map((tender) => (
@@ -55,7 +64,7 @@ export default function TendersSection({ lang, theme }) {
                     <span className="font-mono text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-300 dark:border-amber-500/20">
                       {tender.id}
                     </span>
-                    <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${tender.statusColor}`}>
+                    <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${getStatusBadgeClass(tender.statusColor)}`}>
                       {tender.status[lang] || tender.status.ar}
                     </span>
                     <span className="text-xs text-slate-500 dark:text-slate-400">

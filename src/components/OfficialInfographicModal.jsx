@@ -20,7 +20,12 @@ export default function OfficialInfographicModal({ isOpen, onClose, lang, theme 
   const handleResetZoom = () => setZoomLevel(1);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md animate-fadeIn">
+    <div 
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="infographic-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md animate-fadeIn"
+    >
       <div className={`border rounded-3xl max-w-5xl w-full p-3.5 sm:p-6 shadow-2xl relative max-h-[92vh] sm:max-h-[95vh] flex flex-col ${
         theme === 'dark' ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'
       }`}>
@@ -33,7 +38,7 @@ export default function OfficialInfographicModal({ isOpen, onClose, lang, theme 
               <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div className="min-w-0">
-              <h3 className="text-xs sm:text-lg font-black truncate max-w-[140px] xs:max-w-[240px] sm:max-w-none">
+              <h3 id="infographic-modal-title" className="text-xs sm:text-lg font-black truncate max-w-[140px] xs:max-w-[240px] sm:max-w-none">
                 {isAr ? 'الإعلان الرسمي: إدارة الشراء الموحد' : 'Official Procurement Notice'}
               </h3>
               <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 hidden xs:block truncate">
@@ -46,13 +51,13 @@ export default function OfficialInfographicModal({ isOpen, onClose, lang, theme 
             <div className={`flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-xl border ${
               theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-100 border-slate-200'
             }`}>
-              <button onClick={handleZoomOut} className="p-1 sm:p-1.5 rounded-lg opacity-70 hover:opacity-100 cursor-pointer">
+              <button onClick={handleZoomOut} aria-label="Zoom out" className="p-1 sm:p-1.5 rounded-lg opacity-70 hover:opacity-100 cursor-pointer">
                 <ZoomOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
               <button onClick={handleResetZoom} className="px-1.5 sm:px-2 text-[10px] sm:text-xs font-mono">
                 {Math.round(zoomLevel * 100)}%
               </button>
-              <button onClick={handleZoomIn} className="p-1 sm:p-1.5 rounded-lg opacity-70 hover:opacity-100 cursor-pointer">
+              <button onClick={handleZoomIn} aria-label="Zoom in" className="p-1 sm:p-1.5 rounded-lg opacity-70 hover:opacity-100 cursor-pointer">
                 <ZoomIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
             </div>
@@ -68,6 +73,7 @@ export default function OfficialInfographicModal({ isOpen, onClose, lang, theme 
 
             <button
               onClick={onClose}
+              aria-label={isAr ? 'إغلاق' : 'Close'}
               className="p-1.5 sm:p-2 rounded-xl border hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4 sm:w-5 sm:h-5" />

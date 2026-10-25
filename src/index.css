@@ -63,7 +63,6 @@ html.dark ::-moz-selection, html.dark *::-moz-selection {
 
   /* Universal 90% main level scaling for all languages */
   html {
-    zoom: 0.9;
     zoom: 90%;
     -webkit-text-size-adjust: 100%;
   }
@@ -71,7 +70,6 @@ html.dark ::-moz-selection, html.dark *::-moz-selection {
   /* Tablets & Desktops (>= 768px): Explicit 90% main level zoom */
   @media (min-width: 768px) {
     html {
-      zoom: 0.9;
       zoom: 90%;
     }
   }
