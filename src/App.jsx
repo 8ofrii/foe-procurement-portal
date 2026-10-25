@@ -32,6 +32,7 @@ export default function App() {
     localStorage.setItem('foe_lang', lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.setAttribute('data-lang', lang);
   }, [lang]);
 
   useEffect(() => {
@@ -45,19 +46,19 @@ export default function App() {
     }
   }, [theme]);
 
-  // Enforce 90% default zoom on tablet & desktop, 100% on mobile
+  // Enforce 90% default zoom across all languages on tablet & desktop, 92% on mobile
   useEffect(() => {
     const applyDefaultZoom = () => {
       if (window.innerWidth >= 768) {
         document.documentElement.style.zoom = '0.9';
       } else {
-        document.documentElement.style.zoom = '1';
+        document.documentElement.style.zoom = '0.92';
       }
     };
     applyDefaultZoom();
     window.addEventListener('resize', applyDefaultZoom);
     return () => window.removeEventListener('resize', applyDefaultZoom);
-  }, []);
+  }, [lang]);
 
   // Keyboard shortcut Ctrl+K
   useEffect(() => {

@@ -39,31 +39,61 @@ html.dark ::-moz-selection, html.dark *::-moz-selection {
 }
 
 @layer base {
+  /* Default font tokens */
   :root {
-    --font-heading: 'Alexandria', 'Cairo', system-ui, sans-serif;
-    --font-body: 'Cairo', system-ui, sans-serif;
+    --font-heading: 'Alexandria', 'Cairo', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-body: 'Cairo', 'Inter', system-ui, sans-serif;
   }
 
-  /* Base scaling for mobile devices: 100% native legibility & touch targets */
+  /* Language-specific typography & sizing calibration */
+  html[lang="ar"], [dir="rtl"] {
+    --font-heading: 'Alexandria', 'Cairo', system-ui, sans-serif;
+    --font-body: 'Cairo', system-ui, sans-serif;
+    letter-spacing: normal;
+  }
+
+  html[lang="en"],
+  html[lang="pl"],
+  html[lang="uk"],
+  [dir="ltr"] {
+    --font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Universal 90% base scaling across all viewports */
   html {
     zoom: 0.9;
     zoom: 90%;
     -webkit-text-size-adjust: 100%;
   }
 
-  /* Mobile devices (< 768px): 100% native scaling */
+  /* Mobile devices (< 768px): Maintain comfortable 92% proportions */
   @media (max-width: 767px) {
     html {
-      zoom: 1;
-      zoom: 100%;
+      zoom: 0.92;
+      zoom: 92%;
     }
   }
 
-  /* Tablets & Desktops (>= 768px): Explicit 90% default zoom */
+  /* Tablets & Desktops (>= 768px): Explicit 90% main level zoom */
   @media (min-width: 768px) {
     html {
       zoom: 0.9;
       zoom: 90%;
+    }
+  }
+
+  /* Fine-tune base font scale for Latin & Cyrillic so 90% main level is perfectly balanced across all languages */
+  html:not([lang="ar"]) body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Fallback for browsers where zoom is not supported */
+  @supports not (zoom: 0.9) {
+    html {
+      font-size: 14.4px;
     }
   }
 
