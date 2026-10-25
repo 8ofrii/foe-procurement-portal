@@ -128,90 +128,92 @@ export default function CommitteesSection({ lang, theme }) {
             return (
               <div
                 key={session.id}
-                className={`rounded-3xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between shadow-xl hover:shadow-2xl md:last:col-span-2 lg:last:col-span-1 md:last:max-w-md md:last:mx-auto lg:last:max-w-none w-full ${borderColor} ${
+                className={`rounded-2xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-xl md:last:col-span-2 lg:last:col-span-1 md:last:max-w-md md:last:mx-auto lg:last:max-w-none w-full ${borderColor} ${
                   theme === 'dark'
                     ? 'bg-slate-900/95 shadow-black/60'
                     : 'bg-white shadow-slate-200'
                 }`}
               >
                 {/* Top metallic ribbon strip */}
-                <div className={`h-2 bg-gradient-to-r ${ribbonColor}`}></div>
+                <div className={`h-1.5 bg-gradient-to-r ${ribbonColor}`}></div>
 
-                <div className="p-5 sm:p-7 space-y-4 sm:space-y-5 flex-1 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 space-y-3 flex-1 flex flex-col justify-between">
                   
                   {/* Top Bar: Cadence & Category */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${badgeStyle}`}>
+                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${badgeStyle}`}>
                       <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
                       <span>{session.badge[lang] || session.badge.ar}</span>
                     </span>
 
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                       {session.category[lang] || session.category.ar}
                     </span>
                   </div>
 
-                  {/* Unified Date & Time Pass */}
-                  <div className={`p-4 rounded-2xl border flex items-center justify-between gap-4 ${
-                    theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-200'
+                  {/* Refined Date & Clock Pass */}
+                  <div className={`p-3 rounded-xl border flex items-center justify-between gap-3 ${
+                    theme === 'dark' ? 'bg-slate-950/70 border-slate-800' : 'bg-slate-50/90 border-slate-200'
                   }`}>
-                    <div className="space-y-1">
-                      <div className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
-                        {session.dayName[lang] || session.dayName.ar} • {session.monthName[lang] || session.monthName.ar}
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 border ${badgeStyle}`}>
+                        <Calendar className="w-4 h-4" />
                       </div>
-                      <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400">
-                        <Clock className="w-3.5 h-3.5" />
-                        <span>{isAr ? 'موعد الانعقاد: 02:00 ظهراً' : 'Kickoff: 02:00 PM'}</span>
+                      <div className="min-w-0">
+                        <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
+                          {session.dayName[lang] || session.dayName.ar}
+                        </div>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate">
+                          {session.cadence?.[lang] || session.cadence?.ar}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Big Date Number Token */}
-                    <div className={`px-4 py-2 rounded-xl border flex flex-col items-center justify-center ${badgeStyle} shadow-sm`}>
-                      <span className={`font-mono text-3xl font-black leading-none ${numberColor}`}>
-                        {session.dayNumber}
-                      </span>
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/25 text-xs font-bold flex-shrink-0 whitespace-nowrap">
+                      <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                      <span>{session.time[lang] || session.time.ar}</span>
                     </div>
                   </div>
 
                   {/* Commodity Title & Specification Scope */}
-                  <div className="space-y-1.5">
-                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white leading-snug">
+                  <div className="space-y-1">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
                       {session.commodity[lang] || session.commodity.ar}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
                       {session.commoditySpecs?.[lang] || session.commoditySpecs?.ar || session.category[lang]}
                     </p>
                   </div>
 
-                  {/* Priority / Session Specific Rule Box (Zero Redundant Dates or Times) */}
-                  <div className={`p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed ${themeBg}`}>
-                    <div className="font-black mb-1.5 flex items-center gap-2 text-sm">
-                      {isSunday && <AlertCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />}
-                      {isTuesday && <span className="text-base flex-shrink-0">🐂</span>}
-                      {isMonday && <span className="text-base flex-shrink-0">🦐</span>}
+                  {/* Priority / Session Specific Rule Box (Compact & Balanced) */}
+                  <div className={`p-3 rounded-xl border text-xs leading-relaxed ${themeBg}`}>
+                    <div className="font-bold mb-1 flex items-center gap-1.5 text-xs">
+                      {isSunday && <AlertCircle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />}
+                      {isTuesday && <span className="text-sm flex-shrink-0">🐂</span>}
+                      {isMonday && <span className="text-sm flex-shrink-0">🦐</span>}
                       <span>{session.priorityRule[lang] || session.priorityRule.ar}</span>
                     </div>
-                    <p className="text-xs sm:text-sm opacity-90 leading-relaxed font-medium">
+                    <p className="text-[11px] sm:text-xs opacity-90 leading-relaxed font-normal">
                       {session.priorityDetails[lang] || session.priorityDetails.ar}
                     </p>
                   </div>
 
                 </div>
 
-                {/* Bottom Verification & Venue Footer (No duplicate dates or papers) */}
-                <div className={`px-6 py-3.5 border-t flex items-center justify-between text-xs font-bold ${
+                {/* Bottom Verification & Venue Footer */}
+                <div className={`px-4 py-2.5 border-t flex items-center justify-between text-[11px] font-medium ${
                   theme === 'dark' 
                     ? 'bg-slate-950 border-slate-800' 
                     : 'bg-slate-50 border-slate-200'
                 }`}>
                   <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-                    <MapPin className="w-3.5 h-3.5 text-amber-500" />
+                    <MapPin className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
                     <span>{isAr ? 'قاعة اللجان المركزية' : 'Central Sessions Hall'}</span>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                  <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>{isAr ? 'جلسة معتمدة' : 'Official Session'}</span>
+                    <span>{isAr ? 'جلسة رسمية معتمدة' : 'Official Session'}</span>
                   </div>
                 </div>
 

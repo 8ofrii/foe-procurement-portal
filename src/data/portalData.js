@@ -941,9 +941,7 @@ export const COMMITTEES_DATA = {
       id: "sunday-rice",
       dayName: { ar: "يوم الأحد", en: "Sunday", pl: "Niedziela", uk: "Неділя" },
       dayCode: "SUNDAY",
-      dayNumber: "أسبوعياً",
-      monthName: { ar: "كل أحد — 02:00 ظهراً", en: "Every Sunday — 02:00 PM", pl: "W każdą niedzielę", uk: "Щонеділі о 14:00" },
-      exactDate: "جلسة أسبوعية ثابتة",
+      cadence: { ar: "جلسة أسبوعية ثابتة", en: "Weekly Fixed Session", pl: "Stała sesja tygodniowa", uk: "Щотижнева сесія" },
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
         ar: "لجنة الأرز", 
@@ -957,17 +955,17 @@ export const COMMITTEES_DATA = {
         pl: "Różne gatunki i normy jakościowe",
         uk: "Різні ґатунки та стандарти якості"
       },
-      category: { ar: "حبوب ومحاصيل زراعية", en: "Grains & Agricultural Crops", pl: "Zboża", uk: "Зернові" },
-      badge: { ar: "جلسة أسبوعية ثابتة", en: "Weekly Fixed", pl: "Cotygodniowa", uk: "Щотижнева" },
+      category: { ar: "حبوب ومحاصيل زراعية", en: "Grains & Crops", pl: "Zboża", uk: "Зернові" },
+      badge: { ar: "أسبوعياً", en: "Weekly", pl: "Cotygodniowa", uk: "Щотижнева" },
       priorityRule: {
         ar: "الأولوية بأسبقية التواجد",
-        en: "Priority: Physical Attendance Order",
+        en: "Priority by Sign-in Order",
         pl: "Pierwszeństwo według kolejności przybycia",
         uk: "Пріоритет за черговістю прибуття"
       },
       priorityDetails: {
         ar: "تُمنح أسبقية فحص العروض والبت المالي والفني بأسبقية الحضور الفعلي والتسجيل بكشوف القاعة.",
-        en: "Review priority and bid adjudication are determined by physical sign-in order in the session hall.",
+        en: "Bid adjudication priority is determined by physical registration order in the session hall.",
         pl: "O kolejności rozpatrywania decyduje rejestracja na liście obecności.",
         uk: "Пріоритет розгляду визначається черговістю підпису в списку присутності."
       },
@@ -977,9 +975,7 @@ export const COMMITTEES_DATA = {
       id: "tuesday-cattle",
       dayName: { ar: "يوم الثلاثاء", en: "Tuesday", pl: "Wtorek", uk: "Вівторок" },
       dayCode: "TUESDAY",
-      dayNumber: "أسبوعين",
-      monthName: { ar: "دورية تبادلية — 02:00 ظهراً", en: "Bi-weekly — 02:00 PM", pl: "Co dwa tygodnie", uk: "Почергово о 14:00" },
-      exactDate: "نظام أسبوع وأسبوع",
+      cadence: { ar: "جلسة دورية تبادلية (أسبوع وأسبوع)", en: "Bi-weekly Alternating Session", pl: "Sesja naprzemienna (co 2 tyg.)", uk: "Почергова сесія (через тиждень)" },
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
         ar: "لجنة الرؤوس الحية", 
@@ -994,7 +990,7 @@ export const COMMITTEES_DATA = {
         uk: "Жива худоба та телята для забою або відгодівлі"
       },
       category: { ar: "ثروة حيوانية ولحوم", en: "Livestock & Meat", pl: "Żywy Inwentarz", uk: "Тваринництво" },
-      badge: { ar: "نظام دوري أسبوع وأسبوع", en: "Bi-weekly Schedule", pl: "Co dwa tygodnie", uk: "Почерговий графік" },
+      badge: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
       priorityRule: {
         ar: "دورة الانعقاد التبادلية 🐂",
         en: "Bi-weekly Alternating Cycle 🐂",
@@ -1013,9 +1009,7 @@ export const COMMITTEES_DATA = {
       id: "monday-shrimp",
       dayName: { ar: "يوم الاثنين", en: "Monday", pl: "Poniedziałek", uk: "Понеділок" },
       dayCode: "MONDAY",
-      dayNumber: "أسبوعين",
-      monthName: { ar: "دورية تبادلية — 02:00 ظهراً", en: "Bi-weekly — 02:00 PM", pl: "Co dwa tygodnie", uk: "Почергово о 14:00" },
-      exactDate: "نظام أسبوع وأسبوع",
+      cadence: { ar: "جلسة دورية تبادلية (أسبوع وأسبوع)", en: "Bi-weekly Alternating Session", pl: "Sesja naprzemienna (co 2 tyg.)", uk: "Почергова сесія (через тиждень)" },
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
         ar: "لجنة الجمبري", 
@@ -1030,7 +1024,7 @@ export const COMMITTEES_DATA = {
         uk: "Креветки морські та заморожені різних калібрів"
       },
       category: { ar: "ثروة سمكية وبحرية", en: "Fisheries & Seafood", pl: "Rybołówstwo", uk: "Рибне господарство" },
-      badge: { ar: "نظام دوري أسبوع وأسبوع", en: "Bi-weekly Schedule", pl: "Co dwa tygodnie", uk: "Почерговий графік" },
+      badge: { ar: "دورية تبادلية", en: "Bi-weekly", pl: "Co dwa tygodnie", uk: "Почергова" },
       priorityRule: {
         ar: "دورة الانعقاد التبادلية 🦐",
         en: "Bi-weekly Alternating Cycle 🦐",
@@ -1038,10 +1032,10 @@ export const COMMITTEES_DATA = {
         uk: "Почерговий цикл 🦐"
       },
       priorityDetails: {
-        ar: "انعقدت الجلسة السابقة بنجاح بتاريخ 19/10/2026، وتنعقد الجلسة التالية وفق الموعد المبين أعلاه.",
-        en: "Previous session was held on 19/10/2026; next session convenes per the schedule above.",
-        pl: "Poprzednia sesja odbyła się 19/10/2026; kolejna zgodnie z powyższym terminem.",
-        uk: "Попередня відбулася 19/10/2026; наступна згідно з розкладом вище."
+        ar: "تنعقد الجلسة بالتبادل الأسبوعي مع لجنة الرؤوس الحية بقاعة اللجان المركزية.",
+        en: "Convenes on an alternating weekly schedule with the Live Cattle Committee.",
+        pl: "Obrady naprzemienne co tydzień z komisją ds. żywego bydła.",
+        uk: "Засідання чергуються щотижня з комісією щодо живої худоби."
       },
       tagColor: "emerald"
     }
