@@ -184,21 +184,21 @@ export default function Navbar({
         </div>
 
         {/* Desktop Navigation Links - Centered, identical compact sizing for all languages */}
-        <div className="hidden lg:flex flex-1 items-center justify-center gap-0.5 xl:gap-1.5 text-[11px] xl:text-xs font-semibold px-1 sm:px-2">
+        <div className="hidden lg:flex flex-1 items-center justify-center gap-1 xl:gap-2 text-xs font-semibold px-1 sm:px-2">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`px-1.5 xl:px-2.5 py-1 rounded-md transition-all whitespace-nowrap cursor-pointer ${
+                className={`px-2 xl:px-2.5 py-1.5 rounded-xl transition-all whitespace-nowrap cursor-pointer text-[11px] xl:text-xs ${
                   isActive
                     ? (theme === 'dark' 
-                        ? 'text-amber-400 bg-amber-500/15 font-bold shadow-sm' 
-                        : 'text-amber-800 bg-amber-100 font-bold shadow-sm')
+                        ? 'text-amber-400 bg-amber-500/15 border border-amber-500/30 font-bold shadow-xs' 
+                        : 'text-amber-900 bg-amber-100 border border-amber-300 font-bold shadow-xs')
                     : (theme === 'dark'
-                        ? 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100')
+                        ? 'text-slate-300 hover:text-white hover:bg-slate-800/70 border border-transparent'
+                        : 'text-slate-600 hover:text-slate-950 hover:bg-slate-100 border border-transparent')
                 }`}
               >
                 {item.label}
@@ -207,7 +207,7 @@ export default function Navbar({
           })}
         </div>
 
-        {/* Right Controls: [ 🌐 Language ▾ ] [ 90% ▾ ] [ ☀️/🌙 ] [ 🔍 ] [ ☰ ] */}
+        {/* Right Controls: [ 🌐 Language ▾ ] [ ☀️/🌙 ] [ 🔍 ] [ ☰ ] */}
         <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
           
           {/* Revised Language Selector - Clean language only, no country letters, polished styling */}
@@ -215,7 +215,6 @@ export default function Navbar({
             <button
               onClick={() => {
                 setLangMenuOpen(!langMenuOpen);
-                setSizeMenuOpen(false);
               }}
               type="button"
               aria-expanded={langMenuOpen}
