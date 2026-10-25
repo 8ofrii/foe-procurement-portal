@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { 
   PhoneCall, 
   Mail, 
@@ -155,12 +155,12 @@ export default function ContactSection({ lang, theme }) {
               </div>
               <div>
                 <h3 className="text-sm sm:text-lg font-black text-slate-900 dark:text-white">
-                  {isAr ? 'موقع المقر وقاعة اللجان: توكانو مول — الدور الثالث' : 'Headquarters & Committees Hall: Tucano Mall — Floor 3'}
+                  {isAr ? 'موقع المقر وقاعة اللجان: مول توكانو (Tucano Mall) — الدور الثالث' : 'Headquarters & Committees Hall: Tucano Mall — Floor 3'}
                 </h3>
                 <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
                   {isAr 
-                    ? 'شارع يوسف عباس — مدينة نصر — القاهرة (بالقرب من مستشفى دار الفؤاد ونادي الزهور وجامعة الأزهر)'
-                    : 'Yousef Abbas St., Nasr City, Cairo (near Dar Al Fouad Hospital, Al-Zohour Club & Al-Azhar University)'}
+                    ? 'مجمع توكانو التجاري — شارع يوسف عباس — مدينة نصر — القاهرة (المقر الرئيسي وقاعة اللجان المركزية)'
+                    : 'Tucano Commercial Complex — Yousef Abbas St., Nasr City, Cairo (Headquarters & Central Committees)'}
                 </p>
               </div>
             </div>
@@ -202,7 +202,7 @@ export default function ContactSection({ lang, theme }) {
                 className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all shadow-md shadow-amber-500/20 flex-shrink-0 cursor-pointer"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                <span>{isAr ? 'فتح في خرائط Google ↗' : 'Open in Google Maps ↗'}</span>
+                <span>{isAr ? 'فتح موقع توكانو مول في خرائط Google ↗' : 'Open Tucano Mall in Google Maps ↗'}</span>
               </a>
             </div>
           </div>
@@ -211,8 +211,8 @@ export default function ContactSection({ lang, theme }) {
           <div className="relative w-full h-72 sm:h-96 md:h-[420px] bg-slate-950">
             {mapProvider === 'google' ? (
               <iframe
-                title="Tucano Mall Google Maps Official Embed"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.3087222713177!2d31.3174413!3d30.0657908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e5a5a5a5a5b%3A0x0!2zMzDCsDAzJzU2LjkiTiAzMcKwMTknMTAuNyJF!5e0!3m2!1sar!2seg!4v1710000000000!5m2!1sar!2seg"
+                title="Tucano Mall Google Maps Embed"
+                src="https://maps.google.com/maps?q=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 className="w-full h-full border-0"
                 allowFullScreen=""
                 loading="lazy"
@@ -221,7 +221,7 @@ export default function ContactSection({ lang, theme }) {
             ) : (
               <iframe
                 title="Tucano Mall OpenStreetMap"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=31.3140%2C30.0620%2C31.3250%2C30.0690&layer=mapnik&marker=30.06579%2C31.31963"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=31.3140%2C30.0620%2C31.3250%2C30.0690&layer=mapnik&marker=30.0652%2C31.3205"
                 className="w-full h-full border-0"
                 loading="lazy"
               ></iframe>
@@ -240,11 +240,11 @@ export default function ContactSection({ lang, theme }) {
               </div>
               <p className="text-[11px] text-slate-300 leading-relaxed">
                 {isAr 
-                  ? 'قاعة اللجان المركزية وإدارة الشراء الموحد — جهاز مستقبل مصر للتنمية المستدامة' 
-                  : 'Central Committees Hall & Unified Strategic Procurement Directorate — FOE'}
+                  ? 'مول توكانو التجاري — قاعة اللجان المركزية وإدارة الشراء الموحد بجهاز مستقبل مصر' 
+                  : 'Tucano Commercial Complex — Central Committees Hall & Unified Procurement Directorate (FOE)'}
               </p>
               <div className="pt-1 flex items-center justify-between text-[10px] text-slate-400 border-t border-slate-800">
-                <span className="font-mono">30°03'56.8"N 31°19'10.7"E</span>
+                <span className="font-medium text-amber-400">{isAr ? 'مول توكانو — يوسف عباس' : 'Tucano Mall — Yousef Abbas'}</span>
                 <a
                   href={info.mapsUrl}
                   target="_blank"
