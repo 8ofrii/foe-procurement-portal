@@ -23,11 +23,16 @@ export default function App() {
     return localStorage.getItem('foe_theme') || 'dark';
   });
 
+  // Display size / zoom level: Default is '0.9' (90% Main Level) across all languages
+  const [zoomScale, setZoomScale] = useState(() => {
+    return localStorage.getItem('foe_zoom') || '0.9';
+  });
+
   const [activeSection, setActiveSection] = useState('hero');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isInfographicOpen, setIsInfographicOpen] = useState(false);
 
-  // Sync lang, dir, and theme to root document
+  // Sync lang, dir, and data-lang to root document
   useEffect(() => {
     localStorage.setItem('foe_lang', lang);
     document.documentElement.lang = lang;
@@ -46,19 +51,16 @@ export default function App() {
     }
   }, [theme]);
 
-  // Enforce 90% default zoom across all languages on tablet & desktop, 92% on mobile
+  // Enforce selected display size (Default 90% Main Level) identically across all languages
   useEffect(() => {
-    const applyDefaultZoom = () => {
-      if (window.innerWidth >= 768) {
-        document.documentElement.style.zoom = '0.9';
-      } else {
-        document.documentElement.style.zoom = '0.92';
-      }
+    localStorage.setItem('foe_zoom', zoomScale);
+    const applyZoom = () => {
+      document.documentElement.style.zoom = zoomScale;
     };
-    applyDefaultZoom();
-    window.addEventListener('resize', applyDefaultZoom);
-    return () => window.removeEventListener('resize', applyDefaultZoom);
-  }, [lang]);
+    applyZoom();
+    window.addEventListener('resize', applyZoom);
+    return () => window.removeEventListener('resize', applyZoom);
+  }, [zoomScale, lang]);
 
   // Keyboard shortcut Ctrl+K
   useEffect(() => {
@@ -113,12 +115,14 @@ export default function App() {
     <div className={`min-h-screen transition-colors duration-300 flex flex-col font-sans ${
       theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
     }`}>
-      {/* Sleek, De-cluttered Navigation Bar */}
+      {/* Sleek, De-cluttered Navigation Bar with Unified Size & Language Options */}
       <Navbar
         lang={lang}
         setLang={setLang}
         theme={theme}
         setTheme={setTheme}
+        zoomScale={zoomScale}
+        setZoomScale={setZoomScale}
         onOpenSearch={() => setIsSearchOpen(true)}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
