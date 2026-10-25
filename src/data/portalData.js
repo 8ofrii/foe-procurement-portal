@@ -227,7 +227,7 @@ export const PILLARS = [
       uk: "Суворий контроль якості для гарантії безпечних та корисних продуктів"
     },
     desc: {
-      ar: "منظومة فحص ورقابة صارمة في موانئ الشحن وموانئ الوصول بالتعاون مع المعامل المرجعية وهيئة سلامة الغذاء لمنع دخول أي شحنة غير مطابقة.",
+      ar: "إجراءات فحص ورقابة صارمة في موانئ الشحن وموانئ الوصول بالتعاون مع المعامل المرجعية وهيئة سلامة الغذاء لمنع دخول أي شحنة غير مطابقة.",
       en: "Multi-tier inspection protocols across origin loading and discharge ports partnering with accredited laboratories and food safety authorities.",
       pl: "Rygorystyczny system weryfikacji w portach załadunku i wyładunku we współpracy z laboratoriami referencyjnymi.",
       uk: "Багаторівнева система перевірки в портах відвантаження та прибуття за участю акредитованих референс-лабораторій."

@@ -26,8 +26,61 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
     BadgeDollarSign: BadgeDollarSign
   };
 
+  // Distinct semantic color theme per pillar reflecting its functional purpose
+  const pillarThemes = {
+    1: {
+      // Sovereign Security & Certified Quality (Royal Blue)
+      borderSelected: 'border-blue-500 ring-2 ring-blue-500/20 shadow-xl shadow-blue-500/10',
+      iconBox: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/25',
+      badge: 'bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/25',
+      accentText: 'text-blue-600 dark:text-blue-400',
+      bannerBadge: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30'
+    },
+    2: {
+      // Agriculture, Grains & National Reserves (Golden Amber)
+      borderSelected: 'border-amber-500 ring-2 ring-amber-500/20 shadow-xl shadow-amber-500/10',
+      iconBox: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25',
+      badge: 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/25',
+      accentText: 'text-amber-600 dark:text-amber-400',
+      bannerBadge: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30'
+    },
+    3: {
+      // Market Balance & Price Stability (Teal / Fair Trade)
+      borderSelected: 'border-teal-500 ring-2 ring-teal-500/20 shadow-xl shadow-teal-500/10',
+      iconBox: 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/25',
+      badge: 'bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-500/25',
+      accentText: 'text-teal-600 dark:text-teal-400',
+      bannerBadge: 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/30'
+    },
+    4: {
+      // Food Safety & Health Compliance (Emerald Green)
+      borderSelected: 'border-emerald-500 ring-2 ring-emerald-500/20 shadow-xl shadow-emerald-500/10',
+      iconBox: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/25',
+      badge: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/25',
+      accentText: 'text-emerald-600 dark:text-emerald-400',
+      bannerBadge: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
+    },
+    5: {
+      // Maritime Supply Chains & Global Ports (Deep Indigo)
+      borderSelected: 'border-indigo-500 ring-2 ring-indigo-500/20 shadow-xl shadow-indigo-500/10',
+      iconBox: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/25',
+      badge: 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/25',
+      accentText: 'text-indigo-600 dark:text-indigo-400',
+      bannerBadge: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/30'
+    },
+    6: {
+      // Fiscal Efficiency & FX Treasury Savings (Purple / Economics)
+      borderSelected: 'border-purple-500 ring-2 ring-purple-500/20 shadow-xl shadow-purple-500/10',
+      iconBox: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/25',
+      badge: 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/25',
+      accentText: 'text-purple-600 dark:text-purple-400',
+      bannerBadge: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30'
+    }
+  };
+
   const activePillar = PILLARS.find(p => p.id === selectedPillar) || PILLARS[0];
   const ActiveIcon = iconMap[activePillar.icon] || ShieldCheck;
+  const activeTheme = pillarThemes[activePillar.id] || pillarThemes[1];
 
   return (
     <section id="pillars" className={`py-20 relative border-t transition-colors duration-300 ${
@@ -76,57 +129,55 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
           {PILLARS.map((pillar) => {
             const Icon = iconMap[pillar.icon] || ShieldCheck;
             const isSelected = selectedPillar === pillar.id;
+            const t = pillarThemes[pillar.id] || pillarThemes[1];
 
             return (
               <div
                 key={pillar.id}
                 onClick={() => setSelectedPillar(pillar.id)}
-                className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 border ${
+                className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 border group flex flex-col justify-between ${
                   isSelected 
                     ? (theme === 'dark'
-                        ? 'bg-slate-900 border-amber-500/70 shadow-xl shadow-amber-500/10 scale-[1.02]'
-                        : 'bg-white border-amber-500 shadow-xl shadow-amber-500/10 scale-[1.02] ring-1 ring-amber-500')
+                        ? `bg-slate-900 ${t.borderSelected} scale-[1.02]`
+                        : `bg-white ${t.borderSelected} scale-[1.02]`)
                     : (theme === 'dark'
-                        ? 'bg-slate-900/40 border-slate-800 hover:border-slate-700'
-                        : 'bg-white/80 border-slate-200 hover:border-slate-300')
+                        ? 'bg-slate-900/50 border-slate-800 hover:border-slate-700 hover:bg-slate-900/80'
+                        : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md')
                 }`}
               >
-                {/* Number & Badge */}
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className={`w-8 h-8 rounded-lg text-xs font-mono font-bold flex items-center justify-center border ${
-                    theme === 'dark' ? 'bg-slate-800 border-slate-700 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-700'
-                  }`}>
-                    0{pillar.id}
-                  </span>
-                  <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${
-                    theme === 'dark' ? 'bg-slate-800 border-slate-700 text-amber-400' : 'bg-amber-50 border-amber-200 text-amber-800'
-                  }`}>
-                    {pillar.badge[lang] || pillar.badge.ar}
-                  </span>
-                </div>
+                <div>
+                  {/* Top Header: Simple Semantic Icon on one side, Pill Badge & Number on other side */}
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className={`w-11 h-11 rounded-xl border flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105 shadow-xs ${t.iconBox}`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
 
-                {/* Icon & Title */}
-                <div className="flex items-start gap-3.5 mb-3">
-                  <div className={`p-3 rounded-xl border flex-shrink-0 ${
-                    theme === 'dark' 
-                      ? 'bg-amber-500/10 border-amber-500/20 text-amber-400' 
-                      : 'bg-amber-50 border-amber-200 text-amber-700'
-                  }`}>
-                    <Icon className="w-6 h-6" />
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${t.badge}`}>
+                        {pillar.badge[lang] || pillar.badge.ar}
+                      </span>
+                      <span className={`w-7 h-7 rounded-lg text-xs font-mono font-bold flex items-center justify-center border ${
+                        theme === 'dark' ? 'bg-slate-800/80 border-slate-700 text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-500'
+                      }`}>
+                        0{pillar.id}
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold leading-snug text-slate-900 dark:text-white">
+
+                  {/* Title (Full width, clear, elegant) */}
+                  <h3 className="text-base sm:text-lg font-bold leading-snug text-slate-900 dark:text-white mb-2.5">
                     {pillar.title[lang] || pillar.title.ar}
                   </h3>
-                </div>
 
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
-                  {pillar.desc[lang] || pillar.desc.ar}
-                </p>
+                  {/* Description */}
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                    {pillar.desc[lang] || pillar.desc.ar}
+                  </p>
+                </div>
 
                 {/* Active indicator */}
                 {isSelected && (
-                  <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-amber-600 dark:text-amber-400 font-semibold">
+                  <div className={`mt-5 pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-bold ${t.accentText}`}>
                     <span>{isAr ? 'الركيزة المحددة' : 'Selected Pillar'}</span>
                     <CheckCircle2 className="w-4 h-4" />
                   </div>
@@ -137,7 +188,7 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
         </div>
 
         {/* Selected Pillar Detailed Banner */}
-        <div className={`mt-10 p-6 sm:p-8 rounded-3xl border shadow-xl relative overflow-hidden ${
+        <div className={`mt-10 p-6 sm:p-8 rounded-3xl border shadow-xl relative overflow-hidden transition-all duration-300 ${
           theme === 'dark' 
             ? 'bg-slate-900/90 border-slate-700 text-slate-100' 
             : 'bg-white border-slate-200 text-slate-900'
@@ -145,10 +196,10 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-3 max-w-3xl">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 border border-amber-300 dark:border-amber-500/30">
+                <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-lg border ${activeTheme.bannerBadge}`}>
                   {isAr ? `الركيزة رقم 0${activePillar.id}` : `Pillar #0${activePillar.id}`}
                 </span>
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                   {isAr ? 'آليات التنفيذ والمتابعة المعتمدة' : 'Operational Implementation Protocols'}
                 </span>
               </div>
@@ -162,14 +213,16 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
               </p>
             </div>
 
-            <div className={`flex-shrink-0 flex flex-col items-center justify-center p-6 rounded-2xl border text-center w-full lg:w-72 ${
+            <div className={`flex-shrink-0 flex flex-col items-center justify-center p-6 rounded-2xl border text-center w-full lg:w-72 transition-all ${
               theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'
             }`}>
-              <ActiveIcon className="w-12 h-12 text-amber-500 mb-2" />
-              <div className="text-xs text-slate-500 font-medium">
+              <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center mb-3 shadow-sm ${activeTheme.iconBox}`}>
+                <ActiveIcon className="w-7 h-7" />
+              </div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                 {isAr ? 'جهاز مستقبل مصر للتنمية المستدامة' : 'Mostaqbal Misr Agency'}
               </div>
-              <div className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
+              <div className={`text-sm font-bold mt-0.5 ${activeTheme.accentText}`}>
                 {isAr ? 'إدارة الشراء الموحد' : 'Unified Procurement'}
               </div>
             </div>
