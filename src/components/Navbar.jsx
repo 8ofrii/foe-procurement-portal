@@ -72,8 +72,7 @@ export default function Navbar({
   setLang, 
   theme, 
   setTheme, 
-  zoomScale = '0.9',
-  setZoomScale,
+  onScrollTo,
   onOpenSearch, 
   activeSection, 
   setActiveSection 
@@ -81,7 +80,7 @@ export default function Navbar({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-    const langDropdownRef = useRef(null);
+  const langDropdownRef = useRef(null);
   
   const isAr = lang === 'ar';
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
@@ -102,7 +101,7 @@ export default function Navbar({
       if (langDropdownRef.current && !langDropdownRef.current.contains(event.target)) {
         setLangMenuOpen(false);
       }
-          };
+    };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -117,18 +116,16 @@ export default function Navbar({
 
   const currentLangObj = languages.find(l => l.code === lang) || languages[0];
 
-    const scrollTo = (id) => {
+  const scrollTo = (id) => {
     setMobileMenuOpen(false);
-    setActiveSection(id);
-    const element = document.getElementById(id);
-    if (element) {
-      const navOffset = NAV_OFFSET;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+    if (onScrollTo) {
+      onScrollTo(id);
+    } else {
+      setActiveSection(id);
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -371,41 +368,6 @@ export default function Navbar({
                   >
                     <span>{l.name}</span>
                     {isCurrent && <Check className="w-3.5 h-3.5 text-amber-500" />}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Quick Size Option Row in Mobile Drawer */}
-          <div className="pb-2.5 mb-2 border-b border-slate-200 dark:border-slate-800">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-1.5 flex items-center gap-1.5">
-              <SlidersHorizontal className="w-3 h-3 text-amber-500" />
-              <span>{isAr ? 'مستوى الحجم' : 'Display Size Level'}</span>
-            </div>
-            <div className="grid grid-cols-3 gap-1.5">
-              {sizeOptions.map((opt) => {
-                const isCurrent = (zoomScale || '0.9') === opt.value;
-                return (
-                  <button
-                    key={opt.value}
-                    onClick={() => {
-                      if (setZoomScale) setZoomScale(opt.value);
-                      setMobileMenuOpen(false);
-                    }}
-                    type="button"
-                    className={`py-1.5 px-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer border ${
-                      isCurrent
-                        ? (theme === 'dark'
-                            ? 'bg-amber-500/20 text-amber-400 border-amber-500/40 shadow-xs'
-                            : 'bg-amber-50 text-amber-900 border-amber-300 shadow-xs')
-                        : (theme === 'dark'
-                            ? 'bg-slate-900/60 text-slate-300 border-slate-800 hover:bg-slate-800'
-                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100')
-                    }`}
-                  >
-                    <span>{opt.percent}%</span>
-                    {opt.isMain && <span className="text-[9px] text-amber-500">★</span>}
                   </button>
                 );
               })}

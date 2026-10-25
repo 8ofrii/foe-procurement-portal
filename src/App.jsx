@@ -75,24 +75,52 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Automatic ScrollSpy: update active navbar section when scrolling up or down
+  // Automatic ScrollSpy: dynamically updates active navbar link based on visible section
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 120;
-      for (let i = SECTIONS.length - 1; i >= 0; i--) {
-        const sectionId = SECTIONS[i];
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveSection(sectionId);
-            break;
+      if (ticking) return;
+      ticking = true;
+
+      window.requestAnimationFrame(() => {
+        ticking = false;
+
+        // 1. If near the top of the page, activate 'hero'
+        if (window.scrollY < 80) {
+          setActiveSection('hero');
+          return;
+        }
+
+        // 2. If reached near the bottom of the page, activate the last section ('contact')
+        const scrollHeight = document.documentElement.scrollHeight;
+        const clientHeight = window.innerHeight;
+        if (window.scrollY + clientHeight >= scrollHeight - 60) {
+          setActiveSection(SECTIONS[SECTIONS.length - 1]);
+          return;
+        }
+
+        // 3. Scan sections: A section is active if its top is near or past the header line
+        // Navbar height is ~64px. Detection threshold at 130px gives instant, natural feedback
+        // as soon as a section enters view under the header.
+        const DETECTION_LINE = 130;
+
+        for (let i = 0; i < SECTIONS.length; i++) {
+          const sectionId = SECTIONS[i];
+          const el = document.getElementById(sectionId);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= DETECTION_LINE && rect.bottom > DETECTION_LINE) {
+              setActiveSection(sectionId);
+              break;
+            }
           }
         }
-      }
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -100,11 +128,9 @@ export default function App() {
     setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - NAV_OFFSET;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       });
     }
   };
@@ -119,6 +145,7 @@ export default function App() {
         setLang={setLang}
         theme={theme}
         setTheme={setTheme}
+        onScrollTo={handleScrollTo}
         onOpenSearch={() => setIsSearchOpen(true)}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
