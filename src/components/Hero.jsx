@@ -6,7 +6,8 @@ import {
   Ship, 
   Building2, 
   ShieldCheck, 
-  FileText
+  FileText,
+  MapPin
 } from 'lucide-react';
 import { PORTAL_INFO } from '../data/portalData';
 

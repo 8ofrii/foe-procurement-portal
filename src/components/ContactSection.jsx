@@ -8,7 +8,9 @@ import {
   Building, 
   ShieldCheck,
   Clock,
-  ExternalLink
+  ExternalLink,
+  RotateCw,
+  Compass
 } from 'lucide-react';
 import { PORTAL_INFO, FAQ_LIST } from '../data/portalData';
 
@@ -17,6 +19,21 @@ export default function ContactSection({ lang, theme }) {
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
   const [openFaq, setOpenFaq] = useState(0);
   const [mapProvider, setMapProvider] = useState('google');
+  const [isMapLoading, setIsMapLoading] = useState(true);
+  const [mapReloadKey, setMapReloadKey] = useState(0);
+
+  const handleReloadMap = () => {
+    setIsMapLoading(true);
+    setMapReloadKey(prev => prev + 1);
+  };
+
+  const handleSwitchProvider = (provider) => {
+    if (provider !== mapProvider) {
+      setIsMapLoading(true);
+      setMapProvider(provider);
+      setMapReloadKey(prev => prev + 1);
+    }
+  };
 
   return (
     <section id="contact" className={`py-20 relative border-t transition-colors duration-300 ${
@@ -172,7 +189,7 @@ export default function ContactSection({ lang, theme }) {
               }`}>
                 <button
                   type="button"
-                  onClick={() => setMapProvider('google')}
+                  onClick={() => handleSwitchProvider('google')}
                   className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                     mapProvider === 'google'
                       ? 'bg-amber-500 text-slate-950 shadow-sm font-black'
@@ -183,7 +200,7 @@ export default function ContactSection({ lang, theme }) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setMapProvider('osm')}
+                  onClick={() => handleSwitchProvider('osm')}
                   className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                     mapProvider === 'osm'
                       ? 'bg-amber-500 text-slate-950 shadow-sm font-black'
@@ -208,27 +225,74 @@ export default function ContactSection({ lang, theme }) {
           </div>
 
           {/* Map Embed Container */}
-          <div className="relative w-full h-72 sm:h-96 md:h-[420px] bg-slate-950">
+          <div className="relative w-full h-80 sm:h-96 md:h-[450px] bg-slate-950 overflow-hidden">
+            {/* Loading Indicator / Skeleton */}
+            {isMapLoading && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-slate-950/90 text-amber-400 z-10 transition-opacity duration-300">
+                <div className="w-9 h-9 border-3 border-amber-500/25 border-t-amber-500 rounded-full animate-spin"></div>
+                <div className="text-xs sm:text-sm font-bold text-slate-200 flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-amber-500 animate-bounce" />
+                  <span>{isAr ? 'جارٍ تحميل خريطة توكانو مول المعتمدة...' : 'Loading Tucano Commercial Complex Map...'}</span>
+                </div>
+                <div className="flex items-center gap-2 pt-1">
+                  <button
+                    onClick={() => handleSwitchProvider(mapProvider === 'google' ? 'osm' : 'google')}
+                    type="button"
+                    className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-800 text-amber-400 border border-slate-700 hover:bg-slate-700 transition-colors cursor-pointer"
+                  >
+                    {isAr ? 'التبديل إلى الخريطة البديلة' : 'Switch to Alternative Map'}
+                  </button>
+                  <a
+                    href={info.mapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-colors"
+                  >
+                    {isAr ? 'فتح في خرائط Google ↗' : 'Open in Google Maps ↗'}
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {/* Google Maps Embed with Eager Loading & Stable Render */}
             {mapProvider === 'google' ? (
               <iframe
+                key={`gmap-${mapReloadKey}`}
                 title="Tucano Mall Google Maps Embed"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.5186064016597!2d31.3200135!3d30.0608796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f5f7da2e537%3A0x71310f58dac3832f!2sTucano%20Commercial%20Complex!5e0!3m2!1sar!2seg!4v1710000000000!5m2!1sar!2seg"
                 className="w-full h-full border-0"
                 allowFullScreen=""
-                loading="lazy"
+                loading="eager"
                 referrerPolicy="no-referrer-when-downgrade"
+                onLoad={() => setIsMapLoading(false)}
               ></iframe>
             ) : (
               <iframe
+                key={`osm-${mapReloadKey}`}
                 title="Tucano Mall OpenStreetMap"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=31.3170%2C30.0560%2C31.3280%2C30.0650&layer=mapnik&marker=30.060875%2C31.3225884"
                 className="w-full h-full border-0"
-                loading="lazy"
+                loading="eager"
+                onLoad={() => setIsMapLoading(false)}
               ></iframe>
             )}
 
+            {/* Quick Floating Controls inside Map (Top Left) */}
+            <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 pointer-events-auto">
+              <button
+                type="button"
+                onClick={handleReloadMap}
+                title={isAr ? 'إعادة تحميل الخريطة' : 'Reload Map'}
+                aria-label={isAr ? 'إعادة تحميل الخريطة' : 'Reload Map'}
+                className="p-2 rounded-xl bg-slate-950/85 hover:bg-slate-900 text-amber-400 border border-slate-700/80 shadow-md backdrop-blur-md transition-all cursor-pointer flex items-center gap-1.5 text-xs font-bold"
+              >
+                <RotateCw className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">{isAr ? 'تحديث' : 'Reload'}</span>
+              </button>
+            </div>
+
             {/* Floating Info Overlay Pill */}
-            <div className="absolute bottom-4 right-4 max-w-sm p-4 rounded-2xl border backdrop-blur-md shadow-xl bg-slate-950/90 border-amber-500/40 text-white text-xs space-y-1.5 hidden sm:block pointer-events-auto">
+            <div className="absolute bottom-4 right-4 max-w-sm p-4 rounded-2xl border backdrop-blur-md shadow-xl bg-slate-950/90 border-amber-500/40 text-white text-xs space-y-1.5 hidden sm:block pointer-events-auto z-20">
               <div className="font-bold text-amber-400 flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <Building className="w-3.5 h-3.5" />
