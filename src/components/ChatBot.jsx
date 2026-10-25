@@ -10,7 +10,11 @@ import {
   Wheat,
   Fish,
   ShieldCheck,
-  Share2
+  Share2,
+  RotateCcw,
+  HelpCircle,
+  Clock,
+  Building2
 } from 'lucide-react';
 import { PORTAL_INFO } from '../data/portalData';
 
@@ -23,24 +27,41 @@ export default function ChatBot({ lang, theme }) {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // Initial welcome message per language
-  useEffect(() => {
+  const getWelcomeText = (l) => {
     const welcomeMessages = {
       ar: 'مرحباً بك! أنا المساعد الذكي لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. كيف يمكنني إفادتك اليوم بخصوص مواعيد اللجان (لجنة الأرز، لجنة الرؤوس الحية، لجنة الجمبري)، السلع والمخزون، أو القنوات الرسمية؟',
       en: 'Welcome! I am the AI Assistant of Mostaqbal Misr Unified Procurement Directorate. How can I assist you regarding committees schedule (Rice, Live Cattle, Shrimp), strategic reserves, or official channels?',
       pl: 'Witamy! Jestem Asystentem AI ds. Zakupów Strategicznych Agencji Przyszłość Egiptu. W czym mogę pomóc w kwestii harmonogramu komisji, surowców lub oficjalnych kanałów?',
       uk: 'Вітаємо! Я інтелектуальний помічник Директорату єдиних закупівель Агентства Майбутнє Єгипту. Чим можу допомогти щодо графіка комісій, стратегічних запасів чи контактів?'
     };
+    return welcomeMessages[l] || welcomeMessages.ar;
+  };
 
+  // Initial welcome message per language
+  useEffect(() => {
     setMessages([
       {
         id: 1,
         sender: 'bot',
-        text: welcomeMessages[lang] || welcomeMessages.ar,
+        text: getWelcomeText(lang),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }
     ]);
   }, [lang]);
+
+  // Restart/Refresh Chat conversation
+  const handleResetChat = () => {
+    setMessages([
+      {
+        id: Date.now(),
+        sender: 'bot',
+        text: getWelcomeText(lang),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }
+    ]);
+    setInputValue('');
+    setIsTyping(false);
+  };
 
   const quickPrompts = {
     ar: [
@@ -107,9 +128,7 @@ export default function ChatBot({ lang, theme }) {
       q.includes('facebook') || 
       q.includes('linkedin') || 
       q.includes('twitter') || 
-      q.includes('x') || 
-      q.includes('presidency') || 
-      q.includes('رئاسة')
+      q.includes('x')
     ) {
       return {
         type: 'social_links',
@@ -574,12 +593,24 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
               </div>
             </div>
 
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-1 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={handleResetChat}
+                type="button"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                title={isAr ? 'بدء محادثة جديدة (إعادة ضبط)' : 'Restart Chat'}
+              >
+                <RotateCcw className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                type="button"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                title={isAr ? 'إغلاق' : 'Close'}
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
           {/* Social Media Quick Bar inside Bot Header */}
@@ -617,16 +648,6 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                 className="px-2 py-0.5 rounded-md bg-slate-500/10 hover:bg-slate-900 hover:text-white text-slate-700 dark:text-slate-300 font-bold text-[10px] transition-all flex items-center gap-1 border border-slate-500/20"
               >
                 <span>X</span>
-                <ExternalLink className="w-2.5 h-2.5" />
-              </a>
-              <a 
-                href={info.presidencyUrl} 
-                target="_blank" 
-                rel="noreferrer"
-                title={isAr ? 'بوابة رئاسة الجمهورية' : 'Presidency Portal'}
-                className="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500 text-amber-700 dark:text-amber-400 hover:text-slate-950 font-bold text-[10px] transition-all flex items-center gap-1 border border-amber-500/20"
-              >
-                <span>{isAr ? 'الرئاسة' : 'Presidency'}</span>
                 <ExternalLink className="w-2.5 h-2.5" />
               </a>
             </div>
@@ -713,25 +734,35 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
                         <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                       </a>
 
-                      {/* Presidency Portal Card */}
-                      <a 
-                        href={info.presidencyUrl} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/15 transition-all flex items-center justify-between gap-2 group text-slate-900 dark:text-white"
-                      >
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-xs">
-                            🏛️
-                          </div>
-                          <div>
-                            <div className="text-xs font-bold">{isAr ? 'بوابة رئاسة الجمهورية — افتتاح مشروع مستقبل مصر' : 'Presidency Portal — Future of Egypt Project'}</div>
-                            <div className="text-[10px] text-amber-600 dark:text-amber-400 font-mono">presidency.eg</div>
-                          </div>
-                        </div>
-                        <ExternalLink className="w-3.5 h-3.5 text-amber-500 group-hover:translate-x-0.5 transition-transform" />
-                      </a>
+                    </div>
+                  )}
 
+                  {/* Suggested Topics in the Welcome Message */}
+                  {msg.id === 1 && (
+                    <div className="mt-3.5 pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
+                      <div className="text-[11px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        <span>{isAr ? 'الاستفسارات الشائعة (اضغط للسؤال فوراً):' : 'Suggested Topics (Click to ask):'}</span>
+                      </div>
+                      <div className="grid grid-cols-1 gap-1.5 pt-0.5">
+                        {activePrompts.slice(0, 4).map((promptText, pIdx) => (
+                          <button
+                            key={pIdx}
+                            onClick={() => handleSendMessage(promptText)}
+                            type="button"
+                            className={`w-full ${isAr ? 'text-right' : 'text-left'} px-3 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer flex items-center justify-between gap-2 group ${
+                              theme === 'dark'
+                                ? 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-amber-500/60 hover:bg-amber-500/10 hover:text-amber-300'
+                                : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-900'
+                            }`}
+                          >
+                            <span className="leading-snug">{promptText}</span>
+                            <span className="text-amber-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform flex-shrink-0 text-xs">
+                              {isAr ? '←' : '→'}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -753,16 +784,27 @@ Infolinia: +20 19842 | E-mail: procurement@foe.gov.eg`;
           </div>
 
           {/* Quick Questions Pills */}
-          <div className="p-2 border-t border-slate-200 dark:border-slate-800 overflow-x-auto flex gap-1.5 bg-slate-100 dark:bg-slate-950">
-            {activePrompts.map((p, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleSendMessage(p)}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full text-[11px] font-semibold border transition-all text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 hover:border-amber-500 flex-shrink-0"
-              >
-                {p}
-              </button>
-            ))}
+          <div className="px-3 py-2 border-t border-slate-200 dark:border-slate-800 bg-slate-100/90 dark:bg-slate-950/90">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5">
+              <span className="text-[10px] font-black text-amber-600 dark:text-amber-400 flex items-center gap-1 flex-shrink-0">
+                <HelpCircle className="w-3.5 h-3.5" />
+                <span>{isAr ? 'أسئلة سريعة:' : 'Quick:'}</span>
+              </span>
+              {activePrompts.map((p, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSendMessage(p)}
+                  type="button"
+                  className={`whitespace-nowrap px-3 py-1 rounded-xl text-[11px] font-bold border transition-all flex-shrink-0 cursor-pointer shadow-xs ${
+                    theme === 'dark'
+                      ? 'bg-slate-900 border-slate-700/80 text-slate-200 hover:border-amber-400 hover:bg-amber-500/10 hover:text-amber-300'
+                      : 'bg-white border-slate-300 text-slate-800 hover:border-amber-500 hover:bg-amber-50 hover:text-amber-900'
+                  }`}
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Input Box */}
