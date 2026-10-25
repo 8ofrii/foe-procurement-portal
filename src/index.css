@@ -196,18 +196,25 @@ html.light .glass-card:hover {
   animation-play-state: paused;
 }
 
-/* Completely disable video captions/subtitles across WebKit, Blink, and Gecko */
-video::cue {
+/* Completely disable video captions, subtitles, and track overlays across all engines */
+::cue,
+video::cue,
+*::cue {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  background: transparent !important;
+  color: transparent !important;
 }
-video::-webkit-media-text-track-container {
+video::-webkit-media-text-track-container,
+video::-webkit-media-text-track-display,
+video::-webkit-media-text-track-region,
+video::-webkit-media-controls-text-track-container {
   display: none !important;
-}
-video::-webkit-media-text-track-display {
-  display: none !important;
-}
-video::-webkit-media-text-track-region {
-  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -6,15 +6,7 @@ import {
   Ship, 
   Building2, 
   ShieldCheck, 
-  TrendingUp, 
-  Layers, 
-  Sparkles, 
-  FileText,
-  Radio,
-  Clock,
-  MapPin,
-  Play,
-  Pause
+  FileText
 } from 'lucide-react';
 import { PORTAL_INFO } from '../data/portalData';
 
@@ -24,33 +16,39 @@ export default function Hero({ lang, theme, onScrollTo }) {
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
 
-  // Guarantee browser autoplay by setting muted and invoking play on mount
+  // Guarantee browser autoplay without any captions or sound
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      try {
-        if (videoRef.current.textTracks) {
-          for (let i = 0; i < videoRef.current.textTracks.length; i++) {
-            videoRef.current.textTracks[i].mode = 'disabled';
+      const v = videoRef.current;
+      v.defaultMuted = true;
+      v.muted = true;
+      
+      const disableCaptions = () => {
+        try {
+          if (v.textTracks) {
+            for (let i = 0; i < v.textTracks.length; i++) {
+              v.textTracks[i].mode = 'disabled';
+            }
           }
-        }
-      } catch (e) {}
-      const playPromise = videoRef.current.play();
+        } catch (e) {}
+      };
+
+      disableCaptions();
+      if (v.textTracks) {
+        v.textTracks.onchange = disableCaptions;
+      }
+
+      const playPromise = v.play();
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => setIsPlaying(true))
-          .catch((err) => {
-            console.warn("Autoplay was prevented by browser:", err);
-            setIsPlaying(false);
-          });
+        playPromise.catch((err) => {
+          console.warn("Autoplay was prevented by browser:", err);
+        });
       }
     }
   }, []);
 
-  // Pause background video when hero is scrolled out of viewport
+  // Pause background video when hero is scrolled out of viewport to preserve resources
   useEffect(() => {
     const section = sectionRef.current;
     if (!section || !window.IntersectionObserver) return;
@@ -58,25 +56,13 @@ export default function Hero({ lang, theme, onScrollTo }) {
       if (!videoRef.current) return;
       if (!entry.isIntersecting) {
         videoRef.current.pause();
-      } else if (isPlaying) {
+      } else {
         videoRef.current.play().catch(() => {});
       }
     }, { threshold: 0.1 });
     observer.observe(section);
     return () => observer.disconnect();
-  }, [isPlaying]);
-
-  const toggleVideoPlayback = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      }
-    }
-  };
+  }, []);
 
   const metrics = [
     {
@@ -116,10 +102,14 @@ export default function Hero({ lang, theme, onScrollTo }) {
           muted
           playsInline
           disablePictureInPicture
+          disableRemotePlayback
           controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
+          tabIndex="-1"
+          aria-hidden="true"
+          crossOrigin="anonymous"
           src="/assets/hero-bg.mp4"
           poster="/assets/hero-aerial.jpg"
-          className={`w-full h-full object-cover object-center transition-opacity duration-700 ${
+          className={`w-full h-full object-cover object-center transition-opacity duration-700 pointer-events-none select-none ${
             theme === 'dark' ? 'opacity-70 brightness-90 contrast-105' : 'opacity-45 brightness-95 contrast-100'
           }`}
         >
@@ -133,27 +123,6 @@ export default function Hero({ lang, theme, onScrollTo }) {
         }`}></div>
         {/* Ambient gold glow core */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      </div>
-
-      {/* Floating Video Play/Pause Control Button Pinned to Corner (Bottom Left) */}
-      <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-30 pointer-events-auto">
-        <button
-          onClick={toggleVideoPlayback}
-          type="button"
-          className={`inline-flex items-center justify-center w-8 h-8 rounded-full border transition-all cursor-pointer backdrop-blur-md shadow-lg ${
-            theme === 'dark'
-              ? 'bg-slate-950/85 border-slate-700/80 text-slate-200 hover:text-amber-400 hover:border-amber-400 shadow-black/60'
-              : 'bg-white/95 border-slate-300 text-slate-800 hover:text-amber-700 hover:border-amber-500 shadow-slate-300/80'
-          }`}
-          title={isPlaying ? (isAr ? 'إيقاف الفيديو مؤقتاً' : 'Pause Video') : (isAr ? 'تشغيل الفيديو' : 'Play Video')}
-          aria-label={isPlaying ? (isAr ? 'إيقاف الفيديو مؤقتاً' : 'Pause Video') : (isAr ? 'تشغيل الفيديو' : 'Play Video')}
-        >
-          {isPlaying ? (
-            <Pause className="w-3.5 h-3.5 text-amber-500" />
-          ) : (
-            <Play className="w-3.5 h-3.5 text-amber-500 ml-0.5" />
-          )}
-        </button>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
