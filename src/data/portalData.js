@@ -931,10 +931,10 @@ export const COMMITTEES_DATA = {
     }
   },
   generalNotice: {
-    ar: "📍 تعقد جميع اللجان بمقر إدارة الشراء الموحد: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر - القاهرة (قاعة اللجان المركزية). يُرجى الالتزام بالمواعيد الرسمية واصطحاب التفويض المعتمد والمستندات القانونية.",
-    en: "📍 All committees convene at Unified Procurement Directorate HQ: Tucano Mall, Floor 3, Yousef Abbas St., Nasr City, Cairo (Central Sessions Hall). Authorized representation and statutory documents are required.",
-    pl: "📍 Wszystkie komisje obradują w siedzibie Dyrekcji: Tucano Mall, 3. piętro, ul. Yousef Abbas, Nasr City, Kair.",
-    uk: "📍 Усі комісії засідають у штаб-квартирі Директорату: Tucano Mall, 3-й поверх, вул. Юсефа Аббаса, Наср-Сіті, Каїр."
+    ar: "تعقد جميع اللجان بمقر إدارة الشراء الموحد: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر - القاهرة (قاعة اللجان المركزية). يُرجى الالتزام بالمواعيد الرسمية واصطحاب التفويض المعتمد والمستندات القانونية.",
+    en: "All committees convene at Unified Procurement Directorate HQ: Tucano Mall, Floor 3, Yousef Abbas St., Nasr City, Cairo (Central Sessions Hall). Authorized representation and statutory documents are required.",
+    pl: "Wszystkie komisje obradują w siedzibie Dyrekcji: Tucano Mall, 3. piętro, ul. Yousef Abbas, Nasr City, Kair.",
+    uk: "Усі комісії засідають у штаб-квартирі Директорату: Tucano Mall, 3-й поверх, вул. Юсефа Аббаса, Наср-Сіті, Каїр."
   },
   sessions: [
     {
@@ -975,7 +975,7 @@ export const COMMITTEES_DATA = {
       id: "tuesday-cattle",
       dayName: { ar: "يوم الثلاثاء", en: "Tuesday", pl: "Wtorek", uk: "Вівторок" },
       dayCode: "TUESDAY",
-      cadence: { ar: "جلسة دورية تبادلية (أسبوع وأسبوع)", en: "Bi-weekly Alternating Session", pl: "Sesja naprzemienna (co 2 tyg.)", uk: "Почергова сесія (через тиждень)" },
+      cadence: { ar: "جلسة دورية تبادلية", en: "Bi-weekly Alternating Session", pl: "Sesja naprzemienna", uk: "Почергова сесія" },
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
         ar: "لجنة الرؤوس الحية", 
@@ -1009,7 +1009,7 @@ export const COMMITTEES_DATA = {
       id: "monday-shrimp",
       dayName: { ar: "يوم الاثنين", en: "Monday", pl: "Poniedziałek", uk: "Понеділок" },
       dayCode: "MONDAY",
-      cadence: { ar: "جلسة دورية تبادلية (أسبوع وأسبوع)", en: "Bi-weekly Alternating Session", pl: "Sesja naprzemienna (co 2 tyg.)", uk: "Почергова сесія (через тиждень)" },
+      cadence: { ar: "جلسة دورية تبادلية", en: "Bi-weekly Alternating Session", pl: "Sesja naprzemienna", uk: "Почергова сесія" },
       time: { ar: "02:00 ظهراً", en: "02:00 PM", pl: "14:00", uk: "14:00" },
       commodity: { 
         ar: "لجنة الجمبري", 

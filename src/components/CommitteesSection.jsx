@@ -61,37 +61,48 @@ export default function CommitteesSection({ lang, theme }) {
         <div className={`mb-10 p-4 sm:p-5 rounded-2xl border text-xs sm:text-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 shadow-sm ${
           theme === 'dark'
             ? 'bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/5 border-amber-500/30 text-amber-200'
-            : 'bg-gradient-to-r from-amber-50 via-white to-amber-50/80 border-amber-200 text-amber-950'
+            : 'bg-gradient-to-r from-amber-50/80 via-white to-amber-50/60 border-amber-200 text-amber-950'
         }`}>
-          <div className="flex items-start sm:items-center gap-3">
-            <div className="p-2 sm:p-2.5 rounded-xl bg-amber-500 text-slate-950 flex-shrink-0 font-bold shadow-md shadow-amber-500/20 mt-0.5 sm:mt-0">
-              <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+          <div className="flex items-start sm:items-center gap-3.5">
+            <div className="p-2.5 rounded-xl bg-amber-500 text-slate-950 flex-shrink-0 font-bold shadow-md shadow-amber-500/20">
+              <MapPin className="w-5 h-5" />
             </div>
             <div>
-              <span className="font-bold block sm:inline">
-                {isAr ? 'مقر انعقاد اللجان المعتمد: ' : 'Official Sessions Hall: '}
-              </span>
-              <span className="opacity-90">{generalNotice[lang] || generalNotice.ar}</span>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">
+                  {isAr ? 'مقر انعقاد اللجان المعتمد' : 'Official Committee Venue'}
+                </span>
+                <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/25">
+                  {isAr ? 'قاعة اللجان المركزية' : 'Central Sessions Hall'}
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                {generalNotice[lang] || generalNotice.ar}
+              </p>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold border ${
-              theme === 'dark' ? 'bg-slate-900 border-slate-700 text-slate-300' : 'bg-white border-amber-300 text-amber-900 shadow-sm'
+
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 w-full lg:w-auto flex-shrink-0">
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border ${
+              theme === 'dark' ? 'bg-slate-900 border-slate-700 text-slate-300' : 'bg-white border-slate-200 text-slate-700 shadow-sm'
             }`}>
               <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-              <span>{isAr ? 'مواعيد العمل الرسمية: الأحد – الخميس (9 ص – 5 م)' : 'Official Hours: Sun – Thu (9 AM – 5 PM)'}</span>
+              <span>{isAr ? 'الأحد – الخميس (9 ص – 5 م)' : 'Sun – Thu (9 AM – 5 PM)'}</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold bg-amber-500/20 border border-amber-500/30 text-amber-600 dark:text-amber-400">
-              <span>{isAr ? 'انعقاد اللجان: 02:00 PM' : 'Committees Kickoff: 02:00 PM'}</span>
+
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-amber-300">
+              <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+              <span>{isAr ? 'بدء الجلسات: 02:00 ظهراً' : 'Kickoff: 02:00 PM'}</span>
             </span>
+
             <a
               href="https://www.google.com/maps/search/?api=1&query=Tucano+Commercial+Complex,+Youssef+Abbas,+Nasr+City,+Cairo"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shadow-sm flex-shrink-0"
             >
               <MapPin className="w-3.5 h-3.5" />
-              <span>{isAr ? 'الموقع على خرائط Google ↗' : 'Google Maps ↗'}</span>
+              <span>{isAr ? 'خرائط Google ↗' : 'Google Maps ↗'}</span>
             </a>
           </div>
         </div>
@@ -109,20 +120,23 @@ export default function CommitteesSection({ lang, theme }) {
             let themeBg = 'bg-amber-500/10 border-amber-500/30 text-amber-950 dark:text-amber-200';
             let borderColor = 'border-amber-300 dark:border-amber-500/40 hover:border-amber-500';
             let badgeStyle = 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30';
-            let numberColor = 'text-amber-600 dark:text-amber-400';
+            let timeBadge = 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/25';
+            let clockColor = 'text-amber-500';
 
             if (isTuesday) {
               ribbonColor = 'from-rose-500 via-orange-400 to-amber-500';
               themeBg = 'bg-rose-500/10 border-rose-500/30 text-rose-950 dark:text-rose-200';
               borderColor = 'border-rose-300 dark:border-rose-500/40 hover:border-rose-500';
               badgeStyle = 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border-rose-500/30';
-              numberColor = 'text-rose-600 dark:text-rose-400';
+              timeBadge = 'bg-rose-500/10 text-rose-700 dark:text-rose-400 border-rose-500/25';
+              clockColor = 'text-rose-500';
             } else if (isMonday) {
               ribbonColor = 'from-emerald-500 via-teal-400 to-sky-500';
               themeBg = 'bg-emerald-500/10 border-emerald-500/30 text-emerald-950 dark:text-emerald-200';
               borderColor = 'border-emerald-300 dark:border-emerald-500/40 hover:border-emerald-500';
               badgeStyle = 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/30';
-              numberColor = 'text-emerald-600 dark:text-emerald-400';
+              timeBadge = 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/25';
+              clockColor = 'text-emerald-500';
             }
 
             return (
@@ -169,8 +183,8 @@ export default function CommitteesSection({ lang, theme }) {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/25 text-xs font-bold flex-shrink-0 whitespace-nowrap">
-                      <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-bold flex-shrink-0 whitespace-nowrap ${timeBadge}`}>
+                      <Clock className={`w-3.5 h-3.5 flex-shrink-0 ${clockColor}`} />
                       <span>{session.time[lang] || session.time.ar}</span>
                     </div>
                   </div>
