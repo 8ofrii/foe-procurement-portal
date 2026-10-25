@@ -22,6 +22,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
   const isAr = lang === 'ar';
   const ArrowIcon = isAr ? ArrowLeft : ArrowRight;
   const info = PORTAL_INFO[lang] || PORTAL_INFO.ar;
+  const sectionRef = useRef(null);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
 
@@ -41,6 +42,22 @@ export default function Hero({ lang, theme, onScrollTo }) {
       }
     }
   }, []);
+
+  // Pause background video when hero is scrolled out of viewport
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || !window.IntersectionObserver) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!videoRef.current) return;
+      if (!entry.isIntersecting) {
+        videoRef.current.pause();
+      } else if (isPlaying) {
+        videoRef.current.play().catch(() => {});
+      }
+    }, { threshold: 0.1 });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [isPlaying]);
 
   const toggleVideoPlayback = () => {
     if (videoRef.current) {
@@ -82,7 +99,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
   ];
 
   return (
-    <section id="hero" className="relative isolate pt-8 pb-20 overflow-hidden transition-colors duration-300">
+    <section id="hero" ref={sectionRef} className="relative isolate pt-8 pb-20 overflow-hidden transition-colors duration-300">
       {/* Background Cinematic Video Loop & Overlays (Isolated Stacking Context) */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <video

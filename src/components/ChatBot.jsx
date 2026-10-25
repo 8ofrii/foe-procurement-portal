@@ -134,9 +134,8 @@ export default function ChatBot({ lang, theme }) {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const generateAnswer = (query) => {
-    const q = query.toLowerCase();
-
+// Modular Handler: handleContactQuery
+function handleContactQuery(q, lang, info, isAr) {
     // 1. Contact, Hotline, Phone & Official Emails
     if (
       q.includes('هاتف') || 
@@ -193,6 +192,11 @@ export default function ChatBot({ lang, theme }) {
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleLocationQuery
+function handleLocationQuery(q, lang, info, isAr) {
     // 2. Location, Address & Google Maps (Prioritized before generic departments)
     if (
       q.includes('مقر') || 
@@ -248,6 +252,11 @@ export default function ChatBot({ lang, theme }) {
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleWorkingHoursQuery
+function handleWorkingHoursQuery(q, lang, info, isAr) {
     // 3. Working Hours & Operation Schedule
     if (
       q.includes('ساعات العمل') || 
@@ -304,6 +313,11 @@ Siedziba: Tucano Mall — 3. piętro — Nasr City — Kair.`;
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleCommitteesQuery
+function handleCommitteesQuery(q, lang, info, isAr) {
     // 4. Weekly Committees Query (Sunday Rice, Tuesday Live Cattle, Monday Shrimp)
     if (
       q.includes('لجان') || 
@@ -337,6 +351,11 @@ Siedziba: Tucano Mall — 3. piętro — Nasr City — Kair.`;
       };
     }
 
+  return null;
+}
+
+// Modular Handler: handleSocialQuery
+function handleSocialQuery(q, lang, info, isAr) {
     // 5. Social Media & Official Channels Query
     if (
       q.includes('فيس') || 
@@ -363,6 +382,11 @@ Siedziba: Tucano Mall — 3. piętro — Nasr City — Kair.`;
       };
     }
 
+  return null;
+}
+
+// Modular Handler: handleReservesQuery
+function handleReservesQuery(q, lang, info, isAr) {
     // 6. Strategic Reserves & Commodity Buffers
     if (
       q.includes('مخزون') || 
@@ -413,6 +437,11 @@ All reserves undergo automated digital monitoring across modern silos nationwide
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handlePillarsQuery
+function handlePillarsQuery(q, lang, info, isAr) {
     // 7. Strategic Pillars
     if (
       q.includes('ركائز') || 
@@ -457,6 +486,11 @@ All reserves undergo automated digital monitoring across modern silos nationwide
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleTendersQuery
+function handleTendersQuery(q, lang, info, isAr) {
     // 8. Tenders, Bidding & Suppliers Registry
     if (
       q.includes('مورد') || 
@@ -506,6 +540,11 @@ All reserves undergo automated digital monitoring across modern silos nationwide
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleQualityQuery
+function handleQualityQuery(q, lang, info, isAr) {
     // 9. Quality, Food Safety & Specifications
     if (
       q.includes('جودة') || 
@@ -551,6 +590,11 @@ All reserves undergo automated digital monitoring across modern silos nationwide
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleStorageQuery
+function handleStorageQuery(q, lang, info, isAr) {
     // 10. Silos, Storage & Logistics Network
     if (
       q.includes('صوامع') || 
@@ -598,6 +642,11 @@ All reserves undergo automated digital monitoring across modern silos nationwide
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleDirectoratesQuery
+function handleDirectoratesQuery(q, lang, info, isAr) {
     // 11. The 8 Internal Directorates (Must NOT trigger on single word 'ادارة')
     if (
       q.includes('ادارات') || 
@@ -658,6 +707,11 @@ All reserves undergo automated digital monitoring across modern silos nationwide
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleVisionQuery
+function handleVisionQuery(q, lang, info, isAr) {
     // 12. Strategic Vision, Cabinet Mandate & Governance
     if (
       q.includes('رؤية') || 
@@ -713,6 +767,11 @@ Zgodnie z decyzjami Rady Ministrów na mocy dekretu Prezydenta:
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleGreetingQuery
+function handleGreetingQuery(q, lang, info, isAr) {
     // 13. Polite Greetings & Courtesy
     if (
       q.includes('سلام') || 
@@ -772,6 +831,11 @@ W czym mogę dziś pomóc?`;
       }
     }
 
+  return null;
+}
+
+// Modular Handler: handleFallbackResponse
+function handleFallbackResponse(lang, info, isAr) {
     // 14. Fallback Default Response
     if (lang === 'en') {
       return `Welcome to Mostaqbal Misr Unified Strategic Procurement Directorate.
@@ -802,6 +866,28 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
 • مواعيد الدوام: من الأحد إلى الخميس (09:00 صباحاً – 05:00 مساءً).
 يمكنك السؤال عن: جدول اللجان، مؤشرات المخزون، سجل الموردين، أو معايير الجودة والصوامع.`;
     }
+}
+
+  // Modular intent router calling dedicated query handlers
+  const generateAnswer = (query) => {
+    const q = query.toLowerCase();
+
+    return (
+      handleContactQuery(q, lang, info, isAr) ||
+      handleLocationQuery(q, lang, info, isAr) ||
+      handleWorkingHoursQuery(q, lang, info, isAr) ||
+      handleCommitteesQuery(q, lang, info, isAr) ||
+      handleSocialQuery(q, lang, info, isAr) ||
+      handleReservesQuery(q, lang, info, isAr) ||
+      handlePillarsQuery(q, lang, info, isAr) ||
+      handleTendersQuery(q, lang, info, isAr) ||
+      handleQualityQuery(q, lang, info, isAr) ||
+      handleStorageQuery(q, lang, info, isAr) ||
+      handleDirectoratesQuery(q, lang, info, isAr) ||
+      handleVisionQuery(q, lang, info, isAr) ||
+      handleGreetingQuery(q, lang, info, isAr) ||
+      handleFallbackResponse(lang, info, isAr)
+    );
   };
 
   const handleSendMessage = (textToSend) => {
@@ -883,7 +969,7 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
 
       {/* Floating or Centered Expanded Chat Window */}
       {isOpen && (
-        <div className={`fixed z-50 border shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl transition-all duration-300 ease-out animate-fadeIn ${
+        <div role="dialog" aria-modal="true" aria-label={isAr ? "المساعد الذكي لبوابة الشراء الموحد" : "Smart Procurement Assistant"} className={`fixed z-50 border shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl transition-all duration-300 ease-out animate-fadeIn ${
           isExpanded
             ? 'inset-2 sm:inset-6 md:inset-10 lg:inset-14 max-w-5xl h-[calc(100dvh-16px)] sm:h-auto max-h-[94dvh] sm:max-h-[90vh] m-auto rounded-2xl sm:rounded-3xl'
             : 'bottom-2 sm:bottom-24 left-2 right-2 sm:left-auto sm:right-6 w-auto sm:w-[440px] max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] h-[calc(100dvh-20px)] sm:h-[540px] max-h-[88dvh] sm:max-h-[82vh] rounded-2xl sm:rounded-3xl'
