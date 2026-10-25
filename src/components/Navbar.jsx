@@ -158,16 +158,16 @@ export default function Navbar({
           </div>
 
           <div className="flex flex-col justify-center min-w-0">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white leading-tight truncate">
-                {info.deptName}
+            <span className="text-sm xs:text-base sm:text-lg font-black text-slate-900 dark:text-white leading-tight tracking-tight truncate">
+              {info.deptName}
+            </span>
+            <div className="flex items-center gap-1.5 mt-0.5 min-w-0">
+              <span className="text-[10px] xs:text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 leading-tight truncate">
+                {info.orgName}
               </span>
-              <span className="px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-black font-mono bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 leading-none flex-shrink-0">
+              <span className="px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-black font-mono bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/35 leading-none flex-shrink-0">
                 FOE
               </span>
-            </div>
-            <div className="text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-amber-600 dark:text-amber-400 mt-0.5 leading-tight truncate">
-              {info.orgName}
             </div>
           </div>
         </div>

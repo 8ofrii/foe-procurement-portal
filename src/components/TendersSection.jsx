@@ -100,7 +100,7 @@ export default function TendersSection({ lang, theme }) {
           <AlertCircle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             {isAr ? (
-              'تنبيه رسمي: هذه العمليات والإعلانات خاصة بمنظومة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة. يتم تقديم واستلام العروض الفنية بالمقر الرئيسي للإدارة: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر - القاهرة، وفق المواعيد المقررة.'
+              'تنبيه رسمي: هذه العمليات والإعلانات خاصة بإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة (FOE). يتم تقديم واستلام العروض الفنية بالمقر الرئيسي للإدارة: توكانو مول - الدور الثالث - شارع يوسف عباس - مدينة نصر - القاهرة، وفق المواعيد المقررة.'
             ) : (
               'Official Notice: These procurement announcements are managed by the Unified Procurement Directorate of Future of Egypt Agency for Sustainable Development. Technical proposals are received at the Main Headquarters: Tucano Mall - Floor 3 - Yousef Abbas St. - Nasr City - Cairo.'
             )}

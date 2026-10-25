@@ -176,11 +176,11 @@ export default function Hero({ lang, theme, onScrollTo }) {
           <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug text-slate-900 dark:text-white drop-shadow-sm">
             {isAr ? (
               <>
-                منظومة <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600">الشراء الموحد</span>
+                إدارة <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600">الشراء الموحد</span>
               </>
             ) : (
               <>
-                Unified National <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600">Procurement Directorate</span>
+                Unified <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600">Procurement Directorate</span>
               </>
             )}
           </h1>
