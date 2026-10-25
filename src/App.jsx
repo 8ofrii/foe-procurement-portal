@@ -45,6 +45,20 @@ export default function App() {
     }
   }, [theme]);
 
+  // Enforce 90% default zoom on tablet & desktop, 100% on mobile
+  useEffect(() => {
+    const applyDefaultZoom = () => {
+      if (window.innerWidth >= 768) {
+        document.documentElement.style.zoom = '0.9';
+      } else {
+        document.documentElement.style.zoom = '1';
+      }
+    };
+    applyDefaultZoom();
+    window.addEventListener('resize', applyDefaultZoom);
+    return () => window.removeEventListener('resize', applyDefaultZoom);
+  }, []);
+
   // Keyboard shortcut Ctrl+K
   useEffect(() => {
     const handleKeyDown = (e) => {

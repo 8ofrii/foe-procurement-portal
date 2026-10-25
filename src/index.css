@@ -46,13 +46,23 @@ html.dark ::-moz-selection, html.dark *::-moz-selection {
 
   /* Base scaling for mobile devices: 100% native legibility & touch targets */
   html {
-    zoom: 100%;
+    zoom: 0.9;
+    zoom: 90%;
     -webkit-text-size-adjust: 100%;
   }
 
-  /* Tablets & Desktops (>= 768px): 90% default zoom */
+  /* Mobile devices (< 768px): 100% native scaling */
+  @media (max-width: 767px) {
+    html {
+      zoom: 1;
+      zoom: 100%;
+    }
+  }
+
+  /* Tablets & Desktops (>= 768px): Explicit 90% default zoom */
   @media (min-width: 768px) {
     html {
+      zoom: 0.9;
       zoom: 90%;
     }
   }
