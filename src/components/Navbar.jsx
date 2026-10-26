@@ -204,7 +204,7 @@ export default function Navbar({
           })}
         </div>
 
-        {/* Right Controls: [ 🌐 Language ▾ ] [ ☀️/🌙 ] [ 🔍 ] [ ☰ ] */}
+        {/* Right Controls: Language, Theme, Search, Mobile Menu */}
         <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
           
           {/* Revised Language Selector - Clean language only, no country letters, polished styling */}

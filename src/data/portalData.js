@@ -657,7 +657,7 @@ export const NEWS_ARTICLES = [
   {
     id: 1,
     title: {
-      ar: "موافقة مجلس الوزراء: تكليف جهاز مستقبل مصر بإدارة منظومة الشراء الموحد للسلع الاستراتيجية والأقماح",
+      ar: "موافقة مجلس الوزراء: تكليف جهاز مستقبل مصر بإدارة الشراء الموحد للسلع الاستراتيجية والأقماح",
       en: "Cabinet Approves Mandating Mostaqbal Misr Agency for Unified Strategic Commodity Procurement",
       pl: "Decyzja Rady Ministrów: Agencja Przyszłość Egiptu przejmuje zunifikowane zakupy strategiczne",
       uk: "Рішення Кабміну: Агентство Майбутнє Єгипту уповноважено здійснювати єдині стратегічні закупівлі"
@@ -672,7 +672,7 @@ export const NEWS_ARTICLES = [
       uk: "На виконання указів Президента, Кабінет Міністрів уповноважив Агентство Майбутнє Єгипту здійснювати єдині стратегічні закупівлі продовольчої пшениці у взаємодії з уповноваженими органами."
     },
     details: {
-      ar: `في إطار الرؤية الاستراتيجية للدولة المصرية لتعزيز الأمن الغذائي القومي وتأمين احتياطي استراتيجي آمن يغطي من 6 إلى 9 أشهر من المحاصيل والسلع الأساسية، وافق مجلس الوزراء في جلسته الرسمية على تكليف وإنابة جهاز مستقبل مصر للتنمية المستدامة بإدارة منظومة الشراء الموحد للسلع الاستراتيجية والأقماح لصالح الجهات والجهات العامة، وذلك بالتنسيق والتكامل الكامل مع كافة الهيئات والجهات المعنية.
+      ar: `في إطار الرؤية الاستراتيجية للدولة المصرية لتعزيز الأمن الغذائي القومي وتأمين احتياطي استراتيجي آمن يغطي من 6 إلى 9 أشهر من المحاصيل والسلع الأساسية، وافق مجلس الوزراء في جلسته الرسمية على تكليف وإنابة جهاز مستقبل مصر للتنمية المستدامة بإدارة الشراء الموحد للسلع الاستراتيجية والأقماح لصالح الجهات والجهات العامة، وذلك بالتنسيق والتكامل الكامل مع كافة الهيئات والجهات المعنية.
 
 ويهدف هذا القرار إلى توحيد القوة التفاوضية للجمهورية في أسواق السلع الدولية، وتحقيق أعلى درجات الوفر الدولاري، مع ربط سلاسل الإمداد والاستيراد الخارجي بالطاقات التخزينية العملاقة لشبكة الصوامع الذكية ومجمعات الإنتاج الزراعي بمشروع الدلتا الجديدة الممتد على مساحة 2.2 مليون فدان.`,
       en: `Under the sovereign directives of the Presidency to reinforce national food security, the Egyptian Cabinet officially ratified mandating the Future of Egypt Agency for Sustainable Development to execute unified strategic procurement for national wheat supplies and essential commodities in close coordination with GASC.
@@ -732,7 +732,7 @@ All consignments undergo rigorous three-tier laboratory testing (protein >12.5%,
       uk: "Встановлено рекорд швидкості розвантаження 63 000 тонн пшениці із судна Panamax за 42 години в порту Дамієтта з нульовими штрафами за простій."
     },
     details: {
-      ar: `في إنجاز لوجستي جديد يبرهن على الكفاءة التشغيلية لمنظومة الشراء الموحد بجهاز مستقبل مصر، استقبل رصيف الحبوب بميناء دمياط ناقلة الحبوب العملاقة Panamax محملة بـ 63 ألف طن من القمح المستورد، حيث تم تفريغ الشحنة بالكامل في زمن قياسي لم يتجاوز 42 ساعة.
+      ar: `في إنجاز لوجستي جديد يبرهن على الكفاءة التشغيلية لإدارة الشراء الموحد بجهاز مستقبل مصر، استقبل رصيف الحبوب بميناء دمياط ناقلة الحبوب العملاقة Panamax محملة بـ 63 ألف طن من القمح المستورد، حيث تم تفريغ الشحنة بالكامل في زمن قياسي لم يتجاوز 42 ساعة.
 
 وقد حققت العملية وفراً مالياً محققاً بإلغاء أي غرامات تأخير (Zero Demurrage)، بالتزامن مع تفويج أسطول الشاحنات المجهزة لنقل الحبوب فورياً إلى خلايا الصوامع المركزية بمجمع الدلتا الجديدة بدون أي فقد أو هدر.`,
       en: `Demonstrating outstanding supply chain coordination, the grain terminal at Damietta port completed the discharge of a 63,000 MT Panamax bulk carrier in just 42 hours, avoiding all demurrage costs and seamlessly transferring the grain via modern haulage fleets to New Delta silos.`,
@@ -810,7 +810,7 @@ All consignments undergo rigorous three-tier laboratory testing (protein >12.5%,
       uk: "Інтервенція 85 000 тонн цукру та 110 000 тонн кукурудзи в державні мережі розподілу для стримування спекулятивних коливань цін."
     },
     details: {
-      ar: `تنفيذاً لتوجيهات القيادة العامة، أطلقت منظومة الشراء الموحد حزمة تدفقات سلعية فورية تضمنت ضخ 85 ألف طن من السكر الأبيض عالي النقاوة المنتج من مصانع بنجر السكر التابعة للجهاز بالدلتا الجديدة، إلى جانب 110 آلاف طن من الذرة الصفراء العلفية المخصصة لمربي الدواجن والماشية.
+      ar: `تنفيذاً لتوجيهات القيادة العامة، أطلقت إدارة الشراء الموحد حزمة تدفقات سلعية فورية تضمنت ضخ 85 ألف طن من السكر الأبيض عالي النقاوة المنتج من مصانع بنجر السكر التابعة للجهاز بالدلتا الجديدة، إلى جانب 110 آلاف طن من الذرة الصفراء العلفية المخصصة لمربي الدواجن والماشية.
 
 وقد أثمرت هذه التدفقات عن استقرار فوري في مؤشرات الأسعار بالسوق المحلي، وقطع الطريق على أي محاولات للاحتكار أو حجب السلع، بما يترجم التزام الدولة بحماية الأمن الغذائي للمواطنين.`,
       en: `Executing directives to maintain market balance, the Directorate released 85,000 MT of refined sugar from New Delta refineries alongside 110,000 MT of feed corn, immediately anchoring wholesale prices and protecting domestic consumers.`,
@@ -824,13 +824,13 @@ All consignments undergo rigorous three-tier laboratory testing (protein >12.5%,
 export const FAQ_LIST = [
   {
     q: {
-      ar: "ما هي الرؤية الاستراتيجية لمنظومة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة؟",
+      ar: "ما هي الرؤية الاستراتيجية لإدارة الشراء الموحد بجهاز مستقبل مصر للتنمية المستدامة؟",
       en: "What is the strategic vision of the Unified Procurement Directorate at Mostaqbal Misr Agency?",
       pl: "Jaka jest strategiczna wizja Zunifikowanego Systemu Zakupów Agencji Przyszłość Egiptu?",
       uk: "Яка стратегічна візія системи єдиних закупівель Агентства Майбутнє Єгипту?"
     },
     a: {
-      ar: "تجسد المنظومة رؤية الدولة المصرية، بتوجيهات فخامة رئيس الجمهورية وقرار مجلس الوزراء، في إنابة جهاز مستقبل مصر للتنمية المستدامة لإدارة منظومة الشراء الموحد للسلع الاستراتيجية والأقماح، بالربط المباشر مع أضخم مشروعات الاستصلاح الزراعي والصوامع الرقمية بالدلتا الجديدة (2.2 مليون فدان). ترتكز الرؤية على تحقيق التكامل بين الإنتاج المحلي الواسع والشراء المباشر الذكي، لتأمين احتياطي استراتيجي آمن يغطي من 6 إلى 9 أشهر، وتحقيق الوفر الدولاري، وضبط حركة الأسواق لصالح المواطنين بالتكامل والتنسيق مع كافة الجهات المعنية.",
+      ar: "تجسد المنظومة رؤية الدولة المصرية، بتوجيهات فخامة رئيس الجمهورية وقرار مجلس الوزراء، في إنابة جهاز مستقبل مصر للتنمية المستدامة لإدارة الشراء الموحد للسلع الاستراتيجية والأقماح، بالربط المباشر مع أضخم مشروعات الاستصلاح الزراعي والصوامع الرقمية بالدلتا الجديدة (2.2 مليون فدان). ترتكز الرؤية على تحقيق التكامل بين الإنتاج المحلي الواسع والشراء المباشر الذكي، لتأمين احتياطي استراتيجي آمن يغطي من 6 إلى 9 أشهر، وتحقيق الوفر الدولاري، وضبط حركة الأسواق لصالح المواطنين بالتكامل والتنسيق مع كافة الجهات المعنية.",
       en: "Embodying the sovereign directives of the Presidency and Egyptian Cabinet decrees, the system mandates Mostaqbal Misr Agency to lead unified strategic procurement of essential grains and commodities. It unites massive domestic agricultural production across the 2.2-million-feddan New Delta with smart direct international trading, securing 6-to-9 month national reserves, capturing significant foreign currency savings, and ensuring price stability in coordination with relevant national entities.",
       pl: "Wdrażając wytyczne Prezydenta i decyzje Rady Ministrów, system powierza Agencji Przyszłość Egiptu zarządzanie zunifikowanymi zakupami strategicznymi. Łączy wielką produkcję rolną projektu Nowa Delta z bezpośrednimi kontraktami międzynarodowymi, budując rezerwy na 6-9 miesięcy i stabilizując rynek we współpracy z właściwymi instytucjami.",
       uk: "Втілюючи директиви Президента та постанови Кабінету Міністрів Єгипту, система уповноважує Агентство Майбутнє Єгипту здійснювати єдині стратегічні закупівлі. Вона інтегрує масштабне агровиробництво Нової Дельти із прямими міжнародними контрактами, забезпечуючи 6-9 місяців держрезервів та валютну оптимізацію у партнерстві з державними органами."
@@ -852,7 +852,7 @@ export const FAQ_LIST = [
   },
   {
     q: {
-      ar: "كيف تسهم منظومة الشراء الموحد في تحقيق وفر دولاري للدولة وإلغاء غرامات التأخير؟",
+      ar: "كيف تسهم إدارة الشراء الموحد في تحقيق وفر دولاري للدولة وإلغاء غرامات التأخير؟",
       en: "How does the unified procurement system capture foreign currency (FX) savings and eliminate demurrage?",
       pl: "W jaki sposób zunifikowany system generuje oszczędności walutowe i eliminuje opłaty postojowe?",
       uk: "Як система єдиних закупівель забезпечує економію валюти та виключає демередж?"

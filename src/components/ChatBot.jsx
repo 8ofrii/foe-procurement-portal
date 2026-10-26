@@ -16,6 +16,7 @@ import {
   RotateCcw,
   HelpCircle,
   Clock,
+  PhoneCall,
   Building2,
   Maximize2,
   Minimize2,
@@ -187,43 +188,43 @@ function handleCommitteesQuery(q, lang, info, isAr) {
 
     if (isDatesQuery) {
       if (lang === 'en') {
-        specificNote = `\n\n📅 Next Official Committee Sessions:\n• Rice Committee: ${nextRice} (02:00 PM, Weekly)\n• Shrimp Committee: ${nextShrimp} (02:00 PM, Bi-weekly)\n• Live Cattle Committee: ${nextCattle} (02:00 PM, Bi-weekly)\nVenue: Tucano Commercial Complex — Floor 3 — Central Sessions Hall.`;
+        specificNote = `\n\nNext Official Committee Sessions:\n• Rice Committee: ${nextRice} (02:00 PM, Weekly)\n• Shrimp Committee: ${nextShrimp} (02:00 PM, Bi-weekly)\n• Live Cattle Committee: ${nextCattle} (02:00 PM, Bi-weekly)\nVenue: Tucano Commercial Complex — Floor 3 — Central Sessions Hall.`;
       } else if (lang === 'pl') {
-        specificNote = `\n\n📅 Najbliższe Terminy Posiedzeń:\n• Komisja ds. Ryżu: ${nextRice} (14:00)\n• Komisja ds. Krewetek: ${nextShrimp} (14:00)\n• Komisja ds. Żywego Bydła: ${nextCattle} (14:00)`;
+        specificNote = `\n\nNajbliższe Terminy Posiedzeń:\n• Komisja ds. Ryżu: ${nextRice} (14:00)\n• Komisja ds. Krewetek: ${nextShrimp} (14:00)\n• Komisja ds. Żywego Bydła: ${nextCattle} (14:00)`;
       } else if (lang === 'uk') {
-        specificNote = `\n\n📅 Найближчі Дати Засідань Комісій:\n• Комісія з рису: ${nextRice} (14:00)\n• Комісія з креветок: ${nextShrimp} (14:00)\n• Комісія з живої худоби: ${nextCattle} (14:00)`;
+        specificNote = `\n\nНайближчі Дати Засідань Комісій:\n• Комісія з рису: ${nextRice} (14:00)\n• Комісія з креветок: ${nextShrimp} (14:00)\n• Комісія з живої худоби: ${nextCattle} (14:00)`;
       } else {
-        specificNote = `\n\n📅 تواريخ الجلسات القادمة المعتمدة:\n• لجنة الأرز: ${nextRice} (02:00 ظهراً — جلسة أسبوعية ثابتة).\n• لجنة الجمبري: ${nextShrimp} (02:00 ظهراً — دورية تبادلية).\n• لجنة الرؤوس الحية: ${nextCattle} (02:00 ظهراً — دورية تبادلية).\nالمقر: مجمع توكانو التجاري — الدور الثالث — قاعة اللجان المركزية.`;
+        specificNote = `\n\nتواريخ الجلسات القادمة المعتمدة:\n• لجنة الأرز: ${nextRice} (02:00 ظهراً — جلسة أسبوعية ثابتة).\n• لجنة الجمبري: ${nextShrimp} (02:00 ظهراً — دورية تبادلية).\n• لجنة الرؤوس الحية: ${nextCattle} (02:00 ظهراً — دورية تبادلية).\nالمقر: مجمع توكانو التجاري — الدور الثالث — قاعة اللجان المركزية.`;
       }
     } else if (isRice && !isCattle && !isShrimp) {
       if (lang === 'en') {
-        specificNote = `\n\n📌 Regarding Rice Committee: Convenes weekly every Sunday at 02:00 PM in the Central Bidding Hall (Tucano Mall — Floor 3). Next Session: ${nextRice}. Adjudication priority is strictly by physical sign-in order in the hall.`;
+        specificNote = `\n\nRegarding Rice Committee: Convenes weekly every Sunday at 02:00 PM in the Central Bidding Hall (Tucano Mall — Floor 3). Next Session: ${nextRice}. Adjudication priority is strictly by physical sign-in order in the hall.`;
       } else if (lang === 'pl') {
-        specificNote = `\n\n📌 Komisja ds. Ryżu: Obraduje w każdą niedzielę o godz. 14:00 w Tucano Mall (3. piętro). Najbliższa sesja: ${nextRice}.`;
+        specificNote = `\n\nKomisja ds. Ryżu: Obraduje w każdą niedzielę o godz. 14:00 w Tucano Mall (3. piętro). Najbliższa sesja: ${nextRice}.`;
       } else if (lang === 'uk') {
-        specificNote = `\n\n📌 Комісія із закупівель рису: Засідає щонеділі о 14:00 у залі торгів Tucano Mall (3-й поверх). Найближча дата: ${nextRice}.`;
+        specificNote = `\n\nКомісія із закупівель рису: Засідає щонеділі о 14:00 у залі торгів Tucano Mall (3-й поверх). Найближча дата: ${nextRice}.`;
       } else {
-        specificNote = `\n\n📌 بخصوص لجنة الأرز: تنعقد أسبوعياً كل يوم أحد في تمام الساعة 02:00 ظهراً بقاعة اللجان المركزية (توكانو مول — الدور الثالث). الجلسة القادمة: ${nextRice}. وتطبق قاعدة أسبقية التواجد الفعلي بالقاعة للتسجيل وترتيب الترسية.`;
+        specificNote = `\n\nبخصوص لجنة الأرز: تنعقد أسبوعياً كل يوم أحد في تمام الساعة 02:00 ظهراً بقاعة اللجان المركزية (توكانو مول — الدور الثالث). الجلسة القادمة: ${nextRice}. وتطبق قاعدة أسبقية التواجد الفعلي بالقاعة للتسجيل وترتيب الترسية.`;
       }
     } else if (isCattle && !isRice && !isShrimp) {
       if (lang === 'en') {
-        specificNote = `\n\n📌 Regarding Live Cattle (Livestock) Committee: Convenes Tuesdays at 02:00 PM on a bi-weekly alternating cycle with the Shrimp Committee. Next Session: ${nextCattle}.`;
+        specificNote = `\n\nRegarding Live Cattle (Livestock) Committee: Convenes Tuesdays at 02:00 PM on a bi-weekly alternating cycle with the Shrimp Committee. Next Session: ${nextCattle}.`;
       } else if (lang === 'pl') {
-        specificNote = `\n\n📌 Komisja ds. Żywego Bydła: Obraduje we wtorki o godz. 14:00 co dwa tygodnie. Najbliższa sesja: ${nextCattle}.`;
+        specificNote = `\n\nKomisja ds. Żywego Bydła: Obraduje we wtorki o godz. 14:00 co dwa tygodnie. Najbliższa sesja: ${nextCattle}.`;
       } else if (lang === 'uk') {
-        specificNote = `\n\n📌 Комісія з живої худоби: Засідає щовівторка о 14:00 раз на два тижні. Найближча дата: ${nextCattle}.`;
+        specificNote = `\n\nКомісія з живої худоби: Засідає щовівторка о 14:00 раз на два тижні. Найближча дата: ${nextCattle}.`;
       } else {
-        specificNote = `\n\n📌 بخصوص لجنة الرؤوس الحية (المواشي والعجول): تنعقد كل يوم ثلاثاء في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الجمبري بقاعة اللجان المركزية. الجلسة القادمة: ${nextCattle}.`;
+        specificNote = `\n\nبخصوص لجنة الرؤوس الحية (المواشي والعجول): تنعقد كل يوم ثلاثاء في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الجمبري بقاعة اللجان المركزية. الجلسة القادمة: ${nextCattle}.`;
       }
     } else if (isShrimp && !isRice && !isCattle) {
       if (lang === 'en') {
-        specificNote = `\n\n📌 Regarding Shrimp & Seafood Committee: Convenes Mondays at 02:00 PM on a bi-weekly alternating schedule with the Live Cattle Committee. Next Session: ${nextShrimp}.`;
+        specificNote = `\n\nRegarding Shrimp & Seafood Committee: Convenes Mondays at 02:00 PM on a bi-weekly alternating schedule with the Live Cattle Committee. Next Session: ${nextShrimp}.`;
       } else if (lang === 'pl') {
-        specificNote = `\n\n📌 Komisja ds. Krewetek: Obraduje w poniedziałki o godz. 14:00 co dwa tygodnie. Najbliższa sesja: ${nextShrimp}.`;
+        specificNote = `\n\nKomisja ds. Krewetek: Obraduje w poniedziałki o godz. 14:00 co dwa tygodnie. Najbliższa sesja: ${nextShrimp}.`;
       } else if (lang === 'uk') {
-        specificNote = `\n\n📌 Комісія із закупівель креветок: Засідає щопонеділка о 14:00 раз на два тижні. Найближча дата: ${nextShrimp}.`;
+        specificNote = `\n\nКомісія із закупівель креветок: Засідає щопонеділка о 14:00 раз на два тижні. Найближча дата: ${nextShrimp}.`;
       } else {
-        specificNote = `\n\n📌 بخصوص لجنة الجمبري والأسماك: تنعقد كل يوم اثنين في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الرؤوس الحية بقاعة اللجان المركزية. الجلسة القادمة: ${nextShrimp}.`;
+        specificNote = `\n\nبخصوص لجنة الجمبري والأسماك: تنعقد كل يوم اثنين في تمام الساعة 02:00 ظهراً وفق دورية تبادلية أسبوعية مع لجنة الرؤوس الحية بقاعة اللجان المركزية. الجلسة القادمة: ${nextShrimp}.`;
       }
     }
 
@@ -1388,25 +1389,31 @@ Możesz zapytać o harmonogram komisji, rezerwy lub rejestrację dostawców.`;
                       
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                         {[
-                          { text: isAr ? 'ما هي مواعيد اللجان (الأرز، الرؤوس الحية، والجمبري)؟' : 'Committees Schedule', label: isAr ? '📅 مواعيد وتواريخ اللجان المعتمدة' : '📅 Committees Schedule' },
-                          { text: isAr ? 'أين يقع المقر الرئيسي للإدارة؟' : 'Location of Tucano Mall', label: isAr ? '📍 موقع المقر وقاعة اللجان بتوكانو مول' : '📍 Headquarters & Central Hall' },
-                          { text: isAr ? 'ما هي مواعيد وساعات العمل الرسمية؟' : 'Official Working Hours', label: isAr ? '⏰ ساعات ومواعيد الدوام الرسمي' : '⏰ Official Working Hours' },
-                          { text: isAr ? 'ما هو رقم الخط الساخن وقنوات التواصل؟' : 'Direct Hotline 19842', label: isAr ? '📞 الخط الساخن الموحد (19842)' : '📞 Official Hotline 19842' },
-                        ].map((item, qIdx) => (
-                          <button
-                            key={qIdx}
-                            onClick={() => handleSendMessage(item.text)}
-                            type="button"
-                            className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer flex items-center justify-between text-right ${
-                              theme === 'dark'
-                                ? 'bg-slate-950/80 border-slate-800 text-slate-200 hover:border-amber-500/60 hover:bg-amber-500/10 hover:text-amber-300'
-                                : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-950 shadow-2xs'
-                            }`}
-                          >
-                            <span>{item.label}</span>
-                            <span className="text-amber-500 text-xs">←</span>
-                          </button>
-                        ))}
+                          { text: isAr ? 'ما هي مواعيد اللجان (الأرز، الرؤوس الحية، والجمبري)؟' : 'Committees Schedule', label: isAr ? 'مواعيد وتواريخ اللجان المعتمدة' : 'Committees Schedule', icon: Calendar },
+                          { text: isAr ? 'أين يقع المقر الرئيسي للإدارة؟' : 'Location of Tucano Mall', label: isAr ? 'موقع المقر وقاعة اللجان بتوكانو مول' : 'Headquarters & Central Hall', icon: MapPin },
+                          { text: isAr ? 'ما هي مواعيد وساعات العمل الرسمية؟' : 'Official Working Hours', label: isAr ? 'ساعات ومواعيد الدوام الرسمي' : 'Official Working Hours', icon: Clock },
+                          { text: isAr ? 'ما هو رقم الخط الساخن وقنوات التواصل؟' : 'Direct Hotline 19842', label: isAr ? 'الخط الساخن الموحد (19842)' : 'Official Hotline 19842', icon: PhoneCall },
+                        ].map((item, qIdx) => {
+                          const ItemIcon = item.icon;
+                          return (
+                            <button
+                              key={qIdx}
+                              onClick={() => handleSendMessage(item.text)}
+                              type="button"
+                              className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer flex items-center justify-between text-right ${
+                                theme === 'dark'
+                                  ? 'bg-slate-950/80 border-slate-800 text-slate-200 hover:border-amber-500/60 hover:bg-amber-500/10 hover:text-amber-300'
+                                  : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-950 shadow-2xs'
+                              }`}
+                            >
+                              <span className="flex items-center gap-1.5">
+                                <ItemIcon className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                                <span>{item.label}</span>
+                              </span>
+                              <span className="text-amber-500 text-xs">←</span>
+                            </button>
+                          );
+                        })}
                       </div>
 
                       {/* Official Channels Micro-Strip inside Welcome Message */}
