@@ -193,7 +193,7 @@ export default function Hero({ lang, theme, onScrollTo }) {
               onClick={() => onScrollTo('pillars')}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm shadow-xl shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all cursor-pointer"
             >
-              <span>{isAr ? 'الركائز الاستراتيجية الست' : 'The Six Strategic Pillars'}</span>
+              <span>{isAr ? 'الركائز الاستراتيجية' : 'Strategic Pillars'}</span>
               <ArrowIcon className="w-4 h-4" />
             </button>
 

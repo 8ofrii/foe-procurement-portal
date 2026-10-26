@@ -160,7 +160,7 @@ export default function App() {
           onScrollTo={handleScrollTo}
         />
 
-        {/* The 6 Core Strategic Pillars */}
+        {/* Core Strategic Pillars */}
         <PillarsSection
           lang={lang}
           theme={theme}

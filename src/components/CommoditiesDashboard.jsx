@@ -188,7 +188,7 @@ export default function CommoditiesDashboard({ lang, theme }) {
                           : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
-                      {isAr ? 'الركائز الست' : '6 Pillars'}
+                      {isAr ? 'الركائز الاستراتيجية' : 'Strategic Pillars'}
                     </button>
                   </div>
                 </div>
@@ -206,8 +206,8 @@ export default function CommoditiesDashboard({ lang, theme }) {
                         ? 'عرض توثيقي صادر عن الجهاز يبرز أرقام وطفرات التنمية المستدامة واستصلاح الدلتا الجديدة ومجمعات الصوامع.'
                         : 'Official agency publication showcasing sustainable achievements, New Delta expansion, and smart silos.')
                     : (isAr
-                        ? 'الإعلان الرسمي الصادر عن إدارة الشراء الموحد موضحاً الركائز الاستراتيجية الست لضبط الأسواق.'
-                        : 'Official announcement defining the six strategic pillars for national procurement.')
+                        ? 'الإعلان الرسمي الصادر عن إدارة الشراء الموحد موضحاً الركائز الاستراتيجية لضبط الأسواق.'
+                        : 'Official announcement defining the strategic pillars for national procurement.')
                   }
                 </p>
               </div>

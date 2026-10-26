@@ -164,7 +164,7 @@ export const NAV_LINKS = {
   ]
 };
 
-// The 6 Strategic Pillars from the user's official infographic
+// Strategic Pillars from the official infographic
 export const PILLARS = [
   {
     id: 1,

@@ -96,7 +96,7 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
                 : 'bg-amber-100 border-amber-300 text-amber-800'
             }`}>
               <Sparkles className="w-3.5 h-3.5" />
-              <span>{isAr ? 'المرتكزات الست للشراء الموحد' : 'The Six Strategic Pillars'}</span>
+              <span>{isAr ? 'الركائز الاستراتيجية للشراء الموحد' : 'Strategic Pillars of Unified Procurement'}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black leading-snug sm:leading-normal text-slate-900 dark:text-white">
               {isAr ? 'الركائز الاستراتيجية المعتمدة لجهاز مستقبل مصر' : 'Core Strategic Mandates & Pillars'}
@@ -124,7 +124,7 @@ export default function PillarsSection({ lang, theme, onOpenInfographic }) {
           </button>
         </div>
 
-        {/* 6 Pillars Interactive Cards Grid */}
+        {/* Strategic Pillars Interactive Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {PILLARS.map((pillar) => {
             const Icon = iconMap[pillar.icon] || ShieldCheck;

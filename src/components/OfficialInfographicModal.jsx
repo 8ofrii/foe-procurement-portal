@@ -106,7 +106,7 @@ export default function OfficialInfographicModal({ isOpen, onClose, lang, theme 
             }`}>
               <h4 className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 mb-2 flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-amber-500" />
-                <span>{isAr ? 'المرتكزات الست المستخرجة من الإعلان:' : 'Six Core Mandates from Notice:'}</span>
+                <span>{isAr ? 'الركائز الاستراتيجية المستخرجة من الإعلان:' : 'Strategic Mandates from Notice:'}</span>
               </h4>
 
               <div className="space-y-2">

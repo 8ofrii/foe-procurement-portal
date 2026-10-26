@@ -618,7 +618,7 @@ function handlePillarsQuery(q, lang, info, isAr) {
       q.includes('стовп')
     ) {
       if (lang === 'en') {
-        return `The 6 Strategic Pillars of Mostaqbal Misr Unified Strategic Procurement:
+        return `Strategic Pillars of Mostaqbal Misr Unified Strategic Procurement:
 1. Commodity security, controlled pricing, and certified international quality.
 2. Fortifying state strategic reserves of essential grains and commodities.
 3. Regulating price fluctuations through supply augmentation and direct trading.
@@ -626,7 +626,7 @@ function handlePillarsQuery(q, lang, info, isAr) {
 5. Diversifying import origins across 18+ sovereign nations to mitigate geopolitical risks.
 6. Professional high-level negotiation achieving substantial foreign currency savings.`;
       } else if (lang === 'pl') {
-        return `Sześć Strategicznych Filarów Zunifikowanych Zakupów:
+        return `Strategiczne Filary Zunifikowanych Zakupów:
 1. Bezpieczeństwo towarowe, kontrola cen i certyfikowana jakość.
 2. Wzmocnienie państwowych rezerw strategicznych kluczowych surowców.
 3. Stabilizacja cen poprzez zwiększenie podaży rynkowej.
@@ -634,7 +634,7 @@ function handlePillarsQuery(q, lang, info, isAr) {
 5. Dywersyfikacja źródeł importu z ponad 18 krajów.
 6. Profesjonalne negocjacje przynoszące wymierne oszczędności walutowe.`;
       } else if (lang === 'uk') {
-        return `Шість стратегічних стовпів Директорату єдиних закупівель:
+        return `Стратегічні стовпи Директорату єдиних закупівель:
 1. Товарна безпека, стабільні контрольовані ціни та гарантована якість.
 2. Зміцнення державних резервів зернових та стратегічних культур.
 3. Регулювання ринкових цін шляхом нарощування товарної пропозиції.
@@ -642,7 +642,7 @@ function handlePillarsQuery(q, lang, info, isAr) {
 5. Диверсифікація джерел постачання з понад 18 країн світу.
 6. Професійні переговори, що забезпечують збереження валютних резервів.`;
       } else {
-        return `الركائز الاستراتيجية الست المعتمدة لإدارة الشراء الموحد:
+        return `الركائز الاستراتيجية المعتمدة لإدارة الشراء الموحد:
 1. أمن سلعي.. وأسعار منضبطة.. وجودة مضمونة.
 2. تعزيز مخزون الدولة من السلع والمحاصيل الأساسية والاستراتيجية.
 3. ضبط حركة الأسعار من خلال زيادة المعروض السلعي في الأسواق.
